@@ -167,10 +167,10 @@ function mergeFinanceRecords<T extends { id: string }>(
 }
 
 function persistFinanceMerge<T extends { id: string }>(table: string, upserts: T[], removedIds: string[]) {
-  void Promise.all([
+  return Promise.all([
     upsertJsonRows(table, upserts),
     ...removedIds.map((id) => deleteJsonRow(table, id)),
-  ]).catch(syncError);
+  ]);
 }
 
 function loadXlsxLibrary() {
@@ -311,12 +311,16 @@ export function FinanceView() {
       return withExpenseIds(nookExpenses, 'seed-expense');
     }
   });
+  const incomeRecordsRef = useRef(incomeRecords);
+  const expenseRecordsRef = useRef(expenseRecords);
 
   useEffect(() => {
+    incomeRecordsRef.current = incomeRecords;
     window.localStorage.setItem('nook-finance-income-records', JSON.stringify(incomeRecords));
   }, [incomeRecords]);
 
   useEffect(() => {
+    expenseRecordsRef.current = expenseRecords;
     window.localStorage.setItem('nook-finance-expense-records', JSON.stringify(expenseRecords));
   }, [expenseRecords]);
 
@@ -334,14 +338,14 @@ export function FinanceView() {
         if (supabaseIncome.length) {
           const merged = mergeFinanceRecords<EditableIncomeRecord>([], supabaseIncome, incomeIdentity);
           setIncomeRecords(merged.records);
-          persistFinanceMerge(FINANCE_TABLES.income, merged.upserts, merged.removedIds);
+          void persistFinanceMerge(FINANCE_TABLES.income, merged.upserts, merged.removedIds).catch(syncError);
         } else {
           setIncomeRecords([]);
         }
         if (supabaseExpenses.length) {
           const merged = mergeFinanceRecords<EditableExpenseRecord>([], supabaseExpenses, expenseIdentity);
           setExpenseRecords(merged.records);
-          persistFinanceMerge(FINANCE_TABLES.expenses, merged.upserts, merged.removedIds);
+          void persistFinanceMerge(FINANCE_TABLES.expenses, merged.upserts, merged.removedIds).catch(syncError);
         } else {
           setExpenseRecords([]);
         }
@@ -435,24 +439,32 @@ export function FinanceView() {
     profit: item.profit,
   }));
 
-  const addIncome = (record: IncomeRecord) => {
+  const addIncome = async (record: IncomeRecord) => {
     const nextRecord = { ...record, id: `manual-income-${Date.now()}` };
-    setIncomeRecords((current) => {
-      const merged = mergeFinanceRecords<EditableIncomeRecord>(current, [nextRecord], incomeIdentity);
-      persistFinanceMerge(FINANCE_TABLES.income, merged.upserts, merged.removedIds);
-      return merged.records;
-    });
-    toast.success('Pemasukan disimpan');
+    const merged = mergeFinanceRecords<EditableIncomeRecord>(incomeRecordsRef.current, [nextRecord], incomeIdentity);
+    setIncomeRecords(merged.records);
+
+    try {
+      await persistFinanceMerge(FINANCE_TABLES.income, merged.upserts, merged.removedIds);
+      toast.success('Pemasukan disimpan');
+    } catch (error) {
+      syncError(error);
+      toast.error('Pemasukan belum tersimpan ke Supabase');
+    }
   };
 
-  const addExpense = (record: ExpenseRecord) => {
+  const addExpense = async (record: ExpenseRecord) => {
     const nextRecord = { ...record, id: `manual-expense-${Date.now()}` };
-    setExpenseRecords((current) => {
-      const merged = mergeFinanceRecords<EditableExpenseRecord>(current, [nextRecord], expenseIdentity);
-      persistFinanceMerge(FINANCE_TABLES.expenses, merged.upserts, merged.removedIds);
-      return merged.records;
-    });
-    toast.success('Pengeluaran disimpan');
+    const merged = mergeFinanceRecords<EditableExpenseRecord>(expenseRecordsRef.current, [nextRecord], expenseIdentity);
+    setExpenseRecords(merged.records);
+
+    try {
+      await persistFinanceMerge(FINANCE_TABLES.expenses, merged.upserts, merged.removedIds);
+      toast.success('Pengeluaran disimpan');
+    } catch (error) {
+      syncError(error);
+      toast.error('Pengeluaran belum tersimpan ke Supabase');
+    }
   };
 
   const updateIncome = (id: string, updates: Partial<IncomeRecord>) => {
@@ -500,16 +512,18 @@ export function FinanceView() {
         return;
       }
 
-      setIncomeRecords((current) => {
-        const merged = mergeFinanceRecords<EditableIncomeRecord>(current, importedIncome, incomeIdentity);
-        persistFinanceMerge(FINANCE_TABLES.income, merged.upserts, merged.removedIds);
-        return merged.records;
-      });
-      setExpenseRecords((current) => {
-        const merged = mergeFinanceRecords<EditableExpenseRecord>(current, importedExpenses, expenseIdentity);
-        persistFinanceMerge(FINANCE_TABLES.expenses, merged.upserts, merged.removedIds);
-        return merged.records;
-      });
+      toast.loading('Menyimpan import ke Supabase...', { id: 'finance-import' });
+
+      const mergedIncome = mergeFinanceRecords<EditableIncomeRecord>(incomeRecordsRef.current, importedIncome, incomeIdentity);
+      const mergedExpenses = mergeFinanceRecords<EditableExpenseRecord>(expenseRecordsRef.current, importedExpenses, expenseIdentity);
+
+      setIncomeRecords(mergedIncome.records);
+      setExpenseRecords(mergedExpenses.records);
+
+      await Promise.all([
+        persistFinanceMerge(FINANCE_TABLES.income, mergedIncome.upserts, mergedIncome.removedIds),
+        persistFinanceMerge(FINANCE_TABLES.expenses, mergedExpenses.upserts, mergedExpenses.removedIds),
+      ]);
 
       const latestDate = [...importedIncome.map((item) => item.date), ...importedExpenses.map((item) => item.date)].sort().at(-1);
       if (latestDate) {
@@ -517,9 +531,10 @@ export function FinanceView() {
         setSelectedYear(yearKey(latestDate));
       }
 
-      toast.success(`Import berhasil: ${importedIncome.length} pemasukan dan ${importedExpenses.length} pengeluaran diproses`);
+      toast.success(`Import berhasil: ${importedIncome.length} pemasukan dan ${importedExpenses.length} pengeluaran tersimpan`, { id: 'finance-import' });
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : 'Import Excel gagal');
+      syncError(error);
+      toast.error(error instanceof Error ? error.message : 'Import Excel gagal', { id: 'finance-import' });
     }
   };
 

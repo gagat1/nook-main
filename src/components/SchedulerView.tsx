@@ -154,11 +154,11 @@ export function SchedulerView() {
     <div className="space-y-6">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
         <div>
-          <h1 className="text-4xl font-light tracking-tight text-foreground flex items-center gap-4">
+          <h1 className="text-3xl md:text-4xl font-light tracking-tight text-foreground flex flex-wrap items-center gap-3 md:gap-4">
             Staff Scheduler <span className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground border border-border px-2 py-0.5 rounded-sm">V2.4</span>
           </h1>
-          <div className="flex items-center gap-4 mt-6">
-             <div className="flex bg-card border border-border rounded-sm p-1">
+          <div className="flex flex-col gap-3 mt-6 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
+             <div className="flex w-full bg-card border border-border rounded-sm p-1 sm:w-auto">
                 <Button 
                   variant="ghost" 
                   size="sm" 
@@ -171,7 +171,7 @@ export function SchedulerView() {
                 >
                   <ChevronLeft className="h-4 w-4" />
                 </Button>
-                <div className="flex items-center px-6 text-xs uppercase tracking-widest font-medium text-muted-foreground min-w-[240px] justify-center">
+                <div className="flex min-w-0 flex-1 items-center justify-center px-3 text-center text-xs uppercase tracking-widest font-medium text-muted-foreground sm:min-w-[240px] sm:px-6">
                   {format(startDate, 'MMM d')} — {format(endDate, 'MMM d, yyyy')}
                 </div>
                 <Button 
@@ -217,7 +217,7 @@ export function SchedulerView() {
           </div>
         </div>
         
-        <div className="flex items-center gap-3">
+        <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
           <Button variant="outline" onClick={() => clearSchedules()} className="bg-transparent border-border text-muted-foreground hover:text-foreground hover:bg-accent uppercase text-[10px] tracking-widest px-5 py-5 rounded-sm">
             <Trash2 className="mr-2 h-3.5 w-3.5" /> Clear All
           </Button>
@@ -238,8 +238,8 @@ export function SchedulerView() {
       </div>      <div className="space-y-10">
         {weeks.map((weekDays, weekIndex) => (
           <div key={weekIndex} className="border border-border bg-background rounded-sm overflow-hidden flex flex-col">
-            <div className="p-3 bg-card border-b border-border flex items-center justify-between px-6">
-              <div className="flex items-center gap-4">
+            <div className="p-3 bg-card border-b border-border flex flex-col gap-3 px-4 sm:flex-row sm:items-center sm:justify-between sm:px-6">
+              <div className="flex flex-wrap items-center gap-3 sm:gap-4">
                 <span className="text-[10px] uppercase font-bold text-foreground tracking-[0.3em]">Week {weekIndex + 1}</span>
                 <span className="h-4 w-px bg-border" />
                 <span className="text-[9px] text-muted-foreground font-bold uppercase tracking-widest">

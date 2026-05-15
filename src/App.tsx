@@ -5,7 +5,7 @@
 
 import { useState, useEffect } from 'react';
 import { useScheduleStore } from './store';
-import { 
+import {
   Users, 
   Calendar, 
   Clock, 
@@ -48,6 +48,7 @@ export default function App() {
   const { theme, setTheme, syncFromSupabase, isSupabaseReady } = useScheduleStore();
   const [currentView, setCurrentView] = useState<View>('scheduler');
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
     if (typeof window === 'undefined') return false;
     return window.sessionStorage.getItem('nook-authenticated') === 'true';
@@ -64,6 +65,10 @@ export default function App() {
   }, [syncFromSupabase]);
 
   const toggleTheme = () => setTheme(theme === 'dark' ? 'light' : 'dark');
+  const selectView = (view: View) => {
+    setCurrentView(view);
+    setIsMobileNavOpen(false);
+  };
   const handleLogout = () => {
     window.sessionStorage.removeItem('nook-authenticated');
     setIsAuthenticated(false);
@@ -82,6 +87,54 @@ export default function App() {
     { id: 'maintenance', label: 'Maintenance', icon: Wrench },
   ];
 
+  const navContent = (expanded: boolean) => (
+    <>
+      <div className="mb-8 md:mb-10">
+        <AnimatePresence mode="wait">
+          {expanded && (
+            <motion.p
+              initial={{ opacity: 0, x: -5 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -5 }}
+              className="text-2xl font-light tracking-tight"
+            >
+              Operations v2.4
+            </motion.p>
+          )}
+        </AnimatePresence>
+      </div>
+
+      <nav className="flex-1 space-y-4">
+        {navItems.map((item) => (
+          <button
+            key={item.id}
+            onClick={() => selectView(item.id as View)}
+            className={cn(
+              "group flex w-full items-center gap-3 rounded-sm transition-all duration-300",
+              currentView === item.id 
+                ? "text-foreground" 
+                : "text-muted-foreground hover:text-foreground"
+            )}
+          >
+            <item.icon className={cn(
+              "h-4 w-4 shrink-0 transition-colors",
+              currentView === item.id ? "text-foreground" : "text-muted-foreground group-hover:text-foreground"
+            )} />
+            {expanded && (
+              <motion.span
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="text-[11px] uppercase tracking-[0.1em] font-medium"
+              >
+                {item.label}
+              </motion.span>
+            )}
+          </button>
+        ))}
+      </nav>
+    </>
+  );
+
   if (!isAuthenticated) {
     return (
       <>
@@ -93,60 +146,61 @@ export default function App() {
 
   return (
     <div className={cn(
-      "flex h-screen w-full font-sans overflow-hidden select-none bg-background text-foreground transition-colors duration-300",
+      "flex min-h-screen md:h-screen w-full font-sans overflow-hidden select-none bg-background text-foreground transition-colors duration-300",
       theme
     )}>
       <Toaster position="top-right" theme={theme} />
       
-      {/* Sidebar */}
+      <button
+        onClick={() => setIsMobileNavOpen(true)}
+        className="fixed left-4 top-4 z-40 flex h-10 w-10 items-center justify-center rounded-sm border border-border bg-card text-foreground md:hidden"
+        aria-label="Open menu"
+      >
+        <Menu className="h-4 w-4" />
+      </button>
+
+      <AnimatePresence>
+        {isMobileNavOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 bg-background/80 backdrop-blur-sm md:hidden"
+          >
+            <motion.aside
+              initial={{ x: -320 }}
+              animate={{ x: 0 }}
+              exit={{ x: -320 }}
+              transition={{ duration: 0.25, ease: 'circOut' }}
+              className="flex h-full w-[min(82vw,320px)] flex-col border-r border-border bg-card p-6"
+            >
+              <button
+                onClick={() => setIsMobileNavOpen(false)}
+                className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-sm border border-border text-muted-foreground"
+                aria-label="Close menu"
+              >
+                <X className="h-4 w-4" />
+              </button>
+              {navContent(true)}
+              <div className="mt-8 space-y-3 border-t border-border pt-5">
+                <button
+                  onClick={toggleTheme}
+                  className="flex w-full items-center justify-center rounded-sm p-2 text-muted-foreground hover:text-foreground transition-colors border border-border hover:border-accent"
+                >
+                  {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+                </button>
+              </div>
+            </motion.aside>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <motion.aside
         initial={false}
         animate={{ width: isSidebarOpen ? 280 : 80 }}
-        className="relative flex flex-col border-r border-border bg-card z-20 p-6"
+        className="relative z-20 hidden flex-col border-r border-border bg-card p-6 md:flex"
       >
-        <div className="mb-10">
-          <AnimatePresence mode="wait">
-            {isSidebarOpen && (
-              <motion.p
-                initial={{ opacity: 0, x: -5 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -5 }}
-                className="text-2xl font-light tracking-tight"
-              >
-                Operations v2.4
-              </motion.p>
-            )}
-          </AnimatePresence>
-        </div>
-
-        <nav className="flex-1 space-y-4">
-          {navItems.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => setCurrentView(item.id as View)}
-              className={cn(
-                "group flex w-full items-center gap-3 rounded-sm transition-all duration-300",
-                currentView === item.id 
-                  ? "text-foreground" 
-                  : "text-muted-foreground hover:text-foreground"
-              )}
-            >
-              <item.icon className={cn(
-                "h-4 w-4 shrink-0 transition-colors",
-                currentView === item.id ? "text-foreground" : "text-muted-foreground group-hover:text-foreground"
-              )} />
-              {isSidebarOpen && (
-                <motion.span
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="text-[11px] uppercase tracking-[0.1em] font-medium"
-                >
-                  {item.label}
-                </motion.span>
-              )}
-            </button>
-          ))}
-        </nav>
+        {navContent(isSidebarOpen)}
 
         <div className="mt-auto space-y-4 pt-6 border-t border-border">
           <button
@@ -166,14 +220,14 @@ export default function App() {
       </motion.aside>
 
       {/* Main Content */}
-      <main className="relative flex-1 flex flex-col overflow-hidden bg-background">
-        <header className="h-20 border-b border-border flex items-center justify-between px-8 bg-background">
-          <div className="flex items-center gap-8">
-            <div className="flex flex-col">
+      <main className="relative flex min-w-0 flex-1 flex-col overflow-hidden bg-background">
+        <header className="min-h-20 border-b border-border flex flex-col gap-4 px-5 py-5 bg-background md:flex-row md:items-center md:justify-between md:px-8">
+          <div className="flex flex-wrap items-center gap-4 pl-14 md:gap-8 md:pl-0">
+            <div className="flex min-w-0 flex-col">
               <span className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground font-bold">{currentView}</span>
               <span className="text-sm tracking-wide text-foreground opacity-80">Operational Interface</span>
             </div>
-            <div className="h-8 w-[1px] bg-border"></div>
+            <div className="hidden h-8 w-[1px] bg-border sm:block"></div>
             <div className="flex items-center gap-2">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.4)]" />
               <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-widest">
@@ -182,7 +236,7 @@ export default function App() {
             </div>
           </div>
           
-          <div className="flex gap-4">
+          <div className="flex flex-wrap gap-3 pl-14 md:pl-0">
             <button
               onClick={handleLogout}
               className="inline-flex items-center gap-2 px-4 py-2 border border-border rounded-sm text-[11px] uppercase tracking-widest text-muted-foreground hover:border-foreground hover:text-foreground transition-all"
@@ -197,7 +251,7 @@ export default function App() {
         </header>
 
         <div className="flex-1 w-full bg-background overflow-y-auto overflow-x-hidden">
-          <div className="p-8 pb-12 max-w-[1600px] mx-auto">
+          <div className="w-full max-w-[1600px] mx-auto p-4 pb-24 md:p-8 md:pb-12">
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentView}
@@ -222,7 +276,7 @@ export default function App() {
         </div>
 
         {/* Footer Status Bar */}
-        <footer className="h-12 border-t border-border flex items-center px-8 justify-between text-[10px] uppercase tracking-widest text-muted-foreground bg-card">
+        <footer className="hidden h-12 border-t border-border md:flex items-center px-8 justify-between text-[10px] uppercase tracking-widest text-muted-foreground bg-card">
           <div className="flex gap-6">
             <span>Security: <span className="text-emerald-500 border border-emerald-500/30 px-1 rounded-sm ml-1">LOCKED</span></span>
             <span>Latency: 12ms</span>

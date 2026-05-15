@@ -542,7 +542,7 @@ export function FinanceView() {
     <div className="space-y-8 pb-16">
       <div className="flex flex-col gap-2">
         <h1 className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground font-semibold">NOOK BREW.Finance</h1>
-        <p className="text-4xl font-light tracking-tight text-foreground">Income & Expense Reports</p>
+        <p className="text-3xl md:text-4xl font-light tracking-tight text-foreground">Income & Expense Reports</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
@@ -553,7 +553,7 @@ export function FinanceView() {
       </div>
 
       <Tabs defaultValue="monthly" className="space-y-6">
-        <TabsList variant="line" className="bg-transparent border-b border-border rounded-none h-10">
+        <TabsList variant="line" className="bg-transparent border-b border-border rounded-none h-auto min-h-10 w-full justify-start overflow-x-auto">
           <TabsTrigger value="monthly" className="uppercase text-[10px] tracking-widest px-5">Monthly</TabsTrigger>
           <TabsTrigger value="yearly" className="uppercase text-[10px] tracking-widest px-5">Yearly</TabsTrigger>
           <TabsTrigger value="five-year" className="uppercase text-[10px] tracking-widest px-5">5 Years</TabsTrigger>
@@ -561,10 +561,10 @@ export function FinanceView() {
         </TabsList>
 
         <TabsContent value="monthly" className="space-y-6">
-          <div className="flex items-center justify-between gap-4">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <h2 className="text-xl font-light tracking-tight">Monthly Report</h2>
             <Select value={selectedMonth} onValueChange={setSelectedMonth}>
-              <SelectTrigger className="w-[180px] bg-card border-border rounded-sm">
+              <SelectTrigger className="w-full sm:w-[180px] bg-card border-border rounded-sm">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent className="bg-card border-border text-foreground">
@@ -580,10 +580,10 @@ export function FinanceView() {
         </TabsContent>
 
         <TabsContent value="yearly" className="space-y-6">
-          <div className="flex items-center justify-between gap-4">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <h2 className="text-xl font-light tracking-tight">Yearly Report</h2>
             <Select value={selectedYear} onValueChange={setSelectedYear}>
-              <SelectTrigger className="w-[140px] bg-card border-border rounded-sm">
+              <SelectTrigger className="w-full sm:w-[140px] bg-card border-border rounded-sm">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent className="bg-card border-border text-foreground">
@@ -628,10 +628,10 @@ export function FinanceView() {
         </TabsContent>
 
         <TabsContent value="transactions" className="space-y-6">
-          <div className="flex items-center justify-between gap-4">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <h2 className="text-xl font-light tracking-tight">Income & Expense Entries</h2>
             <Select value={selectedMonth} onValueChange={setSelectedMonth}>
-              <SelectTrigger className="w-[180px] bg-card border-border rounded-sm">
+              <SelectTrigger className="w-full sm:w-[180px] bg-card border-border rounded-sm">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent className="bg-card border-border text-foreground">
@@ -713,7 +713,7 @@ function SummaryGrid({ summary }: { summary?: PeriodSummary }) {
   if (!summary) return null;
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
       <Metric label="Period" value={summary.label} />
       <Metric label="Income" value={formatMoney(summary.income)} />
       <Metric label="Expense" value={formatMoney(summary.expense)} />
@@ -757,23 +757,25 @@ function TrendChart({ data }: { data: Array<{ label: string; income: number; exp
 
 function SummaryTable({ rows }: { rows: PeriodSummary[] }) {
   return (
-    <Card className="bg-card border-border rounded-sm shadow-none overflow-hidden">
-      <div className="grid grid-cols-5 gap-4 border-b border-border px-6 py-4 text-[10px] uppercase tracking-[0.2em] text-muted-foreground font-bold">
-        <span>Year</span>
-        <span>Income</span>
-        <span>Expense</span>
-        <span>Profit</span>
-        <span>Margin</span>
-      </div>
-      {rows.map((row) => (
-        <div key={row.key} className="grid grid-cols-5 gap-4 border-b border-border/60 px-6 py-4 text-xs text-foreground">
-          <span>{row.label}</span>
-          <span>{formatMoney(row.income)}</span>
-          <span>{formatMoney(row.expense)}</span>
-          <span>{formatMoney(row.profit)}</span>
-          <span>{(row.margin * 100).toFixed(1)}%</span>
+    <Card className="bg-card border-border rounded-sm shadow-none overflow-x-auto">
+      <div className="min-w-[720px]">
+        <div className="grid grid-cols-5 gap-4 border-b border-border px-6 py-4 text-[10px] uppercase tracking-[0.2em] text-muted-foreground font-bold">
+          <span>Year</span>
+          <span>Income</span>
+          <span>Expense</span>
+          <span>Profit</span>
+          <span>Margin</span>
         </div>
-      ))}
+        {rows.map((row) => (
+          <div key={row.key} className="grid grid-cols-5 gap-4 border-b border-border/60 px-6 py-4 text-xs text-foreground">
+            <span>{row.label}</span>
+            <span>{formatMoney(row.income)}</span>
+            <span>{formatMoney(row.expense)}</span>
+            <span>{formatMoney(row.profit)}</span>
+            <span>{(row.margin * 100).toFixed(1)}%</span>
+          </div>
+        ))}
+      </div>
     </Card>
   );
 }
@@ -813,26 +815,28 @@ function ExcelImportPanel({ onImport }: { onImport: (file: File) => void }) {
 
 function YearMonthlyTable({ rows }: { rows: PeriodSummary[] }) {
   return (
-    <Card className="bg-card border-border rounded-sm shadow-none overflow-hidden">
+    <Card className="bg-card border-border rounded-sm shadow-none overflow-x-auto">
       <div className="border-b border-border bg-muted/20 px-6 py-5 text-center">
         <span className="text-[11px] uppercase tracking-[0.4em] text-foreground">Rincian Tahunan</span>
       </div>
-      <div className="grid grid-cols-5 gap-4 border-b border-border px-6 py-4 text-[10px] uppercase tracking-[0.2em] text-muted-foreground font-bold">
-        <span>Bulan</span>
-        <span>Pendapatan</span>
-        <span>Pengeluaran</span>
-        <span>Profit</span>
-        <span>Margin</span>
-      </div>
-      {rows.map((row) => (
-        <div key={row.key} className="grid grid-cols-5 gap-4 border-b border-border/60 px-6 py-3 text-xs text-foreground">
-          <span>{row.label}</span>
-          <span>{row.income > 0 ? formatMoney(row.income) : '-'}</span>
-          <span>{row.expense > 0 ? formatMoney(row.expense) : '-'}</span>
-          <span>{row.income || row.expense ? formatMoney(row.profit) : '-'}</span>
-          <span>{row.income > 0 ? `${(row.margin * 100).toFixed(2)}%` : '-'}</span>
+      <div className="min-w-[720px]">
+        <div className="grid grid-cols-5 gap-4 border-b border-border px-6 py-4 text-[10px] uppercase tracking-[0.2em] text-muted-foreground font-bold">
+          <span>Bulan</span>
+          <span>Pendapatan</span>
+          <span>Pengeluaran</span>
+          <span>Profit</span>
+          <span>Margin</span>
         </div>
-      ))}
+        {rows.map((row) => (
+          <div key={row.key} className="grid grid-cols-5 gap-4 border-b border-border/60 px-6 py-3 text-xs text-foreground">
+            <span>{row.label}</span>
+            <span>{row.income > 0 ? formatMoney(row.income) : '-'}</span>
+            <span>{row.expense > 0 ? formatMoney(row.expense) : '-'}</span>
+            <span>{row.income || row.expense ? formatMoney(row.profit) : '-'}</span>
+            <span>{row.income > 0 ? `${(row.margin * 100).toFixed(2)}%` : '-'}</span>
+          </div>
+        ))}
+      </div>
     </Card>
   );
 }
@@ -1007,7 +1011,7 @@ function TransactionPanel({
                     </div>
                   </div>
                 ) : (
-                  <div className="grid grid-cols-[88px_1fr_auto] gap-4">
+                  <div className="grid grid-cols-1 gap-3 sm:grid-cols-[88px_1fr_auto] sm:gap-4">
                     <span className="text-[10px] text-muted-foreground font-mono">{format(parseISO(row.date), 'dd MMM')}</span>
                     <div className="min-w-0">
                       <p className="text-xs text-foreground truncate">{row.name}</p>

@@ -20,7 +20,8 @@ import {
   Sun,
   Moon,
   Banknote,
-  TrendingUp
+  TrendingUp,
+  ReceiptText
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '@/lib/utils';
@@ -35,11 +36,12 @@ import { LeaveView } from './components/LeaveView';
 import { SettingsView } from './components/SettingsView';
 import { CashCounterView } from './components/CashCounterView';
 import { COGSView } from './components/COGSView';
+import { FinanceView } from './components/FinanceView';
 
-type View = 'dashboard' | 'scheduler' | 'employees' | 'shifts' | 'leave' | 'settings' | 'cashier' | 'cogs';
+type View = 'dashboard' | 'scheduler' | 'employees' | 'shifts' | 'leave' | 'settings' | 'cashier' | 'cogs' | 'finance';
 
 export default function App() {
-  const { theme, setTheme } = useScheduleStore();
+  const { theme, setTheme, syncFromSupabase, isSupabaseReady } = useScheduleStore();
   const [currentView, setCurrentView] = useState<View>('scheduler');
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
@@ -49,6 +51,10 @@ export default function App() {
     root.classList.add(theme);
   }, [theme]);
 
+  useEffect(() => {
+    void syncFromSupabase();
+  }, [syncFromSupabase]);
+
   const toggleTheme = () => setTheme(theme === 'dark' ? 'light' : 'dark');
 
   const navItems = [
@@ -57,6 +63,7 @@ export default function App() {
     { id: 'employees', label: 'Employees', icon: Users },
     { id: 'shifts', label: 'Shift Templates', icon: Clock },
     { id: 'leave', label: 'Time Off', icon: ClipboardList },
+    { id: 'finance', label: 'Finance', icon: ReceiptText },
     { id: 'cashier', label: 'Cash Counter', icon: Banknote },
     { id: 'cogs', label: 'COGS Calc', icon: TrendingUp },
     { id: 'settings', label: 'Protocol', icon: Settings },
@@ -147,7 +154,9 @@ export default function App() {
             <div className="h-8 w-[1px] bg-border"></div>
             <div className="flex items-center gap-2">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.4)]" />
-              <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-widest">Active Sync</span>
+              <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-widest">
+                {isSupabaseReady ? 'Supabase Sync' : 'Local Sync'}
+              </span>
             </div>
           </div>
           
@@ -173,6 +182,7 @@ export default function App() {
                 {currentView === 'employees' && <EmployeesView />}
                 {currentView === 'shifts' && <ShiftsView />}
                 {currentView === 'leave' && <LeaveView />}
+                {currentView === 'finance' && <FinanceView />}
                 {currentView === 'cashier' && <CashCounterView />}
                 {currentView === 'cogs' && <COGSView />}
                 {currentView === 'settings' && <SettingsView />}
@@ -195,4 +205,3 @@ export default function App() {
     </div>
   );
 }
-

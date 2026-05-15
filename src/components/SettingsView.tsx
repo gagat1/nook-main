@@ -9,7 +9,7 @@ import { Shield, Clock, Calendar, Users } from 'lucide-react';
 import { ScheduleConstraint } from '../types';
 
 export function SettingsView() {
-  const { constraints } = useScheduleStore();
+  const { constraints, updateConstraints } = useScheduleStore();
   
   const handleSave = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -26,7 +26,7 @@ export function SettingsView() {
       requireMorningNightEveryday: formData.get('requireMorningNightEveryday') === 'on',
     };
     
-    useScheduleStore.setState({ constraints: updatedConstraints });
+    updateConstraints(updatedConstraints);
     toast.success('System constraints updated');
   };
 

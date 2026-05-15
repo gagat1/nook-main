@@ -12,6 +12,8 @@ import {
 } from './types';
 import { generateSchedules } from './lib/engine';
 import { format, startOfWeek, endOfWeek, isWithinInterval, isSameDay } from 'date-fns';
+import { isSupabaseConfigured } from './lib/supabase';
+import { deleteJsonRow, loadJsonRows, replaceJsonRows, saveSingleton, upsertJsonRow, upsertJsonRows } from './lib/supabaseSync';
 
 interface ScheduleState {
   employees: Employee[];
@@ -20,6 +22,9 @@ interface ScheduleState {
   schedules: ScheduledShift[];
   constraints: ScheduleConstraint;
   theme: Theme;
+  isSupabaseReady: boolean;
+  syncFromSupabase: () => Promise<void>;
+  updateConstraints: (constraints: ScheduleConstraint) => void;
   
   // Actions
   setTheme: (theme: Theme) => void;
@@ -75,6 +80,30 @@ const initialShifts: ShiftTemplate[] = [
   { id: 'night', name: 'Night', startTime: '14:00', endTime: '22:00', color: '#10b981', minStaff: 1, maxStaff: 2, priority: 'High', isActive: true },
 ];
 
+const TABLES = {
+  employees: 'shift_employees',
+  shifts: 'shift_templates',
+  leaves: 'leave_requests',
+  schedules: 'scheduled_shifts',
+  settings: 'app_settings',
+};
+
+function syncError(error: unknown) {
+  console.warn('Supabase sync skipped:', error);
+}
+
+function serializeSchedule(schedule: ScheduledShift): ScheduledShift {
+  return { ...schedule, date: new Date(schedule.date) };
+}
+
+function serializeLeave(leave: LeaveRequest): LeaveRequest {
+  return {
+    ...leave,
+    startDate: new Date(leave.startDate),
+    endDate: new Date(leave.endDate),
+  };
+}
+
 export const useScheduleStore = create<ScheduleState>()(
   persist(
     (set, get) => ({
@@ -93,52 +122,140 @@ export const useScheduleStore = create<ScheduleState>()(
         requireMorningNightEveryday: true,
       },
       theme: 'dark',
+      isSupabaseReady: isSupabaseConfigured,
 
-      setTheme: (theme) => set({ theme }),
-      addEmployee: (emp) => set((state) => ({ employees: [...state.employees, emp] })),
-      updateEmployee: (emp) => set((state) => ({
-        employees: state.employees.map((e) => (e.id === emp.id ? emp : e)),
-      })),
-      deleteEmployee: (id) => set((state) => ({
-        employees: state.employees.filter((e) => e.id !== id),
-        schedules: state.schedules.filter((s) => s.employeeId !== id),
-        leaves: state.leaves.filter((l) => l.employeeId !== id),
-      })),
+      syncFromSupabase: async () => {
+        if (!isSupabaseConfigured) return;
+        try {
+          const [employees, shifts, leaves, schedules, settings] = await Promise.all([
+            loadJsonRows<Employee>(TABLES.employees),
+            loadJsonRows<ShiftTemplate>(TABLES.shifts),
+            loadJsonRows<LeaveRequest>(TABLES.leaves),
+            loadJsonRows<ScheduledShift>(TABLES.schedules),
+            loadJsonRows<{ id: string; constraints?: ScheduleConstraint; theme?: Theme }>(TABLES.settings),
+          ]);
 
-      addShift: (shift) => set((state) => ({ shifts: [...state.shifts, shift] })),
-      updateShift: (shift) => set((state) => ({
-        shifts: state.shifts.map((s) => (s.id === shift.id ? shift : s)),
-      })),
-      deleteShift: (id) => set((state) => ({
-        shifts: state.shifts.filter((s) => s.id !== id),
-        schedules: state.schedules.filter((s) => s.shiftTemplateId !== id),
-      })),
+          const appSettings = settings.find((item) => item.id === 'app');
+          const nextEmployees = employees.length ? employees : get().employees;
+          const nextShifts = shifts.length ? shifts : get().shifts;
+          const nextLeaves = leaves.length ? leaves.map(serializeLeave) : get().leaves;
+          const nextSchedules = schedules.length ? schedules.map(serializeSchedule) : get().schedules;
+
+          set((state) => ({
+            employees: nextEmployees,
+            shifts: nextShifts,
+            leaves: nextLeaves,
+            schedules: nextSchedules,
+            constraints: appSettings?.constraints || state.constraints,
+            theme: appSettings?.theme || state.theme,
+            isSupabaseReady: true,
+          }));
+
+          if (!employees.length) void upsertJsonRows(TABLES.employees, nextEmployees).catch(syncError);
+          if (!shifts.length) void upsertJsonRows(TABLES.shifts, nextShifts).catch(syncError);
+          if (!leaves.length && nextLeaves.length) void upsertJsonRows(TABLES.leaves, nextLeaves).catch(syncError);
+          if (!schedules.length && nextSchedules.length) void upsertJsonRows(TABLES.schedules, nextSchedules).catch(syncError);
+          if (!appSettings) void saveSingleton(TABLES.settings, 'app', { constraints: get().constraints, theme: get().theme }).catch(syncError);
+        } catch (error) {
+          syncError(error);
+        }
+      },
+
+      setTheme: (theme) => {
+        set({ theme });
+        void saveSingleton(TABLES.settings, 'app', { constraints: get().constraints, theme }).catch(syncError);
+      },
+      updateConstraints: (constraints) => {
+        set({ constraints });
+        void saveSingleton(TABLES.settings, 'app', { constraints, theme: get().theme }).catch(syncError);
+      },
+      addEmployee: (emp) => {
+        set((state) => ({ employees: [...state.employees, emp] }));
+        void upsertJsonRow(TABLES.employees, emp).catch(syncError);
+      },
+      updateEmployee: (emp) => {
+        set((state) => ({
+          employees: state.employees.map((e) => (e.id === emp.id ? emp : e)),
+        }));
+        void upsertJsonRow(TABLES.employees, emp).catch(syncError);
+      },
+      deleteEmployee: (id) => {
+        set((state) => ({
+          employees: state.employees.filter((e) => e.id !== id),
+          schedules: state.schedules.filter((s) => s.employeeId !== id),
+          leaves: state.leaves.filter((l) => l.employeeId !== id),
+        }));
+        void Promise.all([
+          deleteJsonRow(TABLES.employees, id),
+          replaceJsonRows(TABLES.schedules, get().schedules),
+          replaceJsonRows(TABLES.leaves, get().leaves),
+        ]).catch(syncError);
+      },
+
+      addShift: (shift) => {
+        set((state) => ({ shifts: [...state.shifts, shift] }));
+        void upsertJsonRow(TABLES.shifts, shift).catch(syncError);
+      },
+      updateShift: (shift) => {
+        set((state) => ({
+          shifts: state.shifts.map((s) => (s.id === shift.id ? shift : s)),
+        }));
+        void upsertJsonRow(TABLES.shifts, shift).catch(syncError);
+      },
+      deleteShift: (id) => {
+        set((state) => ({
+          shifts: state.shifts.filter((s) => s.id !== id),
+          schedules: state.schedules.filter((s) => s.shiftTemplateId !== id),
+        }));
+        void Promise.all([
+          deleteJsonRow(TABLES.shifts, id),
+          replaceJsonRows(TABLES.schedules, get().schedules),
+        ]).catch(syncError);
+      },
       duplicateShift: (id) => set((state) => {
         const original = state.shifts.find(s => s.id === id);
         if (!original) return state;
         const copy = { ...original, id: Math.random().toString(36).substr(2, 9), name: `${original.name} (Copy)` };
+        void upsertJsonRow(TABLES.shifts, copy).catch(syncError);
         return { shifts: [...state.shifts, copy] };
       }),
 
-      addLeave: (leave) => set((state) => ({ leaves: [...state.leaves, leave] })),
-      updateLeave: (leave) => set((state) => ({
-        leaves: state.leaves.map((l) => (l.id === leave.id ? leave : l)),
-      })),
-      deleteLeave: (id) => set((state) => ({ leaves: state.leaves.filter((l) => l.id !== id) })),
+      addLeave: (leave) => {
+        set((state) => ({ leaves: [...state.leaves, leave] }));
+        void upsertJsonRow(TABLES.leaves, leave).catch(syncError);
+      },
+      updateLeave: (leave) => {
+        set((state) => ({
+          leaves: state.leaves.map((l) => (l.id === leave.id ? leave : l)),
+        }));
+        void upsertJsonRow(TABLES.leaves, leave).catch(syncError);
+      },
+      deleteLeave: (id) => {
+        set((state) => ({ leaves: state.leaves.filter((l) => l.id !== id) }));
+        void deleteJsonRow(TABLES.leaves, id).catch(syncError);
+      },
 
       updateSchedule: (schedule) => set((state) => {
         const exists = state.schedules.some(s => s.id === schedule.id);
+        void upsertJsonRow(TABLES.schedules, schedule).catch(syncError);
         if (exists) {
           return { schedules: state.schedules.map(s => s.id === schedule.id ? schedule : s) };
         }
         return { schedules: [...state.schedules, schedule] };
       }),
-      deleteSchedule: (id) => set((state) => ({
-        schedules: state.schedules.filter(s => s.id !== id)
-      })),
-      toggleLock: (id) => set((state) => ({
-        schedules: state.schedules.map(s => s.id === id ? { ...s, isLocked: !s.isLocked } : s)
-      })),
+      deleteSchedule: (id) => {
+        set((state) => ({
+          schedules: state.schedules.filter(s => s.id !== id)
+        }));
+        void deleteJsonRow(TABLES.schedules, id).catch(syncError);
+      },
+      toggleLock: (id) => {
+        set((state) => ({
+          schedules: state.schedules.map(s => s.id === id ? { ...s, isLocked: !s.isLocked } : s)
+        }));
+        const updated = get().schedules.find((schedule) => schedule.id === id);
+        if (updated) void upsertJsonRow(TABLES.schedules, updated).catch(syncError);
+      },
 
   generateAll: (startDate, endDate, filter?: { employeeIds?: string[], days?: Date[] }) => {
     const { employees: allEmployees, shifts, leaves, schedules: currentSchedules, constraints } = get();
@@ -168,8 +285,12 @@ export const useScheduleStore = create<ScheduleState>()(
     } else {
       set({ schedules: generated });
     }
+    void replaceJsonRows(TABLES.schedules, generated).catch(syncError);
   },
-      clearSchedules: () => set((state) => ({ schedules: state.schedules.filter(s => s.isLocked) })),
+      clearSchedules: () => {
+        set((state) => ({ schedules: state.schedules.filter(s => s.isLocked) }));
+        void replaceJsonRows(TABLES.schedules, get().schedules).catch(syncError);
+      },
 
       getStats: (employeeId, startDate, endDate) => {
         const { schedules, shifts, employees } = get();

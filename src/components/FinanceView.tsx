@@ -99,6 +99,80 @@ function syncError(error: unknown) {
   console.warn('Finance Supabase sync skipped:', error);
 }
 
+function identityPart(value: string | undefined) {
+  return (value || '').trim().toLowerCase().replace(/\s+/g, ' ');
+}
+
+function incomeIdentity(record: IncomeRecord) {
+  return [record.date, identityPart(record.product), identityPart(record.category)].join('|');
+}
+
+function expenseIdentity(record: ExpenseRecord) {
+  return [record.date, identityPart(record.item), identityPart(record.category)].join('|');
+}
+
+function mergeFinanceRecords<T extends { id: string }>(
+  current: T[],
+  incoming: T[],
+  getIdentity: (record: T) => string
+) {
+  const next = [...current];
+  const indexByIdentity = new Map<string, number>();
+  const removedIds: string[] = [];
+  const upserts: T[] = [];
+  let added = 0;
+  let updated = 0;
+
+  next.forEach((record, index) => {
+    const identity = getIdentity(record);
+    const existingIndex = indexByIdentity.get(identity);
+
+    if (existingIndex == null) {
+      indexByIdentity.set(identity, index);
+      return;
+    }
+
+    removedIds.push(record.id);
+    next[existingIndex] = { ...next[existingIndex], ...record, id: next[existingIndex].id };
+    next[index] = { ...record, id: '' };
+    upserts.push(next[existingIndex]);
+    updated += 1;
+  });
+
+  incoming.forEach((record) => {
+    const identity = getIdentity(record);
+    const existingIndex = indexByIdentity.get(identity);
+
+    if (existingIndex == null) {
+      indexByIdentity.set(identity, next.length);
+      next.push(record);
+      upserts.push(record);
+      added += 1;
+      return;
+    }
+
+    const updatedRecord = { ...next[existingIndex], ...record, id: next[existingIndex].id };
+    next[existingIndex] = updatedRecord;
+    upserts.push(updatedRecord);
+    updated += 1;
+  });
+
+  return {
+    records: next.filter((record) => record.id),
+    upserts,
+    removedIds,
+    added,
+    updated,
+  };
+}
+
+function persistFinanceMerge<T extends { id: string }>(table: string, upserts: T[], removedIds: string[]) {
+  void Promise.all([
+    upsertJsonRows(table, upserts),
+    ...removedIds.map((id) => deleteJsonRow(table, id)),
+  ]).catch(syncError);
+}
+
 function loadXlsxLibrary() {
   if (window.XLSX) return Promise.resolve(window.XLSX);
 
@@ -248,8 +322,16 @@ export function FinanceView() {
           loadJsonRows<EditableExpenseRecord>(FINANCE_TABLES.expenses),
         ]);
 
-        if (supabaseIncome.length) setIncomeRecords(supabaseIncome);
-        if (supabaseExpenses.length) setExpenseRecords(supabaseExpenses);
+        if (supabaseIncome.length) {
+          const merged = mergeFinanceRecords<EditableIncomeRecord>([], supabaseIncome, incomeIdentity);
+          setIncomeRecords(merged.records);
+          persistFinanceMerge(FINANCE_TABLES.income, merged.upserts, merged.removedIds);
+        }
+        if (supabaseExpenses.length) {
+          const merged = mergeFinanceRecords<EditableExpenseRecord>([], supabaseExpenses, expenseIdentity);
+          setExpenseRecords(merged.records);
+          persistFinanceMerge(FINANCE_TABLES.expenses, merged.upserts, merged.removedIds);
+        }
 
         if (!supabaseIncome.length && seedIncome.length) {
           await replaceJsonRows(FINANCE_TABLES.income, seedIncome);
@@ -347,16 +429,22 @@ export function FinanceView() {
 
   const addIncome = (record: IncomeRecord) => {
     const nextRecord = { ...record, id: `manual-income-${Date.now()}` };
-    setIncomeRecords((current) => [...current, nextRecord]);
-    void upsertJsonRow(FINANCE_TABLES.income, nextRecord).catch(syncError);
-    toast.success('Pemasukan ditambahkan');
+    setIncomeRecords((current) => {
+      const merged = mergeFinanceRecords<EditableIncomeRecord>(current, [nextRecord], incomeIdentity);
+      persistFinanceMerge(FINANCE_TABLES.income, merged.upserts, merged.removedIds);
+      return merged.records;
+    });
+    toast.success('Pemasukan disimpan');
   };
 
   const addExpense = (record: ExpenseRecord) => {
     const nextRecord = { ...record, id: `manual-expense-${Date.now()}` };
-    setExpenseRecords((current) => [...current, nextRecord]);
-    void upsertJsonRow(FINANCE_TABLES.expenses, nextRecord).catch(syncError);
-    toast.success('Pengeluaran ditambahkan');
+    setExpenseRecords((current) => {
+      const merged = mergeFinanceRecords<EditableExpenseRecord>(current, [nextRecord], expenseIdentity);
+      persistFinanceMerge(FINANCE_TABLES.expenses, merged.upserts, merged.removedIds);
+      return merged.records;
+    });
+    toast.success('Pengeluaran disimpan');
   };
 
   const updateIncome = (id: string, updates: Partial<IncomeRecord>) => {
@@ -404,12 +492,16 @@ export function FinanceView() {
         return;
       }
 
-      setIncomeRecords((current) => [...current, ...importedIncome]);
-      setExpenseRecords((current) => [...current, ...importedExpenses]);
-      void Promise.all([
-        upsertJsonRows(FINANCE_TABLES.income, importedIncome),
-        upsertJsonRows(FINANCE_TABLES.expenses, importedExpenses),
-      ]).catch(syncError);
+      setIncomeRecords((current) => {
+        const merged = mergeFinanceRecords<EditableIncomeRecord>(current, importedIncome, incomeIdentity);
+        persistFinanceMerge(FINANCE_TABLES.income, merged.upserts, merged.removedIds);
+        return merged.records;
+      });
+      setExpenseRecords((current) => {
+        const merged = mergeFinanceRecords<EditableExpenseRecord>(current, importedExpenses, expenseIdentity);
+        persistFinanceMerge(FINANCE_TABLES.expenses, merged.upserts, merged.removedIds);
+        return merged.records;
+      });
 
       const latestDate = [...importedIncome.map((item) => item.date), ...importedExpenses.map((item) => item.date)].sort().at(-1);
       if (latestDate) {
@@ -417,7 +509,7 @@ export function FinanceView() {
         setSelectedYear(yearKey(latestDate));
       }
 
-      toast.success(`Import berhasil: ${importedIncome.length} pemasukan, ${importedExpenses.length} pengeluaran`);
+      toast.success(`Import berhasil: ${importedIncome.length} pemasukan dan ${importedExpenses.length} pengeluaran diproses`);
     } catch (error) {
       toast.error(error instanceof Error ? error.message : 'Import Excel gagal');
     }

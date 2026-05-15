@@ -393,6 +393,8 @@ export function FinanceView() {
     .sort((a, b) => b.date.localeCompare(a.date));
 
   const yearlyMonthlyRows = useMemo(() => {
+    if (!selectedYear) return [];
+
     return Array.from({ length: 12 }, (_, index) => {
       const key = `${selectedYear}-${String(index + 1).padStart(2, '0')}`;
       const income = incomeRecords

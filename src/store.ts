@@ -122,10 +122,11 @@ export const useScheduleStore = create<ScheduleState>()(
         requireMorningNightEveryday: true,
       },
       theme: 'dark',
-      isSupabaseReady: isSupabaseConfigured,
+      isSupabaseReady: false,
 
       syncFromSupabase: async () => {
         if (!isSupabaseConfigured) return;
+        set({ isSupabaseReady: false });
         try {
           const [employees, shifts, leaves, schedules, settings] = await Promise.all([
             loadJsonRows<Employee>(TABLES.employees),
@@ -157,6 +158,7 @@ export const useScheduleStore = create<ScheduleState>()(
           if (!schedules.length && nextSchedules.length) void upsertJsonRows(TABLES.schedules, nextSchedules).catch(syncError);
           if (!appSettings) void saveSingleton(TABLES.settings, 'app', { constraints: get().constraints, theme: get().theme }).catch(syncError);
         } catch (error) {
+          set({ isSupabaseReady: false });
           syncError(error);
         }
       },

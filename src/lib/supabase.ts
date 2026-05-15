@@ -10,6 +10,8 @@ export const isSupabaseConfigured = Boolean(supabaseUrl && supabaseAnonKey);
 type QueryOptions = {
   order?: string;
   filters?: Record<string, string>;
+  limit?: number;
+  offset?: number;
 };
 
 async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
@@ -40,6 +42,8 @@ async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
 function queryString(options?: QueryOptions) {
   const params = new URLSearchParams();
   if (options?.order) params.set('order', options.order);
+  if (options?.limit != null) params.set('limit', String(options.limit));
+  if (options?.offset != null) params.set('offset', String(options.offset));
   Object.entries(options?.filters || {}).forEach(([key, value]) => {
     params.set(key, value);
   });
@@ -49,6 +53,18 @@ function queryString(options?: QueryOptions) {
 export async function selectRows<T>(table: string, options?: QueryOptions): Promise<T[]> {
   const query = queryString(options);
   return request<T[]>(`${table}?select=*${query ? `&${query}` : ''}`);
+}
+
+export async function selectAllRows<T>(table: string, options?: Omit<QueryOptions, 'limit' | 'offset'>): Promise<T[]> {
+  const pageSize = 500;
+  const rows: T[] = [];
+
+  for (let offset = 0; ; offset += pageSize) {
+    const page = await selectRows<T>(table, { ...options, limit: pageSize, offset });
+    rows.push(...page);
+
+    if (page.length < pageSize) return rows;
+  }
 }
 
 export async function upsertRows<T extends { id: string }>(table: string, rows: T[]): Promise<T[]> {

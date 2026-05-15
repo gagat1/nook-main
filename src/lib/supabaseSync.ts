@@ -1,4 +1,4 @@
-import { deleteRow, isSupabaseConfigured, selectRows, upsertRows } from './supabase';
+import { deleteRow, isSupabaseConfigured, selectAllRows, selectRows, upsertRows } from './supabase';
 
 export type JsonRow<T> = {
   id: string;
@@ -15,7 +15,7 @@ function chunkRows<T>(rows: T[], size: number) {
 
 export async function loadJsonRows<T>(table: string): Promise<T[]> {
   if (!isSupabaseConfigured) return [];
-  const rows = await selectRows<JsonRow<T>>(table, { order: 'id.asc' });
+  const rows = await selectAllRows<JsonRow<T>>(table, { order: 'id.asc' });
   return rows.map((row) => row.data);
 }
 
@@ -42,7 +42,7 @@ export async function upsertJsonRows<T extends { id: string }>(table: string, re
 export async function replaceJsonRows<T extends { id: string }>(table: string, records: T[]) {
   if (!isSupabaseConfigured) return;
 
-  const existing = await selectRows<JsonRow<T>>(table);
+  const existing = await selectAllRows<JsonRow<T>>(table);
   const nextIds = new Set(records.map((record) => record.id));
   await upsertJsonRows(table, records);
 

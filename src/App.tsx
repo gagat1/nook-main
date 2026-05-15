@@ -1,0 +1,198 @@
+/**
+ * @license
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+import { useState, useEffect } from 'react';
+import { useScheduleStore } from './store';
+import { 
+  Users, 
+  Calendar, 
+  Clock, 
+  ClipboardList, 
+  LayoutDashboard, 
+  Settings,
+  ChevronLeft,
+  ChevronRight,
+  Menu,
+  X,
+  Sparkles,
+  Sun,
+  Moon,
+  Banknote,
+  TrendingUp
+} from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
+import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { Toaster } from '@/components/ui/sonner';
+import { SchedulerView } from './components/SchedulerView';
+import { EmployeesView } from './components/EmployeesView';
+import { ShiftsView } from './components/ShiftsView';
+import { DashboardView } from './components/DashboardView';
+import { LeaveView } from './components/LeaveView';
+import { SettingsView } from './components/SettingsView';
+import { CashCounterView } from './components/CashCounterView';
+import { COGSView } from './components/COGSView';
+
+type View = 'dashboard' | 'scheduler' | 'employees' | 'shifts' | 'leave' | 'settings' | 'cashier' | 'cogs';
+
+export default function App() {
+  const { theme, setTheme } = useScheduleStore();
+  const [currentView, setCurrentView] = useState<View>('scheduler');
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+
+  useEffect(() => {
+    const root = window.document.documentElement;
+    root.classList.remove('light', 'dark');
+    root.classList.add(theme);
+  }, [theme]);
+
+  const toggleTheme = () => setTheme(theme === 'dark' ? 'light' : 'dark');
+
+  const navItems = [
+    { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
+    { id: 'scheduler', label: 'Schedule', icon: Calendar },
+    { id: 'employees', label: 'Employees', icon: Users },
+    { id: 'shifts', label: 'Shift Templates', icon: Clock },
+    { id: 'leave', label: 'Time Off', icon: ClipboardList },
+    { id: 'cashier', label: 'Cash Counter', icon: Banknote },
+    { id: 'cogs', label: 'COGS Calc', icon: TrendingUp },
+    { id: 'settings', label: 'Protocol', icon: Settings },
+  ];
+
+  return (
+    <div className={cn(
+      "flex h-screen w-full font-sans overflow-hidden select-none bg-background text-foreground transition-colors duration-300",
+      theme
+    )}>
+      <Toaster position="top-right" theme={theme} />
+      
+      {/* Sidebar */}
+      <motion.aside
+        initial={false}
+        animate={{ width: isSidebarOpen ? 280 : 80 }}
+        className="relative flex flex-col border-r border-border bg-card z-20 p-6"
+      >
+        <div className="mb-10">
+          <AnimatePresence mode="wait">
+            {isSidebarOpen && (
+              <motion.p
+                initial={{ opacity: 0, x: -5 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -5 }}
+                className="text-2xl font-light tracking-tight"
+              >
+                Operations v2.4
+              </motion.p>
+            )}
+          </AnimatePresence>
+        </div>
+
+        <nav className="flex-1 space-y-4">
+          {navItems.map((item) => (
+            <button
+              key={item.id}
+              onClick={() => setCurrentView(item.id as View)}
+              className={cn(
+                "group flex w-full items-center gap-3 rounded-sm transition-all duration-300",
+                currentView === item.id 
+                  ? "text-foreground" 
+                  : "text-muted-foreground hover:text-foreground"
+              )}
+            >
+              <item.icon className={cn(
+                "h-4 w-4 shrink-0 transition-colors",
+                currentView === item.id ? "text-foreground" : "text-muted-foreground group-hover:text-foreground"
+              )} />
+              {isSidebarOpen && (
+                <motion.span
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="text-[11px] uppercase tracking-[0.1em] font-medium"
+                >
+                  {item.label}
+                </motion.span>
+              )}
+            </button>
+          ))}
+        </nav>
+
+        <div className="mt-auto space-y-4 pt-6 border-t border-border">
+          <button
+            onClick={toggleTheme}
+            className="flex w-full items-center justify-center rounded-sm p-2 text-muted-foreground hover:text-foreground transition-colors border border-border hover:border-accent"
+          >
+            {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+          </button>
+          
+          <button
+            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+            className="flex w-full items-center justify-center rounded-sm p-2 text-muted-foreground hover:text-foreground transition-colors border border-border hover:border-accent"
+          >
+            {isSidebarOpen ? <ChevronLeft className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
+          </button>
+        </div>
+      </motion.aside>
+
+      {/* Main Content */}
+      <main className="relative flex-1 flex flex-col overflow-hidden bg-background">
+        <header className="h-20 border-b border-border flex items-center justify-between px-8 bg-background">
+          <div className="flex items-center gap-8">
+            <div className="flex flex-col">
+              <span className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground font-bold">{currentView}</span>
+              <span className="text-sm tracking-wide text-foreground opacity-80">Operational Interface</span>
+            </div>
+            <div className="h-8 w-[1px] bg-border"></div>
+            <div className="flex items-center gap-2">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.4)]" />
+              <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-widest">Active Sync</span>
+            </div>
+          </div>
+          
+          <div className="flex gap-4">
+            <button className="px-4 py-2 border border-border rounded-sm text-[11px] uppercase tracking-widest text-muted-foreground hover:border-foreground hover:text-foreground transition-all">
+              v2.4.12-release
+            </button>
+          </div>
+        </header>
+
+        <div className="flex-1 w-full bg-background overflow-y-auto overflow-x-hidden">
+          <div className="p-8 pb-12 max-w-[1600px] mx-auto">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentView}
+                initial={{ opacity: 0, y: 5 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -5 }}
+                transition={{ duration: 0.3, ease: 'circOut' }}
+              >
+                {currentView === 'dashboard' && <DashboardView />}
+                {currentView === 'scheduler' && <SchedulerView />}
+                {currentView === 'employees' && <EmployeesView />}
+                {currentView === 'shifts' && <ShiftsView />}
+                {currentView === 'leave' && <LeaveView />}
+                {currentView === 'cashier' && <CashCounterView />}
+                {currentView === 'cogs' && <COGSView />}
+                {currentView === 'settings' && <SettingsView />}
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </div>
+
+        {/* Footer Status Bar */}
+        <footer className="h-12 border-t border-border flex items-center px-8 justify-between text-[10px] uppercase tracking-widest text-muted-foreground bg-card">
+          <div className="flex gap-6">
+            <span>Security: <span className="text-emerald-500 border border-emerald-500/30 px-1 rounded-sm ml-1">LOCKED</span></span>
+            <span>Latency: 12ms</span>
+          </div>
+          <div className="flex gap-4">
+            <span className="opacity-40">© 2024 Shift.System</span>
+          </div>
+        </footer>
+      </main>
+    </div>
+  );
+}
+

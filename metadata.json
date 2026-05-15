@@ -1,0 +1,6 @@
+{
+  "name": "ShiftShift",
+  "description": "Automated employee shift scheduling with fairness balancing, manual calendar editing, and payroll calculations.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}

@@ -22,7 +22,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { toast } from 'sonner';
 import { ExpenseRecord, IncomeRecord, nookExpenses, nookIncome } from '../data/nookFinance';
 import { isSupabaseConfigured } from '../lib/supabase';
-import { deleteJsonRow, loadJsonRows, replaceJsonRows, upsertJsonRow, upsertJsonRows } from '../lib/supabaseSync';
+import { deleteJsonRow, loadJsonRows, upsertJsonRow, upsertJsonRows } from '../lib/supabaseSync';
 
 type PeriodSummary = {
   key: string;
@@ -312,9 +312,6 @@ export function FinanceView() {
     if (!isSupabaseConfigured || hasLoadedSupabase.current) return;
     hasLoadedSupabase.current = true;
 
-    const seedIncome = incomeRecords;
-    const seedExpenses = expenseRecords;
-
     void (async () => {
       try {
         const [supabaseIncome, supabaseExpenses] = await Promise.all([
@@ -326,18 +323,15 @@ export function FinanceView() {
           const merged = mergeFinanceRecords<EditableIncomeRecord>([], supabaseIncome, incomeIdentity);
           setIncomeRecords(merged.records);
           persistFinanceMerge(FINANCE_TABLES.income, merged.upserts, merged.removedIds);
+        } else {
+          setIncomeRecords([]);
         }
         if (supabaseExpenses.length) {
           const merged = mergeFinanceRecords<EditableExpenseRecord>([], supabaseExpenses, expenseIdentity);
           setExpenseRecords(merged.records);
           persistFinanceMerge(FINANCE_TABLES.expenses, merged.upserts, merged.removedIds);
-        }
-
-        if (!supabaseIncome.length && seedIncome.length) {
-          await replaceJsonRows(FINANCE_TABLES.income, seedIncome);
-        }
-        if (!supabaseExpenses.length && seedExpenses.length) {
-          await replaceJsonRows(FINANCE_TABLES.expenses, seedExpenses);
+        } else {
+          setExpenseRecords([]);
         }
       } catch (error) {
         syncError(error);

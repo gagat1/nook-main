@@ -349,8 +349,6 @@ export function FinanceView() {
     const nextRecord = { ...record, id: `manual-income-${Date.now()}` };
     setIncomeRecords((current) => [...current, nextRecord]);
     void upsertJsonRow(FINANCE_TABLES.income, nextRecord).catch(syncError);
-    setSelectedMonth(monthKey(record.date));
-    setSelectedYear(yearKey(record.date));
     toast.success('Pemasukan ditambahkan');
   };
 
@@ -358,8 +356,6 @@ export function FinanceView() {
     const nextRecord = { ...record, id: `manual-expense-${Date.now()}` };
     setExpenseRecords((current) => [...current, nextRecord]);
     void upsertJsonRow(FINANCE_TABLES.expenses, nextRecord).catch(syncError);
-    setSelectedMonth(monthKey(record.date));
-    setSelectedYear(yearKey(record.date));
     toast.success('Pengeluaran ditambahkan');
   };
 

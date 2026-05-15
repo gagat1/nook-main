@@ -192,6 +192,18 @@ function readSheetRows(workbook: any, sheetName: string) {
   return window.XLSX.utils.sheet_to_json(worksheet, { header: 1, raw: true, defval: null }) as unknown[][];
 }
 
+function normalizeSheetName(name: string) {
+  return name.trim().toLowerCase().replace(/\s+/g, ' ');
+}
+
+function readFirstMatchingSheetRows(workbook: any, sheetNames: string[]) {
+  const availableNames = workbook.SheetNames || [];
+  const normalizedTargets = new Set(sheetNames.map(normalizeSheetName));
+  const matchedName = availableNames.find((name: string) => normalizedTargets.has(normalizeSheetName(name)));
+
+  return matchedName ? readSheetRows(workbook, matchedName) : [];
+}
+
 function withIncomeIds(records: IncomeRecord[], prefix: string): EditableIncomeRecord[] {
   return records.map((record, index) => ({ ...record, id: `${prefix}-${index}-${record.date}` }));
 }
@@ -480,8 +492,8 @@ export function FinanceView() {
       const XLSX = await loadXlsxLibrary();
       const data = await file.arrayBuffer();
       const workbook = XLSX.read(data, { type: 'array', cellDates: true });
-      const importedIncome = parseIncomeRows(readSheetRows(workbook, 'Pendapatan'));
-      const importedExpenses = parseExpenseRows(readSheetRows(workbook, 'Pengeluaran'));
+      const importedIncome = parseIncomeRows(readFirstMatchingSheetRows(workbook, ['Pendapatan', 'Income']));
+      const importedExpenses = parseExpenseRows(readFirstMatchingSheetRows(workbook, ['Pengeluaran', 'Expenses', 'Expense']));
 
       if (!importedIncome.length && !importedExpenses.length) {
         toast.error('Tidak ada data Pendapatan/Pengeluaran yang terbaca');

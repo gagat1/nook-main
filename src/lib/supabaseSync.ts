@@ -5,6 +5,14 @@ export type JsonRow<T> = {
   data: T;
 };
 
+const UPSERT_BATCH_SIZE = 100;
+
+function chunkRows<T>(rows: T[], size: number) {
+  return Array.from({ length: Math.ceil(rows.length / size) }, (_, index) =>
+    rows.slice(index * size, index * size + size)
+  );
+}
+
 export async function loadJsonRows<T>(table: string): Promise<T[]> {
   if (!isSupabaseConfigured) return [];
   const rows = await selectRows<JsonRow<T>>(table, { order: 'id.asc' });
@@ -24,7 +32,11 @@ export async function upsertJsonRow<T extends { id: string }>(table: string, rec
 
 export async function upsertJsonRows<T extends { id: string }>(table: string, records: T[]) {
   if (!isSupabaseConfigured || !records.length) return;
-  await upsertRows<JsonRow<T>>(table, records.map((record) => ({ id: record.id, data: record })));
+  const rows = records.map((record) => ({ id: record.id, data: record }));
+
+  for (const batch of chunkRows(rows, UPSERT_BATCH_SIZE)) {
+    await upsertRows<JsonRow<T>>(table, batch);
+  }
 }
 
 export async function replaceJsonRows<T extends { id: string }>(table: string, records: T[]) {

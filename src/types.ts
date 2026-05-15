@@ -58,6 +58,12 @@ export interface ScheduledShift {
 
 export type Theme = 'dark' | 'light';
 
+export interface AuthCredentials {
+  username: string;
+  password: string;
+  pin: string;
+}
+
 export interface ScheduleConstraint {
   maxConsecutiveDays: number;
   minRestHours: number;

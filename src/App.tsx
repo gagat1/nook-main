@@ -21,7 +21,9 @@ import {
   Moon,
   Banknote,
   TrendingUp,
-  ReceiptText
+  ReceiptText,
+  Wrench,
+  LogOut
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '@/lib/utils';
@@ -37,13 +39,19 @@ import { SettingsView } from './components/SettingsView';
 import { CashCounterView } from './components/CashCounterView';
 import { COGSView } from './components/COGSView';
 import { FinanceView } from './components/FinanceView';
+import { LoginView } from './components/LoginView';
+import { MaintenanceView } from './components/MaintenanceView';
 
-type View = 'dashboard' | 'scheduler' | 'employees' | 'shifts' | 'leave' | 'settings' | 'cashier' | 'cogs' | 'finance';
+type View = 'dashboard' | 'scheduler' | 'employees' | 'shifts' | 'leave' | 'settings' | 'cashier' | 'cogs' | 'finance' | 'maintenance';
 
 export default function App() {
   const { theme, setTheme, syncFromSupabase, isSupabaseReady } = useScheduleStore();
   const [currentView, setCurrentView] = useState<View>('scheduler');
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    return window.sessionStorage.getItem('nook-authenticated') === 'true';
+  });
 
   useEffect(() => {
     const root = window.document.documentElement;
@@ -56,6 +64,10 @@ export default function App() {
   }, [syncFromSupabase]);
 
   const toggleTheme = () => setTheme(theme === 'dark' ? 'light' : 'dark');
+  const handleLogout = () => {
+    window.sessionStorage.removeItem('nook-authenticated');
+    setIsAuthenticated(false);
+  };
 
   const navItems = [
     { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
@@ -67,7 +79,17 @@ export default function App() {
     { id: 'cashier', label: 'Cash Counter', icon: Banknote },
     { id: 'cogs', label: 'COGS Calc', icon: TrendingUp },
     { id: 'settings', label: 'Protocol', icon: Settings },
+    { id: 'maintenance', label: 'Maintenance', icon: Wrench },
   ];
+
+  if (!isAuthenticated) {
+    return (
+      <>
+        <Toaster position="top-right" theme={theme} />
+        <LoginView onLogin={() => setIsAuthenticated(true)} />
+      </>
+    );
+  }
 
   return (
     <div className={cn(
@@ -161,6 +183,13 @@ export default function App() {
           </div>
           
           <div className="flex gap-4">
+            <button
+              onClick={handleLogout}
+              className="inline-flex items-center gap-2 px-4 py-2 border border-border rounded-sm text-[11px] uppercase tracking-widest text-muted-foreground hover:border-foreground hover:text-foreground transition-all"
+            >
+              <LogOut className="h-3.5 w-3.5" />
+              Logout
+            </button>
             <button className="px-4 py-2 border border-border rounded-sm text-[11px] uppercase tracking-widest text-muted-foreground hover:border-foreground hover:text-foreground transition-all">
               v2.4.12-release
             </button>
@@ -186,6 +215,7 @@ export default function App() {
                 {currentView === 'cashier' && <CashCounterView />}
                 {currentView === 'cogs' && <COGSView />}
                 {currentView === 'settings' && <SettingsView />}
+                {currentView === 'maintenance' && <MaintenanceView />}
               </motion.div>
             </AnimatePresence>
           </div>

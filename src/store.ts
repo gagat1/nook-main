@@ -8,6 +8,7 @@ import {
   ScheduleConstraint,
   ScheduleStats,
   Theme,
+  AuthCredentials,
   getShiftDurationMinutes
 } from './types';
 import { generateSchedules } from './lib/engine';
@@ -22,9 +23,11 @@ interface ScheduleState {
   schedules: ScheduledShift[];
   constraints: ScheduleConstraint;
   theme: Theme;
+  authCredentials: AuthCredentials;
   isSupabaseReady: boolean;
   syncFromSupabase: () => Promise<void>;
   updateConstraints: (constraints: ScheduleConstraint) => void;
+  updateAuthCredentials: (credentials: AuthCredentials) => void;
   
   // Actions
   setTheme: (theme: Theme) => void;
@@ -80,6 +83,12 @@ const initialShifts: ShiftTemplate[] = [
   { id: 'night', name: 'Night', startTime: '14:00', endTime: '22:00', color: '#10b981', minStaff: 1, maxStaff: 2, priority: 'High', isActive: true },
 ];
 
+const defaultAuthCredentials: AuthCredentials = {
+  username: 'admin',
+  password: 'admin',
+  pin: '1234',
+};
+
 const TABLES = {
   employees: 'shift_employees',
   shifts: 'shift_templates',
@@ -122,6 +131,7 @@ export const useScheduleStore = create<ScheduleState>()(
         requireMorningNightEveryday: true,
       },
       theme: 'dark',
+      authCredentials: defaultAuthCredentials,
       isSupabaseReady: false,
 
       syncFromSupabase: async () => {
@@ -133,7 +143,7 @@ export const useScheduleStore = create<ScheduleState>()(
             loadJsonRows<ShiftTemplate>(TABLES.shifts),
             loadJsonRows<LeaveRequest>(TABLES.leaves),
             loadJsonRows<ScheduledShift>(TABLES.schedules),
-            loadJsonRows<{ id: string; constraints?: ScheduleConstraint; theme?: Theme }>(TABLES.settings),
+            loadJsonRows<{ id: string; constraints?: ScheduleConstraint; theme?: Theme; authCredentials?: AuthCredentials }>(TABLES.settings),
           ]);
 
           const appSettings = settings.find((item) => item.id === 'app');
@@ -149,6 +159,7 @@ export const useScheduleStore = create<ScheduleState>()(
             schedules: nextSchedules,
             constraints: appSettings?.constraints || state.constraints,
             theme: appSettings?.theme || state.theme,
+            authCredentials: appSettings?.authCredentials || state.authCredentials,
             isSupabaseReady: true,
           }));
 
@@ -156,7 +167,16 @@ export const useScheduleStore = create<ScheduleState>()(
           if (!shifts.length) void upsertJsonRows(TABLES.shifts, nextShifts).catch(syncError);
           if (!leaves.length && nextLeaves.length) void upsertJsonRows(TABLES.leaves, nextLeaves).catch(syncError);
           if (!schedules.length && nextSchedules.length) void upsertJsonRows(TABLES.schedules, nextSchedules).catch(syncError);
-          if (!appSettings) void saveSingleton(TABLES.settings, 'app', { constraints: get().constraints, theme: get().theme }).catch(syncError);
+          if (!appSettings) void saveSingleton(TABLES.settings, 'app', {
+            constraints: get().constraints,
+            theme: get().theme,
+            authCredentials: get().authCredentials,
+          }).catch(syncError);
+          if (appSettings && !appSettings.authCredentials) void saveSingleton(TABLES.settings, 'app', {
+            constraints: get().constraints,
+            theme: get().theme,
+            authCredentials: get().authCredentials,
+          }).catch(syncError);
         } catch (error) {
           set({ isSupabaseReady: false });
           syncError(error);
@@ -165,11 +185,15 @@ export const useScheduleStore = create<ScheduleState>()(
 
       setTheme: (theme) => {
         set({ theme });
-        void saveSingleton(TABLES.settings, 'app', { constraints: get().constraints, theme }).catch(syncError);
+        void saveSingleton(TABLES.settings, 'app', { constraints: get().constraints, theme, authCredentials: get().authCredentials }).catch(syncError);
       },
       updateConstraints: (constraints) => {
         set({ constraints });
-        void saveSingleton(TABLES.settings, 'app', { constraints, theme: get().theme }).catch(syncError);
+        void saveSingleton(TABLES.settings, 'app', { constraints, theme: get().theme, authCredentials: get().authCredentials }).catch(syncError);
+      },
+      updateAuthCredentials: (authCredentials) => {
+        set({ authCredentials });
+        void saveSingleton(TABLES.settings, 'app', { constraints: get().constraints, theme: get().theme, authCredentials }).catch(syncError);
       },
       addEmployee: (emp) => {
         set((state) => ({ employees: [...state.employees, emp] }));
@@ -341,6 +365,7 @@ export const useScheduleStore = create<ScheduleState>()(
             ...e,
             coreShiftTargets: e.coreShiftTargets || { morning: 3, night: 3 },
           }));
+          state.authCredentials = state.authCredentials || defaultAuthCredentials;
           state.schedules = (state.schedules || []).map(s => ({ 
             ...s, 
             date: s.date instanceof Date ? s.date : new Date(s.date) 

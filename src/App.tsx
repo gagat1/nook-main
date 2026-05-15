@@ -23,7 +23,8 @@ import {
   TrendingUp,
   ReceiptText,
   Wrench,
-  LogOut
+  LogOut,
+  BookOpen
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '@/lib/utils';
@@ -41,8 +42,9 @@ import { COGSView } from './components/COGSView';
 import { FinanceView } from './components/FinanceView';
 import { LoginView } from './components/LoginView';
 import { MaintenanceView } from './components/MaintenanceView';
+import { BusinessDataView } from './components/BusinessDataView';
 
-type View = 'dashboard' | 'scheduler' | 'employees' | 'shifts' | 'leave' | 'settings' | 'cashier' | 'cogs' | 'finance' | 'maintenance';
+type View = 'dashboard' | 'scheduler' | 'employees' | 'shifts' | 'leave' | 'settings' | 'cashier' | 'cogs' | 'finance' | 'business' | 'maintenance';
 
 export default function App() {
   const { theme, setTheme, syncFromSupabase, isSupabaseReady } = useScheduleStore();
@@ -81,6 +83,7 @@ export default function App() {
     { id: 'shifts', label: 'Shift Templates', icon: Clock },
     { id: 'leave', label: 'Time Off', icon: ClipboardList },
     { id: 'finance', label: 'Finance', icon: ReceiptText },
+    { id: 'business', label: 'Business Data', icon: BookOpen },
     { id: 'cashier', label: 'Cash Counter', icon: Banknote },
     { id: 'cogs', label: 'COGS Calc', icon: TrendingUp },
     { id: 'settings', label: 'Protocol', icon: Settings },
@@ -266,6 +269,7 @@ export default function App() {
                 {currentView === 'shifts' && <ShiftsView />}
                 {currentView === 'leave' && <LeaveView />}
                 {currentView === 'finance' && <FinanceView />}
+                {currentView === 'business' && <BusinessDataView />}
                 {currentView === 'cashier' && <CashCounterView />}
                 {currentView === 'cogs' && <COGSView />}
                 {currentView === 'settings' && <SettingsView />}

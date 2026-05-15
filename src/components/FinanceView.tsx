@@ -57,6 +57,10 @@ function formatMoney(value: number) {
   return money.format(Math.round(value || 0));
 }
 
+function extraMetric(label: string, value: number | undefined) {
+  return value == null || value === 0 ? [] : [{ label, value: formatMoney(value) }];
+}
+
 function monthKey(date: string) {
   return date.slice(0, 7);
 }
@@ -157,10 +161,13 @@ function mergeFinanceRecords<T extends { id: string }>(
     updated += 1;
   });
 
+  const uniqueUpserts = [...new Map(upserts.map((record) => [record.id, record])).values()];
+  const uniqueRemovedIds = [...new Set(removedIds)];
+
   return {
     records: next.filter((record) => record.id),
-    upserts,
-    removedIds,
+    upserts: uniqueUpserts,
+    removedIds: uniqueRemovedIds,
     added,
     updated,
   };
@@ -202,6 +209,18 @@ function readFirstMatchingSheetRows(workbook: any, sheetNames: string[]) {
   const matchedName = availableNames.find((name: string) => normalizedTargets.has(normalizeSheetName(name)));
 
   return matchedName ? readSheetRows(workbook, matchedName) : [];
+}
+
+function readSheetRowsContaining(workbook: any, terms: string[]) {
+  const normalizedTerms = terms.map(normalizeSheetName);
+  const availableNames = workbook.SheetNames || [];
+
+  return availableNames
+    .filter((name: string) => {
+      const normalizedName = normalizeSheetName(name);
+      return normalizedTerms.every((term) => normalizedName.includes(term));
+    })
+    .map((name: string) => ({ name, rows: readSheetRows(workbook, name) }));
 }
 
 function withIncomeIds(records: IncomeRecord[], prefix: string): EditableIncomeRecord[] {
@@ -258,6 +277,84 @@ function parseExpenseRows(rows: unknown[][]): EditableExpenseRecord[] {
       note: textValue(row[8]),
     }];
   });
+}
+
+function parseDailyFinanceRows(rows: unknown[][], source: string) {
+  const headerIndex = rows.findIndex((row) => {
+    const cells = row.map((cell) => textValue(cell).toLowerCase());
+    return cells.some((cell) => cell.includes('tanggal')) && cells.some((cell) => cell.includes('pendapatan'));
+  });
+  if (headerIndex < 0) return { income: [] as EditableIncomeRecord[], expenses: [] as EditableExpenseRecord[] };
+
+  let startIndex = headerIndex + 1;
+  const nextRow = rows[startIndex]?.map((cell) => textValue(cell).toLowerCase()) || [];
+  if (nextRow.some((cell) => cell.includes('cash')) || nextRow.some((cell) => cell.includes('qris'))) startIndex += 1;
+
+  const income: EditableIncomeRecord[] = [];
+  const expenses: EditableExpenseRecord[] = [];
+
+  rows.slice(startIndex).forEach((row) => {
+    const date = normalizeDate(row[1]);
+    if (!date) return;
+
+    const gross = Math.round(toNumber(row[2]));
+    const discount = Math.round(toNumber(row[3]));
+    const received = Math.round(toNumber(row[4]));
+    const cogs = Math.round(toNumber(row[5]));
+    const productProfit = Math.round(toNumber(row[6]));
+    const fixedCostDaily = Math.round(toNumber(row[7]));
+    const expense = Math.round(toNumber(row[8]));
+    const note = textValue(row[9]);
+    const profitLoss = Math.round(toNumber(row[10]));
+    const cash = Math.round(toNumber(row[11]));
+    const qris = Math.round(toNumber(row[12]));
+    const deliveryTax = Math.round(toNumber(row[13]));
+
+    if (gross || discount || received || cogs || productProfit || cash || qris || deliveryTax) {
+      income.push({
+        id: `daily-income-${date}`,
+        date,
+        product: 'Daily Sales',
+        category: 'Nook Veteran',
+        gross,
+        discount,
+        fee: 0,
+        net: received || gross - discount,
+        note,
+        received,
+        cogs,
+        productProfit,
+        fixedCostDaily,
+        profitLoss,
+        cash,
+        qris,
+        deliveryTax,
+        source,
+      });
+    }
+
+    if (expense) {
+      expenses.push({
+        id: `daily-expense-${date}`,
+        date,
+        item: note || 'Daily Expense',
+        category: 'Operations',
+        gross: expense,
+        tax: 0,
+        fee: 0,
+        net: expense,
+        note,
+        fixedCostDaily,
+        profitLoss,
+        cash,
+        qris,
+        deliveryTax,
+        source,
+      });
+    }
+  });
+
+  return { income, expenses };
 }
 
 function buildSummary(
@@ -446,10 +543,10 @@ export function FinanceView() {
 
     try {
       await persistFinanceMerge(FINANCE_TABLES.income, merged.upserts, merged.removedIds);
-      toast.success('Pemasukan disimpan');
+      toast.success('Income saved');
     } catch (error) {
       syncError(error);
-      toast.error('Pemasukan belum tersimpan ke Supabase');
+      toast.error('Income was not saved to Supabase');
     }
   };
 
@@ -460,10 +557,10 @@ export function FinanceView() {
 
     try {
       await persistFinanceMerge(FINANCE_TABLES.expenses, merged.upserts, merged.removedIds);
-      toast.success('Pengeluaran disimpan');
+      toast.success('Expense saved');
     } catch (error) {
       syncError(error);
-      toast.error('Pengeluaran belum tersimpan ke Supabase');
+      toast.error('Expense was not saved to Supabase');
     }
   };
 
@@ -474,7 +571,7 @@ export function FinanceView() {
       void upsertJsonRow(FINANCE_TABLES.income, nextRecord).catch(syncError);
       return nextRecord;
     }));
-    toast.success('Pemasukan diperbarui');
+    toast.success('Income updated');
   };
 
   const updateExpense = (id: string, updates: Partial<ExpenseRecord>) => {
@@ -484,19 +581,19 @@ export function FinanceView() {
       void upsertJsonRow(FINANCE_TABLES.expenses, nextRecord).catch(syncError);
       return nextRecord;
     }));
-    toast.success('Pengeluaran diperbarui');
+    toast.success('Expense updated');
   };
 
   const deleteIncome = (id: string) => {
     setIncomeRecords((current) => current.filter((record) => record.id !== id));
     void deleteJsonRow(FINANCE_TABLES.income, id).catch(syncError);
-    toast.info('Pemasukan dihapus');
+    toast.info('Income deleted');
   };
 
   const deleteExpense = (id: string) => {
     setExpenseRecords((current) => current.filter((record) => record.id !== id));
     void deleteJsonRow(FINANCE_TABLES.expenses, id).catch(syncError);
-    toast.info('Pengeluaran dihapus');
+    toast.info('Expense deleted');
   };
 
   const importExcel = async (file: File) => {
@@ -504,15 +601,23 @@ export function FinanceView() {
       const XLSX = await loadXlsxLibrary();
       const data = await file.arrayBuffer();
       const workbook = XLSX.read(data, { type: 'array', cellDates: true });
-      const importedIncome = parseIncomeRows(readFirstMatchingSheetRows(workbook, ['Pendapatan', 'Income']));
-      const importedExpenses = parseExpenseRows(readFirstMatchingSheetRows(workbook, ['Pengeluaran', 'Expenses', 'Expense']));
+      const dailySheets = readSheetRowsContaining(workbook, ['pendapatan', 'pengeluaran'])
+        .map((sheet) => parseDailyFinanceRows(sheet.rows, sheet.name));
+      const importedIncome = [
+        ...parseIncomeRows(readFirstMatchingSheetRows(workbook, ['Pendapatan', 'Income'])),
+        ...dailySheets.flatMap((sheet) => sheet.income),
+      ];
+      const importedExpenses = [
+        ...parseExpenseRows(readFirstMatchingSheetRows(workbook, ['Pengeluaran', 'Expenses', 'Expense'])),
+        ...dailySheets.flatMap((sheet) => sheet.expenses),
+      ];
 
       if (!importedIncome.length && !importedExpenses.length) {
-        toast.error('Tidak ada data Pendapatan/Pengeluaran yang terbaca');
+        toast.error('No readable income or expense data found');
         return;
       }
 
-      toast.loading('Menyimpan import ke Supabase...', { id: 'finance-import' });
+      toast.loading('Saving import to Supabase...', { id: 'finance-import' });
 
       const mergedIncome = mergeFinanceRecords<EditableIncomeRecord>(incomeRecordsRef.current, importedIncome, incomeIdentity);
       const mergedExpenses = mergeFinanceRecords<EditableExpenseRecord>(expenseRecordsRef.current, importedExpenses, expenseIdentity);
@@ -531,10 +636,10 @@ export function FinanceView() {
         setSelectedYear(yearKey(latestDate));
       }
 
-      toast.success(`Import berhasil: ${importedIncome.length} pemasukan dan ${importedExpenses.length} pengeluaran tersimpan`, { id: 'finance-import' });
+      toast.success(`Import complete: ${importedIncome.length} income rows and ${importedExpenses.length} expense rows saved`, { id: 'finance-import' });
     } catch (error) {
       syncError(error);
-      toast.error(error instanceof Error ? error.message : 'Import Excel gagal', { id: 'finance-import' });
+      toast.error(error instanceof Error ? error.message : 'Excel import failed', { id: 'finance-import' });
     }
   };
 
@@ -650,7 +755,7 @@ export function FinanceView() {
           </div>
 
           <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-            <TransactionPanel title="Pemasukan" rows={selectedMonthIncome.map((item) => ({
+            <TransactionPanel title="Income" rows={selectedMonthIncome.map((item) => ({
               id: item.id,
               date: item.date,
               name: item.product,
@@ -660,6 +765,16 @@ export function FinanceView() {
               fee: item.fee,
               amount: item.net,
               note: item.note,
+              extra: [
+                ...extraMetric('Received', item.received),
+                ...extraMetric('COGS', item.cogs),
+                ...extraMetric('Product Profit', item.productProfit),
+                ...extraMetric('Fixed Cost', item.fixedCostDaily),
+                ...extraMetric('Cash', item.cash),
+                ...extraMetric('QRIS', item.qris),
+                ...extraMetric('Delivery Tax', item.deliveryTax),
+                ...extraMetric('Profit / Loss', item.profitLoss),
+              ],
             }))} tone="income" onUpdate={(id, updates) => updateIncome(id, {
               date: updates.date,
               product: updates.name,
@@ -670,7 +785,7 @@ export function FinanceView() {
               net: updates.gross - updates.adjustment - updates.fee,
               note: updates.note,
             })} onDelete={deleteIncome} />
-            <TransactionPanel title="Pengeluaran" rows={selectedMonthExpenses.map((item) => ({
+            <TransactionPanel title="Expense" rows={selectedMonthExpenses.map((item) => ({
               id: item.id,
               date: item.date,
               name: item.item,
@@ -680,6 +795,13 @@ export function FinanceView() {
               fee: item.fee,
               amount: item.net,
               note: item.note,
+              extra: [
+                ...extraMetric('Fixed Cost', item.fixedCostDaily),
+                ...extraMetric('Cash', item.cash),
+                ...extraMetric('QRIS', item.qris),
+                ...extraMetric('Delivery Tax', item.deliveryTax),
+                ...extraMetric('Profit / Loss', item.profitLoss),
+              ],
             }))} tone="expense" onUpdate={(id, updates) => updateExpense(id, {
               date: updates.date,
               item: updates.name,
@@ -791,12 +913,12 @@ function ExcelImportPanel({ onImport }: { onImport: (file: File) => void }) {
           <div>
             <h3 className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground font-bold">Import Excel</h3>
             <p className="mt-2 text-xs text-muted-foreground leading-relaxed">
-              Upload file dengan sheet Pendapatan dan Pengeluaran. Data akan ditambahkan ke laporan dan tersimpan ke Supabase jika koneksi aktif.
+              Upload an Excel file with Income, Expense, or Daily Income & Expense sheets. Matching dates are updated instead of duplicated.
             </p>
           </div>
         </div>
         <label className="inline-flex h-11 cursor-pointer items-center justify-center rounded-sm bg-foreground px-5 text-[10px] font-bold uppercase tracking-[0.2em] text-background hover:opacity-90">
-          Pilih File Excel
+          Choose Excel File
           <input
             type="file"
             accept=".xlsx,.xls"
@@ -817,13 +939,13 @@ function YearMonthlyTable({ rows }: { rows: PeriodSummary[] }) {
   return (
     <Card className="bg-card border-border rounded-sm shadow-none overflow-x-auto">
       <div className="border-b border-border bg-muted/20 px-6 py-5 text-center">
-        <span className="text-[11px] uppercase tracking-[0.4em] text-foreground">Rincian Tahunan</span>
+        <span className="text-[11px] uppercase tracking-[0.4em] text-foreground">Annual Detail</span>
       </div>
       <div className="min-w-[720px]">
         <div className="grid grid-cols-5 gap-4 border-b border-border px-6 py-4 text-[10px] uppercase tracking-[0.2em] text-muted-foreground font-bold">
-          <span>Bulan</span>
-          <span>Pendapatan</span>
-          <span>Pengeluaran</span>
+          <span>Month</span>
+          <span>Income</span>
+          <span>Expense</span>
           <span>Profit</span>
           <span>Margin</span>
         </div>
@@ -849,8 +971,8 @@ function FinanceEntryForm({
   onSubmit: (record: IncomeRecord & ExpenseRecord) => void;
 }) {
   const isIncome = type === 'income';
-  const title = isIncome ? 'Input Pemasukan' : 'Input Pengeluaran';
-  const amountLabel = isIncome ? 'Nominal' : 'Nominal';
+  const title = isIncome ? 'Add Income' : 'Add Expense';
+  const amountLabel = 'Amount';
   const nameLabel = isIncome ? 'Product / Service' : 'Item / Product';
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -866,7 +988,7 @@ function FinanceEntryForm({
     const note = String(formData.get('note') || '').trim();
 
     if (!date || !name || !category || amount <= 0) {
-      toast.error('Tanggal, nama, kategori, dan nominal wajib diisi');
+      toast.error('Date, name, category, and amount are required');
       return;
     }
 
@@ -909,12 +1031,12 @@ function FinanceEntryForm({
       </div>
       <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="space-y-2">
-          <Label className="text-[9px] uppercase tracking-widest text-muted-foreground font-bold">Tanggal</Label>
+          <Label className="text-[9px] uppercase tracking-widest text-muted-foreground font-bold">Date</Label>
           <Input name="date" type="date" required className="bg-background border-border rounded-sm h-11" />
         </div>
         <div className="space-y-2">
-          <Label className="text-[9px] uppercase tracking-widest text-muted-foreground font-bold">Kategori</Label>
-          <Input name="category" required placeholder={isIncome ? 'Nook Main' : 'Bahan Baku'} className="bg-background border-border rounded-sm h-11" />
+          <Label className="text-[9px] uppercase tracking-widest text-muted-foreground font-bold">Category</Label>
+          <Input name="category" required placeholder={isIncome ? 'Nook Main' : 'Raw Material'} className="bg-background border-border rounded-sm h-11" />
         </div>
         <div className="space-y-2 md:col-span-2">
           <Label className="text-[9px] uppercase tracking-widest text-muted-foreground font-bold">{nameLabel}</Label>
@@ -925,7 +1047,7 @@ function FinanceEntryForm({
           <Input name="amount" type="number" min="0" required className="bg-background border-border rounded-sm h-11" />
         </div>
         <div className="space-y-2">
-          <Label className="text-[9px] uppercase tracking-widest text-muted-foreground font-bold">{isIncome ? 'Diskon' : 'Pajak'}</Label>
+          <Label className="text-[9px] uppercase tracking-widest text-muted-foreground font-bold">{isIncome ? 'Discount' : 'Tax'}</Label>
           <Input name="adjustment" type="number" min="0" defaultValue="0" className="bg-background border-border rounded-sm h-11" />
         </div>
         <div className="space-y-2">
@@ -933,11 +1055,11 @@ function FinanceEntryForm({
           <Input name="fee" type="number" min="0" defaultValue="0" className="bg-background border-border rounded-sm h-11" />
         </div>
         <div className="space-y-2">
-          <Label className="text-[9px] uppercase tracking-widest text-muted-foreground font-bold">Catatan</Label>
+          <Label className="text-[9px] uppercase tracking-widest text-muted-foreground font-bold">Note</Label>
           <Input name="note" placeholder="Optional" className="bg-background border-border rounded-sm h-11" />
         </div>
         <Button type="submit" className="md:col-span-2 bg-foreground text-background hover:opacity-90 rounded-sm uppercase text-[10px] tracking-[0.2em] h-11">
-          Tambahkan {isIncome ? 'Pemasukan' : 'Pengeluaran'}
+          Add {isIncome ? 'Income' : 'Expense'}
         </Button>
       </form>
     </Card>
@@ -952,7 +1074,7 @@ function TransactionPanel({
   onDelete,
 }: {
   title: string;
-  rows: Array<{ id: string; date: string; name: string; category: string; gross: number; adjustment: number; fee: number; amount: number; note: string }>;
+  rows: Array<{ id: string; date: string; name: string; category: string; gross: number; adjustment: number; fee: number; amount: number; note: string; extra?: Array<{ label: string; value: string }> }>;
   tone: 'income' | 'expense';
   onUpdate: (id: string, updates: { date: string; name: string; category: string; gross: number; adjustment: number; fee: number; note: string }) => void;
   onDelete: (id: string) => void;
@@ -976,7 +1098,7 @@ function TransactionPanel({
   const saveEdit = () => {
     if (!editingId) return;
     if (!draft.date || !draft.name.trim() || !draft.category.trim() || draft.gross <= 0) {
-      toast.error('Tanggal, nama, kategori, dan nominal wajib diisi');
+      toast.error('Date, name, category, and amount are required');
       return;
     }
     onUpdate(editingId, draft);
@@ -999,12 +1121,12 @@ function TransactionPanel({
                 {isEditing ? (
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     <Input type="date" value={draft.date} onChange={(event) => setDraft((current) => ({ ...current, date: event.target.value }))} className="bg-background border-border rounded-sm h-10 text-xs" />
-                    <Input value={draft.category} onChange={(event) => setDraft((current) => ({ ...current, category: event.target.value }))} className="bg-background border-border rounded-sm h-10 text-xs" placeholder="Kategori" />
-                    <Input value={draft.name} onChange={(event) => setDraft((current) => ({ ...current, name: event.target.value }))} className="bg-background border-border rounded-sm h-10 text-xs md:col-span-2" placeholder="Nama transaksi" />
-                    <Input type="number" value={draft.gross} onChange={(event) => setDraft((current) => ({ ...current, gross: Number(event.target.value) }))} className="bg-background border-border rounded-sm h-10 text-xs" placeholder="Nominal" />
-                    <Input type="number" value={draft.adjustment} onChange={(event) => setDraft((current) => ({ ...current, adjustment: Number(event.target.value) }))} className="bg-background border-border rounded-sm h-10 text-xs" placeholder={tone === 'income' ? 'Diskon' : 'Pajak'} />
+                    <Input value={draft.category} onChange={(event) => setDraft((current) => ({ ...current, category: event.target.value }))} className="bg-background border-border rounded-sm h-10 text-xs" placeholder="Category" />
+                    <Input value={draft.name} onChange={(event) => setDraft((current) => ({ ...current, name: event.target.value }))} className="bg-background border-border rounded-sm h-10 text-xs md:col-span-2" placeholder="Transaction name" />
+                    <Input type="number" value={draft.gross} onChange={(event) => setDraft((current) => ({ ...current, gross: Number(event.target.value) }))} className="bg-background border-border rounded-sm h-10 text-xs" placeholder="Amount" />
+                    <Input type="number" value={draft.adjustment} onChange={(event) => setDraft((current) => ({ ...current, adjustment: Number(event.target.value) }))} className="bg-background border-border rounded-sm h-10 text-xs" placeholder={tone === 'income' ? 'Discount' : 'Tax'} />
                     <Input type="number" value={draft.fee} onChange={(event) => setDraft((current) => ({ ...current, fee: Number(event.target.value) }))} className="bg-background border-border rounded-sm h-10 text-xs" placeholder="Fee" />
-                    <Input value={draft.note} onChange={(event) => setDraft((current) => ({ ...current, note: event.target.value }))} className="bg-background border-border rounded-sm h-10 text-xs" placeholder="Catatan" />
+                    <Input value={draft.note} onChange={(event) => setDraft((current) => ({ ...current, note: event.target.value }))} className="bg-background border-border rounded-sm h-10 text-xs" placeholder="Note" />
                     <div className="md:col-span-2 flex justify-end gap-2">
                       <Button type="button" variant="outline" onClick={() => setEditingId(null)} className="h-9 rounded-sm bg-transparent border-border text-[10px] uppercase tracking-widest">Cancel</Button>
                       <Button type="button" onClick={saveEdit} className="h-9 rounded-sm bg-foreground text-background text-[10px] uppercase tracking-widest">Save</Button>
@@ -1016,6 +1138,15 @@ function TransactionPanel({
                     <div className="min-w-0">
                       <p className="text-xs text-foreground truncate">{row.name}</p>
                       <p className="text-[10px] uppercase tracking-widest text-muted-foreground truncate">{row.category}{row.note ? ` / ${row.note}` : ''}</p>
+                      {row.extra?.length ? (
+                        <div className="mt-2 flex flex-wrap gap-2">
+                          {row.extra.map((metric) => (
+                            <span key={`${row.id}-${metric.label}`} className="rounded-sm border border-border px-2 py-1 text-[9px] uppercase tracking-widest text-muted-foreground">
+                              {metric.label}: <span className="text-foreground">{metric.value}</span>
+                            </span>
+                          ))}
+                        </div>
+                      ) : null}
                       <div className="mt-3 flex gap-2">
                         <Button type="button" variant="outline" onClick={() => beginEdit(row)} className="h-7 rounded-sm bg-transparent border-border px-3 text-[9px] uppercase tracking-widest">Edit</Button>
                         <Button type="button" variant="outline" onClick={() => onDelete(row.id)} className="h-7 rounded-sm bg-transparent border-red-900/40 px-3 text-[9px] uppercase tracking-widest text-red-500 hover:bg-red-950/20">Delete</Button>

@@ -1,5 +1,17 @@
-export type IncomeRecord = { date: string; product: string; category: string; gross: number; discount: number; fee: number; net: number; note: string };
-export type ExpenseRecord = { date: string; item: string; category: string; gross: number; tax: number; fee: number; net: number; note: string };
+export type FinanceExtraFields = {
+  received?: number;
+  cogs?: number;
+  productProfit?: number;
+  fixedCostDaily?: number;
+  profitLoss?: number;
+  cash?: number;
+  qris?: number;
+  deliveryTax?: number;
+  source?: string;
+};
+
+export type IncomeRecord = FinanceExtraFields & { date: string; product: string; category: string; gross: number; discount: number; fee: number; net: number; note: string };
+export type ExpenseRecord = FinanceExtraFields & { date: string; item: string; category: string; gross: number; tax: number; fee: number; net: number; note: string };
 
 export const nookIncome: IncomeRecord[] = [
   {

@@ -22,7 +22,7 @@ export function MaintenanceView() {
     };
 
     if (!nextCredentials.username || !nextCredentials.password || !nextCredentials.pin) {
-      toast.error('Username, password, dan PIN wajib diisi');
+      toast.error('Username, password, and PIN are required');
       return;
     }
 
@@ -45,7 +45,7 @@ export function MaintenanceView() {
           <div>
             <h2 className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground font-bold">Login Credentials</h2>
             <p className="mt-2 text-xs text-muted-foreground leading-relaxed">
-              Update username, password, dan PIN untuk membuka aplikasi.
+              Manage the credentials required to open the application.
             </p>
           </div>
         </div>
@@ -74,7 +74,7 @@ export function MaintenanceView() {
         <div className="flex items-center gap-3">
           <ShieldAlert className="h-4 w-4 text-amber-500" />
           <span className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground font-bold">
-            {isSupabaseReady ? 'Credentials sync to Supabase settings' : 'Credentials saved locally until Supabase is active'}
+            {isSupabaseReady ? 'Credentials synced to Supabase settings' : 'Credentials saved locally until Supabase is active'}
           </span>
         </div>
       </Card>

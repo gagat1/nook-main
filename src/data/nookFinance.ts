@@ -7,6 +7,7 @@ export type FinanceExtraFields = {
   cash?: number;
   qris?: number;
   deliveryTax?: number;
+  transactionCount?: number;
   source?: string;
 };
 

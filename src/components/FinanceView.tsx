@@ -75,14 +75,57 @@ function excelSerialToDate(serial: number) {
   return epoch.toISOString().slice(0, 10);
 }
 
+function isValidDateString(date: string) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) return false;
+  const year = Number(date.slice(0, 4));
+  if (year < 2000 || year > 2100) return false;
+  const parsed = new Date(`${date}T00:00:00Z`);
+  return !Number.isNaN(parsed.getTime()) && parsed.toISOString().slice(0, 10) === date;
+}
+
+function normalizeMonthName(value: string) {
+  return value.slice(0, 3).toLowerCase();
+}
+
+function parseShortDate(value: string) {
+  const match = value.trim().match(/^(\d{1,2})[-/\s]([a-zA-Z]{3,})[-/\s](\d{2,4})$/);
+  if (!match) return '';
+
+  const monthNames = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
+  const day = Number(match[1]);
+  const monthIndex = monthNames.indexOf(normalizeMonthName(match[2]));
+  const rawYear = Number(match[3]);
+  const year = rawYear < 100 ? 2000 + rawYear : rawYear;
+  if (!day || monthIndex < 0) return '';
+
+  const date = `${year}-${String(monthIndex + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+  return isValidDateString(date) ? date : '';
+}
+
 function normalizeDate(value: unknown) {
-  if (value instanceof Date && !Number.isNaN(value.getTime())) return value.toISOString().slice(0, 10);
-  if (typeof value === 'number') return excelSerialToDate(value);
+  if (value instanceof Date && !Number.isNaN(value.getTime())) {
+    const date = value.toISOString().slice(0, 10);
+    return isValidDateString(date) ? date : '';
+  }
+  if (typeof value === 'number') {
+    if (value < 25000 || value > 60000) return '';
+    const date = excelSerialToDate(value);
+    return isValidDateString(date) ? date : '';
+  }
   if (typeof value === 'string') {
+    const shortDate = parseShortDate(value);
+    if (shortDate) return shortDate;
     const parsed = new Date(value);
-    if (!Number.isNaN(parsed.getTime())) return parsed.toISOString().slice(0, 10);
+    if (!Number.isNaN(parsed.getTime())) {
+      const date = parsed.toISOString().slice(0, 10);
+      return isValidDateString(date) ? date : '';
+    }
   }
   return '';
+}
+
+function hasValidRecordDate(record: { date: string }) {
+  return isValidDateString(record.date);
 }
 
 function toNumber(value: unknown) {
@@ -279,14 +322,44 @@ function parseExpenseRows(rows: unknown[][]): EditableExpenseRecord[] {
   });
 }
 
+function normalizedHeader(value: unknown) {
+  return textValue(value).toLowerCase().replace(/\s+/g, ' ');
+}
+
+function findHeaderIndex(row: unknown[], matcher: (value: string) => boolean) {
+  return row.findIndex((cell) => matcher(normalizedHeader(cell)));
+}
+
+function rowValue(row: unknown[], index: number) {
+  return index >= 0 ? row[index] : null;
+}
+
 function parseDailyFinanceRows(rows: unknown[][], source: string) {
-  const headerIndex = rows.findIndex((row) => {
+  const headerRowIndex = rows.findIndex((row) => {
     const cells = row.map((cell) => textValue(cell).toLowerCase());
     return cells.some((cell) => cell.includes('tanggal')) && cells.some((cell) => cell.includes('pendapatan'));
   });
-  if (headerIndex < 0) return { income: [] as EditableIncomeRecord[], expenses: [] as EditableExpenseRecord[] };
+  if (headerRowIndex < 0) return { income: [] as EditableIncomeRecord[], expenses: [] as EditableExpenseRecord[] };
 
-  let startIndex = headerIndex + 1;
+  const headerRow = rows[headerRowIndex] || [];
+  const detailRow = rows[headerRowIndex + 1] || [];
+  const dateIndex = findHeaderIndex(headerRow, (cell) => cell.includes('tanggal'));
+  const grossIndex = findHeaderIndex(headerRow, (cell) => cell.includes('pendapatan') && cell.includes('kotor'));
+  const discountIndex = findHeaderIndex(headerRow, (cell) => cell.includes('diskon'));
+  const receivedIndex = findHeaderIndex(headerRow, (cell) => cell.includes('uang') && cell.includes('diterima'));
+  const cogsIndex = findHeaderIndex(headerRow, (cell) => cell === 'hpp' || cell.includes('cogs'));
+  const productProfitIndex = findHeaderIndex(headerRow, (cell) => cell.includes('keuntungan') && cell.includes('produk'));
+  const fixedCostIndex = findHeaderIndex(headerRow, (cell) => cell.includes('fix cost') || cell.includes('fixed cost'));
+  const expenseIndex = findHeaderIndex(headerRow, (cell) => cell.includes('pengeluaran') || cell.includes('expense'));
+  const noteIndex = findHeaderIndex(headerRow, (cell) => cell.includes('notes') || cell.includes('note'));
+  const profitLossIndex = findHeaderIndex(headerRow, (cell) => cell.includes('laba') || cell.includes('profit') || cell.includes('loss'));
+  const transactionIndex = findHeaderIndex(headerRow, (cell) => cell.includes('transaksi') || cell.includes('transaction'));
+  const cashIndex = findHeaderIndex(detailRow, (cell) => cell.includes('cash'));
+  const qrisIndex = findHeaderIndex(detailRow, (cell) => cell.includes('qris'));
+  const deliveryTaxIndex = findHeaderIndex(detailRow, (cell) => cell.includes('grab') || cell.includes('tax'));
+  if (dateIndex < 0) return { income: [] as EditableIncomeRecord[], expenses: [] as EditableExpenseRecord[] };
+
+  let startIndex = headerRowIndex + 1;
   const nextRow = rows[startIndex]?.map((cell) => textValue(cell).toLowerCase()) || [];
   if (nextRow.some((cell) => cell.includes('cash')) || nextRow.some((cell) => cell.includes('qris'))) startIndex += 1;
 
@@ -294,21 +367,22 @@ function parseDailyFinanceRows(rows: unknown[][], source: string) {
   const expenses: EditableExpenseRecord[] = [];
 
   rows.slice(startIndex).forEach((row) => {
-    const date = normalizeDate(row[1]);
+    const date = normalizeDate(rowValue(row, dateIndex));
     if (!date) return;
 
-    const gross = Math.round(toNumber(row[2]));
-    const discount = Math.round(toNumber(row[3]));
-    const received = Math.round(toNumber(row[4]));
-    const cogs = Math.round(toNumber(row[5]));
-    const productProfit = Math.round(toNumber(row[6]));
-    const fixedCostDaily = Math.round(toNumber(row[7]));
-    const expense = Math.round(toNumber(row[8]));
-    const note = textValue(row[9]);
-    const profitLoss = Math.round(toNumber(row[10]));
-    const cash = Math.round(toNumber(row[11]));
-    const qris = Math.round(toNumber(row[12]));
-    const deliveryTax = Math.round(toNumber(row[13]));
+    const gross = Math.round(toNumber(rowValue(row, grossIndex)));
+    const discount = Math.round(toNumber(rowValue(row, discountIndex)));
+    const received = Math.round(toNumber(rowValue(row, receivedIndex)));
+    const cogs = Math.round(toNumber(rowValue(row, cogsIndex)));
+    const productProfit = Math.round(toNumber(rowValue(row, productProfitIndex)));
+    const fixedCostDaily = Math.round(toNumber(rowValue(row, fixedCostIndex)));
+    const expense = Math.round(toNumber(rowValue(row, expenseIndex)));
+    const note = textValue(rowValue(row, noteIndex));
+    const profitLoss = Math.round(toNumber(rowValue(row, profitLossIndex)));
+    const cash = Math.round(toNumber(rowValue(row, cashIndex)));
+    const qris = Math.round(toNumber(rowValue(row, qrisIndex)));
+    const deliveryTax = Math.round(toNumber(rowValue(row, deliveryTaxIndex)));
+    const transactionCount = Math.round(toNumber(rowValue(row, transactionIndex)));
 
     if (gross || discount || received || cogs || productProfit || cash || qris || deliveryTax) {
       income.push({
@@ -329,6 +403,7 @@ function parseDailyFinanceRows(rows: unknown[][], source: string) {
         cash,
         qris,
         deliveryTax,
+        transactionCount,
         source,
       });
     }
@@ -349,6 +424,7 @@ function parseDailyFinanceRows(rows: unknown[][], source: string) {
         cash,
         qris,
         deliveryTax,
+        transactionCount,
         source,
       });
     }
@@ -390,7 +466,7 @@ export function FinanceView() {
     if (typeof window === 'undefined') return [];
     try {
       const saved = window.localStorage.getItem('nook-finance-income-records');
-      if (saved) return JSON.parse(saved);
+      if (saved) return (JSON.parse(saved) as EditableIncomeRecord[]).filter(hasValidRecordDate);
       const legacyManual = JSON.parse(window.localStorage.getItem('nook-manual-income') || '[]') as IncomeRecord[];
       return [...withIncomeIds(nookIncome, 'seed-income'), ...withIncomeIds(legacyManual, 'legacy-income')];
     } catch {
@@ -401,7 +477,7 @@ export function FinanceView() {
     if (typeof window === 'undefined') return [];
     try {
       const saved = window.localStorage.getItem('nook-finance-expense-records');
-      if (saved) return JSON.parse(saved);
+      if (saved) return (JSON.parse(saved) as EditableExpenseRecord[]).filter(hasValidRecordDate);
       const legacyManual = JSON.parse(window.localStorage.getItem('nook-manual-expenses') || '[]') as ExpenseRecord[];
       return [...withExpenseIds(nookExpenses, 'seed-expense'), ...withExpenseIds(legacyManual, 'legacy-expense')];
     } catch {
@@ -431,20 +507,34 @@ export function FinanceView() {
           loadJsonRows<EditableIncomeRecord>(FINANCE_TABLES.income),
           loadJsonRows<EditableExpenseRecord>(FINANCE_TABLES.expenses),
         ]);
+        const validSupabaseIncome = supabaseIncome.filter(hasValidRecordDate);
+        const invalidSupabaseIncome = supabaseIncome.filter((record) => !hasValidRecordDate(record));
+        const validSupabaseExpenses = supabaseExpenses.filter(hasValidRecordDate);
+        const invalidSupabaseExpenses = supabaseExpenses.filter((record) => !hasValidRecordDate(record));
 
-        if (supabaseIncome.length) {
-          const merged = mergeFinanceRecords<EditableIncomeRecord>([], supabaseIncome, incomeIdentity);
+        if (validSupabaseIncome.length) {
+          const merged = mergeFinanceRecords<EditableIncomeRecord>([], validSupabaseIncome, incomeIdentity);
           setIncomeRecords(merged.records);
-          void persistFinanceMerge(FINANCE_TABLES.income, merged.upserts, merged.removedIds).catch(syncError);
+          void persistFinanceMerge(
+            FINANCE_TABLES.income,
+            merged.upserts,
+            [...merged.removedIds, ...invalidSupabaseIncome.map((record) => record.id)]
+          ).catch(syncError);
         } else {
           setIncomeRecords([]);
+          void Promise.all(invalidSupabaseIncome.map((record) => deleteJsonRow(FINANCE_TABLES.income, record.id))).catch(syncError);
         }
-        if (supabaseExpenses.length) {
-          const merged = mergeFinanceRecords<EditableExpenseRecord>([], supabaseExpenses, expenseIdentity);
+        if (validSupabaseExpenses.length) {
+          const merged = mergeFinanceRecords<EditableExpenseRecord>([], validSupabaseExpenses, expenseIdentity);
           setExpenseRecords(merged.records);
-          void persistFinanceMerge(FINANCE_TABLES.expenses, merged.upserts, merged.removedIds).catch(syncError);
+          void persistFinanceMerge(
+            FINANCE_TABLES.expenses,
+            merged.upserts,
+            [...merged.removedIds, ...invalidSupabaseExpenses.map((record) => record.id)]
+          ).catch(syncError);
         } else {
           setExpenseRecords([]);
+          void Promise.all(invalidSupabaseExpenses.map((record) => deleteJsonRow(FINANCE_TABLES.expenses, record.id))).catch(syncError);
         }
       } catch (error) {
         syncError(error);
@@ -774,6 +864,7 @@ export function FinanceView() {
                 ...extraMetric('QRIS', item.qris),
                 ...extraMetric('Delivery Tax', item.deliveryTax),
                 ...extraMetric('Profit / Loss', item.profitLoss),
+                ...(item.transactionCount ? [{ label: 'Transactions', value: String(item.transactionCount) }] : []),
               ],
             }))} tone="income" onUpdate={(id, updates) => updateIncome(id, {
               date: updates.date,
@@ -801,6 +892,7 @@ export function FinanceView() {
                 ...extraMetric('QRIS', item.qris),
                 ...extraMetric('Delivery Tax', item.deliveryTax),
                 ...extraMetric('Profit / Loss', item.profitLoss),
+                ...(item.transactionCount ? [{ label: 'Transactions', value: String(item.transactionCount) }] : []),
               ],
             }))} tone="expense" onUpdate={(id, updates) => updateExpense(id, {
               date: updates.date,

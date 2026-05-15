@@ -32,7 +32,8 @@ export async function upsertJsonRow<T extends { id: string }>(table: string, rec
 
 export async function upsertJsonRows<T extends { id: string }>(table: string, records: T[]) {
   if (!isSupabaseConfigured || !records.length) return;
-  const rows = records.map((record) => ({ id: record.id, data: record }));
+  const uniqueRecords = Array.from(new Map(records.map((record) => [record.id, record])).values());
+  const rows = uniqueRecords.map((record) => ({ id: record.id, data: record }));
 
   for (const batch of chunkRows(rows, UPSERT_BATCH_SIZE)) {
     await upsertRows<JsonRow<T>>(table, batch);

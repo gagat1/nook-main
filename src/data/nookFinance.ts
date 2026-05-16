@@ -7,7 +7,10 @@ export type FinanceExtraFields = {
   cash?: number;
   qris?: number;
   deliveryTax?: number;
+  actualCash?: number;
+  actualQris?: number;
   transactionCount?: number;
+  paymentMethod?: 'cash' | 'qris';
   source?: string;
 };
 

@@ -61,6 +61,19 @@ function extraMetric(label: string, value: number | undefined) {
   return value == null || value === 0 ? [] : [{ label, value: formatMoney(value) }];
 }
 
+function expensePaymentMethod(record: ExpenseRecord) {
+  if (record.paymentMethod) return record.paymentMethod;
+  return (record.qris ?? 0) > (record.cash ?? 0) ? 'qris' : 'cash';
+}
+
+function expensePaymentFields(net: number, paymentMethod: 'cash' | 'qris') {
+  return {
+    paymentMethod,
+    cash: paymentMethod === 'cash' ? net : 0,
+    qris: paymentMethod === 'qris' ? net : 0,
+  };
+}
+
 function monthKey(date: string) {
   return date.slice(0, 7);
 }
@@ -318,6 +331,7 @@ function parseExpenseRows(rows: unknown[][]): EditableExpenseRecord[] {
       fee: Math.round(fee),
       net: Math.round(net),
       note: textValue(row[8]),
+      ...expensePaymentFields(Math.round(net), 'cash'),
     }];
   });
 }
@@ -421,10 +435,11 @@ function parseDailyFinanceRows(rows: unknown[][], source: string) {
         note,
         fixedCostDaily,
         profitLoss,
-        cash,
-        qris,
+        cash: expense,
+        qris: 0,
         deliveryTax,
         transactionCount,
+        paymentMethod: 'cash',
         source,
       });
     }
@@ -886,7 +901,9 @@ export function FinanceView() {
               fee: item.fee,
               amount: item.net,
               note: item.note,
+              paymentMethod: expensePaymentMethod(item),
               extra: [
+                { label: 'Payment', value: expensePaymentMethod(item).toUpperCase() },
                 ...extraMetric('Fixed Cost', item.fixedCostDaily),
                 ...extraMetric('Cash', item.cash),
                 ...extraMetric('QRIS', item.qris),
@@ -903,6 +920,7 @@ export function FinanceView() {
               fee: updates.fee,
               net: updates.gross - updates.adjustment - updates.fee,
               note: updates.note,
+              ...expensePaymentFields(updates.gross - updates.adjustment - updates.fee, updates.paymentMethod || 'cash'),
             })} onDelete={deleteExpense} />
           </div>
         </TabsContent>
@@ -1078,6 +1096,7 @@ function FinanceEntryForm({
     const adjustment = Number(formData.get('adjustment') || 0);
     const fee = Number(formData.get('fee') || 0);
     const note = String(formData.get('note') || '').trim();
+    const paymentMethod = String(formData.get('paymentMethod') || 'cash') as 'cash' | 'qris';
 
     if (!date || !name || !category || amount <= 0) {
       toast.error('Date, name, category, and amount are required');
@@ -1098,6 +1117,7 @@ function FinanceEntryForm({
         note,
       });
     } else {
+      const net = amount - adjustment - fee;
       onSubmit({
         date,
         product: name,
@@ -1107,8 +1127,9 @@ function FinanceEntryForm({
         discount: 0,
         tax: adjustment,
         fee,
-        net: amount - adjustment - fee,
+        net,
         note,
+        ...expensePaymentFields(net, paymentMethod),
       });
     }
 
@@ -1146,6 +1167,15 @@ function FinanceEntryForm({
           <Label className="text-[9px] uppercase tracking-widest text-muted-foreground font-bold">Fee</Label>
           <Input name="fee" type="number" min="0" defaultValue="0" className="bg-background border-border rounded-sm h-11" />
         </div>
+        {!isIncome && (
+          <div className="space-y-2">
+            <Label className="text-[9px] uppercase tracking-widest text-muted-foreground font-bold">Payment</Label>
+            <select name="paymentMethod" defaultValue="cash" className="h-11 w-full rounded-sm border border-border bg-background px-3 text-sm text-foreground outline-none">
+              <option value="cash">Cash</option>
+              <option value="qris">QRIS</option>
+            </select>
+          </div>
+        )}
         <div className="space-y-2">
           <Label className="text-[9px] uppercase tracking-widest text-muted-foreground font-bold">Note</Label>
           <Input name="note" placeholder="Optional" className="bg-background border-border rounded-sm h-11" />
@@ -1166,15 +1196,15 @@ function TransactionPanel({
   onDelete,
 }: {
   title: string;
-  rows: Array<{ id: string; date: string; name: string; category: string; gross: number; adjustment: number; fee: number; amount: number; note: string; extra?: Array<{ label: string; value: string }> }>;
+  rows: Array<{ id: string; date: string; name: string; category: string; gross: number; adjustment: number; fee: number; amount: number; note: string; paymentMethod?: 'cash' | 'qris'; extra?: Array<{ label: string; value: string }> }>;
   tone: 'income' | 'expense';
-  onUpdate: (id: string, updates: { date: string; name: string; category: string; gross: number; adjustment: number; fee: number; note: string }) => void;
+  onUpdate: (id: string, updates: { date: string; name: string; category: string; gross: number; adjustment: number; fee: number; note: string; paymentMethod?: 'cash' | 'qris' }) => void;
   onDelete: (id: string) => void;
 }) {
   const [editingId, setEditingId] = useState<string | null>(null);
-  const [draft, setDraft] = useState({ date: '', name: '', category: '', gross: 0, adjustment: 0, fee: 0, note: '' });
+  const [draft, setDraft] = useState({ date: '', name: '', category: '', gross: 0, adjustment: 0, fee: 0, note: '', paymentMethod: 'cash' as 'cash' | 'qris' });
 
-  const beginEdit = (row: { id: string; date: string; name: string; category: string; gross: number; adjustment: number; fee: number; note: string }) => {
+  const beginEdit = (row: { id: string; date: string; name: string; category: string; gross: number; adjustment: number; fee: number; note: string; paymentMethod?: 'cash' | 'qris' }) => {
     setEditingId(row.id);
     setDraft({
       date: row.date,
@@ -1184,6 +1214,7 @@ function TransactionPanel({
       adjustment: row.adjustment,
       fee: row.fee,
       note: row.note,
+      paymentMethod: row.paymentMethod || 'cash',
     });
   };
 
@@ -1218,6 +1249,12 @@ function TransactionPanel({
                     <Input type="number" value={draft.gross} onChange={(event) => setDraft((current) => ({ ...current, gross: Number(event.target.value) }))} className="bg-background border-border rounded-sm h-10 text-xs" placeholder="Amount" />
                     <Input type="number" value={draft.adjustment} onChange={(event) => setDraft((current) => ({ ...current, adjustment: Number(event.target.value) }))} className="bg-background border-border rounded-sm h-10 text-xs" placeholder={tone === 'income' ? 'Discount' : 'Tax'} />
                     <Input type="number" value={draft.fee} onChange={(event) => setDraft((current) => ({ ...current, fee: Number(event.target.value) }))} className="bg-background border-border rounded-sm h-10 text-xs" placeholder="Fee" />
+                    {tone === 'expense' && (
+                      <select value={draft.paymentMethod} onChange={(event) => setDraft((current) => ({ ...current, paymentMethod: event.target.value as 'cash' | 'qris' }))} className="h-10 w-full rounded-sm border border-border bg-background px-3 text-xs text-foreground outline-none">
+                        <option value="cash">Cash</option>
+                        <option value="qris">QRIS</option>
+                      </select>
+                    )}
                     <Input value={draft.note} onChange={(event) => setDraft((current) => ({ ...current, note: event.target.value }))} className="bg-background border-border rounded-sm h-10 text-xs" placeholder="Note" />
                     <div className="md:col-span-2 flex justify-end gap-2">
                       <Button type="button" variant="outline" onClick={() => setEditingId(null)} className="h-9 rounded-sm bg-transparent border-border text-[10px] uppercase tracking-widest">Cancel</Button>

@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState, type ReactNode } from 'react';
 import { format, parseISO } from 'date-fns';
-import { BarChart3, CalendarDays, FileSpreadsheet, Pencil, Plus, Save, Upload, WalletCards, X } from 'lucide-react';
+import { BarChart3, FileSpreadsheet, Pencil, Save, Upload, WalletCards, X } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -26,6 +26,14 @@ type DailyReportRow = {
   cash: number;
   qris: number;
   deliveryTax: number;
+  cashExpense: number;
+  qrisExpense: number;
+  expectedCash: number;
+  expectedQris: number;
+  actualCash: number;
+  actualQris: number;
+  cashDifference: number;
+  qrisDifference: number;
   total: number;
   transactions: number;
 };
@@ -151,6 +159,16 @@ function sum(records: number[]) {
   return records.reduce((total, value) => total + (value || 0), 0);
 }
 
+function expenseCashAmount(record: EditableExpenseRecord) {
+  if (record.cash || record.qris) return record.cash ?? 0;
+  return record.paymentMethod === 'qris' ? 0 : record.net;
+}
+
+function expenseQrisAmount(record: EditableExpenseRecord) {
+  if (record.cash || record.qris) return record.qris ?? 0;
+  return record.paymentMethod === 'qris' ? record.net : 0;
+}
+
 function buildDailyRows(incomeRecords: EditableIncomeRecord[], expenseRecords: EditableExpenseRecord[], selectedMonth: string) {
   const dates = [...new Set([
     ...incomeRecords.filter((record) => monthKey(record.date) === selectedMonth).map((record) => record.date),
@@ -170,6 +188,14 @@ function buildDailyRows(incomeRecords: EditableIncomeRecord[], expenseRecords: E
     const cash = sum(dayIncome.map((record) => record.cash ?? 0));
     const qris = sum(dayIncome.map((record) => record.qris ?? 0));
     const deliveryTax = sum(dayIncome.map((record) => record.deliveryTax ?? 0));
+    const cashExpense = sum(dayExpenses.map(expenseCashAmount));
+    const qrisExpense = sum(dayExpenses.map(expenseQrisAmount));
+    const expectedCash = cash - cashExpense;
+    const expectedQris = qris + deliveryTax - qrisExpense;
+    const hasActualCash = dayIncome.some((record) => record.actualCash != null);
+    const hasActualQris = dayIncome.some((record) => record.actualQris != null);
+    const actualCash = hasActualCash ? sum(dayIncome.map((record) => record.actualCash ?? 0)) : expectedCash;
+    const actualQris = hasActualQris ? sum(dayIncome.map((record) => record.actualQris ?? 0)) : expectedQris;
     const importedProfitLoss = dayIncome.some((record) => record.profitLoss != null)
       ? sum(dayIncome.map((record) => record.profitLoss ?? 0))
       : productProfit - fixedCost - expense;
@@ -189,7 +215,15 @@ function buildDailyRows(incomeRecords: EditableIncomeRecord[], expenseRecords: E
       cash,
       qris,
       deliveryTax,
-      total: cash + qris + deliveryTax || received,
+      cashExpense,
+      qrisExpense,
+      expectedCash,
+      expectedQris,
+      actualCash,
+      actualQris,
+      cashDifference: actualCash - expectedCash,
+      qrisDifference: actualQris - expectedQris,
+      total: actualCash + actualQris || received,
       transactions: sum(dayIncome.map((record) => record.transactionCount ?? 0)),
     };
   });
@@ -197,18 +231,26 @@ function buildDailyRows(incomeRecords: EditableIncomeRecord[], expenseRecords: E
 
 function withFormula(row: DailyReportRow): DailyReportRow {
   const productProfit = row.received - row.cogs;
+  const expectedCash = row.cash - row.cashExpense;
+  const expectedQris = row.qris + row.deliveryTax - row.qrisExpense;
   return {
     ...row,
     productProfit,
     profitLoss: productProfit - row.fixedCost - row.expense,
-    total: row.cash + row.qris + row.deliveryTax || row.received,
+    expectedCash,
+    expectedQris,
+    cashDifference: row.actualCash - expectedCash,
+    qrisDifference: row.actualQris - expectedQris,
+    total: row.actualCash + row.actualQris || row.received,
   };
 }
 
-function rowsToFinanceRecords(rows: DailyReportRow[]) {
+function rowsToFinanceRecords(rows: DailyReportRow[], currentIncome: EditableIncomeRecord[] = []) {
   const income = rows.map((row) => {
     const formulaRow = withFormula(row);
+    const existing = currentIncome.find((record) => record.id === `daily-income-${formulaRow.date}`) || currentIncome.find((record) => record.date === formulaRow.date);
     return {
+      ...existing,
       id: `daily-income-${formulaRow.date}`,
       date: formulaRow.date,
       product: 'Daily Sales',
@@ -226,6 +268,8 @@ function rowsToFinanceRecords(rows: DailyReportRow[]) {
       cash: Math.round(formulaRow.cash),
       qris: Math.round(formulaRow.qris),
       deliveryTax: Math.round(formulaRow.deliveryTax),
+      actualCash: existing?.actualCash,
+      actualQris: existing?.actualQris,
       transactionCount: Math.round(formulaRow.transactions),
       source: 'Monthly Operations',
     } satisfies EditableIncomeRecord;
@@ -242,14 +286,38 @@ function rowsToFinanceRecords(rows: DailyReportRow[]) {
     note: row.notes,
     fixedCostDaily: Math.round(row.fixedCost),
     profitLoss: Math.round(withFormula(row).profitLoss),
-    cash: Math.round(row.cash),
-    qris: Math.round(row.qris),
+    cash: Math.round(row.expense),
+    qris: 0,
     deliveryTax: Math.round(row.deliveryTax),
     transactionCount: Math.round(row.transactions),
+    paymentMethod: 'cash',
     source: 'Monthly Operations',
   } satisfies EditableExpenseRecord));
 
   return { income, expenses };
+}
+
+function rowsToActualIncomeRecords(rows: DailyReportRow[], currentIncome: EditableIncomeRecord[]) {
+  return rows.map((row) => {
+    const existing = currentIncome.find((record) => record.id === `daily-income-${row.date}`) || currentIncome.find((record) => record.date === row.date);
+    const formulaRow = withFormula(row);
+    return {
+      ...(existing || {
+        id: `daily-income-${formulaRow.date}`,
+        date: formulaRow.date,
+        product: 'Daily Sales',
+        category: 'Nook Veteran',
+        gross: formulaRow.gross,
+        discount: formulaRow.discount,
+        fee: 0,
+        net: formulaRow.received || formulaRow.gross - formulaRow.discount,
+        note: formulaRow.notes,
+      }),
+      actualCash: Math.round(formulaRow.actualCash),
+      actualQris: Math.round(formulaRow.actualQris),
+      source: existing?.source || 'Monthly Operations',
+    } satisfies EditableIncomeRecord;
+  });
 }
 
 function mergeById<T extends { id: string; date: string }>(current: T[], incoming: T[]) {
@@ -315,6 +383,14 @@ function parseDailyFinanceRows(rows: unknown[][]) {
       cash: Math.round(toNumber(rowValue(row, cashIndex))),
       qris: Math.round(toNumber(rowValue(row, qrisIndex))),
       deliveryTax: Math.round(toNumber(rowValue(row, deliveryTaxIndex))),
+      cashExpense: Math.round(toNumber(rowValue(row, expenseIndex))),
+      qrisExpense: 0,
+      expectedCash: 0,
+      expectedQris: 0,
+      actualCash: 0,
+      actualQris: 0,
+      cashDifference: 0,
+      qrisDifference: 0,
       total: 0,
       transactions: Math.round(toNumber(rowValue(row, transactionIndex))),
     })];
@@ -368,8 +444,12 @@ export function MonthlyOperationsReportView() {
   const activeRows = isEditing ? draftRows.map(withFormula) : dailyRows;
   const activeDays = activeRows.filter((row) => row.gross || row.received || row.expense).length || 1;
   const summary = {
-    cash: sum(activeRows.map((row) => row.cash)),
-    qris: sum(activeRows.map((row) => row.qris)),
+    cash: sum(activeRows.map((row) => row.actualCash)),
+    qris: sum(activeRows.map((row) => row.actualQris)),
+    expectedCash: sum(activeRows.map((row) => row.expectedCash)),
+    expectedQris: sum(activeRows.map((row) => row.expectedQris)),
+    cashDifference: sum(activeRows.map((row) => row.cashDifference)),
+    qrisDifference: sum(activeRows.map((row) => row.qrisDifference)),
     deliveryTax: sum(activeRows.map((row) => row.deliveryTax)),
     total: sum(activeRows.map((row) => row.total)),
     transactions: sum(activeRows.map((row) => row.transactions)),
@@ -388,9 +468,9 @@ export function MonthlyOperationsReportView() {
     if (!isEditing) setDraftRows(dailyRows);
   }, [dailyRows, isEditing]);
 
-  const saveRows = async (rows: DailyReportRow[]) => {
+  const importRows = async (rows: DailyReportRow[]) => {
     const validRows = rows.map(withFormula).filter((row) => isValidDateString(row.date));
-    const { income, expenses } = rowsToFinanceRecords(validRows);
+    const { income, expenses } = rowsToFinanceRecords(validRows, incomeRecords);
     const nextIncome = mergeById(incomeRecords, income);
     const nextExpenses = mergeById(expenseRecords, expenses);
     setIncomeRecords(nextIncome);
@@ -405,7 +485,11 @@ export function MonthlyOperationsReportView() {
 
   const saveDraft = async () => {
     try {
-      await saveRows(draftRows);
+      const actualIncome = rowsToActualIncomeRecords(draftRows.map(withFormula), incomeRecords);
+      const nextIncome = mergeById(incomeRecords, actualIncome);
+      setIncomeRecords(nextIncome);
+      window.localStorage.setItem('nook-finance-income-records', JSON.stringify(nextIncome));
+      await upsertJsonRows(FINANCE_TABLES.income, actualIncome);
       setIsEditing(false);
       toast.success('Monthly report saved');
     } catch (error) {
@@ -425,7 +509,7 @@ export function MonthlyOperationsReportView() {
         toast.error('No readable monthly report rows found');
         return;
       }
-      await saveRows(importedRows);
+      await importRows(importedRows);
       const latestMonth = importedRows.map((row) => monthKey(row.date)).sort().at(-1);
       if (latestMonth) setSelectedMonth(latestMonth);
       toast.success(`Imported ${importedRows.length} daily rows`);
@@ -487,11 +571,13 @@ export function MonthlyOperationsReportView() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-6">
+        <MetricCard icon={WalletCards} label="Expected Cash" value={formatMoney(summary.expectedCash)} />
         <MetricCard icon={WalletCards} label="Actual Cash" value={formatMoney(summary.cash)} />
+        <MetricCard icon={BarChart3} label="Cash Difference" value={formatMoney(summary.cashDifference)} />
+        <MetricCard icon={WalletCards} label="Expected QRIS" value={formatMoney(summary.expectedQris)} />
         <MetricCard icon={WalletCards} label="Actual QRIS" value={formatMoney(summary.qris)} />
-        <MetricCard icon={CalendarDays} label="Total Actual" value={formatMoney(summary.total)} />
-        <MetricCard icon={BarChart3} label="Transactions" value={formatPlainNumber(summary.transactions)} />
+        <MetricCard icon={BarChart3} label="QRIS Difference" value={formatMoney(summary.qrisDifference)} />
       </div>
 
       <div className="grid grid-cols-1 gap-6 xl:grid-cols-[420px_1fr]">
@@ -501,6 +587,8 @@ export function MonthlyOperationsReportView() {
             ['Average Daily Transactions', formatPlainNumber(summary.transactions / activeDays)],
             ['Average Daily Revenue', formatMoney(summary.gross / activeDays)],
             ['Average Product Profit', formatMoney(summary.productProfit / activeDays)],
+            ['Transactions', formatPlainNumber(summary.transactions)],
+            ['Total Actual', formatMoney(summary.total)],
             ['Product Profit', formatMoney(summary.productProfit)],
             ['Total Gross Revenue', formatMoney(summary.gross)],
             ['COGS', formatMoney(summary.cogs), 'danger'],
@@ -513,25 +601,7 @@ export function MonthlyOperationsReportView() {
         <DailyReportTable
           rows={activeRows}
           isEditing={isEditing}
-          onAddRow={() => setDraftRows((current) => [...current, withFormula({
-            date: selectedMonth ? `${selectedMonth}-01` : new Date().toISOString().slice(0, 10),
-            gross: 0,
-            discount: 0,
-            received: 0,
-            cogs: 0,
-            productProfit: 0,
-            fixedCost: 0,
-            expense: 0,
-            notes: '',
-            profitLoss: 0,
-            cash: 0,
-            qris: 0,
-            deliveryTax: 0,
-            total: 0,
-            transactions: 0,
-          })])}
           onChangeRow={(index, updates) => setDraftRows((current) => current.map((row, rowIndex) => rowIndex === index ? withFormula({ ...row, ...updates }) : row))}
-          onDeleteRow={(index) => setDraftRows((current) => current.filter((_, rowIndex) => rowIndex !== index))}
         />
       </div>
     </div>
@@ -571,35 +641,25 @@ function ReportSummaryCard({ monthLabel, rows }: { monthLabel: string; rows: Arr
 function DailyReportTable({
   rows,
   isEditing,
-  onAddRow,
   onChangeRow,
-  onDeleteRow,
 }: {
   rows: DailyReportRow[];
   isEditing: boolean;
-  onAddRow: () => void;
   onChangeRow: (index: number, updates: Partial<DailyReportRow>) => void;
-  onDeleteRow: (index: number) => void;
 }) {
   const columns = isEditing
-    ? 'grid-cols-[104px_112px_96px_112px_96px_132px_104px_104px_180px_112px_96px_96px_96px_112px_96px_88px]'
-    : 'grid-cols-[96px_128px_96px_128px_112px_156px_112px_112px_220px_112px_104px_104px_96px_112px_96px]';
+    ? 'grid-cols-[96px_112px_112px_112px_112px_112px_112px_112px_112px_112px_112px_112px_112px_96px]'
+    : 'grid-cols-[96px_112px_112px_112px_112px_112px_112px_112px_112px_112px_112px_112px_112px_96px]';
   return (
     <Card className="overflow-x-auto rounded-sm border-border bg-card shadow-none">
       <div className="flex items-center justify-between border-b border-border px-4 py-3">
         <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
-          {isEditing ? 'Editable daily inputs. Product Profit, Profit/Loss, and Total are formulas.' : 'Daily Detail'}
+          {isEditing ? 'Only Actual Cash and Actual QRIS are editable here. Revenue, COGS, and expenses are managed in Finance.' : 'Daily Detail'}
         </span>
-        {isEditing && (
-          <Button type="button" onClick={onAddRow} className="h-9 rounded-sm bg-foreground text-[10px] uppercase tracking-[0.2em] text-background">
-            <Plus className="mr-2 h-4 w-4" />
-            Add Day
-          </Button>
-        )}
       </div>
-      <div className={isEditing ? 'min-w-[1680px]' : 'min-w-[1320px]'}>
+      <div className="min-w-[1480px]">
         <div className={`grid ${columns} border-b border-border bg-muted/60 text-[10px] font-bold text-foreground`}>
-          {['Date', 'Gross Revenue', 'Discount', 'Received', 'COGS', 'Product Profit', 'Fixed Cost', 'Expense', 'Notes', 'Profit/Loss', 'Cash', 'QRIS', 'Grab + Tax', 'Total', 'Transactions', ...(isEditing ? ['Action'] : [])].map((label) => (
+          {['Date', 'Gross Revenue', 'Received', 'COGS', 'Expense', 'Expected Cash', 'Actual Cash', 'Cash Diff', 'Expected QRIS', 'Actual QRIS', 'QRIS Diff', 'Product Profit', 'Profit/Loss', 'Transactions'].map((label) => (
             <span key={label} className="border-r border-border px-3 py-3 last:border-r-0">{label}</span>
           ))}
         </div>
@@ -607,39 +667,36 @@ function DailyReportTable({
           <div key={`${row.date}-${index}`} className={`${columns} grid border-b border-border/70 text-xs text-foreground`}>
             {isEditing ? (
               <>
-                <EditCell><Input type="date" value={row.date} onChange={(event) => onChangeRow(index, { date: event.target.value })} className="h-8 rounded-sm border-border bg-background px-2 text-xs" /></EditCell>
-                <NumberInput value={row.gross} onChange={(value) => onChangeRow(index, { gross: value })} />
-                <NumberInput value={row.discount} onChange={(value) => onChangeRow(index, { discount: value })} />
-                <NumberInput value={row.received} onChange={(value) => onChangeRow(index, { received: value })} />
-                <NumberInput value={row.cogs} onChange={(value) => onChangeRow(index, { cogs: value })} />
+                <FormulaCell value={format(parseISO(row.date), 'dd-MMM-yy')} />
+                <FormulaCell value={formatMoney(row.gross)} />
+                <FormulaCell value={formatMoney(row.received)} />
+                <FormulaCell value={formatMoney(row.cogs)} />
+                <FormulaCell value={formatMoney(row.expense)} />
+                <FormulaCell value={formatMoney(row.expectedCash)} />
+                <NumberInput value={row.actualCash} onChange={(value) => onChangeRow(index, { actualCash: value })} />
+                <FormulaCell value={formatMoney(row.cashDifference)} tone={row.cashDifference < 0 ? 'danger' : row.cashDifference > 0 ? 'success' : undefined} />
+                <FormulaCell value={formatMoney(row.expectedQris)} />
+                <NumberInput value={row.actualQris} onChange={(value) => onChangeRow(index, { actualQris: value })} />
+                <FormulaCell value={formatMoney(row.qrisDifference)} tone={row.qrisDifference < 0 ? 'danger' : row.qrisDifference > 0 ? 'success' : undefined} />
                 <FormulaCell value={formatMoney(row.productProfit)} />
-                <NumberInput value={row.fixedCost} onChange={(value) => onChangeRow(index, { fixedCost: value })} />
-                <NumberInput value={row.expense} onChange={(value) => onChangeRow(index, { expense: value })} />
-                <EditCell><Input value={row.notes} onChange={(event) => onChangeRow(index, { notes: event.target.value })} className="h-8 rounded-sm border-border bg-background px-2 text-xs" /></EditCell>
                 <FormulaCell value={formatMoney(row.profitLoss)} />
-                <NumberInput value={row.cash} onChange={(value) => onChangeRow(index, { cash: value })} />
-                <NumberInput value={row.qris} onChange={(value) => onChangeRow(index, { qris: value })} />
-                <NumberInput value={row.deliveryTax} onChange={(value) => onChangeRow(index, { deliveryTax: value })} />
-                <FormulaCell value={formatMoney(row.total)} />
-                <NumberInput value={row.transactions} onChange={(value) => onChangeRow(index, { transactions: value })} />
-                <EditCell><Button type="button" variant="outline" onClick={() => onDeleteRow(index)} className="h-8 rounded-sm border-red-900/50 bg-transparent px-3 text-[10px] uppercase tracking-widest text-red-500">Delete</Button></EditCell>
+                <FormulaCell value={row.transactions ? formatPlainNumber(row.transactions) : '-'} />
               </>
             ) : (
               <>
                 <Cell>{format(parseISO(row.date), 'dd-MMM-yy')}</Cell>
                 <MoneyCell value={row.gross} />
-                <MoneyCell value={row.discount} />
                 <MoneyCell value={row.received} />
                 <MoneyCell value={row.cogs} />
-                <MoneyCell value={row.productProfit} />
-                <MoneyCell value={row.fixedCost} />
                 <MoneyCell value={row.expense} />
-                <Cell>{row.notes || '-'}</Cell>
+                <MoneyCell value={row.expectedCash} />
+                <MoneyCell value={row.actualCash} />
+                <MoneyCell value={row.cashDifference} negativeParens />
+                <MoneyCell value={row.expectedQris} />
+                <MoneyCell value={row.actualQris} />
+                <MoneyCell value={row.qrisDifference} negativeParens />
+                <MoneyCell value={row.productProfit} />
                 <MoneyCell value={row.profitLoss} negativeParens />
-                <MoneyCell value={row.cash} />
-                <MoneyCell value={row.qris} />
-                <MoneyCell value={row.deliveryTax} />
-                <MoneyCell value={row.total} />
                 <Cell>{row.transactions || '-'}</Cell>
               </>
             )}
@@ -671,8 +728,9 @@ function NumberInput({ value, onChange }: { value: number; onChange: (value: num
   );
 }
 
-function FormulaCell({ value }: { value: string }) {
-  return <span className="min-h-12 border-r border-border/70 bg-muted/40 px-3 py-3 font-mono text-xs text-muted-foreground">{value}</span>;
+function FormulaCell({ value, tone }: { value: string; tone?: 'danger' | 'success' }) {
+  const toneClass = tone === 'danger' ? 'text-red-500' : tone === 'success' ? 'text-emerald-500' : 'text-muted-foreground';
+  return <span className={`min-h-12 border-r border-border/70 bg-muted/40 px-3 py-3 font-mono text-xs ${toneClass}`}>{value}</span>;
 }
 
 function MoneyCell({ value, negativeParens = false }: { value: number; negativeParens?: boolean }) {

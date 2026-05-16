@@ -496,6 +496,14 @@ export function MonthlyOperationsReportView() {
     if (!isEditing) setDraftRows(dailyRows);
   }, [dailyRows, isEditing]);
 
+  const updateActualRow = (index: number, updates: Pick<DailyReportRow, 'actualCash'> | Pick<DailyReportRow, 'actualQris'>) => {
+    setDraftRows((current) => {
+      const source = isEditing ? current : dailyRows;
+      return source.map((row, rowIndex) => rowIndex === index ? withFormula({ ...row, ...updates }) : row);
+    });
+    if (!isEditing) setIsEditing(true);
+  };
+
   const updateActualAmounts = (date: string, actualCash: number, actualQris: number) => {
     if (!isValidDateString(date)) {
       toast.error('Choose a valid date');
@@ -631,7 +639,7 @@ export function MonthlyOperationsReportView() {
         onUpdateActual={updateActualAmounts}
       />
 
-      <DailyReportTable rows={activeRows} />
+      <DailyReportTable rows={activeRows} onChangeActual={updateActualRow} />
 
       <div className="max-w-4xl">
         <ReportSummaryCard
@@ -716,29 +724,36 @@ function DailyCashInputCard({
     <Card className="rounded-sm border-border bg-card shadow-none">
       <div className="flex flex-col gap-4 border-b border-border px-4 py-4 lg:flex-row lg:items-end lg:justify-between">
         <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">Daily Cash & QRIS Input</span>
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-[160px_180px_180px_auto]">
-          <Input
-            type="date"
-            value={date}
-            onChange={(event) => setDate(event.target.value)}
-            className="h-10 rounded-sm border-border bg-background text-xs"
-          />
-          <Input
-            type="number"
-            min="0"
-            value={actualCash}
-            onChange={(event) => setActualCash(toNumber(event.target.value))}
-            className="h-10 rounded-sm border-border bg-background text-xs"
-            placeholder="Cash Amount"
-          />
-          <Input
-            type="number"
-            min="0"
-            value={actualQris}
-            onChange={(event) => setActualQris(toNumber(event.target.value))}
-            className="h-10 rounded-sm border-border bg-background text-xs"
-            placeholder="QRIS Amount"
-          />
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-[160px_180px_180px_auto] sm:items-end">
+          <div className="space-y-2">
+            <span className="block text-[9px] font-bold uppercase tracking-widest text-muted-foreground">Date</span>
+            <Input
+              type="date"
+              value={date}
+              onChange={(event) => setDate(event.target.value)}
+              className="h-10 rounded-sm border-border bg-background text-xs"
+            />
+          </div>
+          <div className="space-y-2">
+            <span className="block text-[9px] font-bold uppercase tracking-widest text-muted-foreground">Cash Amount</span>
+            <Input
+              type="number"
+              min="0"
+              value={actualCash}
+              onChange={(event) => setActualCash(toNumber(event.target.value))}
+              className="h-10 rounded-sm border-border bg-background text-xs"
+            />
+          </div>
+          <div className="space-y-2">
+            <span className="block text-[9px] font-bold uppercase tracking-widest text-muted-foreground">QRIS Amount</span>
+            <Input
+              type="number"
+              min="0"
+              value={actualQris}
+              onChange={(event) => setActualQris(toNumber(event.target.value))}
+              className="h-10 rounded-sm border-border bg-background text-xs"
+            />
+          </div>
           <Button type="button" onClick={submitActual} className="h-10 rounded-sm bg-foreground px-5 text-[10px] uppercase tracking-[0.2em] text-background">
             Add
           </Button>
@@ -748,7 +763,13 @@ function DailyCashInputCard({
   );
 }
 
-function DailyReportTable({ rows }: { rows: DailyReportRow[] }) {
+function DailyReportTable({
+  rows,
+  onChangeActual,
+}: {
+  rows: DailyReportRow[];
+  onChangeActual: (index: number, updates: Pick<DailyReportRow, 'actualCash'> | Pick<DailyReportRow, 'actualQris'>) => void;
+}) {
   const columns = 'grid-cols-[96px_112px_112px_112px_112px_112px_112px_112px_112px_112px_112px_112px_96px]';
   return (
     <Card className="overflow-x-auto rounded-sm border-border bg-card shadow-none">
@@ -769,10 +790,10 @@ function DailyReportTable({ rows }: { rows: DailyReportRow[] }) {
             <MoneyCell value={row.cogs} />
             <MoneyCell value={row.expense} />
             <MoneyCell value={row.expectedCash} />
-            <MoneyCell value={row.actualCash} />
+            <EditableMoneyCell value={row.actualCash} onChange={(value) => onChangeActual(index, { actualCash: value })} />
             <MoneyCell value={row.cashDifference} negativeParens />
             <MoneyCell value={row.expectedQris} />
-            <MoneyCell value={row.actualQris} />
+            <EditableMoneyCell value={row.actualQris} onChange={(value) => onChangeActual(index, { actualQris: value })} />
             <MoneyCell value={row.qrisDifference} negativeParens />
             <MoneyCell value={row.profitLoss} negativeParens />
             <Cell>{row.transactions || '-'}</Cell>
@@ -785,6 +806,20 @@ function DailyReportTable({ rows }: { rows: DailyReportRow[] }) {
 
 function Cell({ children }: { children: ReactNode }) {
   return <span className="min-h-10 border-r border-border/70 px-3 py-2 last:border-r-0">{children}</span>;
+}
+
+function EditableMoneyCell({ value, onChange }: { value: number; onChange: (value: number) => void }) {
+  return (
+    <span className="min-h-10 border-r border-border/70 p-1.5 last:border-r-0">
+      <Input
+        type="number"
+        min="0"
+        value={value}
+        onChange={(event) => onChange(toNumber(event.target.value))}
+        className="h-8 rounded-sm border-border bg-background px-2 font-mono text-xs"
+      />
+    </span>
+  );
 }
 
 function MoneyCell({ value, negativeParens = false }: { value: number; negativeParens?: boolean }) {

@@ -24,7 +24,8 @@ import {
   ReceiptText,
   Wrench,
   LogOut,
-  BookOpen
+  BookOpen,
+  FileSpreadsheet
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '@/lib/utils';
@@ -43,8 +44,9 @@ import { FinanceView } from './components/FinanceView';
 import { LoginView } from './components/LoginView';
 import { MaintenanceView } from './components/MaintenanceView';
 import { BusinessDataView } from './components/BusinessDataView';
+import { MonthlyOperationsReportView } from './components/MonthlyOperationsReportView';
 
-type View = 'dashboard' | 'scheduler' | 'employees' | 'shifts' | 'leave' | 'settings' | 'cashier' | 'cogs' | 'finance' | 'business' | 'maintenance';
+type View = 'dashboard' | 'scheduler' | 'employees' | 'shifts' | 'leave' | 'settings' | 'cashier' | 'cogs' | 'finance' | 'monthly-report' | 'business' | 'maintenance';
 
 export default function App() {
   const { theme, setTheme, syncFromSupabase, isSupabaseReady } = useScheduleStore();
@@ -83,6 +85,7 @@ export default function App() {
     { id: 'shifts', label: 'Shift Templates', icon: Clock },
     { id: 'leave', label: 'Time Off', icon: ClipboardList },
     { id: 'finance', label: 'Finance', icon: ReceiptText },
+    { id: 'monthly-report', label: 'Monthly Report', icon: FileSpreadsheet },
     { id: 'business', label: 'Business Data', icon: BookOpen },
     { id: 'cashier', label: 'Cash Counter', icon: Banknote },
     { id: 'cogs', label: 'COGS Calc', icon: TrendingUp },
@@ -269,6 +272,7 @@ export default function App() {
                 {currentView === 'shifts' && <ShiftsView />}
                 {currentView === 'leave' && <LeaveView />}
                 {currentView === 'finance' && <FinanceView />}
+                {currentView === 'monthly-report' && <MonthlyOperationsReportView />}
                 {currentView === 'business' && <BusinessDataView />}
                 {currentView === 'cashier' && <CashCounterView />}
                 {currentView === 'cogs' && <COGSView />}

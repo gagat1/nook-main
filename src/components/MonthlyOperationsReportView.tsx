@@ -580,7 +580,15 @@ export function MonthlyOperationsReportView() {
         <MetricCard icon={BarChart3} label="QRIS Difference" value={formatMoney(summary.qrisDifference)} />
       </div>
 
-      <div className="grid grid-cols-1 gap-6 xl:grid-cols-[420px_1fr]">
+      <DailyCashInputCard
+        rows={activeRows}
+        isEditing={isEditing}
+        onChangeRow={(index, updates) => setDraftRows((current) => current.map((row, rowIndex) => rowIndex === index ? withFormula({ ...row, ...updates }) : row))}
+      />
+
+      <DailyReportTable rows={activeRows} />
+
+      <div className="max-w-4xl">
         <ReportSummaryCard
           monthLabel={selectedLabel}
           rows={[
@@ -597,11 +605,6 @@ export function MonthlyOperationsReportView() {
             ['Other Expenses', formatMoney(summary.expenses), 'danger'],
             ['Total Net Profit', formatMoney(totalNetProfit), 'total'],
           ]}
-        />
-        <DailyReportTable
-          rows={activeRows}
-          isEditing={isEditing}
-          onChangeRow={(index, updates) => setDraftRows((current) => current.map((row, rowIndex) => rowIndex === index ? withFormula({ ...row, ...updates }) : row))}
         />
       </div>
     </div>
@@ -638,7 +641,7 @@ function ReportSummaryCard({ monthLabel, rows }: { monthLabel: string; rows: Arr
   );
 }
 
-function DailyReportTable({
+function DailyCashInputCard({
   rows,
   isEditing,
   onChangeRow,
@@ -647,59 +650,75 @@ function DailyReportTable({
   isEditing: boolean;
   onChangeRow: (index: number, updates: Partial<DailyReportRow>) => void;
 }) {
-  const columns = isEditing
-    ? 'grid-cols-[96px_112px_112px_112px_112px_112px_112px_112px_112px_112px_112px_112px_112px_96px]'
-    : 'grid-cols-[96px_112px_112px_112px_112px_112px_112px_112px_112px_112px_112px_112px_112px_96px]';
   return (
     <Card className="overflow-x-auto rounded-sm border-border bg-card shadow-none">
       <div className="flex items-center justify-between border-b border-border px-4 py-3">
-        <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
-          {isEditing ? 'Only Actual Cash and Actual QRIS are editable here. Revenue, COGS, and expenses are managed in Finance.' : 'Daily Detail'}
-        </span>
+        <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">Daily Cash & QRIS Input</span>
       </div>
-      <div className="min-w-[1480px]">
-        <div className={`grid ${columns} border-b border-border bg-muted/60 text-[10px] font-bold text-foreground`}>
-          {['Date', 'Gross Revenue', 'Received', 'COGS', 'Expense', 'Expected Cash', 'Actual Cash', 'Cash Diff', 'Expected QRIS', 'Actual QRIS', 'QRIS Diff', 'Product Profit', 'Profit/Loss', 'Transactions'].map((label) => (
+      <div className="min-w-[960px]">
+        <div className="grid grid-cols-[96px_132px_132px_132px_132px_132px_132px] border-b border-border bg-muted/60 text-[10px] font-bold text-foreground">
+          {['Date', 'Expected Cash', 'Actual Cash', 'Cash Diff', 'Expected QRIS', 'Actual QRIS', 'QRIS Diff'].map((label) => (
             <span key={label} className="border-r border-border px-3 py-3 last:border-r-0">{label}</span>
           ))}
         </div>
         {rows.map((row, index) => (
-          <div key={`${row.date}-${index}`} className={`${columns} grid border-b border-border/70 text-xs text-foreground`}>
+          <div key={`${row.date}-${index}`} className="grid grid-cols-[96px_132px_132px_132px_132px_132px_132px] border-b border-border/70 text-xs text-foreground">
             {isEditing ? (
               <>
                 <FormulaCell value={format(parseISO(row.date), 'dd-MMM-yy')} />
-                <FormulaCell value={formatMoney(row.gross)} />
-                <FormulaCell value={formatMoney(row.received)} />
-                <FormulaCell value={formatMoney(row.cogs)} />
-                <FormulaCell value={formatMoney(row.expense)} />
                 <FormulaCell value={formatMoney(row.expectedCash)} />
                 <NumberInput value={row.actualCash} onChange={(value) => onChangeRow(index, { actualCash: value })} />
                 <FormulaCell value={formatMoney(row.cashDifference)} tone={row.cashDifference < 0 ? 'danger' : row.cashDifference > 0 ? 'success' : undefined} />
                 <FormulaCell value={formatMoney(row.expectedQris)} />
                 <NumberInput value={row.actualQris} onChange={(value) => onChangeRow(index, { actualQris: value })} />
                 <FormulaCell value={formatMoney(row.qrisDifference)} tone={row.qrisDifference < 0 ? 'danger' : row.qrisDifference > 0 ? 'success' : undefined} />
-                <FormulaCell value={formatMoney(row.productProfit)} />
-                <FormulaCell value={formatMoney(row.profitLoss)} />
-                <FormulaCell value={row.transactions ? formatPlainNumber(row.transactions) : '-'} />
               </>
             ) : (
               <>
                 <Cell>{format(parseISO(row.date), 'dd-MMM-yy')}</Cell>
-                <MoneyCell value={row.gross} />
-                <MoneyCell value={row.received} />
-                <MoneyCell value={row.cogs} />
-                <MoneyCell value={row.expense} />
                 <MoneyCell value={row.expectedCash} />
                 <MoneyCell value={row.actualCash} />
                 <MoneyCell value={row.cashDifference} negativeParens />
                 <MoneyCell value={row.expectedQris} />
                 <MoneyCell value={row.actualQris} />
                 <MoneyCell value={row.qrisDifference} negativeParens />
-                <MoneyCell value={row.productProfit} />
-                <MoneyCell value={row.profitLoss} negativeParens />
-                <Cell>{row.transactions || '-'}</Cell>
               </>
             )}
+          </div>
+        ))}
+      </div>
+    </Card>
+  );
+}
+
+function DailyReportTable({ rows }: { rows: DailyReportRow[] }) {
+  const columns = 'grid-cols-[96px_112px_112px_112px_112px_112px_112px_112px_112px_112px_112px_112px_96px]';
+  return (
+    <Card className="overflow-x-auto rounded-sm border-border bg-card shadow-none">
+      <div className="flex items-center justify-between border-b border-border px-4 py-3">
+        <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">Daily Detail</span>
+      </div>
+      <div className="min-w-[1360px]">
+        <div className={`grid ${columns} border-b border-border bg-muted/60 text-[10px] font-bold text-foreground`}>
+          {['Date', 'Gross Revenue', 'Received', 'COGS', 'Expense', 'Expected Cash', 'Actual Cash', 'Cash Diff', 'Expected QRIS', 'Actual QRIS', 'QRIS Diff', 'Profit/Loss', 'Transactions'].map((label) => (
+            <span key={label} className="border-r border-border px-3 py-3 last:border-r-0">{label}</span>
+          ))}
+        </div>
+        {rows.map((row, index) => (
+          <div key={`${row.date}-${index}`} className={`${columns} grid border-b border-border/70 text-xs text-foreground`}>
+            <Cell>{format(parseISO(row.date), 'dd-MMM-yy')}</Cell>
+            <MoneyCell value={row.gross} />
+            <MoneyCell value={row.received} />
+            <MoneyCell value={row.cogs} />
+            <MoneyCell value={row.expense} />
+            <MoneyCell value={row.expectedCash} />
+            <MoneyCell value={row.actualCash} />
+            <MoneyCell value={row.cashDifference} negativeParens />
+            <MoneyCell value={row.expectedQris} />
+            <MoneyCell value={row.actualQris} />
+            <MoneyCell value={row.qrisDifference} negativeParens />
+            <MoneyCell value={row.profitLoss} negativeParens />
+            <Cell>{row.transactions || '-'}</Cell>
           </div>
         ))}
       </div>

@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState, type ReactNode } from 'react';
 import { format, parseISO } from 'date-fns';
-import { BarChart3, FileSpreadsheet, Pencil, Save, Upload, WalletCards, X } from 'lucide-react';
+import { BarChart3, FileSpreadsheet, Save, Upload, WalletCards, X } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -496,17 +496,13 @@ export function MonthlyOperationsReportView() {
     if (!isEditing) setDraftRows(dailyRows);
   }, [dailyRows, isEditing]);
 
-  const updateDraftRow = (index: number, updates: Partial<DailyReportRow>) => {
-    setDraftRows((current) => {
-      const source = isEditing ? current : dailyRows;
-      return source.map((row, rowIndex) => rowIndex === index ? withFormula({ ...row, ...updates }) : row);
-    });
-    if (!isEditing) setIsEditing(true);
-  };
-
-  const addActualAmount = (date: string, type: 'cash' | 'qris', amount: number) => {
+  const updateActualAmounts = (date: string, actualCash: number, actualQris: number) => {
     if (!isValidDateString(date)) {
       toast.error('Choose a valid date');
+      return;
+    }
+    if (actualCash < 0 || actualQris < 0) {
+      toast.error('Cash and QRIS cannot be negative');
       return;
     }
 
@@ -515,12 +511,12 @@ export function MonthlyOperationsReportView() {
       const source = isEditing ? current : dailyRows;
       const existingIndex = source.findIndex((row) => row.date === date);
       const next = existingIndex >= 0
-        ? source.map((row, rowIndex) => rowIndex === existingIndex ? withFormula({ ...row, [type === 'cash' ? 'actualCash' : 'actualQris']: amount }) : row)
-        : [...source, withFormula({ ...blankDailyRow(date), [type === 'cash' ? 'actualCash' : 'actualQris']: amount })];
+        ? source.map((row, rowIndex) => rowIndex === existingIndex ? withFormula({ ...row, actualCash, actualQris }) : row)
+        : [...source, withFormula({ ...blankDailyRow(date), actualCash, actualQris })];
       return next.sort((a, b) => a.date.localeCompare(b.date));
     });
     if (!isEditing) setIsEditing(true);
-    toast.success(`${type.toUpperCase()} added to daily table`);
+    toast.success('Daily cash and QRIS updated');
   };
 
   const importRows = async (rows: DailyReportRow[]) => {
@@ -617,12 +613,7 @@ export function MonthlyOperationsReportView() {
                 Save
               </Button>
             </>
-          ) : (
-            <Button type="button" onClick={() => { setDraftRows(dailyRows); setIsEditing(true); }} className="h-10 rounded-sm bg-foreground text-[10px] uppercase tracking-[0.2em] text-background">
-              <Pencil className="mr-2 h-4 w-4" />
-              Edit
-            </Button>
-          )}
+          ) : null}
         </div>
       </div>
 
@@ -636,10 +627,8 @@ export function MonthlyOperationsReportView() {
       </div>
 
       <DailyCashInputCard
-        rows={activeRows}
         selectedMonth={selectedMonth}
-        onAddActual={addActualAmount}
-        onChangeRow={updateDraftRow}
+        onUpdateActual={updateActualAmounts}
       />
 
       <DailyReportTable rows={activeRows} />
@@ -698,79 +687,62 @@ function ReportSummaryCard({ monthLabel, rows }: { monthLabel: string; rows: Arr
 }
 
 function DailyCashInputCard({
-  rows,
   selectedMonth,
-  onAddActual,
-  onChangeRow,
+  onUpdateActual,
 }: {
-  rows: DailyReportRow[];
   selectedMonth: string;
-  onAddActual: (date: string, type: 'cash' | 'qris', amount: number) => void;
-  onChangeRow: (index: number, updates: Partial<DailyReportRow>) => void;
+  onUpdateActual: (date: string, actualCash: number, actualQris: number) => void;
 }) {
   const defaultDate = selectedMonth ? `${selectedMonth}-01` : new Date().toISOString().slice(0, 10);
   const [date, setDate] = useState(defaultDate);
-  const [type, setType] = useState<'cash' | 'qris'>('cash');
-  const [amount, setAmount] = useState(0);
+  const [actualCash, setActualCash] = useState(0);
+  const [actualQris, setActualQris] = useState(0);
 
   useEffect(() => {
     setDate(defaultDate);
   }, [defaultDate]);
 
   const submitActual = () => {
-    if (amount <= 0) {
-      toast.error('Amount must be greater than 0');
+    if (actualCash <= 0 && actualQris <= 0) {
+      toast.error('Cash or QRIS must be greater than 0');
       return;
     }
-    onAddActual(date, type, amount);
-    setAmount(0);
+    onUpdateActual(date, actualCash, actualQris);
+    setActualCash(0);
+    setActualQris(0);
   };
 
   return (
-    <Card className="overflow-x-auto rounded-sm border-border bg-card shadow-none">
+    <Card className="rounded-sm border-border bg-card shadow-none">
       <div className="flex flex-col gap-4 border-b border-border px-4 py-4 lg:flex-row lg:items-end lg:justify-between">
         <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">Daily Cash & QRIS Input</span>
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-[160px_130px_180px_auto]">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-[160px_180px_180px_auto]">
           <Input
             type="date"
             value={date}
             onChange={(event) => setDate(event.target.value)}
             className="h-10 rounded-sm border-border bg-background text-xs"
           />
-          <select value={type} onChange={(event) => setType(event.target.value as 'cash' | 'qris')} className="h-10 rounded-sm border border-border bg-background px-3 text-xs text-foreground outline-none">
-            <option value="cash">Cash</option>
-            <option value="qris">QRIS</option>
-          </select>
           <Input
             type="number"
             min="0"
-            value={amount}
-            onChange={(event) => setAmount(toNumber(event.target.value))}
+            value={actualCash}
+            onChange={(event) => setActualCash(toNumber(event.target.value))}
             className="h-10 rounded-sm border-border bg-background text-xs"
-            placeholder="Amount"
+            placeholder="Cash Amount"
+          />
+          <Input
+            type="number"
+            min="0"
+            value={actualQris}
+            onChange={(event) => setActualQris(toNumber(event.target.value))}
+            className="h-10 rounded-sm border-border bg-background text-xs"
+            placeholder="QRIS Amount"
           />
           <Button type="button" onClick={submitActual} className="h-10 rounded-sm bg-foreground px-5 text-[10px] uppercase tracking-[0.2em] text-background">
             Add
           </Button>
         </div>
-      </div>
-      <div className="min-w-[960px]">
-        <div className="grid grid-cols-[96px_132px_132px_132px_132px_132px_132px] border-b border-border bg-muted/60 text-[10px] font-bold text-foreground">
-          {['Date', 'Expected Cash', 'Actual Cash', 'Cash Diff', 'Expected QRIS', 'Actual QRIS', 'QRIS Diff'].map((label) => (
-            <span key={label} className="border-r border-border px-3 py-3 last:border-r-0">{label}</span>
-          ))}
-        </div>
-        {rows.map((row, index) => (
-          <div key={`${row.date}-${index}`} className="grid grid-cols-[96px_132px_132px_132px_132px_132px_132px] border-b border-border/70 text-xs text-foreground">
-            <FormulaCell value={format(parseISO(row.date), 'dd-MMM-yy')} />
-            <FormulaCell value={formatMoney(row.expectedCash)} />
-            <NumberInput value={row.actualCash} onChange={(value) => onChangeRow(index, { actualCash: value })} />
-            <FormulaCell value={formatMoney(row.cashDifference)} tone={row.cashDifference < 0 ? 'danger' : row.cashDifference > 0 ? 'success' : undefined} />
-            <FormulaCell value={formatMoney(row.expectedQris)} />
-            <NumberInput value={row.actualQris} onChange={(value) => onChangeRow(index, { actualQris: value })} />
-            <FormulaCell value={formatMoney(row.qrisDifference)} tone={row.qrisDifference < 0 ? 'danger' : row.qrisDifference > 0 ? 'success' : undefined} />
-          </div>
-        ))}
       </div>
     </Card>
   );
@@ -813,28 +785,6 @@ function DailyReportTable({ rows }: { rows: DailyReportRow[] }) {
 
 function Cell({ children }: { children: ReactNode }) {
   return <span className="min-h-10 border-r border-border/70 px-3 py-2 last:border-r-0">{children}</span>;
-}
-
-function EditCell({ children }: { children: ReactNode }) {
-  return <span className="min-h-12 border-r border-border/70 p-2 last:border-r-0">{children}</span>;
-}
-
-function NumberInput({ value, onChange }: { value: number; onChange: (value: number) => void }) {
-  return (
-    <EditCell>
-      <Input
-        type="number"
-        value={value}
-        onChange={(event) => onChange(toNumber(event.target.value))}
-        className="h-8 rounded-sm border-border bg-background px-2 text-xs"
-      />
-    </EditCell>
-  );
-}
-
-function FormulaCell({ value, tone }: { value: string; tone?: 'danger' | 'success' }) {
-  const toneClass = tone === 'danger' ? 'text-red-500' : tone === 'success' ? 'text-emerald-500' : 'text-muted-foreground';
-  return <span className={`min-h-12 border-r border-border/70 bg-muted/40 px-3 py-3 font-mono text-xs ${toneClass}`}>{value}</span>;
 }
 
 function MoneyCell({ value, negativeParens = false }: { value: number; negativeParens?: boolean }) {

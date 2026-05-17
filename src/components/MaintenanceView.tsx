@@ -27,6 +27,7 @@ const LOCAL_STORAGE_KEYS = [
   'nook-manual-income',
   'nook-manual-expenses',
   'nook-fixed-cost-daily',
+  'nook-cash-movements',
   'nook-business-data',
 ];
 

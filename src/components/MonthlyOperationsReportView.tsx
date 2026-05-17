@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState, type ReactNode } from 'react';
 import { format, parseISO } from 'date-fns';
-import { BarChart3, FileSpreadsheet, Save, Upload, WalletCards, X } from 'lucide-react';
+import { ArrowLeftRight, BarChart3, FileSpreadsheet, Save, Trash2, Upload, WalletCards, X } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -9,10 +9,19 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { ExpenseRecord, IncomeRecord } from '../data/nookFinance';
 import { seedExpenseRecords, seedIncomeRecords } from '../lib/financeSeed';
 import { expensePaymentBreakdown, expensePaymentFields, inferExpensePaymentMethod, normalizeExpensePayment } from '../lib/financePayments';
-import { loadJsonRows, upsertJsonRows } from '../lib/supabaseSync';
+import { loadJsonRows, saveSingleton, upsertJsonRows } from '../lib/supabaseSync';
 
 type EditableIncomeRecord = IncomeRecord & { id: string };
 type EditableExpenseRecord = ExpenseRecord & { id: string };
+type CashMovementDirection = 'cash-to-qris' | 'qris-to-cash';
+
+type CashMovement = {
+  id: string;
+  date: string;
+  direction: CashMovementDirection;
+  amount: number;
+  note: string;
+};
 
 type DailyReportRow = {
   incomeId?: string;
@@ -48,6 +57,8 @@ const FINANCE_TABLES = {
   expenses: 'finance_expenses',
 };
 const SETTINGS_TABLE = 'app_settings';
+const CASH_MOVEMENT_SETTINGS_ID = 'cash_movements';
+const LOCAL_CASH_MOVEMENTS_KEY = 'nook-cash-movements';
 const DEFAULT_FIXED_COST_DAILY = 280000;
 
 declare global {
@@ -185,6 +196,33 @@ function loadLocalFixedCostDaily() {
   if (typeof window === 'undefined') return DEFAULT_FIXED_COST_DAILY;
   const saved = Number(window.localStorage.getItem('nook-fixed-cost-daily'));
   return Number.isFinite(saved) && saved > 0 ? saved : DEFAULT_FIXED_COST_DAILY;
+}
+
+function loadLocalCashMovements(): CashMovement[] {
+  if (typeof window === 'undefined') return [];
+  try {
+    const saved = window.localStorage.getItem(LOCAL_CASH_MOVEMENTS_KEY);
+    if (!saved) return [];
+    return (JSON.parse(saved) as CashMovement[])
+      .filter((movement) => isValidDateString(movement.date) && movement.amount > 0)
+      .map((movement) => ({
+        ...movement,
+        direction: movement.direction === 'qris-to-cash' ? 'qris-to-cash' : 'cash-to-qris',
+        amount: Math.round(movement.amount || 0),
+      }));
+  } catch {
+    return [];
+  }
+}
+
+function movementDelta(movements: CashMovement[]) {
+  return movements.reduce((total, movement) => {
+    const amount = Math.round(movement.amount || 0);
+    if (movement.direction === 'cash-to-qris') {
+      return { cash: total.cash - amount, qris: total.qris + amount };
+    }
+    return { cash: total.cash + amount, qris: total.qris - amount };
+  }, { cash: 0, qris: 0 });
 }
 
 function sum(records: number[]) {
@@ -490,6 +528,7 @@ function loadXlsxLibrary() {
 export function MonthlyOperationsReportView() {
   const [incomeRecords, setIncomeRecords] = useState<EditableIncomeRecord[]>(loadLocalIncome);
   const [expenseRecords, setExpenseRecords] = useState<EditableExpenseRecord[]>(loadLocalExpenses);
+  const [cashMovements, setCashMovements] = useState<CashMovement[]>(loadLocalCashMovements);
   const [fixedCostDaily, setFixedCostDaily] = useState(loadLocalFixedCostDaily);
   const [isEditing, setIsEditing] = useState(false);
   const [draftRows, setDraftRows] = useState<DailyReportRow[]>([]);
@@ -500,7 +539,7 @@ export function MonthlyOperationsReportView() {
         const [income, expenses, settings] = await Promise.all([
           loadJsonRows<EditableIncomeRecord>(FINANCE_TABLES.income),
           loadJsonRows<EditableExpenseRecord>(FINANCE_TABLES.expenses),
-          loadJsonRows<{ id: string; fixedCostDaily?: number }>(SETTINGS_TABLE),
+          loadJsonRows<{ id: string; fixedCostDaily?: number; movements?: CashMovement[] }>(SETTINGS_TABLE),
         ]);
         const validIncome = income.filter((record) => isValidDateString(record.date));
         const validExpenses = expenses.filter((record) => isValidDateString(record.date)).map(normalizeExpensePayment);
@@ -510,6 +549,12 @@ export function MonthlyOperationsReportView() {
         if (financeSettings?.fixedCostDaily) {
           setFixedCostDaily(financeSettings.fixedCostDaily);
           window.localStorage.setItem('nook-fixed-cost-daily', String(financeSettings.fixedCostDaily));
+        }
+        const movementSettings = settings.find((item) => item.id === CASH_MOVEMENT_SETTINGS_ID);
+        if (movementSettings?.movements) {
+          const syncedMovements = movementSettings.movements.filter((movement) => isValidDateString(movement.date) && movement.amount > 0);
+          setCashMovements(syncedMovements);
+          window.localStorage.setItem(LOCAL_CASH_MOVEMENTS_KEY, JSON.stringify(syncedMovements));
         }
       } catch (error) {
         console.warn('Monthly report sync skipped:', error);
@@ -550,6 +595,12 @@ export function MonthlyOperationsReportView() {
     qrisExpense: sum(activeRows.map((row) => row.qrisExpense)),
   };
   const totalNetProfit = summary.gross - summary.cogs - summary.discount - summary.fixedCost;
+  const selectedMonthMovements = useMemo(() => {
+    return cashMovements
+      .filter((movement) => monthKey(movement.date) === selectedMonth)
+      .sort((a, b) => b.date.localeCompare(a.date));
+  }, [cashMovements, selectedMonth]);
+  const selectedMovementDelta = movementDelta(selectedMonthMovements);
   const selectedLabel = selectedMonth ? format(parseISO(`${selectedMonth}-01`), 'MMMM yyyy') : 'No Data';
   const latestInputIndex = (() => {
     for (let index = activeRows.length - 1; index >= 0; index -= 1) {
@@ -558,10 +609,42 @@ export function MonthlyOperationsReportView() {
     return activeRows.length - 1;
   })();
   const latestInputRow = latestInputIndex >= 0 ? activeRows[latestInputIndex] : undefined;
-  const monthlyExpectedCash = summary.expectedCash;
-  const monthlyExpectedQris = summary.expectedQris;
+  const monthlyExpectedCash = summary.expectedCash + selectedMovementDelta.cash;
+  const monthlyExpectedQris = summary.expectedQris + selectedMovementDelta.qris;
   const latestActualCash = latestInputRow?.actualCash ?? 0;
   const latestActualQris = latestInputRow?.actualQris ?? 0;
+
+  const persistCashMovements = (nextMovements: CashMovement[]) => {
+    const normalized = nextMovements
+      .filter((movement) => isValidDateString(movement.date) && movement.amount > 0)
+      .map((movement) => ({ ...movement, amount: Math.round(movement.amount || 0) }))
+      .sort((a, b) => a.date.localeCompare(b.date));
+    setCashMovements(normalized);
+    window.localStorage.setItem(LOCAL_CASH_MOVEMENTS_KEY, JSON.stringify(normalized));
+    void saveSingleton(SETTINGS_TABLE, CASH_MOVEMENT_SETTINGS_ID, { movements: normalized }).catch((error) => {
+      console.warn('Cash movement sync skipped:', error);
+      toast.error('Cash movement was saved locally, but Supabase sync failed');
+    });
+  };
+
+  const addCashMovement = (movement: Omit<CashMovement, 'id'>) => {
+    persistCashMovements([
+      ...cashMovements,
+      { ...movement, id: `cash-movement-${Date.now()}` },
+    ]);
+    toast.success('Cash movement added');
+  };
+
+  const updateCashMovement = (id: string, updates: Partial<CashMovement>) => {
+    persistCashMovements(cashMovements.map((movement) => (
+      movement.id === id ? { ...movement, ...updates } : movement
+    )));
+  };
+
+  const deleteCashMovement = (id: string) => {
+    persistCashMovements(cashMovements.filter((movement) => movement.id !== id));
+    toast.info('Cash movement deleted');
+  };
 
   useEffect(() => {
     if (!isEditing) setDraftRows(dailyRows);
@@ -722,7 +805,7 @@ export function MonthlyOperationsReportView() {
 
       <DailyReportTable rows={activeRows} onChangeRow={updateDailyRow} />
 
-      <div className="max-w-5xl">
+      <div className="grid grid-cols-1 gap-6 xl:grid-cols-[minmax(0,1fr)_minmax(420px,0.8fr)]">
         <ReportSummaryCard
           monthLabel={selectedLabel}
           rows={[
@@ -732,6 +815,15 @@ export function MonthlyOperationsReportView() {
             ['Fixed Cost', formatMoney(summary.fixedCost), 'danger'],
             ['Total Net Profit', formatMoney(totalNetProfit), 'total'],
           ]}
+        />
+        <CashMovementCard
+          monthLabel={selectedLabel}
+          selectedMonth={selectedMonth}
+          movements={selectedMonthMovements}
+          delta={selectedMovementDelta}
+          onAdd={addCashMovement}
+          onUpdate={updateCashMovement}
+          onDelete={deleteCashMovement}
         />
       </div>
     </div>
@@ -780,6 +872,165 @@ function ReportSummaryCard({ monthLabel, rows }: { monthLabel: string; rows: Arr
             <span className={tone === 'danger' ? 'font-mono font-semibold text-red-500' : 'font-mono text-foreground'}>{value}</span>
           </div>
         ))}
+      </div>
+    </Card>
+  );
+}
+
+function CashMovementCard({
+  monthLabel,
+  selectedMonth,
+  movements,
+  delta,
+  onAdd,
+  onUpdate,
+  onDelete,
+}: {
+  monthLabel: string;
+  selectedMonth: string;
+  movements: CashMovement[];
+  delta: { cash: number; qris: number };
+  onAdd: (movement: Omit<CashMovement, 'id'>) => void;
+  onUpdate: (id: string, updates: Partial<CashMovement>) => void;
+  onDelete: (id: string) => void;
+}) {
+  const [date, setDate] = useState(selectedMonth ? `${selectedMonth}-01` : dateToLocalKey(new Date()));
+  const [direction, setDirection] = useState<CashMovementDirection>('cash-to-qris');
+  const [amount, setAmount] = useState(0);
+  const [note, setNote] = useState('');
+
+  useEffect(() => {
+    setDate(selectedMonth ? `${selectedMonth}-01` : dateToLocalKey(new Date()));
+  }, [selectedMonth]);
+
+  const submitMovement = () => {
+    if (!isValidDateString(date) || amount <= 0) {
+      toast.error('Date and amount are required');
+      return;
+    }
+    onAdd({
+      date,
+      direction,
+      amount: Math.round(amount),
+      note: note.trim(),
+    });
+    setAmount(0);
+    setNote('');
+  };
+
+  return (
+    <Card className="overflow-hidden rounded-sm border-border bg-card shadow-none">
+      <div className="flex items-center justify-between border-b border-border bg-muted/60 px-4 py-3">
+        <div>
+          <p className="text-sm font-bold text-foreground">Cash Movement</p>
+          <p className="mt-1 text-[9px] font-bold uppercase tracking-[0.2em] text-muted-foreground">{monthLabel}</p>
+        </div>
+        <ArrowLeftRight className="h-4 w-4 text-foreground" />
+      </div>
+
+      <div className="space-y-5 p-4">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-[135px_1fr]">
+          <Input
+            type="date"
+            value={date}
+            onChange={(event) => setDate(event.target.value)}
+            className="h-10 rounded-sm border-border bg-background text-xs"
+          />
+          <Select value={direction} onValueChange={(value) => setDirection(value as CashMovementDirection)}>
+            <SelectTrigger className="h-10 rounded-sm border-border bg-background">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent className="border-border bg-card text-foreground">
+              <SelectItem value="cash-to-qris">Cash to QRIS</SelectItem>
+              <SelectItem value="qris-to-cash">QRIS to Cash</SelectItem>
+            </SelectContent>
+          </Select>
+          <Input
+            inputMode="numeric"
+            value={formatInputNumber(amount)}
+            onChange={(event) => setAmount(toNumber(event.target.value))}
+            className="h-10 rounded-sm border-border bg-background font-mono text-xs"
+            placeholder="Amount"
+          />
+          <Input
+            value={note}
+            onChange={(event) => setNote(event.target.value)}
+            className="h-10 rounded-sm border-border bg-background text-xs"
+            placeholder="Note"
+          />
+          <Button type="button" onClick={submitMovement} className="h-10 rounded-sm bg-foreground text-[10px] uppercase tracking-[0.2em] text-background sm:col-span-2">
+            Add Movement
+          </Button>
+        </div>
+
+        <div className="grid grid-cols-2 gap-3">
+          <div className="rounded-sm border border-border bg-background p-3">
+            <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-muted-foreground">Cash Impact</p>
+            <p className="mt-2 font-mono text-sm text-foreground">{formatMoney(delta.cash)}</p>
+          </div>
+          <div className="rounded-sm border border-border bg-background p-3">
+            <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-muted-foreground">QRIS Impact</p>
+            <p className="mt-2 font-mono text-sm text-foreground">{formatMoney(delta.qris)}</p>
+          </div>
+        </div>
+
+        <div className="overflow-x-auto rounded-sm border border-border">
+          <div className="grid min-w-[620px] grid-cols-[120px_150px_130px_1fr_48px] border-b border-border bg-background text-[9px] font-bold uppercase tracking-[0.16em] text-muted-foreground">
+            {['Date', 'Direction', 'Amount', 'Note', ''].map((label) => (
+              <span key={label} className="border-r border-border px-3 py-2 last:border-r-0">{label}</span>
+            ))}
+          </div>
+          {movements.length ? movements.map((movement) => (
+            <div key={movement.id} className="grid min-w-[620px] grid-cols-[120px_150px_130px_1fr_48px] border-b border-border/70 text-xs last:border-b-0">
+              <span className="border-r border-border/70 p-1.5">
+                <Input
+                  type="date"
+                  value={movement.date}
+                  onChange={(event) => onUpdate(movement.id, { date: event.target.value })}
+                  className="h-8 rounded-sm border-border bg-background px-2 text-xs"
+                />
+              </span>
+              <span className="border-r border-border/70 p-1.5">
+                <Select value={movement.direction} onValueChange={(value) => onUpdate(movement.id, { direction: value as CashMovementDirection })}>
+                  <SelectTrigger className="h-8 rounded-sm border-border bg-background text-xs">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent className="border-border bg-card text-foreground">
+                    <SelectItem value="cash-to-qris">Cash to QRIS</SelectItem>
+                    <SelectItem value="qris-to-cash">QRIS to Cash</SelectItem>
+                  </SelectContent>
+                </Select>
+              </span>
+              <span className="border-r border-border/70 p-1.5">
+                <Input
+                  inputMode="numeric"
+                  value={formatInputNumber(movement.amount)}
+                  onChange={(event) => onUpdate(movement.id, { amount: toNumber(event.target.value) })}
+                  className="h-8 rounded-sm border-border bg-background px-2 font-mono text-xs"
+                />
+              </span>
+              <span className="border-r border-border/70 p-1.5">
+                <Input
+                  value={movement.note}
+                  onChange={(event) => onUpdate(movement.id, { note: event.target.value })}
+                  className="h-8 rounded-sm border-border bg-background px-2 text-xs"
+                />
+              </span>
+              <button
+                type="button"
+                onClick={() => onDelete(movement.id)}
+                className="flex items-center justify-center text-muted-foreground hover:text-red-500"
+                aria-label="Delete cash movement"
+              >
+                <Trash2 className="h-4 w-4" />
+              </button>
+            </div>
+          )) : (
+            <div className="px-4 py-8 text-center text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
+              No cash movement yet
+            </div>
+          )}
+        </div>
       </div>
     </Card>
   );

@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useRef, useState, useMemo } from 'react';
 import { 
   Calendar as CalendarIcon, 
   ChevronLeft, 
@@ -11,7 +11,8 @@ import {
   AlertTriangle,
   Info,
   CalendarCheck2,
-  CalendarRange
+  CalendarRange,
+  ImageDown
 } from 'lucide-react';
 import { useScheduleStore } from '../store';
 import { 
@@ -40,6 +41,85 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { ScheduledShift } from '../types';
 import { motion } from 'motion/react';
 
+function inlineComputedStyles(source: Element, target: Element) {
+  const computed = window.getComputedStyle(source);
+  const style = Array.from(computed)
+    .map((name) => `${name}:${computed.getPropertyValue(name)};`)
+    .join('');
+  target.setAttribute('style', style);
+
+  Array.from(source.children).forEach((child, index) => {
+    const targetChild = target.children[index];
+    if (targetChild) inlineComputedStyles(child, targetChild);
+  });
+}
+
+async function captureElementAsPng(element: HTMLElement, filename: string) {
+  const width = Math.ceil(element.scrollWidth);
+  const height = Math.ceil(element.scrollHeight);
+  const clone = element.cloneNode(true) as HTMLElement;
+
+  inlineComputedStyles(element, clone);
+  clone.querySelectorAll('[data-export-hide="true"]').forEach((node) => node.remove());
+  clone.querySelectorAll<HTMLElement>('*').forEach((node) => {
+    node.style.overflow = 'visible';
+    if (node.style.position === 'sticky') node.style.position = 'relative';
+  });
+  clone.style.width = `${width}px`;
+  clone.style.height = `${height}px`;
+  clone.style.overflow = 'visible';
+  clone.setAttribute('xmlns', 'http://www.w3.org/1999/xhtml');
+
+  const serialized = new XMLSerializer().serializeToString(clone);
+  const svg = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">
+      <foreignObject width="100%" height="100%">${serialized}</foreignObject>
+    </svg>
+  `;
+  const svgUrl = URL.createObjectURL(new Blob([svg], { type: 'image/svg+xml;charset=utf-8' }));
+
+  try {
+    const image = await new Promise<HTMLImageElement>((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.onerror = () => reject(new Error('Schedule image could not be rendered'));
+      img.src = svgUrl;
+    });
+
+    const scale = Math.min(2, Math.max(1, window.devicePixelRatio || 1));
+    const canvas = document.createElement('canvas');
+    canvas.width = width * scale;
+    canvas.height = height * scale;
+    const context = canvas.getContext('2d');
+    if (!context) throw new Error('Canvas is not available');
+    context.scale(scale, scale);
+    context.fillStyle = '#050505';
+    context.fillRect(0, 0, width, height);
+    context.drawImage(image, 0, 0);
+
+    const blob = await new Promise<Blob>((resolve, reject) => {
+      canvas.toBlob((result) => result ? resolve(result) : reject(new Error('Schedule image could not be created')), 'image/png');
+    });
+
+    const file = new File([blob], filename, { type: 'image/png' });
+    if (navigator.canShare?.({ files: [file] })) {
+      await navigator.share({ files: [file], title: 'Staff Schedule' });
+      return;
+    }
+
+    const imageUrl = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = imageUrl;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(imageUrl);
+  } finally {
+    URL.revokeObjectURL(svgUrl);
+  }
+}
+
 export function SchedulerView() {
   const { 
     employees, 
@@ -59,6 +139,8 @@ export function SchedulerView() {
   const [isGenerateOpen, setIsGenerateOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [editingCell, setEditingCell] = useState<{ date: Date; employeeId: string } | null>(null);
+  const [isExporting, setIsExporting] = useState(false);
+  const scheduleExportRef = useRef<HTMLDivElement | null>(null);
 
   const days = useMemo(() => {
     try {
@@ -91,6 +173,21 @@ export function SchedulerView() {
     generateAll(startDate, endDate);
     toast.success('Schedule generated successfully');
     setIsGenerateOpen(false);
+  };
+
+  const handleExportImage = async () => {
+    if (!scheduleExportRef.current) return;
+    setIsExporting(true);
+    try {
+      const filename = `nook-schedule-${format(startDate, 'yyyy-MM-dd')}-to-${format(endDate, 'yyyy-MM-dd')}.png`;
+      await captureElementAsPng(scheduleExportRef.current, filename);
+      toast.success('Schedule image ready');
+    } catch (error) {
+      console.warn('Schedule export failed:', error);
+      toast.error(error instanceof Error ? error.message : 'Schedule image export failed');
+    } finally {
+      setIsExporting(false);
+    }
   };
 
   const getShiftInCell = (date: Date, employeeId: string) => {
@@ -218,6 +315,9 @@ export function SchedulerView() {
         </div>
         
         <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+          <Button variant="outline" onClick={handleExportImage} disabled={isExporting} className="bg-transparent border-border text-muted-foreground hover:text-foreground hover:bg-accent uppercase text-[10px] tracking-widest px-5 py-5 rounded-sm">
+            <ImageDown className="mr-2 h-3.5 w-3.5" /> {isExporting ? 'Exporting' : 'Export Image'}
+          </Button>
           <Button variant="outline" onClick={() => clearSchedules()} className="bg-transparent border-border text-muted-foreground hover:text-foreground hover:bg-accent uppercase text-[10px] tracking-widest px-5 py-5 rounded-sm">
             <Trash2 className="mr-2 h-3.5 w-3.5" /> Clear All
           </Button>
@@ -235,7 +335,7 @@ export function SchedulerView() {
             <Sparkles className="mr-2 h-3.5 w-3.5" /> Generate Auto
           </Button>
         </div>
-      </div>      <div className="space-y-10">
+      </div>      <div ref={scheduleExportRef} className="space-y-10 bg-background p-2">
         {weeks.map((weekDays, weekIndex) => (
           <div key={weekIndex} className="border border-border bg-background rounded-sm overflow-hidden flex flex-col">
             <div className="p-3 bg-card border-b border-border flex flex-col gap-3 px-4 sm:flex-row sm:items-center sm:justify-between sm:px-6">

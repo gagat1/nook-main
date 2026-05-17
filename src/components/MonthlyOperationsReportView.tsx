@@ -549,7 +549,7 @@ export function MonthlyOperationsReportView() {
     cashExpense: sum(activeRows.map((row) => row.cashExpense)),
     qrisExpense: sum(activeRows.map((row) => row.qrisExpense)),
   };
-  const totalNetProfit = summary.productProfit - summary.fixedCost - summary.expenses;
+  const totalNetProfit = summary.gross - summary.cogs - summary.discount - summary.fixedCost;
   const selectedLabel = selectedMonth ? format(parseISO(`${selectedMonth}-01`), 'MMMM yyyy') : 'No Data';
   const latestInputIndex = (() => {
     for (let index = activeRows.length - 1; index >= 0; index -= 1) {

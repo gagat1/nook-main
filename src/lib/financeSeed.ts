@@ -1,4 +1,5 @@
 import { ExpenseRecord, IncomeRecord, nookExpenses, nookIncome } from '../data/nookFinance';
+import { normalizeExpensePayment } from './financePayments';
 
 export type SeedIncomeRecord = IncomeRecord & { id: string };
 export type SeedExpenseRecord = ExpenseRecord & { id: string };
@@ -10,7 +11,7 @@ export function seedIncomeRecords(): SeedIncomeRecord[] {
 }
 
 export function seedExpenseRecords(): SeedExpenseRecord[] {
-  return nookExpenses.map((record, index) => ({
+  return nookExpenses.map((record, index) => normalizeExpensePayment({
     ...record,
     id: `expense-${record.date}-${String(index + 1).padStart(4, '0')}`,
   }));

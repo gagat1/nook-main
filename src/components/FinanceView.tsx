@@ -21,6 +21,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { toast } from 'sonner';
 import { ExpenseRecord, IncomeRecord } from '../data/nookFinance';
+import { expensePaymentFields, inferExpensePaymentMethod, normalizeExpensePayment, type FinancePaymentMethod } from '../lib/financePayments';
 import { isSupabaseConfigured } from '../lib/supabase';
 import { hasPreSeedFinanceDates, seedExpenseRecords, seedIncomeRecords, shouldResetFinanceRows } from '../lib/financeSeed';
 import { deleteJsonRow, loadJsonRows, replaceJsonRows, upsertJsonRow, upsertJsonRows } from '../lib/supabaseSync';
@@ -60,19 +61,6 @@ function formatMoney(value: number) {
 
 function extraMetric(label: string, value: number | undefined) {
   return value == null || value === 0 ? [] : [{ label, value: formatMoney(value) }];
-}
-
-function expensePaymentMethod(record: ExpenseRecord) {
-  if (record.paymentMethod) return record.paymentMethod;
-  return (record.qris ?? 0) > (record.cash ?? 0) ? 'qris' : 'cash';
-}
-
-function expensePaymentFields(net: number, paymentMethod: 'cash' | 'qris') {
-  return {
-    paymentMethod,
-    cash: paymentMethod === 'cash' ? net : 0,
-    qris: paymentMethod === 'qris' ? net : 0,
-  };
 }
 
 function monthKey(date: string) {
@@ -285,7 +273,7 @@ function withIncomeIds(records: IncomeRecord[], prefix: string): EditableIncomeR
 }
 
 function withExpenseIds(records: ExpenseRecord[], prefix: string): EditableExpenseRecord[] {
-  return records.map((record, index) => ({ ...record, id: `${prefix}-${index}-${record.date}` }));
+  return records.map((record, index) => normalizeExpensePayment({ ...record, id: `${prefix}-${index}-${record.date}` }));
 }
 
 function parseIncomeRows(rows: unknown[][]): EditableIncomeRecord[] {
@@ -318,7 +306,9 @@ function parseExpenseRows(rows: unknown[][]): EditableExpenseRecord[] {
     const gross = toNumber(row[4]);
     const tax = toNumber(row[5]);
     const fee = toNumber(row[6]);
-    const net = toNumber(row[7]) || gross - tax - fee;
+    const note = textValue(row[8]);
+    const net = toNumber(row[7]) || gross + tax + fee;
+    const paymentMethod = inferExpensePaymentMethod({ note });
 
     if (!date || (!gross && !tax && !fee && !net)) return [];
 
@@ -331,8 +321,8 @@ function parseExpenseRows(rows: unknown[][]): EditableExpenseRecord[] {
       tax: Math.round(tax),
       fee: Math.round(fee),
       net: Math.round(net),
-      note: textValue(row[8]),
-      ...expensePaymentFields(Math.round(net), 'cash'),
+      note,
+      ...expensePaymentFields(Math.round(net), paymentMethod),
     }];
   });
 }
@@ -424,6 +414,7 @@ function parseDailyFinanceRows(rows: unknown[][], source: string) {
     }
 
     if (expense) {
+      const paymentMethod = inferExpensePaymentMethod({ note });
       expenses.push({
         id: `daily-expense-${date}`,
         date,
@@ -436,11 +427,9 @@ function parseDailyFinanceRows(rows: unknown[][], source: string) {
         note,
         fixedCostDaily,
         profitLoss,
-        cash: expense,
-        qris: 0,
+        ...expensePaymentFields(expense, paymentMethod),
         deliveryTax,
         transactionCount,
-        paymentMethod: 'cash',
         source,
       });
     }
@@ -497,7 +486,7 @@ export function FinanceView() {
     try {
       const saved = window.localStorage.getItem('nook-finance-expense-records');
       if (saved) {
-        const records = (JSON.parse(saved) as EditableExpenseRecord[]).filter(hasValidRecordDate);
+        const records = (JSON.parse(saved) as EditableExpenseRecord[]).filter(hasValidRecordDate).map(normalizeExpensePayment);
         return hasPreSeedFinanceDates(records) ? seedExpenseRecords() : records;
       }
       const legacyManual = JSON.parse(window.localStorage.getItem('nook-manual-expenses') || '[]') as ExpenseRecord[];
@@ -531,7 +520,7 @@ export function FinanceView() {
         ]);
         const validSupabaseIncome = supabaseIncome.filter(hasValidRecordDate);
         const invalidSupabaseIncome = supabaseIncome.filter((record) => !hasValidRecordDate(record));
-        const validSupabaseExpenses = supabaseExpenses.filter(hasValidRecordDate);
+        const validSupabaseExpenses = supabaseExpenses.filter(hasValidRecordDate).map(normalizeExpensePayment);
         const invalidSupabaseExpenses = supabaseExpenses.filter((record) => !hasValidRecordDate(record));
 
         if (shouldResetFinanceRows(validSupabaseIncome)) {
@@ -665,7 +654,7 @@ export function FinanceView() {
   };
 
   const addExpense = async (record: ExpenseRecord) => {
-    const nextRecord = { ...record, id: `manual-expense-${Date.now()}` };
+    const nextRecord = normalizeExpensePayment({ ...record, id: `manual-expense-${Date.now()}` });
     const merged = mergeFinanceRecords<EditableExpenseRecord>(expenseRecordsRef.current, [nextRecord], expenseIdentity);
     setExpenseRecords(merged.records);
 
@@ -691,7 +680,7 @@ export function FinanceView() {
   const updateExpense = (id: string, updates: Partial<ExpenseRecord>) => {
     setExpenseRecords((current) => current.map((record) => {
       if (record.id !== id) return record;
-      const nextRecord = { ...record, ...updates };
+      const nextRecord = normalizeExpensePayment({ ...record, ...updates });
       void upsertJsonRow(FINANCE_TABLES.expenses, nextRecord).catch(syncError);
       return nextRecord;
     }));
@@ -914,9 +903,9 @@ export function FinanceView() {
               cogs: item.cogs ?? 0,
               amount: item.net,
               note: item.note,
-              paymentMethod: expensePaymentMethod(item),
+              paymentMethod: inferExpensePaymentMethod(item),
               extra: [
-                { label: 'Payment', value: expensePaymentMethod(item).toUpperCase() },
+                { label: 'Payment', value: inferExpensePaymentMethod(item).toUpperCase() },
                 ...extraMetric('COGS', item.cogs),
                 ...extraMetric('Fixed Cost', item.fixedCostDaily),
                 ...extraMetric('Cash', item.cash),
@@ -932,10 +921,10 @@ export function FinanceView() {
               gross: updates.gross,
               tax: updates.adjustment,
               fee: updates.fee,
-              net: updates.gross - updates.adjustment - updates.fee,
+              net: updates.gross + updates.adjustment + updates.fee,
               cogs: updates.cogs,
               note: updates.note,
-              ...expensePaymentFields(updates.gross - updates.adjustment - updates.fee, updates.paymentMethod || 'cash'),
+              ...expensePaymentFields(updates.gross + updates.adjustment + updates.fee, updates.paymentMethod || 'cash'),
             })} onDelete={deleteExpense} />
           </div>
         </TabsContent>
@@ -1112,7 +1101,7 @@ function FinanceEntryForm({
     const fee = Number(formData.get('fee') || 0);
     const cogs = Number(formData.get('cogs') || 0);
     const note = String(formData.get('note') || '').trim();
-    const paymentMethod = String(formData.get('paymentMethod') || 'cash') as 'cash' | 'qris';
+    const paymentMethod = String(formData.get('paymentMethod') || 'cash') as FinancePaymentMethod;
 
     if (!date || !name || !category || amount <= 0) {
       toast.error('Date, name, category, and amount are required');
@@ -1135,7 +1124,7 @@ function FinanceEntryForm({
         note,
       });
     } else {
-      const net = amount - adjustment - fee;
+      const net = amount + adjustment + fee;
       onSubmit({
         date,
         product: name,
@@ -1219,15 +1208,15 @@ function TransactionPanel({
   onDelete,
 }: {
   title: string;
-  rows: Array<{ id: string; date: string; name: string; category: string; gross: number; adjustment: number; fee: number; cogs: number; amount: number; note: string; paymentMethod?: 'cash' | 'qris'; extra?: Array<{ label: string; value: string }> }>;
+  rows: Array<{ id: string; date: string; name: string; category: string; gross: number; adjustment: number; fee: number; cogs: number; amount: number; note: string; paymentMethod?: FinancePaymentMethod; extra?: Array<{ label: string; value: string }> }>;
   tone: 'income' | 'expense';
-  onUpdate: (id: string, updates: { date: string; name: string; category: string; gross: number; adjustment: number; fee: number; cogs: number; note: string; paymentMethod?: 'cash' | 'qris' }) => void;
+  onUpdate: (id: string, updates: { date: string; name: string; category: string; gross: number; adjustment: number; fee: number; cogs: number; note: string; paymentMethod?: FinancePaymentMethod }) => void;
   onDelete: (id: string) => void;
 }) {
   const [editingId, setEditingId] = useState<string | null>(null);
-  const [draft, setDraft] = useState({ date: '', name: '', category: '', gross: 0, adjustment: 0, fee: 0, cogs: 0, note: '', paymentMethod: 'cash' as 'cash' | 'qris' });
+  const [draft, setDraft] = useState({ date: '', name: '', category: '', gross: 0, adjustment: 0, fee: 0, cogs: 0, note: '', paymentMethod: 'cash' as FinancePaymentMethod });
 
-  const beginEdit = (row: { id: string; date: string; name: string; category: string; gross: number; adjustment: number; fee: number; cogs: number; note: string; paymentMethod?: 'cash' | 'qris' }) => {
+  const beginEdit = (row: { id: string; date: string; name: string; category: string; gross: number; adjustment: number; fee: number; cogs: number; note: string; paymentMethod?: FinancePaymentMethod }) => {
     setEditingId(row.id);
     setDraft({
       date: row.date,
@@ -1275,7 +1264,7 @@ function TransactionPanel({
                     <Input type="number" value={draft.fee} onChange={(event) => setDraft((current) => ({ ...current, fee: Number(event.target.value) }))} className="bg-background border-border rounded-sm h-10 text-xs" placeholder="Fee" />
                     <Input type="number" value={draft.cogs} onChange={(event) => setDraft((current) => ({ ...current, cogs: Number(event.target.value) }))} className="bg-background border-border rounded-sm h-10 text-xs" placeholder="COGS / HPP" />
                     {tone === 'expense' && (
-                      <select value={draft.paymentMethod} onChange={(event) => setDraft((current) => ({ ...current, paymentMethod: event.target.value as 'cash' | 'qris' }))} className="h-10 w-full rounded-sm border border-border bg-background px-3 text-xs text-foreground outline-none">
+                      <select value={draft.paymentMethod} onChange={(event) => setDraft((current) => ({ ...current, paymentMethod: event.target.value as FinancePaymentMethod }))} className="h-10 w-full rounded-sm border border-border bg-background px-3 text-xs text-foreground outline-none">
                         <option value="cash">Cash</option>
                         <option value="qris">QRIS</option>
                       </select>

@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { ExpenseRecord, IncomeRecord } from '../data/nookFinance';
 import { hasPreSeedFinanceDates, seedExpenseRecords, seedIncomeRecords, shouldResetFinanceRows } from '../lib/financeSeed';
+import { expensePaymentBreakdown, expensePaymentFields, inferExpensePaymentMethod, normalizeExpensePayment } from '../lib/financePayments';
 import { loadJsonRows, replaceJsonRows, upsertJsonRows } from '../lib/supabaseSync';
 
 type EditableIncomeRecord = IncomeRecord & { id: string };
@@ -140,7 +141,7 @@ function withIncomeIds(records: IncomeRecord[], prefix: string): EditableIncomeR
 }
 
 function withExpenseIds(records: ExpenseRecord[], prefix: string): EditableExpenseRecord[] {
-  return records.map((record, index) => ({ ...record, id: `${prefix}-${index}-${record.date}` }));
+  return records.map((record, index) => normalizeExpensePayment({ ...record, id: `${prefix}-${index}-${record.date}` }));
 }
 
 function loadLocalIncome() {
@@ -161,7 +162,7 @@ function loadLocalExpenses() {
   try {
     const saved = window.localStorage.getItem('nook-finance-expense-records');
     if (saved) {
-      const records = (JSON.parse(saved) as EditableExpenseRecord[]).filter((record) => isValidDateString(record.date));
+      const records = (JSON.parse(saved) as EditableExpenseRecord[]).filter((record) => isValidDateString(record.date)).map(normalizeExpensePayment);
       return hasPreSeedFinanceDates(records) ? seedExpenseRecords() : records;
     }
     const legacyManual = JSON.parse(window.localStorage.getItem('nook-manual-expenses') || '[]') as ExpenseRecord[];
@@ -182,13 +183,11 @@ function sum(records: number[]) {
 }
 
 function expenseCashAmount(record: EditableExpenseRecord) {
-  if (record.cash || record.qris) return record.cash ?? 0;
-  return record.paymentMethod === 'qris' ? 0 : record.net;
+  return expensePaymentBreakdown(record).cash;
 }
 
 function expenseQrisAmount(record: EditableExpenseRecord) {
-  if (record.cash || record.qris) return record.qris ?? 0;
-  return record.paymentMethod === 'qris' ? record.net : 0;
+  return expensePaymentBreakdown(record).qris;
 }
 
 function buildDailyRows(incomeRecords: EditableIncomeRecord[], expenseRecords: EditableExpenseRecord[], selectedMonth: string, fixedCostDaily: number) {
@@ -335,25 +334,26 @@ function rowsToFinanceRecords(rows: DailyReportRow[], currentIncome: EditableInc
       source: 'Monthly Operations',
     } satisfies EditableIncomeRecord;
   });
-  const expenses = rows.filter((row) => row.expense || row.notes).map((row) => ({
-    id: `daily-expense-${row.date}`,
-    date: row.date,
-    item: row.notes || 'Daily Expense',
-    category: 'Operations',
-    gross: Math.round(row.expense),
-    tax: 0,
-    fee: 0,
-    net: Math.round(row.expense),
-    note: row.notes,
-    fixedCostDaily: Math.round(row.fixedCost),
-    profitLoss: Math.round(withFormula(row).profitLoss),
-    cash: Math.round(row.expense),
-    qris: 0,
-    deliveryTax: Math.round(row.deliveryTax),
-    transactionCount: Math.round(row.transactions),
-    paymentMethod: 'cash',
-    source: 'Monthly Operations',
-  } satisfies EditableExpenseRecord));
+  const expenses = rows.filter((row) => row.expense || row.notes).map((row) => {
+    const paymentMethod = inferExpensePaymentMethod({ note: row.notes });
+    return {
+      id: `daily-expense-${row.date}`,
+      date: row.date,
+      item: row.notes || 'Daily Expense',
+      category: 'Operations',
+      gross: Math.round(row.expense),
+      tax: 0,
+      fee: 0,
+      net: Math.round(row.expense),
+      note: row.notes,
+      fixedCostDaily: Math.round(row.fixedCost),
+      profitLoss: Math.round(withFormula(row).profitLoss),
+      ...expensePaymentFields(row.expense, paymentMethod),
+      deliveryTax: Math.round(row.deliveryTax),
+      transactionCount: Math.round(row.transactions),
+      source: 'Monthly Operations',
+    } satisfies EditableExpenseRecord;
+  });
 
   return { income, expenses };
 }
@@ -430,6 +430,10 @@ function parseDailyFinanceRows(rows: unknown[][]) {
     const date = normalizeDate(rowValue(row, dateIndex));
     if (!date) return [];
 
+    const expense = Math.round(toNumber(rowValue(row, expenseIndex)));
+    const paymentMethod = inferExpensePaymentMethod({ note: textValue(rowValue(row, noteIndex)) });
+    const expenseBreakdown = expensePaymentFields(expense, paymentMethod);
+
     return [withFormula({
       date,
       incomeId: undefined,
@@ -439,14 +443,14 @@ function parseDailyFinanceRows(rows: unknown[][]) {
       cogs: Math.round(toNumber(rowValue(row, cogsIndex))),
       productProfit: 0,
       fixedCost: Math.round(toNumber(rowValue(row, fixedCostIndex))),
-      expense: Math.round(toNumber(rowValue(row, expenseIndex))),
+      expense,
       notes: textValue(rowValue(row, noteIndex)),
       profitLoss: 0,
       cash: Math.round(toNumber(rowValue(row, cashIndex))),
       qris: Math.round(toNumber(rowValue(row, qrisIndex))),
       deliveryTax: Math.round(toNumber(rowValue(row, deliveryTaxIndex))),
-      cashExpense: Math.round(toNumber(rowValue(row, expenseIndex))),
-      qrisExpense: 0,
+      cashExpense: expenseBreakdown.cash,
+      qrisExpense: expenseBreakdown.qris,
       expectedCash: 0,
       expectedQris: 0,
       actualCash: 0,
@@ -490,7 +494,7 @@ export function MonthlyOperationsReportView() {
           loadJsonRows<{ id: string; fixedCostDaily?: number }>(SETTINGS_TABLE),
         ]);
         const validIncome = income.filter((record) => isValidDateString(record.date));
-        const validExpenses = expenses.filter((record) => isValidDateString(record.date));
+        const validExpenses = expenses.filter((record) => isValidDateString(record.date)).map(normalizeExpensePayment);
         if (shouldResetFinanceRows(validIncome)) {
           const seededIncome = seedIncomeRecords();
           setIncomeRecords(seededIncome);
@@ -545,8 +549,10 @@ export function MonthlyOperationsReportView() {
     productProfit: sum(activeRows.map((row) => row.productProfit)),
     fixedCost: sum(activeRows.map((row) => row.fixedCost)),
     expenses: sum(activeRows.map((row) => row.expense)),
+    cashExpense: sum(activeRows.map((row) => row.cashExpense)),
+    qrisExpense: sum(activeRows.map((row) => row.qrisExpense)),
   };
-  const totalNetProfit = summary.productProfit - summary.fixedCost;
+  const totalNetProfit = summary.productProfit - summary.fixedCost - summary.expenses;
   const selectedLabel = selectedMonth ? format(parseISO(`${selectedMonth}-01`), 'MMMM yyyy') : 'No Data';
   const latestInputIndex = (() => {
     for (let index = activeRows.length - 1; index >= 0; index -= 1) {
@@ -729,6 +735,9 @@ export function MonthlyOperationsReportView() {
             ['COGS', formatMoney(summary.cogs), 'danger'],
             ['Product Profit', formatMoney(summary.productProfit)],
             ['Fixed Cost', formatMoney(summary.fixedCost), 'danger'],
+            ['Other Expenses', formatMoney(summary.expenses), 'danger'],
+            ['Cash Expenses', formatMoney(summary.cashExpense), 'danger'],
+            ['QRIS Expenses', formatMoney(summary.qrisExpense), 'danger'],
             ['Total Cash + QRIS', formatMoney(summary.total)],
             ['Latest Actual Cash', formatMoney(latestActualCash)],
             ['Latest Actual QRIS', formatMoney(latestActualQris)],

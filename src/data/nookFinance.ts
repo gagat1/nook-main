@@ -19,6657 +19,4521 @@ export type ExpenseRecord = FinanceExtraFields & { date: string; item: string; c
 
 export const nookIncome: IncomeRecord[] = [
   {
-    "date": "2024-11-03",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 600000,
-    "discount": 286000,
-    "fee": 0,
-    "net": 314000,
-    "note": ""
-  },
-  {
-    "date": "2024-11-04",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 260000,
-    "discount": 23000,
-    "fee": 0,
-    "net": 237000,
-    "note": ""
-  },
-  {
-    "date": "2024-11-05",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 418000,
-    "discount": 46000,
-    "fee": 0,
-    "net": 372000,
-    "note": ""
-  },
-  {
-    "date": "2024-11-06",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 235000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 210000,
-    "note": ""
-  },
-  {
-    "date": "2024-11-08",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 73000,
-    "discount": 0,
-    "fee": 0,
-    "net": 73000,
-    "note": ""
-  },
-  {
-    "date": "2024-11-09",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 401000,
-    "discount": 23000,
-    "fee": 0,
-    "net": 378000,
-    "note": ""
-  },
-  {
-    "date": "2024-11-10",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 119000,
-    "discount": 0,
-    "fee": 0,
-    "net": 119000,
-    "note": ""
-  },
-  {
-    "date": "2024-11-11",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 119000,
-    "discount": 23000,
-    "fee": 0,
-    "net": 96000,
-    "note": ""
-  },
-  {
-    "date": "2024-11-12",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 188000,
-    "discount": 23000,
-    "fee": 0,
-    "net": 165000,
-    "note": ""
-  },
-  {
-    "date": "2024-11-13",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 117000,
-    "discount": 23000,
-    "fee": 0,
-    "net": 94000,
-    "note": ""
-  },
-  {
-    "date": "2024-11-14",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 69000,
-    "discount": 0,
-    "fee": 0,
-    "net": 69000,
-    "note": ""
-  },
-  {
-    "date": "2024-11-15",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 117000,
-    "discount": 23000,
-    "fee": 0,
-    "net": 94000,
-    "note": ""
-  },
-  {
-    "date": "2024-11-16",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 92000,
-    "discount": 23000,
-    "fee": 0,
-    "net": 69000,
-    "note": ""
-  },
-  {
-    "date": "2024-11-17",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 94000,
-    "discount": 23000,
-    "fee": 0,
-    "net": 71000,
-    "note": ""
-  },
-  {
-    "date": "2024-11-18",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 190000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 165000,
-    "note": ""
-  },
-  {
-    "date": "2024-11-19",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 140000,
-    "discount": 23000,
-    "fee": 0,
-    "net": 117000,
-    "note": ""
-  },
-  {
-    "date": "2024-11-20",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 112000,
-    "discount": 23000,
-    "fee": 0,
-    "net": 89000,
-    "note": ""
-  },
-  {
-    "date": "2024-11-22",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 152000,
-    "discount": 23000,
-    "fee": 0,
-    "net": 129000,
-    "note": ""
-  },
-  {
-    "date": "2024-11-23",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 209000,
-    "discount": 0,
-    "fee": 0,
-    "net": 209000,
-    "note": ""
-  },
-  {
-    "date": "2024-11-24",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 179000,
-    "discount": 0,
-    "fee": 0,
-    "net": 179000,
-    "note": ""
-  },
-  {
-    "date": "2024-11-25",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 85000,
-    "discount": 0,
-    "fee": 0,
-    "net": 85000,
-    "note": ""
-  },
-  {
-    "date": "2024-11-26",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 203000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 178000,
-    "note": ""
-  },
-  {
-    "date": "2024-11-27",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 232000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 207000,
-    "note": ""
-  },
-  {
-    "date": "2024-11-29",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 249000,
-    "discount": 23000,
-    "fee": 0,
-    "net": 226000,
-    "note": ""
-  },
-  {
-    "date": "2024-11-30",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 130000,
-    "discount": 20000,
-    "fee": 0,
-    "net": 110000,
-    "note": ""
-  },
-  {
-    "date": "2024-12-01",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 145000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 120000,
-    "note": ""
-  },
-  {
-    "date": "2024-12-02",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 181000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 156000,
-    "note": ""
-  },
-  {
-    "date": "2024-12-03",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 120000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 95000,
-    "note": ""
-  },
-  {
-    "date": "2024-12-04",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 155000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 130000,
-    "note": ""
-  },
-  {
-    "date": "2024-12-06",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 118000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 93000,
-    "note": ""
-  },
-  {
-    "date": "2024-12-07",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 136000,
-    "discount": 23000,
-    "fee": 0,
-    "net": 113000,
-    "note": ""
-  },
-  {
-    "date": "2024-12-08",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 253000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 228000,
-    "note": ""
-  },
-  {
-    "date": "2024-12-09",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 234000,
-    "discount": 23000,
-    "fee": 0,
-    "net": 211000,
-    "note": ""
-  },
-  {
-    "date": "2024-12-10",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 259000,
-    "discount": 0,
-    "fee": 0,
-    "net": 259000,
-    "note": ""
-  },
-  {
-    "date": "2024-12-11",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 257000,
-    "discount": 50000,
-    "fee": 0,
-    "net": 207000,
-    "note": ""
-  },
-  {
-    "date": "2024-12-13",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 258000,
-    "discount": 0,
-    "fee": 0,
-    "net": 258000,
-    "note": ""
-  },
-  {
-    "date": "2024-12-14",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 138000,
-    "discount": 0,
-    "fee": 0,
-    "net": 138000,
-    "note": ""
-  },
-  {
-    "date": "2024-12-15",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 88000,
-    "discount": 0,
-    "fee": 0,
-    "net": 88000,
-    "note": ""
-  },
-  {
-    "date": "2024-12-17",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 100000,
-    "discount": 0,
-    "fee": 0,
-    "net": 100000,
-    "note": ""
-  },
-  {
-    "date": "2024-12-18",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 188000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 163000,
-    "note": ""
-  },
-  {
-    "date": "2024-12-20",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 115000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 90000,
-    "note": ""
-  },
-  {
-    "date": "2024-12-21",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 65000,
-    "discount": 20000,
-    "fee": 0,
-    "net": 45000,
-    "note": ""
-  },
-  {
-    "date": "2024-12-23",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 155000,
-    "discount": 0,
-    "fee": 0,
-    "net": 155000,
-    "note": ""
-  },
-  {
-    "date": "2024-12-24",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 118000,
-    "discount": 20000,
-    "fee": 0,
-    "net": 98000,
-    "note": ""
-  },
-  {
-    "date": "2024-12-25",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 149000,
-    "discount": 20000,
-    "fee": 0,
-    "net": 129000,
-    "note": ""
-  },
-  {
-    "date": "2024-12-27",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 286000,
-    "discount": 10000,
-    "fee": 0,
-    "net": 276000,
-    "note": ""
-  },
-  {
-    "date": "2024-12-28",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 277000,
-    "discount": 0,
-    "fee": 0,
-    "net": 277000,
-    "note": ""
-  },
-  {
-    "date": "2024-12-29",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 257000,
-    "discount": 23000,
-    "fee": 0,
-    "net": 234000,
-    "note": ""
-  },
-  {
-    "date": "2024-12-30",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 185000,
-    "discount": 20000,
-    "fee": 0,
-    "net": 165000,
-    "note": ""
-  },
-  {
-    "date": "2024-12-31",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 118000,
-    "discount": 0,
-    "fee": 0,
-    "net": 118000,
-    "note": ""
-  },
-  {
-    "date": "2025-01-01",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 182000,
-    "discount": 5000,
-    "fee": 0,
-    "net": 177000,
-    "note": ""
-  },
-  {
-    "date": "2025-01-03",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 158000,
-    "discount": 5000,
-    "fee": 0,
-    "net": 153000,
-    "note": ""
-  },
-  {
-    "date": "2025-01-04",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 371000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 346000,
-    "note": ""
-  },
-  {
-    "date": "2025-01-05",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 213000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 188000,
-    "note": ""
-  },
-  {
-    "date": "2025-01-06",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 211000,
-    "discount": 0,
-    "fee": 0,
-    "net": 211000,
-    "note": ""
-  },
-  {
-    "date": "2025-01-07",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 205000,
-    "discount": 40000,
-    "fee": 0,
-    "net": 165000,
-    "note": ""
-  },
-  {
-    "date": "2025-01-08",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 138000,
-    "discount": 20000,
-    "fee": 0,
-    "net": 118000,
-    "note": ""
-  },
-  {
-    "date": "2025-01-10",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 219000,
-    "discount": 0,
-    "fee": 0,
-    "net": 219000,
-    "note": ""
-  },
-  {
-    "date": "2025-01-11",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 430000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 405000,
-    "note": ""
-  },
-  {
-    "date": "2025-01-12",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 113000,
-    "discount": 30000,
-    "fee": 0,
-    "net": 83000,
-    "note": ""
-  },
-  {
-    "date": "2025-01-13",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 170000,
-    "discount": 20000,
-    "fee": 0,
-    "net": 150000,
-    "note": ""
-  },
-  {
-    "date": "2025-01-14",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 118000,
-    "discount": 20000,
-    "fee": 0,
-    "net": 98000,
-    "note": ""
-  },
-  {
-    "date": "2025-01-15",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 358000,
-    "discount": 50000,
-    "fee": 0,
-    "net": 308000,
-    "note": ""
-  },
-  {
-    "date": "2025-01-17",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 125000,
-    "discount": 0,
-    "fee": 0,
-    "net": 125000,
-    "note": ""
-  },
-  {
-    "date": "2025-01-19",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 251000,
-    "discount": 5000,
-    "fee": 0,
-    "net": 246000,
-    "note": ""
-  },
-  {
-    "date": "2025-01-20",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 114000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 89000,
-    "note": ""
-  },
-  {
-    "date": "2025-01-21",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 211000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 186000,
-    "note": ""
-  },
-  {
-    "date": "2025-01-22",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 209000,
-    "discount": 20000,
-    "fee": 0,
-    "net": 189000,
-    "note": ""
-  },
-  {
-    "date": "2025-01-24",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 115000,
-    "discount": 0,
-    "fee": 0,
-    "net": 115000,
-    "note": ""
-  },
-  {
-    "date": "2025-01-25",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 125000,
-    "discount": 50000,
-    "fee": 0,
-    "net": 75000,
-    "note": ""
-  },
-  {
-    "date": "2025-01-26",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 160000,
-    "discount": 0,
-    "fee": 0,
-    "net": 160000,
-    "note": ""
-  },
-  {
-    "date": "2025-01-27",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 314000,
-    "discount": 0,
-    "fee": 0,
-    "net": 314000,
-    "note": ""
-  },
-  {
-    "date": "2025-01-28",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 225000,
-    "discount": 0,
-    "fee": 0,
-    "net": 225000,
-    "note": ""
-  },
-  {
-    "date": "2025-01-29",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 152000,
-    "discount": 20000,
-    "fee": 0,
-    "net": 132000,
-    "note": ""
-  },
-  {
-    "date": "2025-01-31",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 120000,
-    "discount": 20000,
-    "fee": 0,
-    "net": 100000,
-    "note": ""
-  },
-  {
-    "date": "2025-02-01",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 95000,
-    "discount": 20000,
-    "fee": 0,
-    "net": 75000,
-    "note": ""
-  },
-  {
-    "date": "2025-02-02",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 100000,
-    "discount": 0,
-    "fee": 0,
-    "net": 100000,
-    "note": ""
-  },
-  {
-    "date": "2025-02-04",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 95000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 70000,
-    "note": ""
-  },
-  {
-    "date": "2025-02-05",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 85000,
-    "discount": 0,
-    "fee": 0,
-    "net": 85000,
-    "note": ""
-  },
-  {
-    "date": "2025-02-07",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 98000,
-    "discount": 0,
-    "fee": 0,
-    "net": 98000,
-    "note": ""
-  },
-  {
-    "date": "2025-02-08",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 145000,
-    "discount": 5000,
-    "fee": 0,
-    "net": 140000,
-    "note": ""
-  },
-  {
-    "date": "2025-02-09",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 266000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 241000,
-    "note": ""
-  },
-  {
-    "date": "2025-02-10",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 145000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 120000,
-    "note": ""
-  },
-  {
-    "date": "2025-02-11",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 295000,
-    "discount": 0,
-    "fee": 0,
-    "net": 295000,
-    "note": ""
-  },
-  {
-    "date": "2025-02-12",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 143000,
-    "discount": 50000,
-    "fee": 0,
-    "net": 93000,
-    "note": ""
-  },
-  {
-    "date": "2025-02-14",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 180000,
-    "discount": 85000,
-    "fee": 0,
-    "net": 95000,
-    "note": ""
-  },
-  {
-    "date": "2025-02-15",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 173000,
-    "discount": 20000,
-    "fee": 0,
-    "net": 153000,
-    "note": ""
-  },
-  {
-    "date": "2025-02-16",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 120000,
-    "discount": 0,
-    "fee": 0,
-    "net": 120000,
-    "note": ""
-  },
-  {
-    "date": "2025-02-17",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 118000,
-    "discount": 20000,
-    "fee": 0,
-    "net": 98000,
-    "note": ""
-  },
-  {
-    "date": "2025-02-18",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 118000,
-    "discount": 0,
-    "fee": 0,
-    "net": 118000,
-    "note": ""
-  },
-  {
-    "date": "2025-02-19",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 155000,
-    "discount": 45000,
-    "fee": 0,
-    "net": 110000,
-    "note": ""
-  },
-  {
-    "date": "2025-02-21",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 75000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 50000,
-    "note": ""
-  },
-  {
-    "date": "2025-02-22",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 174000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 149000,
-    "note": ""
-  },
-  {
-    "date": "2025-02-23",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 223000,
-    "discount": 0,
-    "fee": 0,
-    "net": 223000,
-    "note": ""
-  },
-  {
-    "date": "2025-02-24",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 162000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 137000,
-    "note": ""
-  },
-  {
-    "date": "2025-03-01",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 155000,
-    "discount": 35000,
-    "fee": 0,
-    "net": 120000,
-    "note": ""
-  },
-  {
-    "date": "2025-03-02",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 95000,
-    "discount": 0,
-    "fee": 0,
-    "net": 95000,
-    "note": ""
-  },
-  {
-    "date": "2025-03-03",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 97000,
-    "discount": 30000,
-    "fee": 0,
-    "net": 67000,
-    "note": ""
-  },
-  {
-    "date": "2025-03-07",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 100000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 75000,
-    "note": ""
-  },
-  {
-    "date": "2025-03-08",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 135000,
-    "discount": 0,
-    "fee": 0,
-    "net": 135000,
-    "note": ""
-  },
-  {
-    "date": "2025-03-10",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 100000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 75000,
-    "note": ""
-  },
-  {
-    "date": "2025-03-11",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 50000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 25000,
-    "note": ""
-  },
-  {
-    "date": "2025-03-15",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 85000,
-    "discount": 35000,
-    "fee": 0,
-    "net": 50000,
-    "note": ""
-  },
-  {
-    "date": "2025-03-16",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 85000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 60000,
-    "note": ""
-  },
-  {
-    "date": "2025-03-17",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 122000,
-    "discount": 30000,
-    "fee": 0,
-    "net": 92000,
-    "note": ""
-  },
-  {
-    "date": "2025-03-19",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 180000,
-    "discount": 0,
-    "fee": 0,
-    "net": 180000,
-    "note": ""
-  },
-  {
-    "date": "2025-03-21",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 50000,
-    "discount": 0,
-    "fee": 0,
-    "net": 50000,
-    "note": ""
-  },
-  {
-    "date": "2025-03-22",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 50000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 25000,
-    "note": ""
-  },
-  {
-    "date": "2025-03-23",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 98000,
-    "discount": 0,
-    "fee": 0,
-    "net": 98000,
-    "note": ""
-  },
-  {
-    "date": "2025-03-29",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 513000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 488000,
-    "note": ""
-  },
-  {
-    "date": "2025-03-30",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 299000,
-    "discount": 0,
-    "fee": 0,
-    "net": 299000,
-    "note": ""
-  },
-  {
-    "date": "2025-04-05",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 538000,
-    "discount": 20000,
-    "fee": 0,
-    "net": 518000,
-    "note": ""
-  },
-  {
-    "date": "2025-04-06",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 180000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 155000,
-    "note": ""
-  },
-  {
-    "date": "2025-04-07",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 274000,
-    "discount": 0,
-    "fee": 0,
-    "net": 274000,
-    "note": ""
-  },
-  {
-    "date": "2025-04-08",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 100000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 75000,
-    "note": ""
-  },
-  {
-    "date": "2025-04-09",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 286000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 261000,
-    "note": ""
-  },
-  {
-    "date": "2025-04-12",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 310000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 285000,
-    "note": ""
-  },
-  {
-    "date": "2025-04-13",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 218000,
-    "discount": 0,
-    "fee": 0,
-    "net": 218000,
-    "note": ""
-  },
-  {
-    "date": "2025-04-14",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 143000,
-    "discount": 20000,
-    "fee": 0,
-    "net": 123000,
-    "note": ""
-  },
-  {
-    "date": "2025-04-15",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 73000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 48000,
-    "note": ""
-  },
-  {
-    "date": "2025-04-16",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 188000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 163000,
-    "note": ""
-  },
-  {
-    "date": "2025-04-18",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 48000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 23000,
-    "note": ""
-  },
-  {
-    "date": "2025-04-19",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 218000,
-    "discount": 20000,
-    "fee": 0,
-    "net": 198000,
-    "note": ""
-  },
-  {
-    "date": "2025-04-20",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 213000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 188000,
-    "note": ""
-  },
-  {
-    "date": "2025-04-21",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 75000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 50000,
-    "note": ""
-  },
-  {
-    "date": "2025-04-22",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 114000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 89000,
-    "note": ""
-  },
-  {
-    "date": "2025-04-23",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 156000,
-    "discount": 20000,
-    "fee": 0,
-    "net": 136000,
-    "note": ""
-  },
-  {
-    "date": "2025-04-25",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 140000,
-    "discount": 0,
-    "fee": 0,
-    "net": 140000,
-    "note": ""
-  },
-  {
-    "date": "2025-04-26",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 191000,
-    "discount": 0,
-    "fee": 0,
-    "net": 191000,
-    "note": ""
-  },
-  {
-    "date": "2025-04-27",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 250000,
-    "discount": 20000,
-    "fee": 0,
-    "net": 230000,
-    "note": ""
-  },
-  {
-    "date": "2025-04-28",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 179000,
-    "discount": 20000,
-    "fee": 0,
-    "net": 159000,
-    "note": ""
-  },
-  {
-    "date": "2025-04-29",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 243000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 218000,
-    "note": ""
-  },
-  {
-    "date": "2025-04-30",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 150000,
-    "discount": 0,
-    "fee": 0,
-    "net": 150000,
-    "note": ""
-  },
-  {
-    "date": "2025-05-02",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 175000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 150000,
-    "note": ""
-  },
-  {
-    "date": "2025-05-03",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 100000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 75000,
-    "note": ""
-  },
-  {
-    "date": "2025-05-04",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 388000,
-    "discount": 0,
-    "fee": 0,
-    "net": 388000,
-    "note": ""
-  },
-  {
-    "date": "2025-05-05",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 345000,
-    "discount": 20000,
-    "fee": 0,
-    "net": 325000,
-    "note": ""
-  },
-  {
-    "date": "2025-05-06",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 283000,
-    "discount": 0,
-    "fee": 0,
-    "net": 283000,
-    "note": ""
-  },
-  {
-    "date": "2025-05-07",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 268000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 243000,
-    "note": ""
-  },
-  {
-    "date": "2025-05-09",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 378000,
-    "discount": 0,
-    "fee": 0,
-    "net": 378000,
-    "note": ""
-  },
-  {
-    "date": "2025-05-10",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 434000,
-    "discount": 0,
-    "fee": 0,
-    "net": 434000,
-    "note": ""
-  },
-  {
-    "date": "2025-05-11",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 88000,
-    "discount": 0,
-    "fee": 0,
-    "net": 88000,
-    "note": ""
-  },
-  {
-    "date": "2025-05-12",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 476000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 451000,
-    "note": ""
-  },
-  {
-    "date": "2025-05-13",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 250000,
-    "discount": 0,
-    "fee": 0,
-    "net": 250000,
-    "note": ""
-  },
-  {
-    "date": "2025-05-14",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 423000,
-    "discount": 0,
-    "fee": 0,
-    "net": 423000,
-    "note": ""
-  },
-  {
-    "date": "2025-05-16",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 258000,
-    "discount": 0,
-    "fee": 0,
-    "net": 258000,
-    "note": ""
-  },
-  {
-    "date": "2025-05-17",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 304000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 279000,
-    "note": ""
-  },
-  {
-    "date": "2025-05-18",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 348000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 323000,
-    "note": ""
-  },
-  {
-    "date": "2025-05-19",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 320000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 295000,
-    "note": ""
-  },
-  {
-    "date": "2025-05-20",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 187000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 162000,
-    "note": ""
-  },
-  {
-    "date": "2025-05-21",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 253000,
-    "discount": 20000,
-    "fee": 0,
-    "net": 233000,
-    "note": ""
-  },
-  {
-    "date": "2025-05-23",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 220000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 195000,
-    "note": ""
-  },
-  {
-    "date": "2025-05-24",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 280000,
-    "discount": 0,
-    "fee": 0,
-    "net": 280000,
-    "note": ""
-  },
-  {
-    "date": "2025-05-25",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 237000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 212000,
-    "note": ""
-  },
-  {
-    "date": "2025-05-26",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 353000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 328000,
-    "note": ""
-  },
-  {
-    "date": "2025-05-27",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 293000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 268000,
-    "note": ""
-  },
-  {
-    "date": "2025-05-28",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 433000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 408000,
-    "note": ""
-  },
-  {
-    "date": "2025-05-30",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 313000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 288000,
-    "note": ""
-  },
-  {
-    "date": "2025-05-31",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 191000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 166000,
-    "note": ""
-  },
-  {
-    "date": "2025-06-01",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 377000,
-    "discount": 50000,
-    "fee": 0,
-    "net": 327000,
-    "note": ""
-  },
-  {
-    "date": "2025-06-02",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 195000,
-    "discount": 0,
-    "fee": 0,
-    "net": 195000,
-    "note": ""
-  },
-  {
-    "date": "2025-06-03",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 230000,
-    "discount": 20000,
-    "fee": 0,
-    "net": 210000,
-    "note": ""
-  },
-  {
-    "date": "2025-06-04",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 125000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 100000,
-    "note": ""
-  },
-  {
-    "date": "2025-06-06",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 718000,
-    "discount": 20000,
-    "fee": 0,
-    "net": 698000,
-    "note": ""
-  },
-  {
-    "date": "2025-06-07",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 417000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 392000,
-    "note": ""
-  },
-  {
-    "date": "2025-06-08",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 474000,
-    "discount": 50000,
-    "fee": 0,
-    "net": 424000,
-    "note": ""
-  },
-  {
-    "date": "2025-06-10",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 337000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 312000,
-    "note": ""
-  },
-  {
-    "date": "2025-06-11",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 291000,
-    "discount": 20000,
-    "fee": 0,
-    "net": 271000,
-    "note": ""
-  },
-  {
-    "date": "2025-06-13",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 155000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 130000,
-    "note": ""
-  },
-  {
-    "date": "2025-06-14",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 244000,
-    "discount": 0,
-    "fee": 0,
-    "net": 244000,
-    "note": ""
-  },
-  {
-    "date": "2025-06-15",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 512000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 487000,
-    "note": ""
-  },
-  {
-    "date": "2025-06-16",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 309000,
-    "discount": 0,
-    "fee": 0,
-    "net": 309000,
-    "note": ""
-  },
-  {
-    "date": "2025-06-17",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 185000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 160000,
-    "note": ""
-  },
-  {
-    "date": "2025-06-18",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 631000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 606000,
-    "note": ""
-  },
-  {
-    "date": "2025-06-20",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 109000,
-    "discount": 0,
-    "fee": 0,
-    "net": 109000,
-    "note": ""
-  },
-  {
-    "date": "2025-06-21",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 25000,
-    "discount": 0,
-    "fee": 0,
-    "net": 25000,
-    "note": ""
-  },
-  {
-    "date": "2025-06-22",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 407000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 382000,
-    "note": ""
-  },
-  {
-    "date": "2025-06-23",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 205000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 180000,
-    "note": ""
-  },
-  {
-    "date": "2025-06-24",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 220000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 195000,
-    "note": ""
-  },
-  {
-    "date": "2025-06-25",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 362000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 337000,
-    "note": ""
-  },
-  {
-    "date": "2025-06-27",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 155000,
-    "discount": 0,
-    "fee": 0,
-    "net": 155000,
-    "note": ""
-  },
-  {
-    "date": "2025-06-28",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 613000,
-    "discount": 0,
-    "fee": 0,
-    "net": 613000,
-    "note": ""
-  },
-  {
-    "date": "2025-06-29",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 317000,
-    "discount": 0,
-    "fee": 0,
-    "net": 317000,
-    "note": ""
-  },
-  {
-    "date": "2025-06-30",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 638000,
-    "discount": 35000,
-    "fee": 0,
-    "net": 603000,
-    "note": ""
-  },
-  {
-    "date": "2025-07-01",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 448000,
-    "discount": 0,
-    "fee": 0,
-    "net": 448000,
-    "note": ""
-  },
-  {
-    "date": "2025-07-02",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 493000,
-    "discount": 0,
-    "fee": 0,
-    "net": 493000,
-    "note": ""
-  },
-  {
-    "date": "2025-07-04",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 365000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 340000,
-    "note": ""
-  },
-  {
-    "date": "2025-07-05",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 142000,
-    "discount": 0,
-    "fee": 0,
-    "net": 142000,
-    "note": ""
-  },
-  {
-    "date": "2025-07-06",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 270000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 245000,
-    "note": ""
-  },
-  {
-    "date": "2025-07-07",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 630000,
-    "discount": 0,
-    "fee": 0,
-    "net": 630000,
-    "note": ""
-  },
-  {
-    "date": "2025-07-08",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 598000,
-    "discount": 0,
-    "fee": 0,
-    "net": 598000,
-    "note": ""
-  },
-  {
-    "date": "2025-07-09",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 263000,
-    "discount": 50000,
-    "fee": 0,
-    "net": 213000,
-    "note": ""
-  },
-  {
-    "date": "2025-07-11",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 234000,
-    "discount": 0,
-    "fee": 0,
-    "net": 234000,
-    "note": ""
-  },
-  {
-    "date": "2025-07-12",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 424000,
-    "discount": 0,
-    "fee": 0,
-    "net": 424000,
-    "note": ""
-  },
-  {
-    "date": "2025-07-13",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 413000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 388000,
-    "note": ""
-  },
-  {
-    "date": "2025-07-14",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 346000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 321000,
-    "note": ""
-  },
-  {
-    "date": "2025-07-15",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 506000,
-    "discount": 0,
-    "fee": 0,
-    "net": 506000,
-    "note": ""
-  },
-  {
-    "date": "2025-07-16",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 477000,
-    "discount": 50000,
-    "fee": 0,
-    "net": 427000,
-    "note": ""
-  },
-  {
-    "date": "2025-07-18",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 125000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 100000,
-    "note": ""
-  },
-  {
-    "date": "2025-07-19",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 345000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 320000,
-    "note": ""
-  },
-  {
-    "date": "2025-07-20",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 501000,
-    "discount": 0,
-    "fee": 0,
-    "net": 501000,
-    "note": ""
-  },
-  {
-    "date": "2025-07-21",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 289000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 264000,
-    "note": ""
-  },
-  {
-    "date": "2025-07-22",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 391000,
-    "discount": 0,
-    "fee": 0,
-    "net": 391000,
-    "note": ""
-  },
-  {
-    "date": "2025-07-23",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 547000,
-    "discount": 0,
-    "fee": 0,
-    "net": 547000,
-    "note": ""
-  },
-  {
-    "date": "2025-07-25",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 270000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 245000,
-    "note": ""
-  },
-  {
-    "date": "2025-07-26",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 516000,
-    "discount": 35000,
-    "fee": 0,
-    "net": 481000,
-    "note": ""
-  },
-  {
-    "date": "2025-07-27",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 300000,
-    "discount": 0,
-    "fee": 0,
-    "net": 300000,
-    "note": ""
-  },
-  {
-    "date": "2025-07-28",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 529000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 504000,
-    "note": ""
-  },
-  {
-    "date": "2025-07-29",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 472000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 447000,
-    "note": ""
-  },
-  {
-    "date": "2025-07-30",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 388000,
-    "discount": 0,
-    "fee": 0,
-    "net": 388000,
-    "note": ""
-  },
-  {
-    "date": "2025-08-01",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 331000,
-    "discount": 0,
-    "fee": 0,
-    "net": 331000,
-    "note": ""
-  },
-  {
-    "date": "2025-08-02",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 221000,
-    "discount": 0,
-    "fee": 0,
-    "net": 221000,
-    "note": ""
-  },
-  {
-    "date": "2025-08-03",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 638000,
-    "discount": 0,
-    "fee": 0,
-    "net": 638000,
-    "note": ""
-  },
-  {
-    "date": "2025-08-04",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 408000,
-    "discount": 0,
-    "fee": 0,
-    "net": 408000,
-    "note": ""
-  },
-  {
-    "date": "2025-08-05",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 654000,
-    "discount": 0,
-    "fee": 0,
-    "net": 654000,
-    "note": ""
-  },
-  {
-    "date": "2025-08-06",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 698000,
-    "discount": 0,
-    "fee": 0,
-    "net": 698000,
-    "note": ""
-  },
-  {
-    "date": "2025-08-08",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 183000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 158000,
-    "note": ""
-  },
-  {
-    "date": "2025-08-09",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 451000,
-    "discount": 35000,
-    "fee": 0,
-    "net": 416000,
-    "note": ""
-  },
-  {
-    "date": "2025-08-10",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 568000,
-    "discount": 35000,
-    "fee": 0,
-    "net": 533000,
-    "note": ""
-  },
-  {
-    "date": "2025-08-11",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 271000,
-    "discount": 35000,
-    "fee": 0,
-    "net": 236000,
-    "note": ""
-  },
-  {
-    "date": "2025-08-12",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 374000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 349000,
-    "note": ""
-  },
-  {
-    "date": "2025-08-13",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 432000,
-    "discount": 0,
-    "fee": 0,
-    "net": 432000,
-    "note": ""
-  },
-  {
-    "date": "2025-08-15",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 383000,
-    "discount": 0,
-    "fee": 0,
-    "net": 383000,
-    "note": ""
-  },
-  {
-    "date": "2025-08-16",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 290000,
-    "discount": 35000,
-    "fee": 0,
-    "net": 255000,
-    "note": ""
-  },
-  {
-    "date": "2025-08-17",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 63000,
-    "discount": 0,
-    "fee": 0,
-    "net": 63000,
-    "note": ""
-  },
-  {
-    "date": "2025-08-18",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 238000,
-    "discount": 0,
-    "fee": 0,
-    "net": 238000,
-    "note": ""
-  },
-  {
-    "date": "2025-08-19",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 266000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 241000,
-    "note": ""
-  },
-  {
-    "date": "2025-08-20",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 337000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 312000,
-    "note": ""
-  },
-  {
-    "date": "2025-08-21",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 454000,
-    "discount": 35000,
-    "fee": 0,
-    "net": 419000,
-    "note": ""
-  },
-  {
-    "date": "2025-08-22",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 448000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 423000,
-    "note": ""
-  },
-  {
-    "date": "2025-08-23",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 311000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 286000,
-    "note": ""
-  },
-  {
-    "date": "2025-08-24",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 391000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 366000,
-    "note": ""
-  },
-  {
-    "date": "2025-08-26",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 391000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 366000,
-    "note": ""
-  },
-  {
-    "date": "2025-08-27",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 68000,
-    "discount": 48000,
-    "fee": 0,
-    "net": 20000,
-    "note": ""
-  },
-  {
-    "date": "2025-08-29",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 148000,
-    "discount": 25000,
-    "fee": 0,
-    "net": 123000,
-    "note": ""
-  },
-  {
-    "date": "2025-08-30",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 494000,
-    "discount": 50000,
-    "fee": 0,
-    "net": 444000,
-    "note": ""
-  },
-  {
-    "date": "2025-08-31",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 373000,
-    "discount": 0,
-    "fee": 0,
-    "net": 373000,
-    "note": ""
-  },
-  {
     "date": "2025-09-01",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 299000,
     "discount": 0,
     "fee": 0,
     "net": 299000,
-    "note": ""
+    "note": "",
+    "received": 299000,
+    "cogs": 141500,
+    "productProfit": 157500,
+    "fixedCostDaily": 233000,
+    "profitLoss": -75500,
+    "cash": 88000,
+    "qris": 199000,
+    "deliveryTax": 0,
+    "transactionCount": 9,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-09-02",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 264000,
     "discount": 25000,
     "fee": 0,
     "net": 239000,
-    "note": ""
+    "note": "",
+    "received": 239000,
+    "cogs": 118500,
+    "productProfit": 120500,
+    "fixedCostDaily": 233000,
+    "profitLoss": -112500,
+    "cash": 48000,
+    "qris": 191000,
+    "deliveryTax": 0,
+    "transactionCount": 9,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-09-03",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 100000,
     "discount": 50000,
     "fee": 0,
     "net": 50000,
-    "note": ""
+    "note": "",
+    "received": 50000,
+    "cogs": 49000,
+    "productProfit": 1000,
+    "fixedCostDaily": 233000,
+    "profitLoss": -232000,
+    "cash": 0,
+    "qris": 50000,
+    "deliveryTax": 0,
+    "transactionCount": 1,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-09-12",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 903000,
     "discount": 0,
     "fee": 0,
     "net": 903000,
-    "note": ""
+    "note": "",
+    "received": 903000,
+    "cogs": 382000,
+    "productProfit": 521000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 288000,
+    "cash": 257000,
+    "qris": 567000,
+    "deliveryTax": 0,
+    "transactionCount": 23,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-09-13",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 775000,
     "discount": 0,
     "fee": 0,
     "net": 775000,
-    "note": ""
+    "note": "",
+    "received": 775000,
+    "cogs": 350000,
+    "productProfit": 425000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 192000,
+    "cash": 194000,
+    "qris": 483000,
+    "deliveryTax": 0,
+    "transactionCount": 21,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-09-14",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1028000,
     "discount": 20000,
     "fee": 0,
     "net": 1008000,
-    "note": ""
+    "note": "",
+    "received": 1008000,
+    "cogs": 451500,
+    "productProfit": 556500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 323500,
+    "cash": -259000,
+    "qris": 450000,
+    "deliveryTax": 0,
+    "transactionCount": 26,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-09-15",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1102000,
     "discount": 25000,
     "fee": 0,
     "net": 1077000,
-    "note": ""
+    "note": "",
+    "received": 1077000,
+    "cogs": 494500,
+    "productProfit": 582500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 349500,
+    "cash": -20000,
+    "qris": 654000,
+    "deliveryTax": 0,
+    "transactionCount": 31,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-09-16",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 824000,
     "discount": 25000,
     "fee": 0,
     "net": 799000,
-    "note": ""
+    "note": "",
+    "received": 799000,
+    "cogs": 338000,
+    "productProfit": 461000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 228000,
+    "cash": 312000,
+    "qris": 303000,
+    "deliveryTax": 0,
+    "transactionCount": 19,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-09-17",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 867000,
     "discount": 25000,
     "fee": 0,
     "net": 842000,
-    "note": ""
+    "note": "",
+    "received": 842000,
+    "cogs": 422500,
+    "productProfit": 419500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 186500,
+    "cash": 296000,
+    "qris": 239000,
+    "deliveryTax": 0,
+    "transactionCount": 21,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-09-19",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1374000,
     "discount": 25000,
     "fee": 0,
     "net": 1349000,
-    "note": ""
+    "note": "",
+    "received": 1349000,
+    "cogs": 578500,
+    "productProfit": 770500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 537500,
+    "cash": 473000,
+    "qris": 624000,
+    "deliveryTax": 0,
+    "transactionCount": 32,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-09-20",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1163000,
     "discount": 0,
     "fee": 0,
     "net": 1163000,
-    "note": ""
+    "note": "",
+    "received": 1163000,
+    "cogs": 553500,
+    "productProfit": 609500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 376500,
+    "cash": 344000,
+    "qris": 620000,
+    "deliveryTax": 0,
+    "transactionCount": 30,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-09-21",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 906000,
     "discount": 25000,
     "fee": 0,
     "net": 881000,
-    "note": ""
+    "note": "",
+    "received": 881000,
+    "cogs": 424500,
+    "productProfit": 456500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 223500,
+    "cash": -422000,
+    "qris": 331000,
+    "deliveryTax": 0,
+    "transactionCount": 21,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-09-22",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1186000,
     "discount": 0,
     "fee": 0,
     "net": 1186000,
-    "note": ""
+    "note": "",
+    "received": 1186000,
+    "cogs": 562000,
+    "productProfit": 624000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 391000,
+    "cash": 1117000,
+    "qris": -533000,
+    "deliveryTax": 0,
+    "transactionCount": 34,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-09-23",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 897000,
     "discount": 25000,
     "fee": 0,
     "net": 872000,
-    "note": ""
+    "note": "",
+    "received": 872000,
+    "cogs": 387500,
+    "productProfit": 484500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 251500,
+    "cash": 79000,
+    "qris": 354000,
+    "deliveryTax": 0,
+    "transactionCount": 25,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-09-24",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1348000,
     "discount": 0,
     "fee": 0,
     "net": 1348000,
-    "note": ""
+    "note": "",
+    "received": 1348000,
+    "cogs": 636500,
+    "productProfit": 711500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 478500,
+    "cash": 29000,
+    "qris": 624000,
+    "deliveryTax": 0,
+    "transactionCount": 35,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-09-26",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1163000,
     "discount": 0,
     "fee": 0,
     "net": 1163000,
-    "note": ""
+    "note": "",
+    "received": 1163000,
+    "cogs": 495500,
+    "productProfit": 667500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 434500,
+    "cash": 686000,
+    "qris": 477000,
+    "deliveryTax": 0,
+    "transactionCount": 35,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-09-27",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1595000,
     "discount": 0,
     "fee": 0,
     "net": 1595000,
-    "note": ""
+    "note": "",
+    "received": 1595000,
+    "cogs": 720500,
+    "productProfit": 874500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 641500,
+    "cash": 412000,
+    "qris": 731000,
+    "deliveryTax": 0,
+    "transactionCount": 42,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-09-28",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1414000,
     "discount": 0,
     "fee": 0,
     "net": 1414000,
-    "note": ""
+    "note": "",
+    "received": 1414000,
+    "cogs": 604000,
+    "productProfit": 810000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 577000,
+    "cash": -1779000,
+    "qris": 2941000,
+    "deliveryTax": 0,
+    "transactionCount": 37,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-09-29",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1209000,
     "discount": 0,
     "fee": 0,
     "net": 1209000,
-    "note": ""
+    "note": "",
+    "received": 1209000,
+    "cogs": 551000,
+    "productProfit": 658000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 425000,
+    "cash": -588000,
+    "qris": 473000,
+    "deliveryTax": 0,
+    "transactionCount": 32,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-09-30",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1229000,
     "discount": 0,
     "fee": 0,
     "net": 1229000,
-    "note": ""
+    "note": "",
+    "received": 1229000,
+    "cogs": 556500,
+    "productProfit": 672500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 439500,
+    "cash": 684000,
+    "qris": 533000,
+    "deliveryTax": 0,
+    "transactionCount": 30,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-10-01",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1125000,
     "discount": 25000,
     "fee": 0,
     "net": 1100000,
-    "note": ""
+    "note": "",
+    "received": 1100000,
+    "cogs": 473500,
+    "productProfit": 626500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 393500,
+    "cash": 609000,
+    "qris": 479000,
+    "deliveryTax": 0,
+    "transactionCount": 29,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-10-03",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1200000,
     "discount": 0,
     "fee": 0,
     "net": 1200000,
-    "note": ""
+    "note": "",
+    "received": 1200000,
+    "cogs": 565000,
+    "productProfit": 635000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 402000,
+    "cash": 343000,
+    "qris": 640000,
+    "deliveryTax": 0,
+    "transactionCount": 32,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-10-04",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1357000,
     "discount": 0,
     "fee": 0,
     "net": 1357000,
-    "note": ""
+    "note": "",
+    "received": 1357000,
+    "cogs": 597000,
+    "productProfit": 760000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 527000,
+    "cash": 191000,
+    "qris": 735000,
+    "deliveryTax": 0,
+    "transactionCount": 38,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-10-05",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1266000,
     "discount": 0,
     "fee": 0,
     "net": 1266000,
-    "note": ""
+    "note": "",
+    "received": 1266000,
+    "cogs": 598000,
+    "productProfit": 668000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 435000,
+    "cash": 530000,
+    "qris": 227000,
+    "deliveryTax": 0,
+    "transactionCount": 33,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-10-06",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1684000,
     "discount": 25000,
     "fee": 0,
     "net": 1659000,
-    "note": ""
+    "note": "",
+    "received": 1659000,
+    "cogs": 743500,
+    "productProfit": 915500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 682500,
+    "cash": 291000,
+    "qris": 748000,
+    "deliveryTax": 0,
+    "transactionCount": 44,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-10-07",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1307000,
     "discount": 0,
     "fee": 0,
     "net": 1307000,
-    "note": ""
+    "note": "",
+    "received": 1307000,
+    "cogs": 585500,
+    "productProfit": 721500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 488500,
+    "cash": 401000,
+    "qris": 476000,
+    "deliveryTax": 0,
+    "transactionCount": 36,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-10-08",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1296000,
     "discount": 0,
     "fee": 0,
     "net": 1296000,
-    "note": ""
+    "note": "",
+    "received": 1296000,
+    "cogs": 581000,
+    "productProfit": 715000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 482000,
+    "cash": -2046000,
+    "qris": 2576000,
+    "deliveryTax": 0,
+    "transactionCount": 32,
+    "source": "Pemasukan.xlsx"
+  },
+  {
+    "date": "2025-10-09",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
+    "gross": 0,
+    "discount": 0,
+    "fee": 0,
+    "net": 0,
+    "note": "",
+    "received": 0,
+    "cogs": 0,
+    "productProfit": 0,
+    "fixedCostDaily": 233000,
+    "profitLoss": -233000,
+    "cash": -12000,
+    "qris": -348000,
+    "deliveryTax": 0,
+    "transactionCount": 0,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-10-10",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1423000,
     "discount": 50000,
     "fee": 0,
     "net": 1373000,
-    "note": ""
+    "note": "",
+    "received": 1373000,
+    "cogs": 702500,
+    "productProfit": 670500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 437500,
+    "cash": 283000,
+    "qris": 1090000,
+    "deliveryTax": 0,
+    "transactionCount": 32,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-10-11",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1169000,
     "discount": 0,
     "fee": 0,
     "net": 1169000,
-    "note": ""
+    "note": "",
+    "received": 1169000,
+    "cogs": 512000,
+    "productProfit": 657000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 424000,
+    "cash": 202000,
+    "qris": 304000,
+    "deliveryTax": 0,
+    "transactionCount": 29,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-10-12",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1227000,
     "discount": 30000,
     "fee": 0,
     "net": 1197000,
-    "note": ""
+    "note": "",
+    "received": 1197000,
+    "cogs": 518500,
+    "productProfit": 678500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 445500,
+    "cash": 484000,
+    "qris": 438000,
+    "deliveryTax": 0,
+    "transactionCount": 36,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-10-13",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1291000,
     "discount": 25000,
     "fee": 0,
     "net": 1266000,
-    "note": ""
+    "note": "",
+    "received": 1266000,
+    "cogs": 562500,
+    "productProfit": 703500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 470500,
+    "cash": -193000,
+    "qris": 329000,
+    "deliveryTax": 0,
+    "transactionCount": 36,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-10-14",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1106000,
     "discount": 0,
     "fee": 0,
     "net": 1106000,
-    "note": ""
+    "note": "",
+    "received": 1106000,
+    "cogs": 400000,
+    "productProfit": 706000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 473000,
+    "cash": 398000,
+    "qris": 708000,
+    "deliveryTax": 0,
+    "transactionCount": 24,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-10-15",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1202000,
     "discount": 0,
     "fee": 0,
     "net": 1202000,
-    "note": ""
+    "note": "",
+    "received": 1202000,
+    "cogs": 546500,
+    "productProfit": 655500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 422500,
+    "cash": 391000,
+    "qris": 811000,
+    "deliveryTax": 0,
+    "transactionCount": 22,
+    "source": "Pemasukan.xlsx"
+  },
+  {
+    "date": "2025-10-16",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
+    "gross": 0,
+    "discount": 0,
+    "fee": 0,
+    "net": 0,
+    "note": "",
+    "received": 0,
+    "cogs": 0,
+    "productProfit": 0,
+    "fixedCostDaily": 233000,
+    "profitLoss": -233000,
+    "cash": -12000,
+    "qris": -240000,
+    "deliveryTax": 0,
+    "transactionCount": 0,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-10-17",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1306000,
-    "discount": 0,
+    "discount": 60000,
     "fee": 0,
-    "net": 1306000,
-    "note": ""
+    "net": 1246000,
+    "note": "",
+    "received": 1246000,
+    "cogs": 571500,
+    "productProfit": 674500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 441500,
+    "cash": 633000,
+    "qris": 496000,
+    "deliveryTax": 0,
+    "transactionCount": 25,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-10-18",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1163000,
     "discount": 0,
     "fee": 0,
     "net": 1163000,
-    "note": ""
+    "note": "",
+    "received": 1163000,
+    "cogs": 506500,
+    "productProfit": 656500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 423500,
+    "cash": 151000,
+    "qris": -299000,
+    "deliveryTax": 0,
+    "transactionCount": 35,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-10-19",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1556000,
     "discount": 0,
     "fee": 0,
     "net": 1556000,
-    "note": ""
+    "note": "",
+    "received": 1556000,
+    "cogs": 700500,
+    "productProfit": 855500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 622500,
+    "cash": -788000,
+    "qris": 1242000,
+    "deliveryTax": 0,
+    "transactionCount": 35,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-10-20",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 824000,
     "discount": 35000,
     "fee": 0,
     "net": 789000,
-    "note": ""
+    "note": "",
+    "received": 789000,
+    "cogs": 339500,
+    "productProfit": 449500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 216500,
+    "cash": 96000,
+    "qris": 308000,
+    "deliveryTax": 0,
+    "transactionCount": 25,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-10-21",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 426000,
     "discount": 0,
     "fee": 0,
     "net": 426000,
-    "note": ""
+    "note": "",
+    "received": 426000,
+    "cogs": 200500,
+    "productProfit": 225500,
+    "fixedCostDaily": 233000,
+    "profitLoss": -7500,
+    "cash": -72000,
+    "qris": 246000,
+    "deliveryTax": 0,
+    "transactionCount": 14,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-10-22",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1594000,
     "discount": 0,
     "fee": 0,
     "net": 1594000,
-    "note": ""
+    "note": "",
+    "received": 1594000,
+    "cogs": 750000,
+    "productProfit": 844000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 611000,
+    "cash": 514000,
+    "qris": 943000,
+    "deliveryTax": 0,
+    "transactionCount": 29,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-10-24",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 508000,
     "discount": 25000,
     "fee": 0,
     "net": 483000,
-    "note": ""
+    "note": "",
+    "received": 483000,
+    "cogs": 217500,
+    "productProfit": 265500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 32500,
+    "cash": -375000,
+    "qris": 206000,
+    "deliveryTax": 0,
+    "transactionCount": 11,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-10-25",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1419000,
     "discount": 25000,
     "fee": 0,
     "net": 1394000,
-    "note": ""
+    "note": "",
+    "received": 1394000,
+    "cogs": 640000,
+    "productProfit": 754000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 521000,
+    "cash": 153000,
+    "qris": 941000,
+    "deliveryTax": 0,
+    "transactionCount": 40,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-10-26",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 1318000,
+    "product": "Daily Sales",
+    "category": "Nook Brew",
+    "gross": 1381000,
     "discount": 0,
     "fee": 0,
-    "net": 1318000,
-    "note": ""
+    "net": 1381000,
+    "note": "",
+    "received": 1381000,
+    "cogs": 618000,
+    "productProfit": 763000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 530000,
+    "cash": 536000,
+    "qris": -586000,
+    "deliveryTax": 0,
+    "transactionCount": 33,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-10-27",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 679000,
     "discount": 0,
     "fee": 0,
     "net": 679000,
-    "note": ""
+    "note": "",
+    "received": 679000,
+    "cogs": 290500,
+    "productProfit": 388500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 155500,
+    "cash": 462000,
+    "qris": 185000,
+    "deliveryTax": 0,
+    "transactionCount": 16,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-10-28",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 908000,
     "discount": 50000,
     "fee": 0,
     "net": 858000,
-    "note": ""
+    "note": "",
+    "received": 858000,
+    "cogs": 381000,
+    "productProfit": 477000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 244000,
+    "cash": 69000,
+    "qris": 375000,
+    "deliveryTax": 0,
+    "transactionCount": 21,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-10-29",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1219000,
     "discount": 25000,
     "fee": 0,
     "net": 1194000,
-    "note": ""
+    "note": "",
+    "received": 1194000,
+    "cogs": 596500,
+    "productProfit": 597500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 364500,
+    "cash": 345000,
+    "qris": 141000,
+    "deliveryTax": 0,
+    "transactionCount": 33,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-10-31",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1278000,
     "discount": 25000,
     "fee": 0,
     "net": 1253000,
-    "note": ""
+    "note": "",
+    "received": 1253000,
+    "cogs": 561000,
+    "productProfit": 692000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 459000,
+    "cash": 494000,
+    "qris": 424000,
+    "deliveryTax": 0,
+    "transactionCount": 30,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-11-01",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1778000,
     "discount": 60000,
     "fee": 0,
     "net": 1718000,
-    "note": ""
+    "note": "",
+    "received": 1718000,
+    "cogs": 755000,
+    "productProfit": 963000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 730000,
+    "cash": 584000,
+    "qris": 1134000,
+    "deliveryTax": 0,
+    "transactionCount": 38,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-11-02",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1379000,
     "discount": 55000,
     "fee": 0,
     "net": 1324000,
-    "note": ""
+    "note": "",
+    "received": 1324000,
+    "cogs": 586000,
+    "productProfit": 738000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 505000,
+    "cash": 362000,
+    "qris": 750000,
+    "deliveryTax": 0,
+    "transactionCount": 32,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-11-03",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 794000,
     "discount": 30000,
     "fee": 0,
     "net": 764000,
-    "note": ""
+    "note": "",
+    "received": 764000,
+    "cogs": 354500,
+    "productProfit": 409500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 176500,
+    "cash": 383000,
+    "qris": 369000,
+    "deliveryTax": 0,
+    "transactionCount": 22,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-11-04",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1607000,
     "discount": 0,
     "fee": 0,
     "net": 1607000,
-    "note": ""
+    "note": "",
+    "received": 1607000,
+    "cogs": 706500,
+    "productProfit": 900500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 667500,
+    "cash": 195000,
+    "qris": 1150000,
+    "deliveryTax": 0,
+    "transactionCount": 40,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-11-05",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1109000,
     "discount": 50000,
     "fee": 0,
     "net": 1059000,
-    "note": ""
+    "note": "",
+    "received": 1059000,
+    "cogs": 534000,
+    "productProfit": 525000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 292000,
+    "cash": -105000,
+    "qris": -120000,
+    "deliveryTax": 0,
+    "transactionCount": 28,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-11-07",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1370000,
     "discount": 25000,
     "fee": 0,
     "net": 1345000,
-    "note": ""
+    "note": "",
+    "received": 1345000,
+    "cogs": 611000,
+    "productProfit": 734000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 501000,
+    "cash": 51000,
+    "qris": 680000,
+    "deliveryTax": 0,
+    "transactionCount": 35,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-11-08",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1148000,
     "discount": 0,
     "fee": 0,
     "net": 1148000,
-    "note": ""
+    "note": "",
+    "received": 1148000,
+    "cogs": 508500,
+    "productProfit": 639500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 406500,
+    "cash": 317000,
+    "qris": 700000,
+    "deliveryTax": 0,
+    "transactionCount": 29,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-11-09",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1121000,
     "discount": 0,
     "fee": 0,
     "net": 1121000,
-    "note": ""
+    "note": "",
+    "received": 1121000,
+    "cogs": 477500,
+    "productProfit": 643500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 410500,
+    "cash": 29000,
+    "qris": -195000,
+    "deliveryTax": 0,
+    "transactionCount": 30,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-11-10",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 805000,
     "discount": 0,
     "fee": 0,
     "net": 805000,
-    "note": ""
+    "note": "",
+    "received": 805000,
+    "cogs": 351500,
+    "productProfit": 453500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 220500,
+    "cash": 90000,
+    "qris": 158000,
+    "deliveryTax": 0,
+    "transactionCount": 24,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-11-11",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1277000,
     "discount": 25000,
     "fee": 0,
     "net": 1252000,
-    "note": ""
+    "note": "",
+    "received": 1252000,
+    "cogs": 559500,
+    "productProfit": 692500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 459500,
+    "cash": 599000,
+    "qris": 548000,
+    "deliveryTax": 0,
+    "transactionCount": 34,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-11-12",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1138000,
     "discount": 85000,
     "fee": 0,
     "net": 1053000,
-    "note": ""
+    "note": "",
+    "received": 1053000,
+    "cogs": 498000,
+    "productProfit": 555000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 322000,
+    "cash": 310000,
+    "qris": 421000,
+    "deliveryTax": 0,
+    "transactionCount": 36,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-11-14",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1277000,
     "discount": 0,
     "fee": 0,
     "net": 1277000,
-    "note": ""
+    "note": "",
+    "received": 1277000,
+    "cogs": 606500,
+    "productProfit": 670500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 437500,
+    "cash": 26000,
+    "qris": 548000,
+    "deliveryTax": 0,
+    "transactionCount": 33,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-11-15",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1566000,
     "discount": 60000,
     "fee": 0,
     "net": 1506000,
-    "note": ""
+    "note": "",
+    "received": 1506000,
+    "cogs": 717500,
+    "productProfit": 788500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 555500,
+    "cash": 435000,
+    "qris": 771000,
+    "deliveryTax": 0,
+    "transactionCount": 40,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-11-16",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1690000,
     "discount": 25000,
     "fee": 0,
     "net": 1665000,
-    "note": ""
+    "note": "",
+    "received": 1665000,
+    "cogs": 763000,
+    "productProfit": 902000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 669000,
+    "cash": -290000,
+    "qris": 732000,
+    "deliveryTax": 0,
+    "transactionCount": 45,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-11-17",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1309000,
-    "discount": 25000,
+    "discount": 35000,
     "fee": 0,
-    "net": 1284000,
-    "note": ""
+    "net": 1274000,
+    "note": "",
+    "received": 1274000,
+    "cogs": 694000,
+    "productProfit": 580000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 347000,
+    "cash": -2175000,
+    "qris": 3252000,
+    "deliveryTax": 0,
+    "transactionCount": 28,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-11-18",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1161000,
-    "discount": 35000,
+    "discount": 0,
     "fee": 0,
-    "net": 1126000,
-    "note": ""
+    "net": 1161000,
+    "note": "",
+    "received": 1161000,
+    "cogs": 523500,
+    "productProfit": 637500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 404500,
+    "cash": 153000,
+    "qris": -34000,
+    "deliveryTax": 0,
+    "transactionCount": 24,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-11-19",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1223000,
     "discount": 35000,
     "fee": 0,
     "net": 1188000,
-    "note": ""
+    "note": "",
+    "received": 1188000,
+    "cogs": 591500,
+    "productProfit": 596500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 363500,
+    "cash": -5000,
+    "qris": 744000,
+    "deliveryTax": 0,
+    "transactionCount": 33,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-11-21",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1281000,
     "discount": 60000,
     "fee": 0,
     "net": 1221000,
-    "note": ""
+    "note": "",
+    "received": 1221000,
+    "cogs": 564000,
+    "productProfit": 657000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 424000,
+    "cash": 347000,
+    "qris": -542000,
+    "deliveryTax": 0,
+    "transactionCount": 34,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-11-22",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1601000,
     "discount": 0,
     "fee": 0,
     "net": 1601000,
-    "note": ""
+    "note": "",
+    "received": 1601000,
+    "cogs": 700000,
+    "productProfit": 901000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 668000,
+    "cash": 110000,
+    "qris": 1150000,
+    "deliveryTax": 0,
+    "transactionCount": 40,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-11-23",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1659000,
     "discount": 0,
     "fee": 0,
     "net": 1659000,
-    "note": ""
+    "note": "",
+    "received": 1659000,
+    "cogs": 738500,
+    "productProfit": 920500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 687500,
+    "cash": -186000,
+    "qris": 870000,
+    "deliveryTax": 0,
+    "transactionCount": 36,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-11-24",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1862000,
     "discount": 0,
     "fee": 0,
     "net": 1862000,
-    "note": ""
+    "note": "",
+    "received": 1862000,
+    "cogs": 821500,
+    "productProfit": 1040500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 807500,
+    "cash": 390000,
+    "qris": 1003000,
+    "deliveryTax": 0,
+    "transactionCount": 45,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-11-25",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1423000,
     "discount": 50000,
     "fee": 0,
     "net": 1373000,
-    "note": ""
+    "note": "",
+    "received": 1373000,
+    "cogs": 630500,
+    "productProfit": 742500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 509500,
+    "cash": -23000,
+    "qris": -828000,
+    "deliveryTax": 0,
+    "transactionCount": 30,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-11-26",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1289000,
     "discount": 35000,
     "fee": 0,
     "net": 1254000,
-    "note": ""
+    "note": "",
+    "received": 1254000,
+    "cogs": 595500,
+    "productProfit": 658500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 425500,
+    "cash": 105000,
+    "qris": 696000,
+    "deliveryTax": 0,
+    "transactionCount": 32,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-11-28",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1243000,
     "discount": 45000,
     "fee": 0,
     "net": 1198000,
-    "note": ""
+    "note": "",
+    "received": 1198000,
+    "cogs": 540000,
+    "productProfit": 658000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 425000,
+    "cash": 253000,
+    "qris": 753000,
+    "deliveryTax": 0,
+    "transactionCount": 30,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-11-29",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1565000,
     "discount": 65000,
     "fee": 0,
     "net": 1500000,
-    "note": ""
+    "note": "",
+    "received": 1500000,
+    "cogs": 740500,
+    "productProfit": 759500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 526500,
+    "cash": 451000,
+    "qris": 295000,
+    "deliveryTax": 0,
+    "transactionCount": 32,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-11-30",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1101000,
     "discount": 0,
     "fee": 0,
     "net": 1101000,
-    "note": ""
+    "note": "",
+    "received": 1101000,
+    "cogs": 489500,
+    "productProfit": 611500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 378500,
+    "cash": 415000,
+    "qris": -1826000,
+    "deliveryTax": 0,
+    "transactionCount": 31,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-12-01",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 876000,
     "discount": 25000,
     "fee": 0,
     "net": 851000,
-    "note": ""
+    "note": "",
+    "received": 851000,
+    "cogs": 423500,
+    "productProfit": 427500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 194500,
+    "cash": 355000,
+    "qris": 484000,
+    "deliveryTax": 0,
+    "transactionCount": 25,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-12-02",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 987000,
     "discount": 25000,
     "fee": 0,
     "net": 962000,
-    "note": ""
+    "note": "",
+    "received": 962000,
+    "cogs": 410500,
+    "productProfit": 551500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 318500,
+    "cash": -11000,
+    "qris": 775000,
+    "deliveryTax": 0,
+    "transactionCount": 22,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-12-03",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1051000,
     "discount": 25000,
     "fee": 0,
     "net": 1026000,
-    "note": ""
+    "note": "",
+    "received": 1026000,
+    "cogs": 483000,
+    "productProfit": 543000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 310000,
+    "cash": 579000,
+    "qris": 447000,
+    "deliveryTax": 0,
+    "transactionCount": 23,
+    "source": "Pemasukan.xlsx"
+  },
+  {
+    "date": "2025-12-04",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
+    "gross": 0,
+    "discount": 0,
+    "fee": 0,
+    "net": 0,
+    "note": "",
+    "received": 0,
+    "cogs": 0,
+    "productProfit": 0,
+    "fixedCostDaily": 233000,
+    "profitLoss": -233000,
+    "cash": 0,
+    "qris": -499000,
+    "deliveryTax": 0,
+    "transactionCount": 0,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-12-05",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1256000,
     "discount": 45000,
     "fee": 0,
     "net": 1211000,
-    "note": ""
+    "note": "",
+    "received": 1211000,
+    "cogs": 519500,
+    "productProfit": 691500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 458500,
+    "cash": 411000,
+    "qris": 582000,
+    "deliveryTax": 0,
+    "transactionCount": 25,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-12-06",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1361000,
     "discount": 0,
     "fee": 0,
     "net": 1361000,
-    "note": ""
+    "note": "",
+    "received": 1361000,
+    "cogs": 575000,
+    "productProfit": 786000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 553000,
+    "cash": 90000,
+    "qris": 909000,
+    "deliveryTax": 0,
+    "transactionCount": 39,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-12-07",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1402000,
     "discount": 23000,
     "fee": 0,
     "net": 1379000,
-    "note": ""
+    "note": "",
+    "received": 1379000,
+    "cogs": 614500,
+    "productProfit": 764500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 531500,
+    "cash": 475000,
+    "qris": 892000,
+    "deliveryTax": 0,
+    "transactionCount": 28,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-12-08",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1627000,
     "discount": 65000,
     "fee": 0,
     "net": 1562000,
-    "note": ""
+    "note": "",
+    "received": 1562000,
+    "cogs": 704500,
+    "productProfit": 857500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 624500,
+    "cash": 160000,
+    "qris": 1182000,
+    "deliveryTax": 0,
+    "transactionCount": 35,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-12-09",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1346000,
     "discount": 50000,
     "fee": 0,
     "net": 1296000,
-    "note": ""
+    "note": "",
+    "received": 1296000,
+    "cogs": 629000,
+    "productProfit": 667000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 434000,
+    "cash": 276000,
+    "qris": 608000,
+    "deliveryTax": 0,
+    "transactionCount": 29,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-12-10",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 631000,
     "discount": 0,
     "fee": 0,
     "net": 631000,
-    "note": ""
+    "note": "",
+    "received": 631000,
+    "cogs": 260000,
+    "productProfit": 371000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 138000,
+    "cash": -601000,
+    "qris": 270000,
+    "deliveryTax": 0,
+    "transactionCount": 15,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-12-12",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1198000,
     "discount": 50000,
     "fee": 0,
     "net": 1148000,
-    "note": ""
+    "note": "",
+    "received": 1148000,
+    "cogs": 519000,
+    "productProfit": 629000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 396000,
+    "cash": 443000,
+    "qris": 595000,
+    "deliveryTax": 0,
+    "transactionCount": 28,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-12-13",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 2322000,
     "discount": 0,
     "fee": 0,
     "net": 2322000,
-    "note": ""
+    "note": "",
+    "received": 2322000,
+    "cogs": 1024500,
+    "productProfit": 1297500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 1064500,
+    "cash": 708000,
+    "qris": 1315000,
+    "deliveryTax": 0,
+    "transactionCount": 45,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-12-14",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1730000,
     "discount": 25000,
     "fee": 0,
     "net": 1705000,
-    "note": ""
+    "note": "",
+    "received": 1705000,
+    "cogs": 799500,
+    "productProfit": 905500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 672500,
+    "cash": -345000,
+    "qris": -5000,
+    "deliveryTax": 0,
+    "transactionCount": 49,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-12-15",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1659000,
     "discount": 0,
     "fee": 0,
     "net": 1659000,
-    "note": ""
+    "note": "",
+    "received": 1659000,
+    "cogs": 723500,
+    "productProfit": 935500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 702500,
+    "cash": 290000,
+    "qris": 1139000,
+    "deliveryTax": 0,
+    "transactionCount": 32,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-12-16",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1295000,
     "discount": 55000,
     "fee": 0,
     "net": 1240000,
-    "note": ""
+    "note": "",
+    "received": 1240000,
+    "cogs": 530000,
+    "productProfit": 710000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 477000,
+    "cash": 42000,
+    "qris": 771000,
+    "deliveryTax": 0,
+    "transactionCount": 28,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-12-17",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1407000,
     "discount": 25000,
     "fee": 0,
     "net": 1382000,
-    "note": ""
+    "note": "",
+    "received": 1382000,
+    "cogs": 620500,
+    "productProfit": 761500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 528500,
+    "cash": -2776000,
+    "qris": 2821000,
+    "deliveryTax": 0,
+    "transactionCount": 40,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-12-19",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1346000,
     "discount": 0,
     "fee": 0,
     "net": 1346000,
-    "note": ""
+    "note": "",
+    "received": 1346000,
+    "cogs": 621000,
+    "productProfit": 725000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 492000,
+    "cash": 317000,
+    "qris": 385000,
+    "deliveryTax": 0,
+    "transactionCount": 32,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-12-20",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1502000,
     "discount": 0,
     "fee": 0,
     "net": 1502000,
-    "note": ""
+    "note": "",
+    "received": 1502000,
+    "cogs": 687000,
+    "productProfit": 815000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 582000,
+    "cash": -390000,
+    "qris": 117000,
+    "deliveryTax": 0,
+    "transactionCount": 38,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-12-21",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1847000,
     "discount": 35000,
     "fee": 0,
     "net": 1812000,
-    "note": ""
+    "note": "",
+    "received": 1812000,
+    "cogs": 865500,
+    "productProfit": 946500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 713500,
+    "cash": 440000,
+    "qris": 1251000,
+    "deliveryTax": 0,
+    "transactionCount": 42,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-12-22",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1174000,
     "discount": 50000,
     "fee": 0,
     "net": 1124000,
-    "note": ""
+    "note": "",
+    "received": 1124000,
+    "cogs": 529500,
+    "productProfit": 594500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 361500,
+    "cash": 35000,
+    "qris": 714000,
+    "deliveryTax": 0,
+    "transactionCount": 35,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-12-23",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1869000,
     "discount": 0,
     "fee": 0,
     "net": 1869000,
-    "note": ""
+    "note": "",
+    "received": 1869000,
+    "cogs": 827500,
+    "productProfit": 1041500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 808500,
+    "cash": 896000,
+    "qris": 578000,
+    "deliveryTax": 0,
+    "transactionCount": 52,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-12-24",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1904000,
     "discount": 48000,
     "fee": 0,
     "net": 1856000,
-    "note": ""
+    "note": "",
+    "received": 1856000,
+    "cogs": 866000,
+    "productProfit": 990000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 757000,
+    "cash": -631000,
+    "qris": 1190000,
+    "deliveryTax": 0,
+    "transactionCount": 50,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-12-26",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 2075000,
     "discount": 0,
     "fee": 0,
     "net": 2075000,
-    "note": ""
+    "note": "",
+    "received": 2075000,
+    "cogs": 928000,
+    "productProfit": 1147000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 914000,
+    "cash": 521000,
+    "qris": 1136000,
+    "deliveryTax": 0,
+    "transactionCount": 60,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-12-27",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 2366000,
     "discount": 0,
     "fee": 0,
     "net": 2366000,
-    "note": ""
+    "note": "",
+    "received": 2366000,
+    "cogs": 107500,
+    "productProfit": 2258500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 2025500,
+    "cash": 274000,
+    "qris": 1600000,
+    "deliveryTax": 0,
+    "transactionCount": 62,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-12-28",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 2500000,
     "discount": 0,
     "fee": 0,
     "net": 2500000,
-    "note": ""
+    "note": "",
+    "received": 2500000,
+    "cogs": 1110000,
+    "productProfit": 1390000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 1157000,
+    "cash": 118000,
+    "qris": 1952000,
+    "deliveryTax": 0,
+    "transactionCount": 64,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-12-29",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1836000,
     "discount": 0,
     "fee": 0,
     "net": 1836000,
-    "note": ""
+    "note": "",
+    "received": 1836000,
+    "cogs": 774500,
+    "productProfit": 1061500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 828500,
+    "cash": -421000,
+    "qris": -1471000,
+    "deliveryTax": 0,
+    "transactionCount": 52,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-12-30",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1405000,
     "discount": 25000,
     "fee": 0,
     "net": 1380000,
-    "note": ""
+    "note": "",
+    "received": 1380000,
+    "cogs": 607500,
+    "productProfit": 772500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 539500,
+    "cash": -1000,
+    "qris": 1057000,
+    "deliveryTax": 0,
+    "transactionCount": 50,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2025-12-31",
-    "product": "Sales",
-    "category": "Nook Main",
-    "gross": 1896000,
+    "product": "Daily Sales",
+    "category": "Nook Brew",
+    "gross": 1869000,
     "discount": 0,
     "fee": 0,
-    "net": 1896000,
-    "note": ""
+    "net": 1869000,
+    "note": "",
+    "received": 1869000,
+    "cogs": 823000,
+    "productProfit": 1046000,
+    "fixedCostDaily": 233001,
+    "profitLoss": 812999,
+    "cash": 640000,
+    "qris": -2986000,
+    "deliveryTax": 0,
+    "transactionCount": 47,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-01-02",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 2276000,
     "discount": 0,
     "fee": 0,
     "net": 2276000,
-    "note": ""
+    "note": "",
+    "received": 2276000,
+    "cogs": 1010000,
+    "productProfit": 1266000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 1033000,
+    "cash": 978000,
+    "qris": 1298000,
+    "deliveryTax": 0,
+    "transactionCount": 58,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-01-03",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 2218000,
     "discount": 0,
     "fee": 0,
     "net": 2218000,
-    "note": ""
+    "note": "",
+    "received": 2218000,
+    "cogs": 957500,
+    "productProfit": 1260500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 1027500,
+    "cash": -485000,
+    "qris": 1397000,
+    "deliveryTax": 0,
+    "transactionCount": 52,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-01-04",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 2268000,
     "discount": 20000,
     "fee": 0,
     "net": 2248000,
-    "note": ""
+    "note": "",
+    "received": 2248000,
+    "cogs": 989500,
+    "productProfit": 1258500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 1025500,
+    "cash": 648000,
+    "qris": 1143000,
+    "deliveryTax": 0,
+    "transactionCount": 55,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-01-05",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1801000,
     "discount": 0,
     "fee": 0,
     "net": 1801000,
-    "note": ""
+    "note": "",
+    "received": 1801000,
+    "cogs": 824500,
+    "productProfit": 976500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 743500,
+    "cash": 485000,
+    "qris": -397000,
+    "deliveryTax": 0,
+    "transactionCount": 46,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-01-06",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1962000,
     "discount": 23000,
     "fee": 0,
     "net": 1939000,
-    "note": ""
+    "note": "",
+    "received": 1939000,
+    "cogs": 939500,
+    "productProfit": 999500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 766500,
+    "cash": -1645000,
+    "qris": 3082000,
+    "deliveryTax": 0,
+    "transactionCount": 45,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-01-07",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1979000,
     "discount": 0,
     "fee": 0,
     "net": 1979000,
-    "note": ""
+    "note": "",
+    "received": 1979000,
+    "cogs": 879500,
+    "productProfit": 1099500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 866500,
+    "cash": 237000,
+    "qris": -177000,
+    "deliveryTax": 0,
+    "transactionCount": 48,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-01-09",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1650000,
     "discount": 0,
     "fee": 0,
     "net": 1650000,
-    "note": ""
+    "note": "",
+    "received": 1650000,
+    "cogs": 790000,
+    "productProfit": 860000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 627000,
+    "cash": 714000,
+    "qris": 483000,
+    "deliveryTax": 0,
+    "transactionCount": 46,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-01-10",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 2134000,
     "discount": 0,
     "fee": 0,
     "net": 2134000,
-    "note": ""
+    "note": "",
+    "received": 2134000,
+    "cogs": 925500,
+    "productProfit": 1208500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 975500,
+    "cash": 428000,
+    "qris": 1302000,
+    "deliveryTax": 0,
+    "transactionCount": 48,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-01-11",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1734000,
     "discount": 0,
     "fee": 0,
     "net": 1734000,
-    "note": ""
+    "note": "",
+    "received": 1734000,
+    "cogs": 771500,
+    "productProfit": 962500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 729500,
+    "cash": 789000,
+    "qris": 865000,
+    "deliveryTax": 0,
+    "transactionCount": 47,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-01-12",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1320000,
     "discount": 23000,
     "fee": 0,
     "net": 1297000,
-    "note": ""
+    "note": "",
+    "received": 1297000,
+    "cogs": 559000,
+    "productProfit": 738000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 505000,
+    "cash": 111000,
+    "qris": 976000,
+    "deliveryTax": 0,
+    "transactionCount": 35,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-01-13",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1055000,
     "discount": 0,
     "fee": 0,
     "net": 1055000,
-    "note": ""
+    "note": "",
+    "received": 1055000,
+    "cogs": 471500,
+    "productProfit": 583500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 350500,
+    "cash": -372000,
+    "qris": 665000,
+    "deliveryTax": 0,
+    "transactionCount": 28,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-01-14",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1316000,
     "discount": 0,
     "fee": 0,
     "net": 1316000,
-    "note": ""
+    "note": "",
+    "received": 1316000,
+    "cogs": 598000,
+    "productProfit": 718000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 485000,
+    "cash": 19000,
+    "qris": 770000,
+    "deliveryTax": 0,
+    "transactionCount": 32,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-01-16",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 2251000,
     "discount": 0,
     "fee": 0,
     "net": 2251000,
-    "note": ""
+    "note": "",
+    "received": 2251000,
+    "cogs": 1001500,
+    "productProfit": 1249500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 1016500,
+    "cash": 403000,
+    "qris": 1678000,
+    "deliveryTax": 0,
+    "transactionCount": 51,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-01-17",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1939000,
     "discount": 0,
     "fee": 0,
     "net": 1939000,
-    "note": ""
+    "note": "",
+    "received": 1939000,
+    "cogs": 884500,
+    "productProfit": 1054500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 821500,
+    "cash": -975000,
+    "qris": 782000,
+    "deliveryTax": 0,
+    "transactionCount": 54,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-01-18",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 2739000,
     "discount": 0,
     "fee": 0,
     "net": 2739000,
-    "note": ""
+    "note": "",
+    "received": 2739000,
+    "cogs": 1231000,
+    "productProfit": 1508000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 1275000,
+    "cash": 166000,
+    "qris": 229000,
+    "deliveryTax": 0,
+    "transactionCount": 65,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-01-19",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1501000,
     "discount": 25000,
     "fee": 0,
     "net": 1476000,
-    "note": ""
+    "note": "",
+    "received": 1476000,
+    "cogs": 655500,
+    "productProfit": 820500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 587500,
+    "cash": -775000,
+    "qris": 793000,
+    "deliveryTax": 0,
+    "transactionCount": 40,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-01-20",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1587000,
     "discount": 25000,
     "fee": 0,
     "net": 1562000,
-    "note": ""
+    "note": "",
+    "received": 1562000,
+    "cogs": 722000,
+    "productProfit": 840000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 607000,
+    "cash": 494000,
+    "qris": 856000,
+    "deliveryTax": 0,
+    "transactionCount": 47,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-01-21",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1026000,
     "discount": 25000,
     "fee": 0,
     "net": 1001000,
-    "note": ""
+    "note": "",
+    "received": 1001000,
+    "cogs": 464000,
+    "productProfit": 537000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 304000,
+    "cash": -99000,
+    "qris": 598000,
+    "deliveryTax": 0,
+    "transactionCount": 32,
+    "source": "Pemasukan.xlsx"
+  },
+  {
+    "date": "2026-01-22",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
+    "gross": 0,
+    "discount": 0,
+    "fee": 0,
+    "net": 0,
+    "note": "",
+    "received": 0,
+    "cogs": 0,
+    "productProfit": 0,
+    "fixedCostDaily": 233000,
+    "profitLoss": -233000,
+    "cash": 0,
+    "qris": -1480000,
+    "deliveryTax": 0,
+    "transactionCount": 0,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-01-23",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1739000,
     "discount": 0,
     "fee": 0,
     "net": 1739000,
-    "note": ""
+    "note": "",
+    "received": 1739000,
+    "cogs": 777500,
+    "productProfit": 961500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 728500,
+    "cash": 561000,
+    "qris": 1154000,
+    "deliveryTax": 0,
+    "transactionCount": 35,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-01-24",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 2032000,
     "discount": 50000,
     "fee": 0,
     "net": 1982000,
-    "note": ""
+    "note": "",
+    "received": 1982000,
+    "cogs": 928500,
+    "productProfit": 1053500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 820500,
+    "cash": 485000,
+    "qris": 1437000,
+    "deliveryTax": 0,
+    "transactionCount": 56,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-01-25",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 2092000,
     "discount": 0,
     "fee": 0,
     "net": 2092000,
-    "note": ""
+    "note": "",
+    "received": 2092000,
+    "cogs": 933000,
+    "productProfit": 1159000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 926000,
+    "cash": -1604000,
+    "qris": 3484000,
+    "deliveryTax": 0,
+    "transactionCount": 65,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-01-26",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1870000,
     "discount": 0,
     "fee": 0,
     "net": 1870000,
-    "note": ""
+    "note": "",
+    "received": 1870000,
+    "cogs": 837000,
+    "productProfit": 1033000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 800000,
+    "cash": 759000,
+    "qris": 337000,
+    "deliveryTax": 0,
+    "transactionCount": 55,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-01-27",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1421000,
     "discount": 25000,
     "fee": 0,
     "net": 1396000,
-    "note": ""
+    "note": "",
+    "received": 1396000,
+    "cogs": 592500,
+    "productProfit": 803500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 570500,
+    "cash": 266000,
+    "qris": 1130000,
+    "deliveryTax": 0,
+    "transactionCount": 45,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-01-28",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1288000,
     "discount": 0,
     "fee": 0,
     "net": 1288000,
-    "note": ""
+    "note": "",
+    "received": 1288000,
+    "cogs": 580500,
+    "productProfit": 707500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 474500,
+    "cash": 344000,
+    "qris": -633000,
+    "deliveryTax": 0,
+    "transactionCount": 39,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-01-30",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 2084000,
     "discount": 0,
     "fee": 0,
     "net": 2084000,
-    "note": ""
+    "note": "",
+    "received": 2084000,
+    "cogs": 908500,
+    "productProfit": 1175500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 942500,
+    "cash": 794000,
+    "qris": 1226000,
+    "deliveryTax": 0,
+    "transactionCount": 55,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-01-31",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 2369000,
     "discount": 0,
     "fee": 0,
     "net": 2369000,
-    "note": ""
+    "note": "",
+    "received": 2369000,
+    "cogs": 1043000,
+    "productProfit": 1326000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 1093000,
+    "cash": 911000,
+    "qris": -1727000,
+    "deliveryTax": 0,
+    "transactionCount": 65,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-02-01",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1961000,
     "discount": 0,
     "fee": 0,
     "net": 1961000,
-    "note": ""
+    "note": "",
+    "received": 1961000,
+    "cogs": 917000,
+    "productProfit": 1044000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 811000,
+    "cash": 883000,
+    "qris": 1066000,
+    "deliveryTax": 0,
+    "transactionCount": 60,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-02-03",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1547000,
     "discount": 0,
     "fee": 0,
     "net": 1547000,
-    "note": ""
+    "note": "",
+    "received": 1547000,
+    "cogs": 716500,
+    "productProfit": 830500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 597500,
+    "cash": 370000,
+    "qris": 1028000,
+    "deliveryTax": 0,
+    "transactionCount": 55,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-02-04",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1690000,
     "discount": 25000,
     "fee": 0,
     "net": 1665000,
-    "note": ""
+    "note": "",
+    "received": 1665000,
+    "cogs": 750500,
+    "productProfit": 914500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 681500,
+    "cash": 372000,
+    "qris": 656000,
+    "deliveryTax": 0,
+    "transactionCount": 40,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-02-06",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1507000,
     "discount": 0,
     "fee": 0,
     "net": 1507000,
-    "note": ""
+    "note": "",
+    "received": 1507000,
+    "cogs": 673000,
+    "productProfit": 834000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 601000,
+    "cash": -148000,
+    "qris": 1153000,
+    "deliveryTax": 0,
+    "transactionCount": 38,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-02-07",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1063000,
     "discount": 0,
     "fee": 0,
     "net": 1063000,
-    "note": ""
+    "note": "",
+    "received": 1063000,
+    "cogs": 473500,
+    "productProfit": 589500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 356500,
+    "cash": 337000,
+    "qris": 726000,
+    "deliveryTax": 0,
+    "transactionCount": 40,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-02-08",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 2178000,
     "discount": 48000,
     "fee": 0,
     "net": 2130000,
-    "note": ""
+    "note": "",
+    "received": 2130000,
+    "cogs": 1023000,
+    "productProfit": 1107000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 874000,
+    "cash": 27000,
+    "qris": 1009000,
+    "deliveryTax": 0,
+    "transactionCount": 55,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-02-09",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1211000,
     "discount": 25000,
     "fee": 0,
     "net": 1186000,
-    "note": ""
+    "note": "",
+    "received": 1186000,
+    "cogs": 515500,
+    "productProfit": 670500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 437500,
+    "cash": 100000,
+    "qris": 794000,
+    "deliveryTax": 0,
+    "transactionCount": 33,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-02-10",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1272000,
     "discount": 25000,
     "fee": 0,
     "net": 1247000,
-    "note": ""
+    "note": "",
+    "received": 1247000,
+    "cogs": 580500,
+    "productProfit": 666500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 433500,
+    "cash": 341000,
+    "qris": 612000,
+    "deliveryTax": 0,
+    "transactionCount": 36,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-02-11",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 914000,
     "discount": 0,
     "fee": 0,
     "net": 914000,
-    "note": ""
+    "note": "",
+    "received": 914000,
+    "cogs": 407000,
+    "productProfit": 507000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 274000,
+    "cash": -5000,
+    "qris": 385000,
+    "deliveryTax": 0,
+    "transactionCount": 32,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-02-13",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1588000,
     "discount": 23000,
     "fee": 0,
     "net": 1565000,
-    "note": ""
+    "note": "",
+    "received": 1565000,
+    "cogs": 667000,
+    "productProfit": 898000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 665000,
+    "cash": 398000,
+    "qris": 849000,
+    "deliveryTax": 0,
+    "transactionCount": 38,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-02-14",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1943000,
     "discount": 0,
     "fee": 0,
     "net": 1943000,
-    "note": ""
+    "note": "",
+    "received": 1943000,
+    "cogs": 849000,
+    "productProfit": 1094000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 861000,
+    "cash": 459000,
+    "qris": 1132000,
+    "deliveryTax": 0,
+    "transactionCount": 45,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-02-15",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 2094000,
     "discount": 0,
     "fee": 0,
     "net": 2094000,
-    "note": ""
+    "note": "",
+    "received": 2094000,
+    "cogs": 955000,
+    "productProfit": 1139000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 906000,
+    "cash": -110000,
+    "qris": 1234000,
+    "deliveryTax": 0,
+    "transactionCount": 60,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-02-16",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 2821000,
     "discount": 25000,
     "fee": 0,
     "net": 2796000,
-    "note": ""
+    "note": "",
+    "received": 2796000,
+    "cogs": 1223000,
+    "productProfit": 1573000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 1340000,
+    "cash": -52000,
+    "qris": 576000,
+    "deliveryTax": 0,
+    "transactionCount": 65,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-02-17",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1688000,
     "discount": 0,
     "fee": 0,
     "net": 1688000,
-    "note": ""
+    "note": "",
+    "received": 1688000,
+    "cogs": 762500,
+    "productProfit": 925500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 692500,
+    "cash": -1466000,
+    "qris": 2442000,
+    "deliveryTax": 0,
+    "transactionCount": 49,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-02-18",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 2027000,
     "discount": 0,
     "fee": 0,
     "net": 2027000,
-    "note": ""
+    "note": "",
+    "received": 2027000,
+    "cogs": 855500,
+    "productProfit": 1171500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 938500,
+    "cash": 691000,
+    "qris": 252000,
+    "deliveryTax": 0,
+    "transactionCount": 55,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-02-20",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1030000,
     "discount": 0,
     "fee": 0,
     "net": 1030000,
-    "note": ""
+    "note": "",
+    "received": 1030000,
+    "cogs": 482000,
+    "productProfit": 548000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 315000,
+    "cash": -936000,
+    "qris": 684000,
+    "deliveryTax": 0,
+    "transactionCount": 30,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-02-21",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 853000,
     "discount": 0,
     "fee": 0,
     "net": 853000,
-    "note": ""
+    "note": "",
+    "received": 853000,
+    "cogs": 369500,
+    "productProfit": 483500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 250500,
+    "cash": 213000,
+    "qris": 347000,
+    "deliveryTax": 0,
+    "transactionCount": 28,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-02-22",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 261000,
     "discount": 0,
     "fee": 0,
     "net": 261000,
-    "note": ""
+    "note": "",
+    "received": 261000,
+    "cogs": 108500,
+    "productProfit": 152500,
+    "fixedCostDaily": 233000,
+    "profitLoss": -80500,
+    "cash": 70000,
+    "qris": 141000,
+    "deliveryTax": 0,
+    "transactionCount": 5,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-02-23",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 733000,
     "discount": 0,
     "fee": 0,
     "net": 733000,
-    "note": ""
+    "note": "",
+    "received": 733000,
+    "cogs": 294500,
+    "productProfit": 438500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 205500,
+    "cash": 101000,
+    "qris": 419000,
+    "deliveryTax": 0,
+    "transactionCount": 15,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-02-24",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 891000,
     "discount": 0,
     "fee": 0,
     "net": 891000,
-    "note": ""
+    "note": "",
+    "received": 891000,
+    "cogs": 388000,
+    "productProfit": 503000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 270000,
+    "cash": 497000,
+    "qris": 382000,
+    "deliveryTax": 0,
+    "transactionCount": 20,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-02-25",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1231000,
     "discount": 0,
     "fee": 0,
     "net": 1231000,
-    "note": ""
+    "note": "",
+    "received": 1231000,
+    "cogs": 558000,
+    "productProfit": 673000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 440000,
+    "cash": 419000,
+    "qris": 752000,
+    "deliveryTax": 0,
+    "transactionCount": 32,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-02-27",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1279000,
     "discount": 0,
     "fee": 0,
     "net": 1279000,
-    "note": ""
+    "note": "",
+    "received": 1279000,
+    "cogs": 553000,
+    "productProfit": 726000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 493000,
+    "cash": -78000,
+    "qris": 815000,
+    "deliveryTax": 0,
+    "transactionCount": 32,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-02-28",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 455000,
     "discount": 0,
     "fee": 0,
     "net": 455000,
-    "note": ""
+    "note": "",
+    "received": 455000,
+    "cogs": 223000,
+    "productProfit": 232000,
+    "fixedCostDaily": 233000,
+    "profitLoss": -1000,
+    "cash": -395000,
+    "qris": -5842000,
+    "deliveryTax": 0,
+    "transactionCount": 15,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-03-01",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1300000,
     "discount": 0,
     "fee": 0,
     "net": 1300000,
-    "note": ""
+    "note": "",
+    "received": 1300000,
+    "cogs": 610000,
+    "productProfit": 690000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 457000,
+    "cash": 571000,
+    "qris": 729000,
+    "deliveryTax": 0,
+    "transactionCount": 37,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-03-02",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 664000,
     "discount": 0,
     "fee": 0,
     "net": 664000,
-    "note": ""
+    "note": "",
+    "received": 664000,
+    "cogs": 268500,
+    "productProfit": 395500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 162500,
+    "cash": -299000,
+    "qris": 546000,
+    "deliveryTax": 0,
+    "transactionCount": 15,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-03-03",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1164000,
     "discount": 0,
     "fee": 0,
     "net": 1164000,
-    "note": ""
+    "note": "",
+    "received": 1164000,
+    "cogs": 515000,
+    "productProfit": 649000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 416000,
+    "cash": 563000,
+    "qris": 4000,
+    "deliveryTax": 0,
+    "transactionCount": 25,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-03-04",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 728000,
     "discount": 0,
     "fee": 0,
     "net": 728000,
-    "note": ""
+    "note": "",
+    "received": 728000,
+    "cogs": 339000,
+    "productProfit": 389000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 156000,
+    "cash": 42000,
+    "qris": 444000,
+    "deliveryTax": 0,
+    "transactionCount": 20,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-03-06",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 938000,
     "discount": 0,
     "fee": 0,
     "net": 938000,
-    "note": ""
+    "note": "",
+    "received": 938000,
+    "cogs": 422500,
+    "productProfit": 515500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 282500,
+    "cash": 243000,
+    "qris": 598000,
+    "deliveryTax": 0,
+    "transactionCount": 23,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-03-07",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 982000,
     "discount": 0,
     "fee": 0,
     "net": 982000,
-    "note": ""
+    "note": "",
+    "received": 982000,
+    "cogs": 448000,
+    "productProfit": 534000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 301000,
+    "cash": 170000,
+    "qris": 812000,
+    "deliveryTax": 0,
+    "transactionCount": 24,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-03-08",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1308000,
     "discount": 0,
     "fee": 0,
     "net": 1308000,
-    "note": ""
+    "note": "",
+    "received": 1308000,
+    "cogs": 580000,
+    "productProfit": 728000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 495000,
+    "cash": 477000,
+    "qris": 794000,
+    "deliveryTax": 0,
+    "transactionCount": 33,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-03-09",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 436000,
     "discount": 0,
     "fee": 0,
     "net": 436000,
-    "note": ""
+    "note": "",
+    "received": 436000,
+    "cogs": 188000,
+    "productProfit": 248000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 15000,
+    "cash": -938000,
+    "qris": 644000,
+    "deliveryTax": 0,
+    "transactionCount": 8,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-03-10",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 955000,
     "discount": 0,
     "fee": 0,
     "net": 955000,
-    "note": ""
+    "note": "",
+    "received": 955000,
+    "cogs": 443500,
+    "productProfit": 511500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 278500,
+    "cash": 18000,
+    "qris": -312700,
+    "deliveryTax": 0,
+    "transactionCount": 25,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-03-11",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 619000,
     "discount": 0,
     "fee": 0,
     "net": 619000,
-    "note": ""
+    "note": "",
+    "received": 619000,
+    "cogs": 264500,
+    "productProfit": 354500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 121500,
+    "cash": 119000,
+    "qris": 320000,
+    "deliveryTax": 0,
+    "transactionCount": 20,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-03-13",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 968000,
     "discount": 0,
     "fee": 0,
     "net": 968000,
-    "note": ""
+    "note": "",
+    "received": 968000,
+    "cogs": 417500,
+    "productProfit": 550500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 317500,
+    "cash": -830000,
+    "qris": 43000,
+    "deliveryTax": 0,
+    "transactionCount": 27,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-03-14",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1164000,
     "discount": 0,
     "fee": 0,
     "net": 1164000,
-    "note": ""
+    "note": "",
+    "received": 1164000,
+    "cogs": 472500,
+    "productProfit": 691500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 458500,
+    "cash": 409000,
+    "qris": 743000,
+    "deliveryTax": 0,
+    "transactionCount": 32,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-03-15",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1215000,
     "discount": 0,
     "fee": 0,
     "net": 1215000,
-    "note": ""
+    "note": "",
+    "received": 1215000,
+    "cogs": 522500,
+    "productProfit": 692500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 459500,
+    "cash": 383000,
+    "qris": 500000,
+    "deliveryTax": 0,
+    "transactionCount": 36,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-03-16",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1339000,
     "discount": 0,
     "fee": 0,
     "net": 1339000,
-    "note": ""
+    "note": "",
+    "received": 1339000,
+    "cogs": 570000,
+    "productProfit": 769000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 536000,
+    "cash": -374000,
+    "qris": 466000,
+    "deliveryTax": 0,
+    "transactionCount": 38,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-03-17",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1575000,
     "discount": 0,
     "fee": 0,
     "net": 1575000,
-    "note": ""
+    "note": "",
+    "received": 1575000,
+    "cogs": 637500,
+    "productProfit": 937500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 704500,
+    "cash": 197000,
+    "qris": 1144000,
+    "deliveryTax": 0,
+    "transactionCount": 42,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-03-18",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 2294000,
     "discount": 0,
     "fee": 0,
     "net": 2294000,
-    "note": ""
+    "note": "",
+    "received": 2294000,
+    "cogs": 998000,
+    "productProfit": 1296000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 1063000,
+    "cash": 452000,
+    "qris": 1842000,
+    "deliveryTax": 0,
+    "transactionCount": 60,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-03-20",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 2918000,
     "discount": 0,
     "fee": 0,
     "net": 2918000,
-    "note": ""
+    "note": "",
+    "received": 2918000,
+    "cogs": 1295000,
+    "productProfit": 1623000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 1390000,
+    "cash": 693000,
+    "qris": 2225000,
+    "deliveryTax": 0,
+    "transactionCount": 62,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-03-21",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 3285000,
     "discount": 0,
     "fee": 0,
     "net": 3285000,
-    "note": ""
+    "note": "",
+    "received": 3285000,
+    "cogs": 1443000,
+    "productProfit": 1842000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 1609000,
+    "cash": 632000,
+    "qris": 1832000,
+    "deliveryTax": 0,
+    "transactionCount": 80,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-03-22",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 3953000,
     "discount": 0,
     "fee": 0,
     "net": 3953000,
-    "note": ""
+    "note": "",
+    "received": 3953000,
+    "cogs": 1735000,
+    "productProfit": 2218000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 1985000,
+    "cash": 1240000,
+    "qris": 2713000,
+    "deliveryTax": 0,
+    "transactionCount": 92,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-03-23",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 3326000,
     "discount": 0,
     "fee": 0,
     "net": 3326000,
-    "note": ""
+    "note": "",
+    "received": 3326000,
+    "cogs": 1587500,
+    "productProfit": 1738500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 1505500,
+    "cash": -3657000,
+    "qris": 6071000,
+    "deliveryTax": 0,
+    "transactionCount": 82,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-03-24",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 4205000,
     "discount": 0,
     "fee": 0,
     "net": 4205000,
-    "note": ""
+    "note": "",
+    "received": 4205000,
+    "cogs": 1814000,
+    "productProfit": 2391000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 2158000,
+    "cash": 1477000,
+    "qris": 2140000,
+    "deliveryTax": 0,
+    "transactionCount": 102,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-03-25",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 3926000,
     "discount": 0,
     "fee": 0,
     "net": 3926000,
-    "note": ""
+    "note": "",
+    "received": 3926000,
+    "cogs": 1709500,
+    "productProfit": 2216500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 1983500,
+    "cash": -1367000,
+    "qris": 2719000,
+    "deliveryTax": 0,
+    "transactionCount": 90,
+    "source": "Pemasukan.xlsx"
+  },
+  {
+    "date": "2026-03-26",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
+    "gross": 0,
+    "discount": 0,
+    "fee": 0,
+    "net": 0,
+    "note": "",
+    "received": 0,
+    "cogs": 0,
+    "productProfit": 0,
+    "fixedCostDaily": 233000,
+    "profitLoss": -233000,
+    "cash": 0,
+    "qris": -826000,
+    "deliveryTax": 0,
+    "transactionCount": 0,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-03-27",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 3343000,
     "discount": 0,
     "fee": 0,
     "net": 3343000,
-    "note": ""
+    "note": "",
+    "received": 3343000,
+    "cogs": 1520500,
+    "productProfit": 1822500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 1589500,
+    "cash": 653000,
+    "qris": 866000,
+    "deliveryTax": 0,
+    "transactionCount": 72,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-03-28",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 2466000,
     "discount": 0,
     "fee": 0,
     "net": 2466000,
-    "note": ""
+    "note": "",
+    "received": 2466000,
+    "cogs": 1103500,
+    "productProfit": 1362500,
+    "fixedCostDaily": 233000,
+    "profitLoss": 1129500,
+    "cash": -69000,
+    "qris": -1263000,
+    "deliveryTax": 0,
+    "transactionCount": 60,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-03-29",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 2099000,
     "discount": 0,
     "fee": 0,
     "net": 2099000,
-    "note": ""
+    "note": "",
+    "received": 2099000,
+    "cogs": 968000,
+    "productProfit": 1131000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 898000,
+    "cash": 583000,
+    "qris": -3131000,
+    "deliveryTax": 0,
+    "transactionCount": 58,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-03-30",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1865000,
     "discount": 0,
     "fee": 0,
     "net": 1865000,
-    "note": ""
+    "note": "",
+    "received": 1865000,
+    "cogs": 1009000,
+    "productProfit": 856000,
+    "fixedCostDaily": 233000,
+    "profitLoss": 623000,
+    "cash": -95000,
+    "qris": 1265000,
+    "deliveryTax": 0,
+    "transactionCount": 52,
+    "source": "Pemasukan.xlsx"
+  },
+  {
+    "date": "2026-03-31",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
+    "gross": 0,
+    "discount": 0,
+    "fee": 0,
+    "net": 0,
+    "note": "",
+    "received": 0,
+    "cogs": 0,
+    "productProfit": 0,
+    "fixedCostDaily": 233000,
+    "profitLoss": -233000,
+    "cash": -1334000,
+    "qris": -11568000,
+    "deliveryTax": 0,
+    "transactionCount": 0,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-04-01",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1857000,
     "discount": 0,
     "fee": 0,
     "net": 1857000,
-    "note": ""
+    "note": "",
+    "received": 1857000,
+    "cogs": 832500,
+    "productProfit": 1024500,
+    "fixedCostDaily": 280000,
+    "profitLoss": 744500,
+    "cash": 743000,
+    "qris": 1102000,
+    "deliveryTax": 0,
+    "transactionCount": 40,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-04-02",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 2444000,
     "discount": 0,
     "fee": 0,
     "net": 2444000,
-    "note": ""
+    "note": "",
+    "received": 2444000,
+    "cogs": 1040500,
+    "productProfit": 1403500,
+    "fixedCostDaily": 280000,
+    "profitLoss": 1123500,
+    "cash": 397000,
+    "qris": 2005000,
+    "deliveryTax": 0,
+    "transactionCount": 52,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-04-03",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 2251000,
     "discount": 0,
     "fee": 0,
     "net": 2251000,
-    "note": ""
+    "note": "",
+    "received": 2251000,
+    "cogs": 984000,
+    "productProfit": 1267000,
+    "fixedCostDaily": 280000,
+    "profitLoss": 987000,
+    "cash": 460000,
+    "qris": 1624000,
+    "deliveryTax": 0,
+    "transactionCount": 55,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-04-04",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 2208000,
     "discount": 0,
     "fee": 0,
     "net": 2208000,
-    "note": ""
+    "note": "",
+    "received": 2208000,
+    "cogs": 968000,
+    "productProfit": 1240000,
+    "fixedCostDaily": 280000,
+    "profitLoss": 960000,
+    "cash": 736000,
+    "qris": 957000,
+    "deliveryTax": 0,
+    "transactionCount": 56,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-04-05",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1992000,
     "discount": 0,
     "fee": 0,
     "net": 1992000,
-    "note": ""
+    "note": "",
+    "received": 1992000,
+    "cogs": 872000,
+    "productProfit": 1120000,
+    "fixedCostDaily": 280000,
+    "profitLoss": 840000,
+    "cash": -1975000,
+    "qris": 3955000,
+    "deliveryTax": 0,
+    "transactionCount": 48,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-04-06",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1568000,
     "discount": 0,
     "fee": 0,
     "net": 1568000,
-    "note": ""
+    "note": "",
+    "received": 1568000,
+    "cogs": 671000,
+    "productProfit": 897000,
+    "fixedCostDaily": 280000,
+    "profitLoss": 617000,
+    "cash": 91000,
+    "qris": 443000,
+    "deliveryTax": 0,
+    "transactionCount": 43,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-04-07",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1708000,
     "discount": 0,
     "fee": 0,
     "net": 1708000,
-    "note": ""
+    "note": "",
+    "received": 1708000,
+    "cogs": 718000,
+    "productProfit": 990000,
+    "fixedCostDaily": 280000,
+    "profitLoss": 710000,
+    "cash": 591000,
+    "qris": 643000,
+    "deliveryTax": 0,
+    "transactionCount": 50,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-04-08",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 2038000,
     "discount": 0,
     "fee": 0,
     "net": 2038000,
-    "note": ""
+    "note": "",
+    "received": 2038000,
+    "cogs": 864500,
+    "productProfit": 1173500,
+    "fixedCostDaily": 280000,
+    "profitLoss": 893500,
+    "cash": 993000,
+    "qris": 483000,
+    "deliveryTax": 0,
+    "transactionCount": 55,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-04-09",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1949000,
     "discount": 0,
     "fee": 0,
     "net": 1949000,
-    "note": ""
+    "note": "",
+    "received": 1949000,
+    "cogs": 899500,
+    "productProfit": 1049500,
+    "fixedCostDaily": 280000,
+    "profitLoss": 769500,
+    "cash": 866000,
+    "qris": -511000,
+    "deliveryTax": 0,
+    "transactionCount": 50,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-04-10",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1703000,
     "discount": 0,
     "fee": 0,
     "net": 1703000,
-    "note": ""
+    "note": "",
+    "received": 1703000,
+    "cogs": 744500,
+    "productProfit": 958500,
+    "fixedCostDaily": 280000,
+    "profitLoss": 678500,
+    "cash": -87000,
+    "qris": 1100000,
+    "deliveryTax": 0,
+    "transactionCount": 40,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-04-11",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 2647000,
     "discount": 0,
     "fee": 0,
     "net": 2647000,
-    "note": ""
+    "note": "",
+    "received": 2647000,
+    "cogs": 1104500,
+    "productProfit": 1542500,
+    "fixedCostDaily": 280000,
+    "profitLoss": 1262500,
+    "cash": 153000,
+    "qris": 215000,
+    "deliveryTax": 0,
+    "transactionCount": 70,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-04-12",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 2288000,
     "discount": 0,
     "fee": 0,
     "net": 2288000,
-    "note": ""
+    "note": "",
+    "received": 2288000,
+    "cogs": 942000,
+    "productProfit": 1346000,
+    "fixedCostDaily": 280000,
+    "profitLoss": 1066000,
+    "cash": -1000000,
+    "qris": 1611000,
+    "deliveryTax": 0,
+    "transactionCount": 65,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-04-13",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 2571000,
     "discount": 0,
     "fee": 0,
     "net": 2571000,
-    "note": ""
+    "note": "",
+    "received": 2571000,
+    "cogs": 1132500,
+    "productProfit": 1438500,
+    "fixedCostDaily": 280000,
+    "profitLoss": 1158500,
+    "cash": 683000,
+    "qris": 182000,
+    "deliveryTax": 0,
+    "transactionCount": 70,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-04-14",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 2211000,
     "discount": 0,
     "fee": 0,
     "net": 2211000,
-    "note": ""
+    "note": "",
+    "received": 2211000,
+    "cogs": 931500,
+    "productProfit": 1279500,
+    "fixedCostDaily": 280000,
+    "profitLoss": 999500,
+    "cash": -3365000,
+    "qris": 4746000,
+    "deliveryTax": 0,
+    "transactionCount": 65,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-04-15",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1422000,
     "discount": 0,
     "fee": 0,
     "net": 1422000,
-    "note": ""
+    "note": "",
+    "received": 1422000,
+    "cogs": 622500,
+    "productProfit": 799500,
+    "fixedCostDaily": 280000,
+    "profitLoss": 519500,
+    "cash": 383000,
+    "qris": 907000,
+    "deliveryTax": 0,
+    "transactionCount": 55,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-04-16",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1886000,
     "discount": 0,
     "fee": 0,
     "net": 1886000,
-    "note": ""
+    "note": "",
+    "received": 1886000,
+    "cogs": 767500,
+    "productProfit": 1118500,
+    "fixedCostDaily": 280000,
+    "profitLoss": 838500,
+    "cash": 797000,
+    "qris": 868000,
+    "deliveryTax": 0,
+    "transactionCount": 60,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-04-17",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 2135000,
     "discount": 0,
     "fee": 0,
     "net": 2135000,
-    "note": ""
+    "note": "",
+    "received": 2135000,
+    "cogs": 987500,
+    "productProfit": 1147500,
+    "fixedCostDaily": 280000,
+    "profitLoss": 867500,
+    "cash": 837000,
+    "qris": 943000,
+    "deliveryTax": 0,
+    "transactionCount": 69,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-04-18",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1839000,
     "discount": 0,
     "fee": 0,
     "net": 1839000,
-    "note": ""
+    "note": "",
+    "received": 1839000,
+    "cogs": 820500,
+    "productProfit": 1018500,
+    "fixedCostDaily": 280000,
+    "profitLoss": 738500,
+    "cash": 1305000,
+    "qris": -288000,
+    "deliveryTax": 0,
+    "transactionCount": 55,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-04-19",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 2486000,
     "discount": 0,
     "fee": 0,
     "net": 2486000,
-    "note": ""
+    "note": "",
+    "received": 2486000,
+    "cogs": 1107500,
+    "productProfit": 1378500,
+    "fixedCostDaily": 280000,
+    "profitLoss": 1098500,
+    "cash": 288000,
+    "qris": 2129000,
+    "deliveryTax": 0,
+    "transactionCount": 65,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-04-20",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 2207000,
     "discount": 0,
     "fee": 0,
     "net": 2207000,
-    "note": ""
+    "note": "",
+    "received": 2207000,
+    "cogs": 1000000,
+    "productProfit": 1207000,
+    "fixedCostDaily": 280000,
+    "profitLoss": 927000,
+    "cash": -3109000,
+    "qris": 1890000,
+    "deliveryTax": 0,
+    "transactionCount": 60,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-04-21",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1634000,
     "discount": 0,
     "fee": 0,
     "net": 1634000,
-    "note": ""
+    "note": "",
+    "received": 1634000,
+    "cogs": 687000,
+    "productProfit": 947000,
+    "fixedCostDaily": 280000,
+    "profitLoss": 667000,
+    "cash": 197000,
+    "qris": 515000,
+    "deliveryTax": 0,
+    "transactionCount": 52,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-04-22",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1557000,
     "discount": 0,
     "fee": 0,
     "net": 1557000,
-    "note": ""
+    "note": "",
+    "received": 1557000,
+    "cogs": 647000,
+    "productProfit": 910000,
+    "fixedCostDaily": 280000,
+    "profitLoss": 630000,
+    "cash": -270000,
+    "qris": 950000,
+    "deliveryTax": 0,
+    "transactionCount": 50,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-04-23",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 2457000,
     "discount": 0,
     "fee": 0,
     "net": 2457000,
-    "note": ""
+    "note": "",
+    "received": 2457000,
+    "cogs": 1027500,
+    "productProfit": 1429500,
+    "fixedCostDaily": 280000,
+    "profitLoss": 1149500,
+    "cash": 860000,
+    "qris": 1597000,
+    "deliveryTax": 0,
+    "transactionCount": 63,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-04-24",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 2286000,
     "discount": 0,
     "fee": 0,
     "net": 2286000,
-    "note": ""
+    "note": "",
+    "received": 2286000,
+    "cogs": 1041500,
+    "productProfit": 1244500,
+    "fixedCostDaily": 280000,
+    "profitLoss": 964500,
+    "cash": -88000,
+    "qris": 505000,
+    "deliveryTax": 0,
+    "transactionCount": 59,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-04-25",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 2253000,
     "discount": 0,
     "fee": 0,
     "net": 2253000,
-    "note": ""
+    "note": "",
+    "received": 2253000,
+    "cogs": 947000,
+    "productProfit": 1306000,
+    "fixedCostDaily": 280000,
+    "profitLoss": 1026000,
+    "cash": -99000,
+    "qris": -4550000,
+    "deliveryTax": 0,
+    "transactionCount": 55,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-04-26",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1772000,
     "discount": 0,
     "fee": 0,
     "net": 1772000,
-    "note": ""
+    "note": "",
+    "received": 1772000,
+    "cogs": 760500,
+    "productProfit": 1011500,
+    "fixedCostDaily": 280000,
+    "profitLoss": 731500,
+    "cash": 840000,
+    "qris": 908000,
+    "deliveryTax": 0,
+    "transactionCount": 45,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-04-27",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1275000,
     "discount": 0,
     "fee": 0,
     "net": 1275000,
-    "note": ""
+    "note": "",
+    "received": 1275000,
+    "cogs": 537000,
+    "productProfit": 738000,
+    "fixedCostDaily": 280000,
+    "profitLoss": 458000,
+    "cash": 419000,
+    "qris": -188000,
+    "deliveryTax": 0,
+    "transactionCount": 35,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-04-28",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1881000,
     "discount": 0,
     "fee": 0,
     "net": 1881000,
-    "note": ""
+    "note": "",
+    "received": 1881000,
+    "cogs": 845000,
+    "productProfit": 1036000,
+    "fixedCostDaily": 280000,
+    "profitLoss": 756000,
+    "cash": 327000,
+    "qris": 832000,
+    "deliveryTax": 0,
+    "transactionCount": 45,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-04-29",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1496000,
     "discount": 0,
     "fee": 0,
     "net": 1496000,
-    "note": ""
+    "note": "",
+    "received": 1496000,
+    "cogs": 622500,
+    "productProfit": 873500,
+    "fixedCostDaily": 280000,
+    "profitLoss": 593500,
+    "cash": 227000,
+    "qris": -1024000,
+    "deliveryTax": 0,
+    "transactionCount": 40,
+    "source": "Pemasukan.xlsx"
   },
   {
     "date": "2026-04-30",
-    "product": "Sales",
-    "category": "Nook Main",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
     "gross": 1447000,
     "discount": 0,
     "fee": 0,
     "net": 1447000,
-    "note": ""
+    "note": "",
+    "received": 1447000,
+    "cogs": 599000,
+    "productProfit": 848000,
+    "fixedCostDaily": 280000,
+    "profitLoss": 568000,
+    "cash": -210000,
+    "qris": -3936000,
+    "deliveryTax": 0,
+    "transactionCount": 39,
+    "source": "Pemasukan.xlsx"
+  },
+  {
+    "date": "2026-05-01",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
+    "gross": 2386000,
+    "discount": 0,
+    "fee": 0,
+    "net": 2386000,
+    "note": "",
+    "received": 2386000,
+    "cogs": 1023500,
+    "productProfit": 1362500,
+    "fixedCostDaily": 280000,
+    "profitLoss": 1082500,
+    "cash": 406000,
+    "qris": 1968000,
+    "deliveryTax": 0,
+    "transactionCount": 65,
+    "source": "Pemasukan.xlsx"
+  },
+  {
+    "date": "2026-05-02",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
+    "gross": 3163000,
+    "discount": 0,
+    "fee": 0,
+    "net": 3163000,
+    "note": "",
+    "received": 3163000,
+    "cogs": 1372000,
+    "productProfit": 1791000,
+    "fixedCostDaily": 280000,
+    "profitLoss": 1511000,
+    "cash": 912000,
+    "qris": 2239000,
+    "deliveryTax": 0,
+    "transactionCount": 86,
+    "source": "Pemasukan.xlsx"
+  },
+  {
+    "date": "2026-05-03",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
+    "gross": 1904000,
+    "discount": 0,
+    "fee": 0,
+    "net": 1904000,
+    "note": "",
+    "received": 1904000,
+    "cogs": 806000,
+    "productProfit": 1098000,
+    "fixedCostDaily": 280000,
+    "profitLoss": 818000,
+    "cash": -348000,
+    "qris": 1750000,
+    "deliveryTax": 0,
+    "transactionCount": 55,
+    "source": "Pemasukan.xlsx"
+  },
+  {
+    "date": "2026-05-05",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
+    "gross": 2191000,
+    "discount": 0,
+    "fee": 0,
+    "net": 2191000,
+    "note": "",
+    "received": 2191000,
+    "cogs": 971000,
+    "productProfit": 1220000,
+    "fixedCostDaily": 280000,
+    "profitLoss": 940000,
+    "cash": 240000,
+    "qris": 1480000,
+    "deliveryTax": 0,
+    "transactionCount": 58,
+    "source": "Pemasukan.xlsx"
+  },
+  {
+    "date": "2026-05-06",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
+    "gross": 2124000,
+    "discount": 0,
+    "fee": 0,
+    "net": 2124000,
+    "note": "",
+    "received": 2124000,
+    "cogs": 896500,
+    "productProfit": 1227500,
+    "fixedCostDaily": 280000,
+    "profitLoss": 947500,
+    "cash": 61000,
+    "qris": 1472000,
+    "deliveryTax": 0,
+    "transactionCount": 59,
+    "source": "Pemasukan.xlsx"
+  },
+  {
+    "date": "2026-05-07",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
+    "gross": 1987000,
+    "discount": 0,
+    "fee": 0,
+    "net": 1987000,
+    "note": "",
+    "received": 1987000,
+    "cogs": 864000,
+    "productProfit": 1123000,
+    "fixedCostDaily": 280000,
+    "profitLoss": 843000,
+    "cash": 189000,
+    "qris": -853000,
+    "deliveryTax": 0,
+    "transactionCount": 56,
+    "source": "Pemasukan.xlsx"
+  },
+  {
+    "date": "2026-05-08",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
+    "gross": 1886000,
+    "discount": 0,
+    "fee": 0,
+    "net": 1886000,
+    "note": "",
+    "received": 1886000,
+    "cogs": 845500,
+    "productProfit": 1040500,
+    "fixedCostDaily": 280000,
+    "profitLoss": 760500,
+    "cash": 141000,
+    "qris": 1091000,
+    "deliveryTax": 0,
+    "transactionCount": 50,
+    "source": "Pemasukan.xlsx"
+  },
+  {
+    "date": "2026-05-09",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
+    "gross": 2796000,
+    "discount": 0,
+    "fee": 0,
+    "net": 2796000,
+    "note": "",
+    "received": 2796000,
+    "cogs": 1234000,
+    "productProfit": 1562000,
+    "fixedCostDaily": 280000,
+    "profitLoss": 1282000,
+    "cash": 1072000,
+    "qris": 1546000,
+    "deliveryTax": 0,
+    "transactionCount": 58,
+    "source": "Pemasukan.xlsx"
+  },
+  {
+    "date": "2026-05-10",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
+    "gross": 2166000,
+    "discount": 0,
+    "fee": 0,
+    "net": 2166000,
+    "note": "",
+    "received": 2166000,
+    "cogs": 942500,
+    "productProfit": 1223500,
+    "fixedCostDaily": 280000,
+    "profitLoss": 943500,
+    "cash": 375000,
+    "qris": 1355000,
+    "deliveryTax": 0,
+    "transactionCount": 53,
+    "source": "Pemasukan.xlsx"
+  },
+  {
+    "date": "2026-05-11",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
+    "gross": 1540000,
+    "discount": 0,
+    "fee": 0,
+    "net": 1540000,
+    "note": "",
+    "received": 1540000,
+    "cogs": 663500,
+    "productProfit": 876500,
+    "fixedCostDaily": 280000,
+    "profitLoss": 596500,
+    "cash": 259000,
+    "qris": 778000,
+    "deliveryTax": 0,
+    "transactionCount": 39,
+    "source": "Pemasukan.xlsx"
+  },
+  {
+    "date": "2026-05-12",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
+    "gross": 2114000,
+    "discount": 0,
+    "fee": 0,
+    "net": 2114000,
+    "note": "",
+    "received": 2114000,
+    "cogs": 900000,
+    "productProfit": 1214000,
+    "fixedCostDaily": 280000,
+    "profitLoss": 934000,
+    "cash": -3909000,
+    "qris": 2771000,
+    "deliveryTax": 0,
+    "transactionCount": 58,
+    "source": "Pemasukan.xlsx"
+  },
+  {
+    "date": "2026-05-13",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
+    "gross": 2353000,
+    "discount": 0,
+    "fee": 0,
+    "net": 2353000,
+    "note": "",
+    "received": 2353000,
+    "cogs": 987000,
+    "productProfit": 1366000,
+    "fixedCostDaily": 280000,
+    "profitLoss": 1086000,
+    "cash": 655000,
+    "qris": 1453000,
+    "deliveryTax": 0,
+    "transactionCount": 60,
+    "source": "Pemasukan.xlsx"
+  },
+  {
+    "date": "2026-05-14",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
+    "gross": 1955000,
+    "discount": 0,
+    "fee": 0,
+    "net": 1955000,
+    "note": "",
+    "received": 1955000,
+    "cogs": 821000,
+    "productProfit": 1134000,
+    "fixedCostDaily": 280000,
+    "profitLoss": 854000,
+    "cash": 199000,
+    "qris": 174000,
+    "deliveryTax": 0,
+    "transactionCount": 55,
+    "source": "Pemasukan.xlsx"
+  },
+  {
+    "date": "2026-05-15",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
+    "gross": 2783000,
+    "discount": 0,
+    "fee": 0,
+    "net": 2783000,
+    "note": "",
+    "received": 2783000,
+    "cogs": 1281000,
+    "productProfit": 1502000,
+    "fixedCostDaily": 280000,
+    "profitLoss": 1222000,
+    "cash": -391000,
+    "qris": 2630000,
+    "deliveryTax": 0,
+    "transactionCount": 65,
+    "source": "Pemasukan.xlsx"
+  },
+  {
+    "date": "2026-05-16",
+    "product": "Daily Sales",
+    "category": "Nook Brew",
+    "gross": 2317000,
+    "discount": 0,
+    "fee": 0,
+    "net": 2317000,
+    "note": "",
+    "received": 2317000,
+    "cogs": 969000,
+    "productProfit": 1348000,
+    "fixedCostDaily": 280000,
+    "profitLoss": 1068000,
+    "cash": 667000,
+    "qris": 1598000,
+    "deliveryTax": 0,
+    "transactionCount": 60,
+    "source": "Pemasukan.xlsx"
   }
 ];
 
 export const nookExpenses: ExpenseRecord[] = [
   {
-    "date": "2024-11-11",
-    "item": "Kabel",
-    "category": "Lain-lain",
-    "gross": 50000,
-    "tax": 0,
-    "fee": 0,
-    "net": 50000,
-    "note": "Cash"
-  },
-  {
-    "date": "2024-11-11",
-    "item": "Krimer",
-    "category": "Bahan Baku",
-    "gross": 45000,
-    "tax": 0,
-    "fee": 0,
-    "net": 45000,
-    "note": "Cash"
-  },
-  {
-    "date": "2024-11-11",
-    "item": "Coklat",
-    "category": "Bahan Baku",
-    "gross": 40000,
-    "tax": 0,
-    "fee": 0,
-    "net": 40000,
-    "note": "Cash"
-  },
-  {
-    "date": "2024-11-15",
-    "item": "Galon",
-    "category": "Bahan Baku",
-    "gross": 15000,
-    "tax": 0,
-    "fee": 0,
-    "net": 15000,
-    "note": "Cash"
-  },
-  {
-    "date": "2024-11-22",
-    "item": "A Roast Espresso Beans (1kg)",
-    "category": "Bahan Baku",
-    "gross": 341000,
-    "tax": 0,
-    "fee": 0,
-    "net": 341000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2024-11-22",
-    "item": "Hippo Blend Espresso (1kg)",
-    "category": "Bahan Baku",
-    "gross": 222500,
-    "tax": 0,
-    "fee": 0,
-    "net": 222500,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2024-11-22",
-    "item": "Colombia Manantiales Filter (100gr)",
-    "category": "Bahan Baku",
-    "gross": 70000,
-    "tax": 0,
-    "fee": 0,
-    "net": 70000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2024-11-22",
-    "item": "Panama Boquere Eagle (50gr)",
-    "category": "Bahan Baku",
-    "gross": 76500,
-    "tax": 0,
-    "fee": 0,
-    "net": 76500,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2024-11-22",
-    "item": "Bean Banter Guatemala (100gr)",
-    "category": "Bahan Baku",
-    "gross": 75000,
-    "tax": 0,
-    "fee": 0,
-    "net": 75000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2024-11-22",
-    "item": "Filter Toko Kopi 58 (100gr)",
-    "category": "Bahan Baku",
-    "gross": 265000,
-    "tax": 0,
-    "fee": 0,
-    "net": 265000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2024-11-29",
-    "item": "Kebersihan",
-    "category": "Lain-lain",
-    "gross": 15000,
-    "tax": 0,
-    "fee": 0,
-    "net": 15000,
-    "note": "Cash"
-  },
-  {
-    "date": "2024-11-29",
-    "item": "Galon",
-    "category": "Bahan Baku",
-    "gross": 15000,
-    "tax": 0,
-    "fee": 0,
-    "net": 15000,
-    "note": "Cash"
-  },
-  {
-    "date": "2024-11-30",
-    "item": "Sabun",
-    "category": "Lain-lain",
-    "gross": 20000,
-    "tax": 0,
-    "fee": 0,
-    "net": 20000,
-    "note": "Cash"
-  },
-  {
-    "date": "2024-12-06",
-    "item": "Hayati Kopi",
-    "category": "Bahan Baku",
-    "gross": 70000,
-    "tax": 0,
-    "fee": 0,
-    "net": 70000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2024-12-06",
-    "item": "Greenfields Susu",
-    "category": "Bahan Baku",
-    "gross": 240000,
-    "tax": 0,
-    "fee": 0,
-    "net": 240000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2024-12-07",
-    "item": "Bean Banter Tenjolaya (100gr)",
-    "category": "Bahan Baku",
-    "gross": 100000,
-    "tax": 0,
-    "fee": 0,
-    "net": 100000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2024-12-10",
-    "item": "Krimer",
-    "category": "Bahan Baku",
-    "gross": 45000,
-    "tax": 0,
-    "fee": 0,
-    "net": 45000,
-    "note": "Cash"
-  },
-  {
-    "date": "2024-12-10",
-    "item": "Marjan Sirup Vanilla",
-    "category": "Bahan Baku",
-    "gross": 25000,
-    "tax": 0,
-    "fee": 0,
-    "net": 25000,
-    "note": "Cash"
-  },
-  {
-    "date": "2024-12-10",
-    "item": "Gula Aren",
-    "category": "Bahan Baku",
-    "gross": 25000,
-    "tax": 0,
-    "fee": 0,
-    "net": 25000,
-    "note": "Cash"
-  },
-  {
-    "date": "2024-12-10",
-    "item": "Kresek Sampah Besar",
-    "category": "Lain-lain",
-    "gross": 35000,
-    "tax": 0,
-    "fee": 0,
-    "net": 35000,
-    "note": "Cash"
-  },
-  {
-    "date": "2024-12-11",
-    "item": "Tanah Dieng Filter (400gr)",
-    "category": "Bahan Baku",
-    "gross": 208000,
-    "tax": 0,
-    "fee": 0,
-    "net": 208000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2024-12-28",
-    "item": "Galon",
-    "category": "Bahan Baku",
-    "gross": 15000,
-    "tax": 0,
-    "fee": 0,
-    "net": 15000,
-    "note": "Cash"
-  },
-  {
-    "date": "2024-12-31",
-    "item": "Bean Banter Espresso",
-    "category": "Bahan Baku",
-    "gross": 235000,
-    "tax": 0,
-    "fee": 0,
-    "net": 235000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2024-12-31",
-    "item": "Djaya Espresso",
-    "category": "Bahan Baku",
-    "gross": 275000,
-    "tax": 0,
-    "fee": 0,
-    "net": 275000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2024-12-31",
-    "item": "Common Ground Filter",
-    "category": "Bahan Baku",
-    "gross": 195000,
-    "tax": 0,
-    "fee": 0,
-    "net": 195000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2024-12-31",
-    "item": "Ehiopia Bensa Filter",
-    "category": "Bahan Baku",
-    "gross": 62000,
-    "tax": 0,
-    "fee": 0,
-    "net": 62000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2024-12-31",
-    "item": "Strawberry Surprise Filter",
-    "category": "Bahan Baku",
-    "gross": 78000,
-    "tax": 0,
-    "fee": 0,
-    "net": 78000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2024-12-31",
-    "item": "Greenfields Susu",
-    "category": "Bahan Baku",
-    "gross": 240000,
-    "tax": 0,
-    "fee": 0,
-    "net": 240000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2024-12-31",
-    "item": "Krimer",
-    "category": "Bahan Baku",
-    "gross": 45000,
-    "tax": 0,
-    "fee": 0,
-    "net": 45000,
-    "note": "Cash"
-  },
-  {
-    "date": "2024-12-31",
-    "item": "Plastik Cup",
-    "category": "Lain-lain",
-    "gross": 25000,
-    "tax": 0,
-    "fee": 0,
-    "net": 25000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-01-03",
-    "item": "Galon",
-    "category": "Bahan Baku",
-    "gross": 16000,
-    "tax": 0,
-    "fee": 0,
-    "net": 16000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-01-05",
-    "item": "Cookies",
-    "category": "Bahan Baku",
-    "gross": 60000,
-    "tax": 0,
-    "fee": 0,
-    "net": 60000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-01-07",
-    "item": "Galon",
-    "category": "Bahan Baku",
-    "gross": 16000,
-    "tax": 0,
-    "fee": 0,
-    "net": 16000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-01-11",
-    "item": "Galon",
-    "category": "Bahan Baku",
-    "gross": 16000,
-    "tax": 0,
-    "fee": 0,
-    "net": 16000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-01-13",
-    "item": "Max Krimer 500gr",
-    "category": "Bahan Baku",
-    "gross": 50000,
-    "tax": 0,
-    "fee": 0,
-    "net": 50000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-01-13",
-    "item": "Coklat Van Houten 165gr",
-    "category": "Bahan Baku",
-    "gross": 40000,
-    "tax": 0,
-    "fee": 0,
-    "net": 40000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-01-13",
-    "item": "Plastik Es Klip",
-    "category": "Lain-lain",
-    "gross": 6500,
-    "tax": 0,
-    "fee": 0,
-    "net": 6500,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-01-13",
-    "item": "Palm Sugar 500gr",
-    "category": "Bahan Baku",
-    "gross": 16000,
-    "tax": 0,
-    "fee": 0,
-    "net": 16000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-01-13",
-    "item": "Plastik Sampah Besar",
-    "category": "Lain-lain",
-    "gross": 21500,
-    "tax": 0,
-    "fee": 0,
-    "net": 21500,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-01-17",
-    "item": "Galon",
-    "category": "Bahan Baku",
-    "gross": 16000,
-    "tax": 0,
-    "fee": 0,
-    "net": 16000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-01-17",
-    "item": "Malawi Mzuzu Filter (100gr)",
-    "category": "Bahan Baku",
-    "gross": 60000,
-    "tax": 0,
-    "fee": 0,
-    "net": 60000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-01-19",
-    "item": "Lampu",
-    "category": "Lain-lain",
-    "gross": 15000,
-    "tax": 0,
-    "fee": 0,
-    "net": 15000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-01-19",
-    "item": "Galon",
-    "category": "Lain-lain",
-    "gross": 15000,
-    "tax": 0,
-    "fee": 0,
-    "net": 15000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-01-21",
-    "item": "Tisu",
-    "category": "Lain-lain",
-    "gross": 15000,
-    "tax": 0,
-    "fee": 0,
-    "net": 15000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-01-21",
-    "item": "Galon",
-    "category": "Bahan Baku",
-    "gross": 15000,
-    "tax": 0,
-    "fee": 0,
-    "net": 15000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-01-22",
-    "item": "Susu Greenfield 1 Box",
-    "category": "Bahan Baku",
-    "gross": 240000,
-    "tax": 0,
-    "fee": 0,
-    "net": 240000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-01-23",
-    "item": "Galon",
-    "category": "Bahan Baku",
-    "gross": 15000,
-    "tax": 0,
-    "fee": 0,
-    "net": 15000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-01-24",
-    "item": "Galon",
-    "category": "Bahan Baku",
-    "gross": 15000,
-    "tax": 0,
-    "fee": 0,
-    "net": 15000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-01-29",
-    "item": "Kebersihan",
-    "category": "Lain-lain",
-    "gross": 20000,
-    "tax": 0,
-    "fee": 0,
-    "net": 20000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-01-29",
-    "item": "Catur Village Bali Fumidai",
-    "category": "Bahan Baku",
-    "gross": 92000,
-    "tax": 0,
-    "fee": 0,
-    "net": 92000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-01-29",
-    "item": "Tropical Candy Espresso",
-    "category": "Bahan Baku",
-    "gross": 278000,
-    "tax": 0,
-    "fee": 0,
-    "net": 278000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-01-29",
-    "item": "Costa Rica Esperanza",
-    "category": "Bahan Baku",
-    "gross": 146000,
-    "tax": 0,
-    "fee": 0,
-    "net": 146000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-01-29",
-    "item": "Ponorogo Mosto Natural",
-    "category": "Bahan Baku",
-    "gross": 82000,
-    "tax": 0,
-    "fee": 0,
-    "net": 82000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-01-31",
-    "item": "Plastik Sampah Besar",
-    "category": "Lain-lain",
-    "gross": 15000,
-    "tax": 0,
-    "fee": 0,
-    "net": 15000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-01-31",
-    "item": "Plastik Klip Es",
-    "category": "Lain-lain",
-    "gross": 15000,
-    "tax": 0,
-    "fee": 0,
-    "net": 15000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-02-07",
-    "item": "Galon",
-    "category": "Bahan Baku",
-    "gross": 25000,
-    "tax": 0,
-    "fee": 0,
-    "net": 25000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-02-09",
-    "item": "Galon",
-    "category": "Bahan Baku",
-    "gross": 20000,
-    "tax": 0,
-    "fee": 0,
-    "net": 20000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-02-12",
-    "item": "Sapu",
-    "category": "Lain-lain",
-    "gross": 15000,
-    "tax": 0,
-    "fee": 0,
-    "net": 15000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-02-15",
-    "item": "Kabel, Set T",
-    "category": "Lain-lain",
-    "gross": 277000,
-    "tax": 0,
-    "fee": 0,
-    "net": 277000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-02-28",
-    "item": "Galon",
-    "category": "Bahan Baku",
-    "gross": 20000,
-    "tax": 0,
-    "fee": 0,
-    "net": 20000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-02-28",
-    "item": "Kopi Arabica Sumbing",
-    "category": "Bahan Baku",
-    "gross": 120000,
-    "tax": 0,
-    "fee": 0,
-    "net": 120000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-03-15",
-    "item": "Galon",
-    "category": "Bahan Baku",
-    "gross": 48000,
-    "tax": 0,
-    "fee": 0,
-    "net": 48000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-03-16",
-    "item": "Kopi Arabica Ichamama",
-    "category": "Bahan Baku",
-    "gross": 85000,
-    "tax": 0,
-    "fee": 0,
-    "net": 85000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-03-17",
-    "item": "Kopi Arabica Konga",
-    "category": "Bahan Baku",
-    "gross": 85000,
-    "tax": 0,
-    "fee": 0,
-    "net": 85000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-03-18",
-    "item": "Kopi Arabica Tenjolaya",
-    "category": "Bahan Baku",
-    "gross": 95000,
-    "tax": 0,
-    "fee": 0,
-    "net": 95000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-03-21",
-    "item": "Espresso Beans Mantra",
-    "category": "Bahan Baku",
-    "gross": 231000,
-    "tax": 0,
-    "fee": 0,
-    "net": 231000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-03-28",
-    "item": "Kopi Arabica Dot Kejajar",
-    "category": "Bahan Baku",
-    "gross": 100000,
-    "tax": 0,
-    "fee": 0,
-    "net": 100000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-03-29",
-    "item": "Kopi Arabica Manglayang",
-    "category": "Bahan Baku",
-    "gross": 95000,
-    "tax": 0,
-    "fee": 0,
-    "net": 95000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-03-30",
-    "item": "Susu Greenfield 1 Box",
-    "category": "Bahan Baku",
-    "gross": 240000,
-    "tax": 0,
-    "fee": 0,
-    "net": 240000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-04-07",
-    "item": "Galon",
-    "category": "Bahan Baku",
-    "gross": 48000,
-    "tax": 0,
-    "fee": 0,
-    "net": 48000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-04-07",
-    "item": "Krimer Bubuk",
-    "category": "Bahan Baku",
-    "gross": 31000,
-    "tax": 0,
-    "fee": 0,
-    "net": 31000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-04-07",
-    "item": "Trash Bag",
-    "category": "Lain-lain",
-    "gross": 6000,
-    "tax": 0,
-    "fee": 0,
-    "net": 6000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-04-10",
-    "item": "Kopi Arabica Slukatan",
-    "category": "Bahan Baku",
-    "gross": 45000,
-    "tax": 0,
-    "fee": 0,
-    "net": 45000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-04-11",
-    "item": "Trash Bag",
-    "category": "Lain-lain",
-    "gross": 30000,
-    "tax": 0,
-    "fee": 0,
-    "net": 30000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-04-11",
-    "item": "Coklat Bubuk",
-    "category": "Bahan Baku",
-    "gross": 38000,
-    "tax": 0,
-    "fee": 0,
-    "net": 38000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-04-12",
-    "item": "Soklin",
-    "category": "Lain-lain",
-    "gross": 10000,
-    "tax": 0,
-    "fee": 0,
-    "net": 10000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-04-22",
-    "item": "Brazil Sweet Hazelnut Espresso",
-    "category": "Bahan Baku",
-    "gross": 264000,
-    "tax": 0,
-    "fee": 0,
-    "net": 264000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-04-22",
-    "item": "Matcha",
-    "category": "Bahan Baku",
-    "gross": 150000,
-    "tax": 0,
-    "fee": 0,
-    "net": 150000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-04-22",
-    "item": "Nusty Gum Espresso",
-    "category": "Bahan Baku",
-    "gross": 258000,
-    "tax": 0,
-    "fee": 0,
-    "net": 258000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-04-22",
-    "item": "Trieste Lavender Syrup",
-    "category": "Bahan Baku",
-    "gross": 72000,
-    "tax": 0,
-    "fee": 0,
-    "net": 72000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-04-23",
-    "item": "Greenfields Susu",
-    "category": "Bahan Baku",
-    "gross": 240000,
-    "tax": 0,
-    "fee": 0,
-    "net": 240000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-04-23",
-    "item": "Kabel + Stop Kontak",
-    "category": "Lain-lain",
-    "gross": 88000,
-    "tax": 0,
-    "fee": 0,
-    "net": 88000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-04-24",
-    "item": "Kebersihan",
-    "category": "Lain-lain",
-    "gross": 50000,
-    "tax": 0,
-    "fee": 0,
-    "net": 50000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-04-25",
-    "item": "Tisu, Gula, Plastik Sampah",
-    "category": "Lain-lain",
-    "gross": 70000,
-    "tax": 0,
-    "fee": 0,
-    "net": 70000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-05-01",
-    "item": "Galon",
-    "category": "Bahan Baku",
-    "gross": 120000,
-    "tax": 0,
-    "fee": 0,
-    "net": 120000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-05-02",
-    "item": "Cookies",
-    "category": "Bahan Baku",
-    "gross": 60000,
-    "tax": 0,
-    "fee": 0,
-    "net": 60000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-05-02",
-    "item": "Krimer",
-    "category": "Bahan Baku",
-    "gross": 40000,
-    "tax": 0,
-    "fee": 0,
-    "net": 40000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-05-03",
-    "item": "Arabica Lereng Dieng",
-    "category": "Bahan Baku",
-    "gross": 40000,
-    "tax": 0,
-    "fee": 0,
-    "net": 40000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-05-04",
-    "item": "Saka Prau",
-    "category": "Bahan Baku",
-    "gross": 40000,
-    "tax": 0,
-    "fee": 0,
-    "net": 40000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-05-05",
-    "item": "Keset + Klip",
-    "category": "Lain-lain",
-    "gross": 148000,
-    "tax": 0,
-    "fee": 0,
-    "net": 148000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-05-06",
-    "item": "Filter Beans",
-    "category": "Bahan Baku",
-    "gross": 212000,
-    "tax": 0,
-    "fee": 0,
-    "net": 212000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-05-07",
-    "item": "Listrik",
-    "category": "Listrik",
-    "gross": 110000,
-    "tax": 0,
-    "fee": 0,
-    "net": 110000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-05-08",
-    "item": "Ichamama Filter Beans",
-    "category": "Bahan Baku",
-    "gross": 90000,
-    "tax": 0,
-    "fee": 0,
-    "net": 90000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-05-09",
-    "item": "Kreo Filter Beans",
-    "category": "Bahan Baku",
-    "gross": 40000,
-    "tax": 0,
-    "fee": 0,
-    "net": 40000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-05-10",
-    "item": "Greenfields Susu",
-    "category": "Bahan Baku",
-    "gross": 240000,
-    "tax": 0,
-    "fee": 0,
-    "net": 240000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-05-10",
-    "item": "Es Batu",
-    "category": "Bahan Baku",
-    "gross": 10000,
-    "tax": 0,
-    "fee": 0,
-    "net": 10000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-05-11",
-    "item": "Galon",
-    "category": "Bahan Baku",
-    "gross": 72000,
-    "tax": 0,
-    "fee": 0,
-    "net": 72000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-05-11",
-    "item": "Espresso Beans 2kg",
-    "category": "Bahan Baku",
-    "gross": 530000,
-    "tax": 0,
-    "fee": 0,
-    "net": 530000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-05-11",
-    "item": "Spons",
-    "category": "Lain-lain",
-    "gross": 11000,
-    "tax": 0,
-    "fee": 0,
-    "net": 11000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-05-12",
-    "item": "Bowongso Filter Beans",
-    "category": "Bahan Baku",
-    "gross": 100000,
-    "tax": 0,
-    "fee": 0,
-    "net": 100000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-05-12",
-    "item": "Poster",
-    "category": "Lain-lain",
-    "gross": 50000,
-    "tax": 0,
-    "fee": 0,
-    "net": 50000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-05-13",
-    "item": "Espresso Beans 2kg",
-    "category": "Bahan Baku",
-    "gross": 507000,
-    "tax": 0,
-    "fee": 0,
-    "net": 507000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-05-13",
-    "item": "Greenfields Susu",
-    "category": "Bahan Baku",
-    "gross": 240000,
-    "tax": 0,
-    "fee": 0,
-    "net": 240000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-05-13",
-    "item": "Kabel",
-    "category": "Bahan Baku",
-    "gross": 100000,
-    "tax": 0,
-    "fee": 0,
-    "net": 100000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-05-25",
-    "item": "Tenjolaya Filter Beans",
-    "category": "Bahan Baku",
-    "gross": 28000,
-    "tax": 0,
-    "fee": 0,
-    "net": 28000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-05-25",
-    "item": "Flor de cafe",
-    "category": "Bahan Baku",
-    "gross": 90000,
-    "tax": 0,
-    "fee": 0,
-    "net": 90000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-05-25",
-    "item": "Gelas",
-    "category": "Lain-lain",
-    "gross": 230000,
-    "tax": 0,
-    "fee": 0,
-    "net": 230000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-05-25",
-    "item": "Listrik",
-    "category": "Listrik",
-    "gross": 100000,
-    "tax": 0,
-    "fee": 0,
-    "net": 100000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-05-26",
-    "item": "Papper Filter",
-    "category": "Bahan Baku",
-    "gross": 100000,
-    "tax": 0,
-    "fee": 0,
-    "net": 100000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-05-26",
-    "item": "Distributor",
-    "category": "Lain-lain",
-    "gross": 100000,
-    "tax": 0,
-    "fee": 0,
-    "net": 100000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-05-27",
-    "item": "Galon",
-    "category": "Bahan Baku",
-    "gross": 72000,
-    "tax": 0,
-    "fee": 0,
-    "net": 72000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-05-28",
-    "item": "Krimer",
-    "category": "Bahan Baku",
-    "gross": 45000,
-    "tax": 0,
-    "fee": 0,
-    "net": 45000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-05-28",
-    "item": "Coklat",
-    "category": "Bahan Baku",
-    "gross": 45000,
-    "tax": 0,
-    "fee": 0,
-    "net": 45000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-06-01",
-    "item": "Sapu",
-    "category": "Lain-lain",
-    "gross": 14000,
-    "tax": 0,
-    "fee": 0,
-    "net": 14000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-06-02",
-    "item": "Listrik",
-    "category": "Listrik",
-    "gross": 100000,
-    "tax": 0,
-    "fee": 0,
-    "net": 100000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-06-03",
-    "item": "Kebersihan",
-    "category": "Lain-lain",
-    "gross": 30000,
-    "tax": 0,
-    "fee": 0,
-    "net": 30000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-06-04",
-    "item": "Matcha",
-    "category": "Bahan Baku",
-    "gross": 165000,
-    "tax": 0,
-    "fee": 0,
-    "net": 165000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-06-06",
-    "item": "Elipse Geisha",
-    "category": "Bahan Baku",
-    "gross": 50000,
-    "tax": 0,
-    "fee": 0,
-    "net": 50000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-06-06",
-    "item": "Greenfields Susu",
-    "category": "Bahan Baku",
-    "gross": 240000,
-    "tax": 0,
-    "fee": 0,
-    "net": 240000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-06-06",
-    "item": "Kedung Lesung",
-    "category": "Bahan Baku",
-    "gross": 40000,
-    "tax": 0,
-    "fee": 0,
-    "net": 40000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-06-07",
-    "item": "Mekarawangi Filter Beans",
-    "category": "Bahan Baku",
-    "gross": 45000,
-    "tax": 0,
-    "fee": 0,
-    "net": 45000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-06-07",
-    "item": "Sidamo Bensa Filter Beans",
-    "category": "Bahan Baku",
-    "gross": 85000,
-    "tax": 0,
-    "fee": 0,
-    "net": 85000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-06-08",
-    "item": "Air PDAM",
-    "category": "Lain-lain",
-    "gross": 43000,
-    "tax": 0,
-    "fee": 0,
-    "net": 43000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-06-08",
-    "item": "Filter Beans",
-    "category": "Bahan Baku",
-    "gross": 165000,
-    "tax": 0,
-    "fee": 0,
-    "net": 165000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-06-08",
-    "item": "Flor de cafe Filter Beans",
-    "category": "Bahan Baku",
-    "gross": 72000,
-    "tax": 0,
-    "fee": 0,
-    "net": 72000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-06-09",
-    "item": "Sirup",
-    "category": "Bahan Baku",
-    "gross": 110000,
-    "tax": 0,
-    "fee": 0,
-    "net": 110000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-06-09",
-    "item": "Listrik",
-    "category": "Listrik",
-    "gross": 100000,
-    "tax": 0,
-    "fee": 0,
-    "net": 100000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-06-09",
-    "item": "Krimer",
-    "category": "Bahan Baku",
-    "gross": 70000,
-    "tax": 0,
-    "fee": 0,
-    "net": 70000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-06-10",
-    "item": "Galon",
-    "category": "Bahan Baku",
-    "gross": 72000,
-    "tax": 0,
-    "fee": 0,
-    "net": 72000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-06-17",
-    "item": "Susu Greenfield 2 Kotak",
-    "category": "Bahan Baku",
-    "gross": 45000,
-    "tax": 0,
-    "fee": 0,
-    "net": 45000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-06-18",
-    "item": "Listrik",
-    "category": "Listrik",
-    "gross": 100000,
-    "tax": 0,
-    "fee": 0,
-    "net": 100000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-06-20",
-    "item": "Greenfields Susu",
-    "category": "Bahan Baku",
-    "gross": 240000,
-    "tax": 0,
-    "fee": 0,
-    "net": 240000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-06-21",
-    "item": "Monochrome Espresso Jhons",
-    "category": "Bahan Baku",
-    "gross": 330000,
-    "tax": 0,
-    "fee": 0,
-    "net": 330000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-06-21",
-    "item": "Ribang Gayo, Kenya",
-    "category": "Bahan Baku",
-    "gross": 295000,
-    "tax": 0,
-    "fee": 0,
-    "net": 295000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-06-22",
-    "item": "Tisu",
-    "category": "Lain-lain",
-    "gross": 10000,
-    "tax": 0,
-    "fee": 0,
-    "net": 10000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-06-22",
-    "item": "Ethiopia Lalesa",
-    "category": "Bahan Baku",
-    "gross": 90000,
-    "tax": 0,
-    "fee": 0,
-    "net": 90000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-06-22",
-    "item": "Angin angin cranberry Hayati",
-    "category": "Bahan Baku",
-    "gross": 70000,
-    "tax": 0,
-    "fee": 0,
-    "net": 70000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-06-23",
-    "item": "Galon",
-    "category": "Bahan Baku",
-    "gross": 42000,
-    "tax": 0,
-    "fee": 0,
-    "net": 42000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-06-24",
-    "item": "Espresso Cloud Catcher",
-    "category": "Bahan Baku",
-    "gross": 225000,
-    "tax": 0,
-    "fee": 0,
-    "net": 225000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-06-25",
-    "item": "Hayati Espresso",
-    "category": "Bahan Baku",
-    "gross": 215000,
-    "tax": 0,
-    "fee": 0,
-    "net": 215000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-06-25",
-    "item": "Flor de cafe",
-    "category": "Bahan Baku",
-    "gross": 90000,
-    "tax": 0,
-    "fee": 0,
-    "net": 90000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-06-25",
-    "item": "Listrik",
-    "category": "Listrik",
-    "gross": 100000,
-    "tax": 0,
-    "fee": 0,
-    "net": 100000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-06-25",
-    "item": "Matcha",
-    "category": "Bahan Baku",
-    "gross": 140000,
-    "tax": 0,
-    "fee": 0,
-    "net": 140000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-06-29",
-    "item": "Krimer",
-    "category": "Bahan Baku",
-    "gross": 45000,
-    "tax": 0,
-    "fee": 0,
-    "net": 45000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-06-30",
-    "item": "Two Hand Full Beans",
-    "category": "Bahan Baku",
-    "gross": 582000,
-    "tax": 0,
-    "fee": 0,
-    "net": 582000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-06-30",
-    "item": "Greenfields Susu 2L",
-    "category": "Bahan Baku",
-    "gross": 65000,
-    "tax": 0,
-    "fee": 0,
-    "net": 65000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-06-30",
-    "item": "Greenfield Box",
-    "category": "Bahan Baku",
-    "gross": 240000,
-    "tax": 0,
-    "fee": 0,
-    "net": 240000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-07-04",
-    "item": "Ijen Filter Beans",
-    "category": "Bahan Baku",
-    "gross": 65000,
-    "tax": 0,
-    "fee": 0,
-    "net": 65000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-07-06",
-    "item": "Coklat",
-    "category": "Bahan Baku",
-    "gross": 25000,
-    "tax": 0,
-    "fee": 0,
-    "net": 25000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-07-06",
-    "item": "Listrik",
-    "category": "Listrik",
-    "gross": 100000,
-    "tax": 0,
-    "fee": 0,
-    "net": 100000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-07-08",
-    "item": "Galon",
-    "category": "Bahan Baku",
-    "gross": 48000,
-    "tax": 0,
-    "fee": 0,
-    "net": 48000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-07-11",
-    "item": "Pewangi",
-    "category": "Lain-lain",
-    "gross": 25000,
-    "tax": 0,
-    "fee": 0,
-    "net": 25000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-07-11",
-    "item": "Kebersihan",
-    "category": "Lain-lain",
-    "gross": 30000,
-    "tax": 0,
-    "fee": 0,
-    "net": 30000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-07-12",
-    "item": "Odysey Espresso",
-    "category": "Bahan Baku",
-    "gross": 304000,
-    "tax": 0,
-    "fee": 0,
-    "net": 304000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-07-12",
-    "item": "Plastik Es, Sampah",
-    "category": "Lain-lain",
-    "gross": 55000,
-    "tax": 0,
-    "fee": 0,
-    "net": 55000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-07-12",
-    "item": "Krimer",
-    "category": "Bahan Baku",
-    "gross": 50000,
-    "tax": 0,
-    "fee": 0,
-    "net": 50000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-07-14",
-    "item": "Tanah Dieng Kopi",
-    "category": "Bahan Baku",
-    "gross": 260000,
-    "tax": 0,
-    "fee": 0,
-    "net": 260000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-07-14",
-    "item": "Listrik",
-    "category": "Listrik",
-    "gross": 100000,
-    "tax": 0,
-    "fee": 0,
-    "net": 100000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-07-15",
-    "item": "Gayo Choco Espresso",
-    "category": "Bahan Baku",
-    "gross": 441000,
-    "tax": 0,
-    "fee": 0,
-    "net": 441000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-07-16",
-    "item": "Galon",
-    "category": "Bahan Baku",
-    "gross": 48000,
-    "tax": 0,
-    "fee": 0,
-    "net": 48000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-07-16",
-    "item": "Matcha",
-    "category": "Bahan Baku",
-    "gross": 120000,
-    "tax": 0,
-    "fee": 0,
-    "net": 120000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-07-16",
-    "item": "Susu 2 Kota",
-    "category": "Bahan Baku",
-    "gross": 50000,
-    "tax": 0,
-    "fee": 0,
-    "net": 50000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-07-18",
-    "item": "Greenfields 1 Box",
-    "category": "Bahan Baku",
-    "gross": 240000,
-    "tax": 0,
-    "fee": 0,
-    "net": 240000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-07-19",
-    "item": "Koeslan Cotton Candy Spro",
-    "category": "Bahan Baku",
-    "gross": 240000,
-    "tax": 0,
-    "fee": 0,
-    "net": 240000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-07-19",
-    "item": "Filter China Collins",
-    "category": "Bahan Baku",
-    "gross": 167000,
-    "tax": 0,
-    "fee": 0,
-    "net": 167000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-07-19",
-    "item": "Filter Kenya Gaithi",
-    "category": "Bahan Baku",
-    "gross": 167000,
-    "tax": 0,
-    "fee": 0,
-    "net": 167000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-07-22",
-    "item": "Karo Filter",
-    "category": "Bahan Baku",
-    "gross": 50000,
-    "tax": 0,
-    "fee": 0,
-    "net": 50000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-07-22",
-    "item": "Listrik",
-    "category": "Listrik",
-    "gross": 100000,
-    "tax": 0,
-    "fee": 0,
-    "net": 100000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-07-22",
-    "item": "Aren, Coklat, Krimer",
-    "category": "Bahan Baku",
-    "gross": 100000,
-    "tax": 0,
-    "fee": 0,
-    "net": 100000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-07-23",
-    "item": "Galon",
-    "category": "Bahan Baku",
-    "gross": 48000,
-    "tax": 0,
-    "fee": 0,
-    "net": 48000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-07-24",
-    "item": "Greenfields 1 Box",
-    "category": "Bahan Baku",
-    "gross": 240000,
-    "tax": 0,
-    "fee": 0,
-    "net": 240000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-07-25",
-    "item": "Papper Filter",
-    "category": "Bahan Baku",
-    "gross": 100000,
-    "tax": 0,
-    "fee": 0,
-    "net": 100000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-07-26",
-    "item": "Stiker",
-    "category": "Lain-lain",
-    "gross": 50000,
-    "tax": 0,
-    "fee": 0,
-    "net": 50000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-07-27",
-    "item": "Bimalukar Filter",
-    "category": "Bahan Baku",
-    "gross": 90000,
-    "tax": 0,
-    "fee": 0,
-    "net": 90000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-07-27",
-    "item": "Lavender Sirup",
-    "category": "Bahan Baku",
-    "gross": 75000,
-    "tax": 0,
-    "fee": 0,
-    "net": 75000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-07-28",
-    "item": "El Carizal Beans",
-    "category": "Lain-lain",
-    "gross": 150000,
-    "tax": 0,
-    "fee": 0,
-    "net": 150000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-07-28",
+    "date": "2025-09-01",
     "item": "Es",
     "category": "Bahan Baku",
     "gross": 12000,
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-07-28",
-    "item": "Kertas",
-    "category": "Lain-lain",
-    "gross": 120000,
-    "tax": 0,
-    "fee": 0,
-    "net": 120000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-07-28",
-    "item": "Tisu",
-    "category": "Lain-lain",
-    "gross": 32000,
-    "tax": 0,
-    "fee": 0,
-    "net": 32000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-07-30",
-    "item": "Sansat Modern Spro",
-    "category": "Bahan Baku",
-    "gross": 305000,
-    "tax": 0,
-    "fee": 0,
-    "net": 305000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-07-30",
-    "item": "Listrik",
-    "category": "Listrik",
-    "gross": 100000,
-    "tax": 0,
-    "fee": 0,
-    "net": 100000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-07-30",
-    "item": "Air PDAM",
-    "category": "Lain-lain",
-    "gross": 85000,
-    "tax": 0,
-    "fee": 0,
-    "net": 85000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-07-30",
-    "item": "Galon",
-    "category": "Bahan Baku",
-    "gross": 48000,
-    "tax": 0,
-    "fee": 0,
-    "net": 48000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-07-30",
-    "item": "Expat Espresso",
-    "category": "Bahan Baku",
-    "gross": 205000,
-    "tax": 0,
-    "fee": 0,
-    "net": 205000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-07-30",
-    "item": "Sirup Vanilla",
-    "category": "Bahan Baku",
-    "gross": 110000,
-    "tax": 0,
-    "fee": 0,
-    "net": 110000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-07-30",
-    "item": "Filter Mor Mor",
-    "category": "Bahan Baku",
-    "gross": 135000,
-    "tax": 0,
-    "fee": 0,
-    "net": 135000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-07-30",
-    "item": "Filter Koeslan",
-    "category": "Bahan Baku",
-    "gross": 140000,
-    "tax": 0,
-    "fee": 0,
-    "net": 140000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-08-02",
-    "item": "Kebersihan",
-    "category": "Lain-lain",
-    "gross": 15000,
-    "tax": 0,
-    "fee": 0,
-    "net": 15000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-08-03",
-    "item": "Cheese Cake",
-    "category": "Bahan Baku",
-    "gross": 80000,
-    "tax": 0,
-    "fee": 0,
-    "net": 80000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-08-04",
-    "item": "Tanah Dieng Modern Spro",
-    "category": "Bahan Baku",
-    "gross": 320000,
-    "tax": 0,
-    "fee": 0,
-    "net": 320000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-08-04",
-    "item": "Es",
-    "category": "Bahan Baku",
-    "gross": 12000,
-    "tax": 0,
-    "fee": 0,
-    "net": 12000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-08-04",
-    "item": "Stiker",
-    "category": "Lain-lain",
-    "gross": 35000,
-    "tax": 0,
-    "fee": 0,
-    "net": 35000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-08-04",
-    "item": "Greenfields",
-    "category": "Bahan Baku",
-    "gross": 240000,
-    "tax": 0,
-    "fee": 0,
-    "net": 240000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-08-05",
-    "item": "Plastik Sampah Besar",
-    "category": "Lain-lain",
-    "gross": 25000,
-    "tax": 0,
-    "fee": 0,
-    "net": 25000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-08-06",
-    "item": "Geisha Filter",
-    "category": "Bahan Baku",
-    "gross": 40000,
-    "tax": 0,
-    "fee": 0,
-    "net": 40000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-08-06",
-    "item": "El Carizal Beans",
-    "category": "Bahan Baku",
-    "gross": 135000,
-    "tax": 0,
-    "fee": 0,
-    "net": 135000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-08-06",
-    "item": "Dawuhan",
-    "category": "Bahan Baku",
-    "gross": 85000,
-    "tax": 0,
-    "fee": 0,
-    "net": 85000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-08-06",
-    "item": "Classic Spro (2)",
-    "category": "Bahan Baku",
-    "gross": 437000,
-    "tax": 0,
-    "fee": 0,
-    "net": 437000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-08-06",
-    "item": "Geisha Spro (2)",
-    "category": "Bahan Baku",
-    "gross": 100000,
-    "tax": 0,
-    "fee": 0,
-    "net": 100000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-08-08",
-    "item": "Cheese Cake",
-    "category": "Bahan Baku",
-    "gross": 115000,
-    "tax": 0,
-    "fee": 0,
-    "net": 115000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-08-08",
-    "item": "Listrik",
-    "category": "Listrik",
-    "gross": 100000,
-    "tax": 0,
-    "fee": 0,
-    "net": 100000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-08-09",
-    "item": "Galon",
-    "category": "Bahan Baku",
-    "gross": 48000,
-    "tax": 0,
-    "fee": 0,
-    "net": 48000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-08-11",
-    "item": "Aren",
-    "category": "Bahan Baku",
-    "gross": 15000,
-    "tax": 0,
-    "fee": 0,
-    "net": 15000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-08-11",
-    "item": "Krimer",
-    "category": "Bahan Baku",
-    "gross": 40000,
-    "tax": 0,
-    "fee": 0,
-    "net": 40000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-08-11",
-    "item": "Plastik",
-    "category": "Bahan Baku",
-    "gross": 10000,
-    "tax": 0,
-    "fee": 0,
-    "net": 10000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-08-11",
-    "item": "Es",
-    "category": "Bahan Baku",
-    "gross": 12000,
-    "tax": 0,
-    "fee": 0,
-    "net": 12000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-08-11",
-    "item": "Mad Scientist Spro 200gr",
-    "category": "Bahan Baku",
-    "gross": 105000,
-    "tax": 0,
-    "fee": 0,
-    "net": 105000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-08-14",
-    "item": "TBRK Filter",
-    "category": "Bahan Baku",
-    "gross": 232000,
-    "tax": 0,
-    "fee": 0,
-    "net": 232000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-08-15",
-    "item": "Roastbeanhood Filter",
-    "category": "Bahan Baku",
-    "gross": 105000,
-    "tax": 0,
-    "fee": 0,
-    "net": 105000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-08-16",
-    "item": "Papper Filter",
-    "category": "Bahan Baku",
-    "gross": 100000,
-    "tax": 0,
-    "fee": 0,
-    "net": 100000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-08-17",
-    "item": "Listrik",
-    "category": "Listrik",
-    "gross": 100000,
-    "tax": 0,
-    "fee": 0,
-    "net": 100000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-08-17",
-    "item": "Geisha",
-    "category": "Bahan Baku",
-    "gross": 240000,
-    "tax": 0,
-    "fee": 0,
-    "net": 240000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-08-17",
-    "item": "Es",
-    "category": "Bahan Baku",
-    "gross": 12000,
-    "tax": 0,
-    "fee": 0,
-    "net": 12000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-08-17",
-    "item": "Instnc Espresso",
-    "category": "Bahan Baku",
-    "gross": 224000,
-    "tax": 0,
-    "fee": 0,
-    "net": 224000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-08-17",
-    "item": "Batre",
-    "category": "Bahan Baku",
-    "gross": 27000,
-    "tax": 0,
-    "fee": 0,
-    "net": 27000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-08-17",
-    "item": "Matcha",
-    "category": "Bahan Baku",
-    "gross": 105000,
-    "tax": 0,
-    "fee": 0,
-    "net": 105000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-08-18",
-    "item": "Galon",
-    "category": "Bahan Baku",
-    "gross": 48000,
-    "tax": 0,
-    "fee": 0,
-    "net": 48000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-08-20",
-    "item": "Listrik",
-    "category": "Listrik",
-    "gross": 100000,
-    "tax": 0,
-    "fee": 0,
-    "net": 100000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-08-29",
-    "item": "Krimer, Coklat",
-    "category": "Bahan Baku",
-    "gross": 95000,
-    "tax": 0,
-    "fee": 0,
-    "net": 95000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-08-29",
-    "item": "Roastbeanhood Filter",
-    "category": "Bahan Baku",
-    "gross": 105000,
-    "tax": 0,
-    "fee": 0,
-    "net": 105000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-08-29",
-    "item": "Greenfields",
-    "category": "Bahan Baku",
-    "gross": 240000,
-    "tax": 0,
-    "fee": 0,
-    "net": 240000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-08-29",
-    "item": "Espresso Modern",
-    "category": "Bahan Baku",
-    "gross": 320000,
-    "tax": 0,
-    "fee": 0,
-    "net": 320000,
-    "note": "Transfer Bank"
-  },
-  {
-    "date": "2025-08-29",
-    "item": "Stiker",
-    "category": "Lain-lain",
-    "gross": 85000,
-    "tax": 0,
-    "fee": 0,
-    "net": 85000,
-    "note": "Cash"
-  },
-  {
-    "date": "2025-09-12",
-    "item": "Es",
-    "category": "Bahan Baku",
-    "gross": 12000,
-    "tax": 0,
-    "fee": 0,
-    "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-12",
@@ -6679,7 +4543,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 45000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 45000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-12",
@@ -6689,7 +4557,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 22000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 22000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-13",
@@ -6699,7 +4571,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 48000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 48000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-13",
@@ -6709,7 +4585,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 50000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 50000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-14",
@@ -6719,7 +4599,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 65000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 65000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-14",
@@ -6729,7 +4613,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 100000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 100000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-14",
@@ -6739,7 +4627,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-14",
@@ -6749,7 +4641,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 240000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 240000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-14",
@@ -6759,7 +4655,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 100000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 100000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-14",
@@ -6769,7 +4669,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 300000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 300000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-15",
@@ -6779,7 +4683,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 320000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 320000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-15",
@@ -6789,7 +4697,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 100000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 100000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-15",
@@ -6799,7 +4711,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-16",
@@ -6809,7 +4725,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 90000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 90000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-16",
@@ -6819,7 +4739,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 24000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 24000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-16",
@@ -6829,7 +4753,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 45000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 45000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-17",
@@ -6839,7 +4767,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 200000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 200000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-17",
@@ -6849,7 +4781,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-17",
@@ -6859,7 +4795,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 95000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 95000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-17",
@@ -6869,7 +4809,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 40000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 40000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-19",
@@ -6879,7 +4823,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 240000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 240000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-19",
@@ -6889,7 +4837,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-20",
@@ -6899,7 +4851,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 124000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 124000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-20",
@@ -6909,7 +4865,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 18000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 18000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-20",
@@ -6919,7 +4879,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 48000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 48000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-21",
@@ -6929,7 +4893,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 640000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 640000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-21",
@@ -6939,7 +4907,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-21",
@@ -6949,7 +4921,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 125000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 125000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-21",
@@ -6959,7 +4935,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 75000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 75000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-21",
@@ -6969,7 +4949,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 120000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 120000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-22",
@@ -6979,7 +4963,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 350000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 350000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-22",
@@ -6989,7 +4977,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-22",
@@ -6999,7 +4991,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 240000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 240000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-23",
@@ -7009,7 +5005,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 39000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 39000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-23",
@@ -7019,7 +5019,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 45000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 45000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-24",
@@ -7029,7 +5033,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 270000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 270000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-24",
@@ -7039,7 +5047,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 100000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 100000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-24",
@@ -7049,7 +5061,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 125000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 125000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-24",
@@ -7059,7 +5075,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 200000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 200000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-26",
@@ -7069,7 +5089,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-26",
@@ -7079,7 +5103,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 235000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 235000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-26",
@@ -7089,7 +5117,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 250000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 250000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-26",
@@ -7099,7 +5131,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 18000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 18000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-26",
@@ -7109,7 +5145,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 48000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 48000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-27",
@@ -7119,7 +5159,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 240000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 240000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-27",
@@ -7129,7 +5173,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-27",
@@ -7139,7 +5187,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 125000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 125000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-27",
@@ -7149,7 +5201,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 75000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 75000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-28",
@@ -7159,7 +5215,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 95000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 95000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-28",
@@ -7169,7 +5229,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 50000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 50000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-28",
@@ -7179,7 +5243,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 95000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 95000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-28",
@@ -7189,7 +5257,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-29",
@@ -7199,7 +5271,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 19000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 19000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-29",
@@ -7209,7 +5285,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 48000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 48000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-29",
@@ -7219,7 +5299,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 167000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 167000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-29",
@@ -7229,7 +5313,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 240000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 240000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-29",
@@ -7239,7 +5327,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 640000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 640000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-29",
@@ -7249,7 +5341,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 210000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 210000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-30",
@@ -7259,7 +5355,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-30",
@@ -7269,7 +5369,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 1794000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 1794000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-30",
@@ -7279,7 +5383,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 666000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 666000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-09-30",
@@ -7289,7 +5397,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 375000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 375000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-01",
@@ -7299,7 +5411,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-03",
@@ -7309,7 +5425,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 95000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 95000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-03",
@@ -7319,7 +5439,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-03",
@@ -7329,7 +5453,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 110000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 110000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-04",
@@ -7339,7 +5467,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-04",
@@ -7349,7 +5481,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 240000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 240000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-04",
@@ -7359,7 +5495,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 144000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 144000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-04",
@@ -7369,7 +5509,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 35000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 35000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-05",
@@ -7379,7 +5523,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-05",
@@ -7389,7 +5537,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 264000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 264000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-05",
@@ -7399,7 +5551,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 103000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 103000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-05",
@@ -7409,7 +5565,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 130000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 130000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-06",
@@ -7419,7 +5579,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 200000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 200000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-06",
@@ -7429,7 +5593,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 125000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 125000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-06",
@@ -7439,7 +5607,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-06",
@@ -7449,7 +5621,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 163000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 163000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-06",
@@ -7459,7 +5635,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 120000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 120000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-07",
@@ -7469,7 +5649,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 240000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 240000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-07",
@@ -7479,7 +5663,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-07",
@@ -7489,7 +5677,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 65000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 65000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-07",
@@ -7499,7 +5691,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 100000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 100000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-07",
@@ -7509,7 +5705,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 13000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 13000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-08",
@@ -7519,7 +5719,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 706000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 706000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-08",
@@ -7529,7 +5733,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-08",
@@ -7539,7 +5747,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 48000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 48000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-09",
@@ -7549,7 +5761,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 348000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 348000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-09",
@@ -7559,7 +5775,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-10",
@@ -7569,7 +5789,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 240000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 240000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-10",
@@ -7579,7 +5803,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 350000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 350000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-10",
@@ -7589,7 +5817,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-11",
@@ -7599,7 +5831,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 95000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 95000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-11",
@@ -7609,7 +5845,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 174000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 174000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-11",
@@ -7619,7 +5859,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 118000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 118000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-11",
@@ -7629,7 +5873,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 276000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 276000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-12",
@@ -7639,7 +5887,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-12",
@@ -7649,7 +5901,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 18000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 18000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-12",
@@ -7659,7 +5915,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 245000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 245000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-13",
@@ -7669,7 +5929,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-13",
@@ -7679,7 +5943,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 48000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 48000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-13",
@@ -7689,7 +5957,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 165000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 165000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-13",
@@ -7699,7 +5971,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 125000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 125000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-13",
@@ -7709,7 +5985,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 240000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 240000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-13",
@@ -7719,7 +5999,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 640000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 640000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-14",
@@ -7729,7 +6013,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-14",
@@ -7739,7 +6027,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 410000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 410000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-15",
@@ -7749,7 +6041,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-15",
@@ -7759,7 +6055,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 75000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 75000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-16",
@@ -7769,7 +6069,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-16",
@@ -7779,7 +6083,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 240000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 240000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-17",
@@ -7789,7 +6097,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-17",
@@ -7799,7 +6111,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 25000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 25000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-17",
@@ -7809,7 +6125,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 90000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 90000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-18",
@@ -7819,7 +6139,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-18",
@@ -7829,7 +6153,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 200000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 200000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-18",
@@ -7839,7 +6167,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 24000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 24000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-18",
@@ -7849,7 +6181,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 175000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 175000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-18",
@@ -7859,7 +6195,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 900000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 900000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-19",
@@ -7869,7 +6209,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-19",
@@ -7879,7 +6223,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 90000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 90000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-19",
@@ -7889,7 +6237,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 1000000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 1000000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-20",
@@ -7899,7 +6251,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-20",
@@ -7909,7 +6265,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 250000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 250000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-20",
@@ -7919,7 +6279,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 48000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 48000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-20",
@@ -7929,7 +6293,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 70000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 70000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-21",
@@ -7939,7 +6307,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-21",
@@ -7949,7 +6321,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 240000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 240000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-22",
@@ -7959,7 +6335,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-22",
@@ -7969,7 +6349,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 125000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 125000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-23",
@@ -7979,7 +6363,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-23",
@@ -7989,7 +6377,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 640000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 640000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-25",
@@ -7999,7 +6391,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-25",
@@ -8009,7 +6405,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 240000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 240000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-25",
@@ -8019,7 +6419,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 48000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 48000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-26",
@@ -8029,7 +6433,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-26",
@@ -8039,7 +6447,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 405000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 405000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-26",
@@ -8049,7 +6461,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 396000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 396000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-26",
@@ -8059,7 +6475,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 200000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 200000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-26",
@@ -8069,7 +6489,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 163000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 163000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-26",
@@ -8079,7 +6503,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 235000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 235000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-27",
@@ -8089,7 +6517,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-27",
@@ -8099,7 +6531,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 20000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 20000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-28",
@@ -8109,7 +6545,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-28",
@@ -8119,7 +6559,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 125000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 125000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-28",
@@ -8129,7 +6573,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 240000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 240000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-28",
@@ -8139,7 +6587,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 25000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 25000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-29",
@@ -8149,7 +6601,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-29",
@@ -8159,7 +6615,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 48000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 48000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-29",
@@ -8169,7 +6629,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 143000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 143000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-29",
@@ -8179,7 +6643,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 80000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 80000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-29",
@@ -8189,7 +6657,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 385000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 385000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-29",
@@ -8199,7 +6671,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 40000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 40000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-31",
@@ -8209,7 +6685,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-31",
@@ -8219,7 +6699,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 75000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 75000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-31",
@@ -8229,7 +6713,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 235000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 235000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-31",
@@ -8239,7 +6727,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 240000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 240000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-31",
@@ -8249,7 +6741,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 250000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 250000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-10-31",
@@ -8259,7 +6755,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 340000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 340000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-02",
@@ -8269,7 +6769,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-02",
@@ -8279,7 +6783,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 200000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 200000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-03",
@@ -8289,7 +6797,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-04",
@@ -8299,7 +6811,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-04",
@@ -8309,7 +6825,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 250000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 250000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-05",
@@ -8319,7 +6839,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-05",
@@ -8329,7 +6853,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 632000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 632000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-05",
@@ -8339,7 +6867,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 640000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 640000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-07",
@@ -8349,7 +6881,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-07",
@@ -8359,7 +6895,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 48000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 48000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-07",
@@ -8369,7 +6909,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 350000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 350000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-08",
@@ -8379,7 +6923,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-08",
@@ -8389,7 +6937,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 119000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 119000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-09",
@@ -8399,7 +6951,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 536000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 536000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-09",
@@ -8409,7 +6965,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 500000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 500000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-09",
@@ -8419,7 +6979,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 240000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 240000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-09",
@@ -8429,7 +6993,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-10",
@@ -8439,7 +7007,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-10",
@@ -8449,7 +7021,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 167000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 167000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-10",
@@ -8459,7 +7035,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 120000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 120000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-10",
@@ -8469,7 +7049,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 258000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 258000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-11",
@@ -8479,7 +7063,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-11",
@@ -8489,7 +7077,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 93000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 93000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-12",
@@ -8499,7 +7091,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-12",
@@ -8509,7 +7105,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 262000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 262000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-12",
@@ -8519,7 +7119,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 48000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 48000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-13",
@@ -8529,7 +7133,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 466000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 466000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-13",
@@ -8539,7 +7147,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-13",
@@ -8549,7 +7161,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 25000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 25000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-13",
@@ -8559,7 +7175,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 200000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 200000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-15",
@@ -8569,7 +7189,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-15",
@@ -8579,7 +7203,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 48000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 48000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-15",
@@ -8589,7 +7217,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 240000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 240000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-16",
@@ -8599,7 +7231,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-16",
@@ -8609,7 +7245,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 44000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 44000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-16",
@@ -8619,7 +7259,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 75000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 75000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-16",
@@ -8629,7 +7273,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 17000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 17000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-16",
@@ -8639,7 +7287,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 350000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 350000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-16",
@@ -8649,7 +7301,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 85000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 85000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-16",
@@ -8659,7 +7315,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 640000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 640000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-17",
@@ -8669,7 +7329,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-17",
@@ -8679,7 +7343,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 185000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 185000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-18",
@@ -8689,7 +7357,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 340000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 340000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-18",
@@ -8699,7 +7371,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 95000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 95000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-18",
@@ -8709,7 +7385,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-18",
@@ -8719,7 +7399,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 502000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 502000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-18",
@@ -8729,7 +7413,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 93000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 93000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-19",
@@ -8739,7 +7427,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 17000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 17000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-19",
@@ -8749,7 +7441,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-19",
@@ -8759,7 +7455,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 24000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 24000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-19",
@@ -8769,7 +7469,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 180000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 180000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-20",
@@ -8779,7 +7483,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 550000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 550000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-20",
@@ -8789,7 +7497,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 40000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 40000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-20",
@@ -8799,7 +7511,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-20",
@@ -8809,7 +7525,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 394000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 394000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-20",
@@ -8819,7 +7539,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 340000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 340000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-20",
@@ -8829,7 +7553,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 180000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 180000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-21",
@@ -8839,7 +7567,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 550000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 550000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-21",
@@ -8849,7 +7581,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 40000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 40000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-21",
@@ -8859,7 +7595,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-21",
@@ -8869,7 +7609,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 80000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 80000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-21",
@@ -8879,7 +7623,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 394000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 394000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-21",
@@ -8889,7 +7637,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 340000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 340000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-22",
@@ -8899,7 +7651,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-22",
@@ -8909,7 +7665,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 240000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 240000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-22",
@@ -8919,7 +7679,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 50000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 50000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-23",
@@ -8929,7 +7693,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 263000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 263000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-23",
@@ -8939,7 +7707,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 75000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 75000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-23",
@@ -8949,7 +7721,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 195000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 195000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-23",
@@ -8959,7 +7735,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 125000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 125000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-23",
@@ -8969,7 +7749,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-23",
@@ -8979,7 +7763,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 75000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 75000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-23",
@@ -8989,7 +7777,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 180000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 180000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-23",
@@ -8999,7 +7791,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 48000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 48000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-24",
@@ -9009,7 +7805,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-24",
@@ -9019,7 +7819,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 24000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 24000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-24",
@@ -9029,7 +7833,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 100000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 100000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-24",
@@ -9039,7 +7847,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 45000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 45000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-25",
@@ -9049,7 +7861,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 88000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 88000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-25",
@@ -9059,7 +7875,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 75000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 75000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-25",
@@ -9069,7 +7889,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 165000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 165000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-25",
@@ -9079,7 +7903,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 24000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 24000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-25",
@@ -9089,7 +7917,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 70000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 70000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-26",
@@ -9099,7 +7931,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-26",
@@ -9109,7 +7945,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 19000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 19000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-26",
@@ -9119,7 +7959,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 72000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 72000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-26",
@@ -9129,7 +7973,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 350000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 350000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-28",
@@ -9139,7 +7987,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-28",
@@ -9149,7 +8001,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 180000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 180000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-29",
@@ -9159,7 +8015,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 250000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 250000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-29",
@@ -9169,7 +8029,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 320000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 320000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-29",
@@ -9179,7 +8043,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 120000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 120000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-29",
@@ -9189,7 +8057,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 18000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 18000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-29",
@@ -9199,7 +8071,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 165000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 165000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-30",
@@ -9209,7 +8085,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-30",
@@ -9219,7 +8099,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 2500000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 2500000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-30",
@@ -9229,7 +8113,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 200000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 200000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-30",
@@ -9239,7 +8127,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 750000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 750000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-30",
@@ -9249,7 +8141,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 340000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 340000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-30",
@@ -9259,7 +8155,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 95000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 95000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-11-30",
@@ -9269,7 +8169,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 120000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 120000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-01",
@@ -9279,7 +8183,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-02",
@@ -9289,7 +8197,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 198000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 198000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-03",
@@ -9299,7 +8211,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-03",
@@ -9309,7 +8225,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 37000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 37000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-03",
@@ -9319,7 +8239,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 240000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 240000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-03",
@@ -9329,7 +8253,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 50000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 50000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-03",
@@ -9339,7 +8267,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 48000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 48000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-04",
@@ -9349,7 +8281,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 254000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 254000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-04",
@@ -9359,7 +8295,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 245000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 245000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-05",
@@ -9369,7 +8309,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-05",
@@ -9379,7 +8323,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 136000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 136000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-06",
@@ -9389,7 +8337,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-06",
@@ -9399,7 +8351,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 240000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 240000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-06",
@@ -9409,7 +8365,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 120000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 120000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-07",
@@ -9419,7 +8379,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-08",
@@ -9429,7 +8393,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-08",
@@ -9439,7 +8407,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 72000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 72000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-08",
@@ -9449,7 +8421,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 136000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 136000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-09",
@@ -9459,7 +8435,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-09",
@@ -9469,7 +8449,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 240000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 240000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-09",
@@ -9479,7 +8463,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 160000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 160000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-10",
@@ -9489,7 +8477,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-10",
@@ -9499,7 +8491,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 700000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 700000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-10",
@@ -9509,7 +8505,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 250000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 250000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-12",
@@ -9519,7 +8519,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-12",
@@ -9529,7 +8533,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 98000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 98000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-13",
@@ -9539,7 +8547,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-13",
@@ -9549,7 +8561,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 24000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 24000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-13",
@@ -9559,7 +8575,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 110000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 110000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-13",
@@ -9569,7 +8589,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 240000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 240000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-14",
@@ -9579,7 +8603,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-14",
@@ -9589,7 +8617,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 240000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 240000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-14",
@@ -9599,7 +8631,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 725000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 725000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-14",
@@ -9609,7 +8645,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 350000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 350000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-14",
@@ -9619,7 +8659,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 203000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 203000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-14",
@@ -9629,7 +8673,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 25000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 25000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-15",
@@ -9639,7 +8687,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-15",
@@ -9649,7 +8701,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 170000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 170000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-15",
@@ -9659,7 +8715,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 48000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 48000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-16",
@@ -9669,7 +8729,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-16",
@@ -9679,7 +8743,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 340000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 340000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-16",
@@ -9689,7 +8757,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 75000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 75000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-17",
@@ -9699,7 +8771,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-17",
@@ -9709,7 +8785,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 95000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 95000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-17",
@@ -9719,7 +8799,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 750000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 750000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-17",
@@ -9729,7 +8813,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 480000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 480000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-18",
@@ -9739,7 +8827,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-18",
@@ -9749,7 +8841,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 48000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 48000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-18",
@@ -9759,7 +8855,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 48000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 48000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-18",
@@ -9769,7 +8869,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 200000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 200000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-20",
@@ -9779,7 +8883,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 125000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 125000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-20",
@@ -9789,7 +8897,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 700000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 700000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-20",
@@ -9799,7 +8911,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 85000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 85000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-20",
@@ -9809,7 +8925,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 215000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 215000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-20",
@@ -9819,7 +8939,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 650000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 650000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-21",
@@ -9829,7 +8953,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 36000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 36000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-21",
@@ -9839,7 +8967,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 85000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 85000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-22",
@@ -9849,7 +8981,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-22",
@@ -9859,7 +8995,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 240000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 240000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-22",
@@ -9869,7 +9009,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 75000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 75000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-22",
@@ -9879,7 +9023,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 48000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 48000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-23",
@@ -9889,7 +9037,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-23",
@@ -9899,7 +9051,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 70000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 70000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-23",
@@ -9909,7 +9065,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 313000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 313000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-24",
@@ -9919,7 +9079,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 100000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 100000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-24",
@@ -9929,7 +9093,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 750000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 750000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-24",
@@ -9939,7 +9107,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 240000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 240000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-24",
@@ -9949,7 +9121,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 24000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 24000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-24",
@@ -9959,7 +9135,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 160000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 160000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-24",
@@ -9969,7 +9149,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 125000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 125000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-26",
@@ -9979,7 +9163,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 150000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 150000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-26",
@@ -9989,7 +9177,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 256000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 256000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-26",
@@ -9999,7 +9191,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-27",
@@ -10009,7 +9205,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 480000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 480000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-27",
@@ -10019,7 +9219,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-28",
@@ -10029,7 +9233,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 24000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 24000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-28",
@@ -10039,7 +9247,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 195000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 195000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-28",
@@ -10049,7 +9261,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 215000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 215000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-29",
@@ -10059,7 +9275,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 24000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 24000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-29",
@@ -10069,7 +9289,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 340000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 340000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-29",
@@ -10079,7 +9303,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 330000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 330000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-29",
@@ -10089,7 +9317,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 1450000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 1450000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-29",
@@ -10099,7 +9331,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 195000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 195000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-29",
@@ -10109,7 +9345,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 933000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 933000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-29",
@@ -10119,7 +9359,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 48000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 48000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-29",
@@ -10129,7 +9373,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 180000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 180000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-29",
@@ -10139,7 +9387,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 240000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 240000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-30",
@@ -10149,7 +9401,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-30",
@@ -10159,7 +9415,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 240000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 240000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-30",
@@ -10169,7 +9429,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 72000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 72000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-31",
@@ -10179,7 +9443,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 260000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 260000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-31",
@@ -10189,7 +9457,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 1358000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 1358000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2025-12-31",
@@ -10199,7 +9471,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 2500000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 2500000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-02",
@@ -10209,7 +9485,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 75000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 75000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-02",
@@ -10219,7 +9499,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 24000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 24000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-02",
@@ -10229,7 +9513,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 6000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 6000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-03",
@@ -10239,7 +9527,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-03",
@@ -10249,7 +9541,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 48000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 48000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-03",
@@ -10259,7 +9555,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 750000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 750000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-03",
@@ -10269,7 +9569,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 240000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 240000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-03",
@@ -10279,7 +9583,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 256000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 256000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-04",
@@ -10289,7 +9597,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 245000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 245000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-04",
@@ -10299,7 +9611,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-04",
@@ -10309,7 +9625,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 200000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 200000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-05",
@@ -10319,7 +9639,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 80000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 80000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-05",
@@ -10329,7 +9653,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 500000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 500000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-05",
@@ -10339,7 +9667,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 581000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 581000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-05",
@@ -10349,7 +9681,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-05",
@@ -10359,7 +9695,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 152000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 152000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-05",
@@ -10369,7 +9709,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 200000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 200000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-05",
@@ -10379,7 +9723,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 140000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 140000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-05",
@@ -10389,7 +9737,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 48000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 48000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-06",
@@ -10399,7 +9751,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 490000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 490000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-06",
@@ -10409,7 +9765,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-07",
@@ -10419,7 +9779,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 24000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 24000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-07",
@@ -10429,7 +9793,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 1450000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 1450000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-07",
@@ -10439,7 +9807,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 100000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 100000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-07",
@@ -10449,7 +9821,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 48000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 48000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-07",
@@ -10459,7 +9835,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 340000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 340000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-09",
@@ -10469,7 +9849,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 180000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 180000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-09",
@@ -10479,7 +9863,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 16000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 16000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-09",
@@ -10489,7 +9877,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-09",
@@ -10499,7 +9891,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 125000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 125000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-10",
@@ -10509,7 +9905,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-10",
@@ -10519,7 +9919,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 50000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 50000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-10",
@@ -10529,7 +9933,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 85000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 85000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-10",
@@ -10539,7 +9947,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 245000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 245000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-11",
@@ -10549,7 +9961,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-11",
@@ -10559,7 +9975,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 48000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 48000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-11",
@@ -10569,7 +9989,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 20000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 20000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-12",
@@ -10579,7 +10003,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-12",
@@ -10589,7 +10017,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 48000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 48000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-12",
@@ -10599,7 +10031,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 150000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 150000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-13",
@@ -10609,7 +10045,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-13",
@@ -10619,7 +10059,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 750000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 750000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-14",
@@ -10629,7 +10073,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-14",
@@ -10639,7 +10087,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 490000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 490000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-14",
@@ -10649,7 +10101,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 25000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 25000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-16",
@@ -10659,7 +10115,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-16",
@@ -10669,7 +10129,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 158000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 158000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-17",
@@ -10679,7 +10143,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 360000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 360000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-17",
@@ -10689,7 +10157,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-17",
@@ -10699,7 +10171,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-17",
@@ -10709,7 +10185,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 1230000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 1230000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-17",
@@ -10719,7 +10199,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 260000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 260000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-17",
@@ -10729,7 +10213,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 250000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 250000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-18",
@@ -10739,7 +10227,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-18",
@@ -10749,7 +10241,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 490000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 490000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-18",
@@ -10759,7 +10255,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 48000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 48000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-18",
@@ -10769,7 +10269,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 168000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 168000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-18",
@@ -10779,7 +10283,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 650000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 650000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-18",
@@ -10789,7 +10297,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 832000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 832000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-18",
@@ -10799,7 +10311,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 1550000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 1550000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-19",
@@ -10809,7 +10325,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 75000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 75000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-19",
@@ -10819,7 +10339,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 629000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 629000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-19",
@@ -10829,7 +10353,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 340000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 340000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-19",
@@ -10839,7 +10367,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-19",
@@ -10849,7 +10381,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 152000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 152000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-19",
@@ -10859,7 +10395,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 250000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 250000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-20",
@@ -10869,7 +10409,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-20",
@@ -10879,7 +10423,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 200000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 200000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-21",
@@ -10889,7 +10437,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-21",
@@ -10899,7 +10451,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 490000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 490000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-22",
@@ -10909,17 +10465,25 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 1480000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 1480000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-24",
     "item": "Es",
     "category": "Bahan Baku",
-    "gross": 24000,
+    "gross": 36000,
     "tax": 0,
     "fee": 0,
-    "net": 24000,
-    "note": "Cash"
+    "net": 36000,
+    "note": "Cash",
+    "cash": 36000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-24",
@@ -10929,17 +10493,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 24000,
-    "note": "Cash"
-  },
-  {
-    "date": "2026-01-24",
-    "item": "Es",
-    "category": "Bahan Baku",
-    "gross": 12000,
-    "tax": 0,
-    "fee": 0,
-    "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 24000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-24",
@@ -10949,7 +10507,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 48000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 48000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-25",
@@ -10959,7 +10521,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-25",
@@ -10969,7 +10535,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 200000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 200000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-26",
@@ -10979,7 +10549,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-26",
@@ -10989,7 +10563,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 260000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 260000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-26",
@@ -10999,7 +10577,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 490000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 490000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-27",
@@ -11009,7 +10591,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-27",
@@ -11019,7 +10605,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 1130000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 1130000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-27",
@@ -11029,7 +10619,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 185000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 185000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-28",
@@ -11039,7 +10633,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 392000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 392000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-28",
@@ -11049,7 +10647,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 745000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 745000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-28",
@@ -11059,7 +10661,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 368000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 368000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-28",
@@ -11069,7 +10675,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 72000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 72000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-29",
@@ -11079,7 +10689,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-29",
@@ -11089,7 +10703,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 40000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 40000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-30",
@@ -11099,7 +10717,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 340000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 340000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-30",
@@ -11109,7 +10731,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-30",
@@ -11119,7 +10745,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 60000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 60000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-30",
@@ -11129,7 +10759,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 490000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 490000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-30",
@@ -11139,7 +10773,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 185000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 185000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-30",
@@ -11149,7 +10787,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 2335000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 2335000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-01-30",
@@ -11159,7 +10801,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 850000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 850000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-01",
@@ -11169,7 +10815,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-02",
@@ -11179,7 +10829,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-02",
@@ -11189,7 +10843,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 137000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 137000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-03",
@@ -11199,7 +10857,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-03",
@@ -11209,7 +10871,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 250000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 250000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-03",
@@ -11219,7 +10885,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 375000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 375000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-06",
@@ -11229,7 +10899,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-06",
@@ -11239,7 +10913,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 490000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 490000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-07",
@@ -11249,7 +10927,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-07",
@@ -11259,7 +10941,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 48000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 48000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-08",
@@ -11269,7 +10955,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-08",
@@ -11279,7 +10969,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 200000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 200000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-08",
@@ -11289,7 +10983,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 90000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 90000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-08",
@@ -11299,7 +10997,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 780000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 780000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-09",
@@ -11309,7 +11011,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-09",
@@ -11319,7 +11025,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 200000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 200000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-09",
@@ -11329,7 +11039,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 80000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 80000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-10",
@@ -11339,7 +11053,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-10",
@@ -11349,7 +11067,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 48000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 48000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-10",
@@ -11359,7 +11081,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 234000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 234000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-11",
@@ -11369,7 +11095,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-11",
@@ -11379,7 +11109,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 245000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 245000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-11",
@@ -11389,7 +11123,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 79000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 79000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-11",
@@ -11399,7 +11137,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 18000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 18000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-11",
@@ -11409,7 +11151,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 180000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 180000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-12",
@@ -11419,7 +11165,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-12",
@@ -11429,7 +11179,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 25000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 25000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-12",
@@ -11439,7 +11193,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 24000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 24000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-12",
@@ -11449,7 +11207,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 245000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 245000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-13",
@@ -11459,7 +11221,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-13",
@@ -11469,7 +11235,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 340000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 340000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-14",
@@ -11479,7 +11249,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-14",
@@ -11489,7 +11263,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 940000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 940000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-14",
@@ -11499,7 +11277,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 18000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 18000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-16",
@@ -11509,7 +11291,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 170000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 170000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-16",
@@ -11519,7 +11305,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 39000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 39000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-16",
@@ -11529,7 +11319,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 40000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 40000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-16",
@@ -11539,7 +11333,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 24000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 24000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-16",
@@ -11549,7 +11347,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 180000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 180000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-16",
@@ -11559,7 +11361,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 48000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 48000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-16",
@@ -11569,7 +11375,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 186000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 186000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-16",
@@ -11579,7 +11389,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 490000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 490000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-16",
@@ -11589,7 +11403,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 850000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 850000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-16",
@@ -11599,7 +11417,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 245000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 245000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-17",
@@ -11609,7 +11431,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-17",
@@ -11619,7 +11445,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 700000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 700000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-18",
@@ -11629,7 +11459,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 187000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 187000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-18",
@@ -11639,7 +11473,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 420000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 420000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-18",
@@ -11649,7 +11487,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 385000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 385000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-18",
@@ -11659,7 +11501,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-18",
@@ -11669,7 +11515,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 80000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 80000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-19",
@@ -11679,7 +11529,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-19",
@@ -11689,7 +11543,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 490000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 490000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-19",
@@ -11699,7 +11557,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 780000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 780000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-20",
@@ -11709,7 +11571,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 75000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 75000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-21",
@@ -11719,7 +11585,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 206000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 206000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-22",
@@ -11729,7 +11599,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-23",
@@ -11739,7 +11613,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 50000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 50000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-24",
@@ -11749,7 +11627,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-24",
@@ -11759,7 +11641,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 201000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 201000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-25",
@@ -11769,7 +11655,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-26",
@@ -11779,7 +11669,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-26",
@@ -11789,7 +11683,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 48000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 48000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-27",
@@ -11799,7 +11697,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-27",
@@ -11809,7 +11711,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 100000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 100000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-27",
@@ -11819,7 +11725,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 25000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 25000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-27",
@@ -11829,7 +11739,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 165000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 165000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-27",
@@ -11839,7 +11753,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 240000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 240000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-28",
@@ -11849,7 +11767,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 3890000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 3890000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-28",
@@ -11859,7 +11781,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 1600000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 1600000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-28",
@@ -11869,7 +11795,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 200000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 200000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-28",
@@ -11879,7 +11809,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-28",
@@ -11889,7 +11823,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 500000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 500000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-02-28",
@@ -11899,7 +11837,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 490000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 490000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-01",
@@ -11909,7 +11851,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-02",
@@ -11919,7 +11865,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-02",
@@ -11929,7 +11879,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 45000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 45000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-02",
@@ -11939,7 +11893,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 340000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 340000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-02",
@@ -11949,7 +11907,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 20000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 20000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-03",
@@ -11959,7 +11921,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 385000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 385000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-03",
@@ -11969,7 +11935,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 200000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 200000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-03",
@@ -11979,7 +11949,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-04",
@@ -11989,7 +11963,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 45000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 45000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-04",
@@ -11999,7 +11977,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 25000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 25000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-04",
@@ -12009,7 +11991,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 100000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 100000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-04",
@@ -12019,7 +12005,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 72000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 72000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-05",
@@ -12029,7 +12019,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-05",
@@ -12039,7 +12033,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 85000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 85000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-06",
@@ -12049,7 +12047,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 140000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 140000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-07",
@@ -12059,7 +12061,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-07",
@@ -12069,7 +12075,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 25000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 25000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-08",
@@ -12079,7 +12089,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 490000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 490000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-08",
@@ -12089,7 +12103,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-08",
@@ -12099,7 +12117,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 60000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 60000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-08",
@@ -12109,7 +12131,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 168000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 168000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-10",
@@ -12119,7 +12145,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 380000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 380000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-10",
@@ -12129,7 +12159,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 25000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 25000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-10",
@@ -12139,7 +12173,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 180000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 180000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-10",
@@ -12149,7 +12187,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-10",
@@ -12159,7 +12201,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 48000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 48000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-11",
@@ -12169,7 +12215,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 180000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 180000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-13",
@@ -12179,7 +12229,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-13",
@@ -12189,7 +12243,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 1130000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 1130000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-13",
@@ -12199,7 +12257,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 425000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 425000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-13",
@@ -12209,7 +12271,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 168000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 168000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-14",
@@ -12219,7 +12285,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-15",
@@ -12229,7 +12299,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 72000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 72000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-15",
@@ -12239,7 +12313,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-15",
@@ -12249,7 +12327,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 248000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 248000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-16",
@@ -12259,7 +12341,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-16",
@@ -12269,7 +12355,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 885000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 885000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-16",
@@ -12279,7 +12369,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 350000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 350000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-17",
@@ -12289,7 +12383,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-17",
@@ -12299,7 +12397,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 142000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 142000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-17",
@@ -12309,7 +12411,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 25000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 25000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-17",
@@ -12319,7 +12425,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 55000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 55000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-20",
@@ -12329,7 +12439,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-21",
@@ -12339,17 +12453,25 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 490000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 490000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-21",
     "item": "Es",
     "category": "Bahan Baku",
-    "gross": 24000,
+    "gross": 36000,
     "tax": 0,
     "fee": 0,
-    "net": 24000,
-    "note": "Cash"
+    "net": 36000,
+    "note": "Cash",
+    "cash": 36000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-21",
@@ -12359,7 +12481,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 50000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 50000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-21",
@@ -12369,7 +12495,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 248000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 248000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-21",
@@ -12379,17 +12509,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 45000,
-    "note": "Cash"
-  },
-  {
-    "date": "2026-03-21",
-    "item": "Es",
-    "category": "Bahan Baku",
-    "gross": 12000,
-    "tax": 0,
-    "fee": 0,
-    "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 45000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-22",
@@ -12399,7 +12523,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 1415000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 1415000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-22",
@@ -12409,7 +12537,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 216000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 216000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-22",
@@ -12419,7 +12551,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 128000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 128000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-22",
@@ -12429,7 +12565,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 1910000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 1910000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-22",
@@ -12439,7 +12579,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 168000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 168000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-23",
@@ -12449,7 +12593,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 490000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 490000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-23",
@@ -12459,7 +12607,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-23",
@@ -12469,7 +12621,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 200000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 200000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-23",
@@ -12479,7 +12635,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 185000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 185000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-23",
@@ -12489,7 +12649,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 13000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 13000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-24",
@@ -12499,7 +12663,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 24000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 24000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-24",
@@ -12509,7 +12677,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 262000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 262000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-24",
@@ -12519,7 +12691,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 100000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 100000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-24",
@@ -12529,7 +12705,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 202000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 202000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-25",
@@ -12539,7 +12719,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 120000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 120000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-25",
@@ -12549,7 +12733,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 18000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 18000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-25",
@@ -12559,7 +12747,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 36000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 36000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-25",
@@ -12569,7 +12761,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 200000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 200000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-25",
@@ -12579,7 +12775,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 1115000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 1115000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-25",
@@ -12589,7 +12789,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 443000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 443000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-25",
@@ -12599,7 +12803,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 120000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 120000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-25",
@@ -12609,7 +12817,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 334000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 334000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-25",
@@ -12619,7 +12831,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 188000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 188000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-25",
@@ -12629,7 +12845,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 170000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 170000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-26",
@@ -12639,7 +12859,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-27",
@@ -12649,7 +12873,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 490000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 490000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-27",
@@ -12659,7 +12887,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 36000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 36000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-27",
@@ -12669,7 +12901,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 176000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 176000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-27",
@@ -12679,7 +12915,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 369000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 369000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-27",
@@ -12689,7 +12929,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 2610000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 2610000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-27",
@@ -12699,7 +12943,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 90000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 90000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-29",
@@ -12709,7 +12957,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 632000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 632000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-29",
@@ -12719,7 +12971,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 15000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 15000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-29",
@@ -12729,7 +12985,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 500000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 500000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-30",
@@ -12739,7 +12999,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 24000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 24000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-30",
@@ -12749,7 +13013,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 495000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 495000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-30",
@@ -12759,7 +13027,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 176000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 176000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-31",
@@ -12769,7 +13041,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 158000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 158000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-31",
@@ -12779,7 +13055,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 98000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 98000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-31",
@@ -12789,7 +13069,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 120000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 120000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-31",
@@ -12799,7 +13083,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 2500000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 2500000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-31",
@@ -12809,7 +13097,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 1900000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 1900000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-31",
@@ -12819,7 +13111,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 425000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 425000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-31",
@@ -12829,7 +13125,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 48000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 48000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-31",
@@ -12839,7 +13139,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 1353000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 1353000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-03-31",
@@ -12849,7 +13153,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 730000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 730000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-01",
@@ -12859,7 +13167,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-02",
@@ -12869,7 +13181,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-02",
@@ -12879,7 +13195,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 30000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 30000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-03",
@@ -12889,7 +13209,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 60000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 60000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-03",
@@ -12899,7 +13223,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 75000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 75000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-03",
@@ -12909,7 +13237,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 20000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 20000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-03",
@@ -12919,7 +13251,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-04",
@@ -12929,7 +13265,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-04",
@@ -12939,7 +13279,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 335000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 335000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-04",
@@ -12949,7 +13293,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 180000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 180000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-05",
@@ -12959,7 +13307,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-06",
@@ -12969,7 +13321,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 490000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 490000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-06",
@@ -12979,7 +13335,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 57000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 57000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-06",
@@ -12989,7 +13349,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 182000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 182000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-06",
@@ -12999,7 +13363,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 60000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 60000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-06",
@@ -13009,7 +13377,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 233000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 233000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-06",
@@ -13019,7 +13391,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-07",
@@ -13029,7 +13405,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-07",
@@ -13039,7 +13419,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 390000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 390000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-07",
@@ -13049,7 +13433,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 72000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 72000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-08",
@@ -13059,7 +13447,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-08",
@@ -13069,7 +13461,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 550000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 550000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-09",
@@ -13079,7 +13475,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-09",
@@ -13089,7 +13489,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 362000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 362000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-09",
@@ -13099,7 +13503,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 1220000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 1220000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-10",
@@ -13109,7 +13517,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 490000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 490000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-10",
@@ -13119,7 +13531,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 200000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 200000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-11",
@@ -13129,7 +13545,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 375000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 375000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-11",
@@ -13139,7 +13559,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 24000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 24000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-11",
@@ -13149,7 +13573,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 48000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 48000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-11",
@@ -13159,7 +13587,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 362000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 362000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-11",
@@ -13169,7 +13601,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 80000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 80000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-11",
@@ -13179,7 +13615,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 670000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 670000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-11",
@@ -13189,7 +13629,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 445000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 445000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-11",
@@ -13199,7 +13643,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 275000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 275000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-12",
@@ -13209,7 +13657,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-12",
@@ -13219,7 +13671,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 15000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 15000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-12",
@@ -13229,7 +13685,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 1650000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 1650000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-13",
@@ -13239,7 +13699,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 565000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 565000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-13",
@@ -13249,7 +13713,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 496000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 496000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-13",
@@ -13259,7 +13727,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 633000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 633000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-13",
@@ -13269,7 +13741,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-14",
@@ -13279,7 +13755,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-14",
@@ -13289,7 +13769,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 490000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 490000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-14",
@@ -13299,7 +13783,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 95000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 95000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-14",
@@ -13309,7 +13797,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 233000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 233000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-15",
@@ -13319,7 +13811,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-15",
@@ -13329,7 +13825,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 95000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 95000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-15",
@@ -13339,7 +13839,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-16",
@@ -13349,7 +13853,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-16",
@@ -13359,7 +13867,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 195000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 195000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-16",
@@ -13369,7 +13881,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 14000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 14000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-17",
@@ -13379,7 +13895,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 343000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 343000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-17",
@@ -13389,7 +13909,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-18",
@@ -13399,7 +13923,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 24000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 24000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-18",
@@ -13409,7 +13937,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 48000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 48000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-18",
@@ -13419,7 +13951,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 350000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 350000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-18",
@@ -13429,7 +13965,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 50000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 50000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-18",
@@ -13439,7 +13979,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 350000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 350000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-19",
@@ -13449,7 +13993,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-19",
@@ -13459,7 +14007,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 45000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 45000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-20",
@@ -13469,7 +14021,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 500000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 500000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-20",
@@ -13479,7 +14035,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 450000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 450000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-20",
@@ -13489,7 +14049,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 1650000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 1650000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-20",
@@ -13499,7 +14063,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 233000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 233000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-20",
@@ -13509,7 +14077,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 490000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 490000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-20",
@@ -13519,7 +14091,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 55000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 55000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-20",
@@ -13529,7 +14105,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 48000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 48000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-21",
@@ -13539,7 +14119,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 237000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 237000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-21",
@@ -13549,7 +14133,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 641000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 641000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-21",
@@ -13559,7 +14147,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 24000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 24000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-21",
@@ -13569,7 +14161,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 20000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 20000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-22",
@@ -13579,7 +14175,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 490000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 490000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-22",
@@ -13589,7 +14189,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 375000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 375000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-22",
@@ -13599,7 +14203,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-23",
@@ -13609,7 +14217,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-23",
@@ -13619,7 +14231,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 72000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 72000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-24",
@@ -13629,7 +14245,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 24000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 24000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-24",
@@ -13639,7 +14259,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 365000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 365000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-24",
@@ -13649,7 +14273,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 1480000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 1480000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-25",
@@ -13659,7 +14287,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-25",
@@ -13669,7 +14301,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 490000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 490000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-26",
@@ -13679,7 +14315,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-27",
@@ -13689,7 +14329,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 336000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 336000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-27",
@@ -13699,7 +14343,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 48000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 48000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-27",
@@ -13709,7 +14357,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 600000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 600000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-27",
@@ -13719,7 +14371,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-27",
@@ -13729,7 +14385,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 18000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 18000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-27",
@@ -13739,7 +14399,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 9000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 9000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-27",
@@ -13749,7 +14413,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 21000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 21000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-28",
@@ -13759,7 +14427,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 558000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 558000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-28",
@@ -13769,7 +14441,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-28",
@@ -13779,7 +14455,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 152000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 152000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-29",
@@ -13789,7 +14469,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 48000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 48000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-29",
@@ -13799,7 +14483,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 2000000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 2000000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-29",
@@ -13809,7 +14497,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 233000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 233000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-29",
@@ -13819,7 +14511,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 12000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-30",
@@ -13829,7 +14525,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 2000000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 2000000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-30",
@@ -13839,7 +14539,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 2300000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 2300000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-30",
@@ -13849,7 +14553,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 40000,
-    "note": "Cash"
+    "note": "Cash",
+    "cash": 40000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-30",
@@ -13859,7 +14567,11 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 600000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 600000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
   },
   {
     "date": "2026-04-30",
@@ -13869,6 +14581,668 @@ export const nookExpenses: ExpenseRecord[] = [
     "tax": 0,
     "fee": 0,
     "net": 255000,
-    "note": "Transfer Bank"
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 255000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
+  },
+  {
+    "date": "2026-05-01",
+    "item": "Es",
+    "category": "Bahan Baku",
+    "gross": 12000,
+    "tax": 0,
+    "fee": 0,
+    "net": 12000,
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
+  },
+  {
+    "date": "2026-05-02",
+    "item": "Es",
+    "category": "Bahan Baku",
+    "gross": 12000,
+    "tax": 0,
+    "fee": 0,
+    "net": 12000,
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
+  },
+  {
+    "date": "2026-05-03",
+    "item": "Es",
+    "category": "Bahan Baku",
+    "gross": 12000,
+    "tax": 0,
+    "fee": 0,
+    "net": 12000,
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
+  },
+  {
+    "date": "2026-05-03",
+    "item": "Susu",
+    "category": "Bahan Baku",
+    "gross": 490000,
+    "tax": 0,
+    "fee": 0,
+    "net": 490000,
+    "note": "Cash",
+    "cash": 490000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
+  },
+  {
+    "date": "2026-05-05",
+    "item": "Es",
+    "category": "Bahan Baku",
+    "gross": 12000,
+    "tax": 0,
+    "fee": 0,
+    "net": 12000,
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
+  },
+  {
+    "date": "2026-05-05",
+    "item": "Cup",
+    "category": "Bahan Baku",
+    "gross": 375000,
+    "tax": 0,
+    "fee": 0,
+    "net": 375000,
+    "note": "Cash",
+    "cash": 375000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
+  },
+  {
+    "date": "2026-05-05",
+    "item": "Galon",
+    "category": "Bahan Baku",
+    "gross": 72000,
+    "tax": 0,
+    "fee": 0,
+    "net": 72000,
+    "note": "Cash",
+    "cash": 72000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
+  },
+  {
+    "date": "2026-05-06",
+    "item": "Es",
+    "category": "Bahan Baku",
+    "gross": 12000,
+    "tax": 0,
+    "fee": 0,
+    "net": 12000,
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
+  },
+  {
+    "date": "2026-05-06",
+    "item": "Aren+Coklat",
+    "category": "Bahan Baku",
+    "gross": 298000,
+    "tax": 0,
+    "fee": 0,
+    "net": 298000,
+    "note": "Cash",
+    "cash": 298000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
+  },
+  {
+    "date": "2026-05-06",
+    "item": "Cookies",
+    "category": "Bahan Baku",
+    "gross": 233000,
+    "tax": 0,
+    "fee": 0,
+    "net": 233000,
+    "note": "Cash",
+    "cash": 233000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
+  },
+  {
+    "date": "2026-05-06",
+    "item": "Ongkir Kaos",
+    "category": "Lain-lain",
+    "gross": 45000,
+    "tax": 0,
+    "fee": 0,
+    "net": 45000,
+    "note": "Cash",
+    "cash": 45000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
+  },
+  {
+    "date": "2026-05-07",
+    "item": "Es",
+    "category": "Bahan Baku",
+    "gross": 12000,
+    "tax": 0,
+    "fee": 0,
+    "net": 12000,
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
+  },
+  {
+    "date": "2026-05-07",
+    "item": "Spro Tanah Dieng",
+    "category": "Bahan Baku",
+    "gross": 2000000,
+    "tax": 0,
+    "fee": 0,
+    "net": 2000000,
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 2000000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
+  },
+  {
+    "date": "2026-05-07",
+    "item": "Susu Eceran",
+    "category": "Bahan Baku",
+    "gross": 63000,
+    "tax": 0,
+    "fee": 0,
+    "net": 63000,
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 63000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
+  },
+  {
+    "date": "2026-05-07",
+    "item": "Sirup Vanilla",
+    "category": "Bahan Baku",
+    "gross": 600000,
+    "tax": 0,
+    "fee": 0,
+    "net": 600000,
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 600000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
+  },
+  {
+    "date": "2026-05-07",
+    "item": "Listrik",
+    "category": "Listrik",
+    "gross": 200000,
+    "tax": 0,
+    "fee": 0,
+    "net": 200000,
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 200000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
+  },
+  {
+    "date": "2026-05-08",
+    "item": "Es",
+    "category": "Bahan Baku",
+    "gross": 12000,
+    "tax": 0,
+    "fee": 0,
+    "net": 12000,
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
+  },
+  {
+    "date": "2026-05-08",
+    "item": "Galon",
+    "category": "Bahan Baku",
+    "gross": 72000,
+    "tax": 0,
+    "fee": 0,
+    "net": 72000,
+    "note": "Cash",
+    "cash": 72000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
+  },
+  {
+    "date": "2026-05-08",
+    "item": "Susu",
+    "category": "Bahan Baku",
+    "gross": 490000,
+    "tax": 0,
+    "fee": 0,
+    "net": 490000,
+    "note": "Cash",
+    "cash": 490000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
+  },
+  {
+    "date": "2026-05-08",
+    "item": "Oatside",
+    "category": "Bahan Baku",
+    "gross": 68000,
+    "tax": 0,
+    "fee": 0,
+    "net": 68000,
+    "note": "Cash",
+    "cash": 68000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
+  },
+  {
+    "date": "2026-05-09",
+    "item": "Es",
+    "category": "Bahan Baku",
+    "gross": 12000,
+    "tax": 0,
+    "fee": 0,
+    "net": 12000,
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
+  },
+  {
+    "date": "2026-05-09",
+    "item": "Tube",
+    "category": "Lain-lain",
+    "gross": 166000,
+    "tax": 0,
+    "fee": 0,
+    "net": 166000,
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 166000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
+  },
+  {
+    "date": "2026-05-10",
+    "item": "Es",
+    "category": "Bahan Baku",
+    "gross": 24000,
+    "tax": 0,
+    "fee": 0,
+    "net": 24000,
+    "note": "Cash",
+    "cash": 24000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
+  },
+  {
+    "date": "2026-05-10",
+    "item": "Sendok",
+    "category": "Lain-lain",
+    "gross": 12000,
+    "tax": 0,
+    "fee": 0,
+    "net": 12000,
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
+  },
+  {
+    "date": "2026-05-10",
+    "item": "Krimer",
+    "category": "Bahan Baku",
+    "gross": 400000,
+    "tax": 0,
+    "fee": 0,
+    "net": 400000,
+    "note": "Cash",
+    "cash": 400000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
+  },
+  {
+    "date": "2026-05-11",
+    "item": "Es",
+    "category": "Bahan Baku",
+    "gross": 12000,
+    "tax": 0,
+    "fee": 0,
+    "net": 12000,
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
+  },
+  {
+    "date": "2026-05-11",
+    "item": "Spro Mor Mor",
+    "category": "Bahan Baku",
+    "gross": 410000,
+    "tax": 0,
+    "fee": 0,
+    "net": 410000,
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 410000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
+  },
+  {
+    "date": "2026-05-11",
+    "item": "Karpet Londry",
+    "category": "Lain-lain",
+    "gross": 45000,
+    "tax": 0,
+    "fee": 0,
+    "net": 45000,
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 45000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
+  },
+  {
+    "date": "2026-05-12",
+    "item": "Es",
+    "category": "Bahan Baku",
+    "gross": 12000,
+    "tax": 0,
+    "fee": 0,
+    "net": 12000,
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
+  },
+  {
+    "date": "2026-05-12",
+    "item": "Filter TikTok",
+    "category": "Bahan Baku",
+    "gross": 728000,
+    "tax": 0,
+    "fee": 0,
+    "net": 728000,
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 728000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
+  },
+  {
+    "date": "2026-05-12",
+    "item": "Spro Tanah Dieng",
+    "category": "Bahan Baku",
+    "gross": 2000000,
+    "tax": 0,
+    "fee": 0,
+    "net": 2000000,
+    "note": "Cash",
+    "cash": 2000000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
+  },
+  {
+    "date": "2026-05-12",
+    "item": "Susu",
+    "category": "Bahan Baku",
+    "gross": 490000,
+    "tax": 0,
+    "fee": 0,
+    "net": 490000,
+    "note": "Cash",
+    "cash": 490000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
+  },
+  {
+    "date": "2026-05-12",
+    "item": "Lemon",
+    "category": "Bahan Baku",
+    "gross": 10000,
+    "tax": 0,
+    "fee": 0,
+    "net": 10000,
+    "note": "Cash",
+    "cash": 10000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
+  },
+  {
+    "date": "2026-05-13",
+    "item": "Es",
+    "category": "Bahan Baku",
+    "gross": 12000,
+    "tax": 0,
+    "fee": 0,
+    "net": 12000,
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
+  },
+  {
+    "date": "2026-05-13",
+    "item": "Cookies",
+    "category": "Bahan Baku",
+    "gross": 233000,
+    "tax": 0,
+    "fee": 0,
+    "net": 233000,
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 233000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
+  },
+  {
+    "date": "2026-05-14",
+    "item": "Matcha",
+    "category": "Bahan Baku",
+    "gross": 248000,
+    "tax": 0,
+    "fee": 0,
+    "net": 248000,
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 248000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
+  },
+  {
+    "date": "2026-05-14",
+    "item": "Es",
+    "category": "Bahan Baku",
+    "gross": 24000,
+    "tax": 0,
+    "fee": 0,
+    "net": 24000,
+    "note": "Cash",
+    "cash": 24000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
+  },
+  {
+    "date": "2026-05-14",
+    "item": "Spro Koeslan",
+    "category": "Bahan Baku",
+    "gross": 1150000,
+    "tax": 0,
+    "fee": 0,
+    "net": 1150000,
+    "note": "Transfer Bank",
+    "cash": 0,
+    "qris": 1150000,
+    "paymentMethod": "qris",
+    "source": "Pengeluarab.xlsx"
+  },
+  {
+    "date": "2026-05-14",
+    "item": "Aren",
+    "category": "Bahan Baku",
+    "gross": 88000,
+    "tax": 0,
+    "fee": 0,
+    "net": 88000,
+    "note": "Cash",
+    "cash": 88000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
+  },
+  {
+    "date": "2026-05-14",
+    "item": "Galon",
+    "category": "Bahan Baku",
+    "gross": 72000,
+    "tax": 0,
+    "fee": 0,
+    "net": 72000,
+    "note": "Cash",
+    "cash": 72000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
+  },
+  {
+    "date": "2026-05-15",
+    "item": "Es",
+    "category": "Bahan Baku",
+    "gross": 12000,
+    "tax": 0,
+    "fee": 0,
+    "net": 12000,
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
+  },
+  {
+    "date": "2026-05-15",
+    "item": "Buah Vita",
+    "category": "Bahan Baku",
+    "gross": 62000,
+    "tax": 0,
+    "fee": 0,
+    "net": 62000,
+    "note": "Cash",
+    "cash": 62000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
+  },
+  {
+    "date": "2026-05-15",
+    "item": "Trashbag",
+    "category": "Lain-lain",
+    "gross": 85000,
+    "tax": 0,
+    "fee": 0,
+    "net": 85000,
+    "note": "Cash",
+    "cash": 85000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
+  },
+  {
+    "date": "2026-05-15",
+    "item": "Cup",
+    "category": "Bahan Baku",
+    "gross": 385000,
+    "tax": 0,
+    "fee": 0,
+    "net": 385000,
+    "note": "Cash",
+    "cash": 385000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
+  },
+  {
+    "date": "2026-05-15",
+    "item": "Susu",
+    "category": "Lain-lain",
+    "gross": 490000,
+    "tax": 0,
+    "fee": 0,
+    "net": 490000,
+    "note": "Cash",
+    "cash": 490000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
+  },
+  {
+    "date": "2026-05-16",
+    "item": "Es",
+    "category": "Bahan Baku",
+    "gross": 12000,
+    "tax": 0,
+    "fee": 0,
+    "net": 12000,
+    "note": "Cash",
+    "cash": 12000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
+  },
+  {
+    "date": "2026-05-16",
+    "item": "Lemon",
+    "category": "Bahan Baku",
+    "gross": 40000,
+    "tax": 0,
+    "fee": 0,
+    "net": 40000,
+    "note": "Cash",
+    "cash": 40000,
+    "qris": 0,
+    "paymentMethod": "cash",
+    "source": "Pengeluarab.xlsx"
   }
 ];

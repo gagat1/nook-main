@@ -6,8 +6,9 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { ExpenseRecord, IncomeRecord, nookExpenses, nookIncome } from '../data/nookFinance';
-import { loadJsonRows, upsertJsonRows } from '../lib/supabaseSync';
+import { ExpenseRecord, IncomeRecord } from '../data/nookFinance';
+import { hasPreSeedFinanceDates, seedExpenseRecords, seedIncomeRecords, shouldResetFinanceRows } from '../lib/financeSeed';
+import { loadJsonRows, replaceJsonRows, upsertJsonRows } from '../lib/supabaseSync';
 
 type EditableIncomeRecord = IncomeRecord & { id: string };
 type EditableExpenseRecord = ExpenseRecord & { id: string };
@@ -145,22 +146,28 @@ function withExpenseIds(records: ExpenseRecord[], prefix: string): EditableExpen
 function loadLocalIncome() {
   try {
     const saved = window.localStorage.getItem('nook-finance-income-records');
-    if (saved) return (JSON.parse(saved) as EditableIncomeRecord[]).filter((record) => isValidDateString(record.date));
+    if (saved) {
+      const records = (JSON.parse(saved) as EditableIncomeRecord[]).filter((record) => isValidDateString(record.date));
+      return hasPreSeedFinanceDates(records) ? seedIncomeRecords() : records;
+    }
     const legacyManual = JSON.parse(window.localStorage.getItem('nook-manual-income') || '[]') as IncomeRecord[];
-    return [...withIncomeIds(nookIncome, 'seed-income'), ...withIncomeIds(legacyManual, 'legacy-income')];
+    return [...seedIncomeRecords(), ...withIncomeIds(legacyManual, 'legacy-income')];
   } catch {
-    return withIncomeIds(nookIncome, 'seed-income');
+    return seedIncomeRecords();
   }
 }
 
 function loadLocalExpenses() {
   try {
     const saved = window.localStorage.getItem('nook-finance-expense-records');
-    if (saved) return (JSON.parse(saved) as EditableExpenseRecord[]).filter((record) => isValidDateString(record.date));
+    if (saved) {
+      const records = (JSON.parse(saved) as EditableExpenseRecord[]).filter((record) => isValidDateString(record.date));
+      return hasPreSeedFinanceDates(records) ? seedExpenseRecords() : records;
+    }
     const legacyManual = JSON.parse(window.localStorage.getItem('nook-manual-expenses') || '[]') as ExpenseRecord[];
-    return [...withExpenseIds(nookExpenses, 'seed-expense'), ...withExpenseIds(legacyManual, 'legacy-expense')];
+    return [...seedExpenseRecords(), ...withExpenseIds(legacyManual, 'legacy-expense')];
   } catch {
-    return withExpenseIds(nookExpenses, 'seed-expense');
+    return seedExpenseRecords();
   }
 }
 
@@ -482,8 +489,22 @@ export function MonthlyOperationsReportView() {
           loadJsonRows<EditableExpenseRecord>(FINANCE_TABLES.expenses),
           loadJsonRows<{ id: string; fixedCostDaily?: number }>(SETTINGS_TABLE),
         ]);
-        if (income.length) setIncomeRecords(income.filter((record) => isValidDateString(record.date)));
-        if (expenses.length) setExpenseRecords(expenses.filter((record) => isValidDateString(record.date)));
+        const validIncome = income.filter((record) => isValidDateString(record.date));
+        const validExpenses = expenses.filter((record) => isValidDateString(record.date));
+        if (shouldResetFinanceRows(validIncome)) {
+          const seededIncome = seedIncomeRecords();
+          setIncomeRecords(seededIncome);
+          void replaceJsonRows(FINANCE_TABLES.income, seededIncome).catch((error) => console.warn('Monthly report seed sync skipped:', error));
+        } else {
+          setIncomeRecords(validIncome);
+        }
+        if (shouldResetFinanceRows(validExpenses)) {
+          const seededExpenses = seedExpenseRecords();
+          setExpenseRecords(seededExpenses);
+          void replaceJsonRows(FINANCE_TABLES.expenses, seededExpenses).catch((error) => console.warn('Monthly report seed sync skipped:', error));
+        } else {
+          setExpenseRecords(validExpenses);
+        }
         const financeSettings = settings.find((item) => item.id === 'finance');
         if (financeSettings?.fixedCostDaily) {
           setFixedCostDaily(financeSettings.fixedCostDaily);

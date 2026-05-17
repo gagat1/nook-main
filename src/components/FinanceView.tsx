@@ -20,9 +20,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { toast } from 'sonner';
-import { ExpenseRecord, IncomeRecord, nookExpenses, nookIncome } from '../data/nookFinance';
+import { ExpenseRecord, IncomeRecord } from '../data/nookFinance';
 import { isSupabaseConfigured } from '../lib/supabase';
-import { deleteJsonRow, loadJsonRows, upsertJsonRow, upsertJsonRows } from '../lib/supabaseSync';
+import { hasPreSeedFinanceDates, seedExpenseRecords, seedIncomeRecords, shouldResetFinanceRows } from '../lib/financeSeed';
+import { deleteJsonRow, loadJsonRows, replaceJsonRows, upsertJsonRow, upsertJsonRows } from '../lib/supabaseSync';
 
 type PeriodSummary = {
   key: string;
@@ -481,22 +482,28 @@ export function FinanceView() {
     if (typeof window === 'undefined') return [];
     try {
       const saved = window.localStorage.getItem('nook-finance-income-records');
-      if (saved) return (JSON.parse(saved) as EditableIncomeRecord[]).filter(hasValidRecordDate);
+      if (saved) {
+        const records = (JSON.parse(saved) as EditableIncomeRecord[]).filter(hasValidRecordDate);
+        return hasPreSeedFinanceDates(records) ? seedIncomeRecords() : records;
+      }
       const legacyManual = JSON.parse(window.localStorage.getItem('nook-manual-income') || '[]') as IncomeRecord[];
-      return [...withIncomeIds(nookIncome, 'seed-income'), ...withIncomeIds(legacyManual, 'legacy-income')];
+      return [...seedIncomeRecords(), ...withIncomeIds(legacyManual, 'legacy-income')];
     } catch {
-      return withIncomeIds(nookIncome, 'seed-income');
+      return seedIncomeRecords();
     }
   });
   const [expenseRecords, setExpenseRecords] = useState<EditableExpenseRecord[]>(() => {
     if (typeof window === 'undefined') return [];
     try {
       const saved = window.localStorage.getItem('nook-finance-expense-records');
-      if (saved) return (JSON.parse(saved) as EditableExpenseRecord[]).filter(hasValidRecordDate);
+      if (saved) {
+        const records = (JSON.parse(saved) as EditableExpenseRecord[]).filter(hasValidRecordDate);
+        return hasPreSeedFinanceDates(records) ? seedExpenseRecords() : records;
+      }
       const legacyManual = JSON.parse(window.localStorage.getItem('nook-manual-expenses') || '[]') as ExpenseRecord[];
-      return [...withExpenseIds(nookExpenses, 'seed-expense'), ...withExpenseIds(legacyManual, 'legacy-expense')];
+      return [...seedExpenseRecords(), ...withExpenseIds(legacyManual, 'legacy-expense')];
     } catch {
-      return withExpenseIds(nookExpenses, 'seed-expense');
+      return seedExpenseRecords();
     }
   });
   const incomeRecordsRef = useRef(incomeRecords);
@@ -527,7 +534,11 @@ export function FinanceView() {
         const validSupabaseExpenses = supabaseExpenses.filter(hasValidRecordDate);
         const invalidSupabaseExpenses = supabaseExpenses.filter((record) => !hasValidRecordDate(record));
 
-        if (validSupabaseIncome.length) {
+        if (shouldResetFinanceRows(validSupabaseIncome)) {
+          const seededIncome = seedIncomeRecords();
+          setIncomeRecords(seededIncome);
+          void replaceJsonRows(FINANCE_TABLES.income, seededIncome).catch(syncError);
+        } else if (validSupabaseIncome.length) {
           const merged = mergeFinanceRecords<EditableIncomeRecord>([], validSupabaseIncome, incomeIdentity);
           setIncomeRecords(merged.records);
           void persistFinanceMerge(
@@ -535,11 +546,12 @@ export function FinanceView() {
             merged.upserts,
             [...merged.removedIds, ...invalidSupabaseIncome.map((record) => record.id)]
           ).catch(syncError);
-        } else {
-          setIncomeRecords([]);
-          void Promise.all(invalidSupabaseIncome.map((record) => deleteJsonRow(FINANCE_TABLES.income, record.id))).catch(syncError);
         }
-        if (validSupabaseExpenses.length) {
+        if (shouldResetFinanceRows(validSupabaseExpenses)) {
+          const seededExpenses = seedExpenseRecords();
+          setExpenseRecords(seededExpenses);
+          void replaceJsonRows(FINANCE_TABLES.expenses, seededExpenses).catch(syncError);
+        } else if (validSupabaseExpenses.length) {
           const merged = mergeFinanceRecords<EditableExpenseRecord>([], validSupabaseExpenses, expenseIdentity);
           setExpenseRecords(merged.records);
           void persistFinanceMerge(
@@ -547,9 +559,6 @@ export function FinanceView() {
             merged.upserts,
             [...merged.removedIds, ...invalidSupabaseExpenses.map((record) => record.id)]
           ).catch(syncError);
-        } else {
-          setExpenseRecords([]);
-          void Promise.all(invalidSupabaseExpenses.map((record) => deleteJsonRow(FINANCE_TABLES.expenses, record.id))).catch(syncError);
         }
       } catch (error) {
         syncError(error);

@@ -23,8 +23,8 @@ import { toast } from 'sonner';
 import { ExpenseRecord, IncomeRecord } from '../data/nookFinance';
 import { expensePaymentFields, inferExpensePaymentMethod, normalizeExpensePayment, type FinancePaymentMethod } from '../lib/financePayments';
 import { isSupabaseConfigured } from '../lib/supabase';
-import { hasPreSeedFinanceDates, seedExpenseRecords, seedIncomeRecords, shouldResetFinanceRows } from '../lib/financeSeed';
-import { deleteJsonRow, loadJsonRows, replaceJsonRows, upsertJsonRow, upsertJsonRows } from '../lib/supabaseSync';
+import { seedExpenseRecords, seedIncomeRecords } from '../lib/financeSeed';
+import { deleteJsonRow, loadJsonRows, upsertJsonRow, upsertJsonRows } from '../lib/supabaseSync';
 
 type PeriodSummary = {
   key: string;
@@ -473,7 +473,7 @@ export function FinanceView() {
       const saved = window.localStorage.getItem('nook-finance-income-records');
       if (saved) {
         const records = (JSON.parse(saved) as EditableIncomeRecord[]).filter(hasValidRecordDate);
-        return hasPreSeedFinanceDates(records) ? seedIncomeRecords() : records;
+        return records;
       }
       const legacyManual = JSON.parse(window.localStorage.getItem('nook-manual-income') || '[]') as IncomeRecord[];
       return [...seedIncomeRecords(), ...withIncomeIds(legacyManual, 'legacy-income')];
@@ -487,7 +487,7 @@ export function FinanceView() {
       const saved = window.localStorage.getItem('nook-finance-expense-records');
       if (saved) {
         const records = (JSON.parse(saved) as EditableExpenseRecord[]).filter(hasValidRecordDate).map(normalizeExpensePayment);
-        return hasPreSeedFinanceDates(records) ? seedExpenseRecords() : records;
+        return records;
       }
       const legacyManual = JSON.parse(window.localStorage.getItem('nook-manual-expenses') || '[]') as ExpenseRecord[];
       return [...seedExpenseRecords(), ...withExpenseIds(legacyManual, 'legacy-expense')];
@@ -523,11 +523,7 @@ export function FinanceView() {
         const validSupabaseExpenses = supabaseExpenses.filter(hasValidRecordDate).map(normalizeExpensePayment);
         const invalidSupabaseExpenses = supabaseExpenses.filter((record) => !hasValidRecordDate(record));
 
-        if (shouldResetFinanceRows(validSupabaseIncome)) {
-          const seededIncome = seedIncomeRecords();
-          setIncomeRecords(seededIncome);
-          void replaceJsonRows(FINANCE_TABLES.income, seededIncome).catch(syncError);
-        } else if (validSupabaseIncome.length) {
+        if (validSupabaseIncome.length) {
           const merged = mergeFinanceRecords<EditableIncomeRecord>([], validSupabaseIncome, incomeIdentity);
           setIncomeRecords(merged.records);
           void persistFinanceMerge(
@@ -535,12 +531,11 @@ export function FinanceView() {
             merged.upserts,
             [...merged.removedIds, ...invalidSupabaseIncome.map((record) => record.id)]
           ).catch(syncError);
+        } else {
+          setIncomeRecords([]);
+          void Promise.all(invalidSupabaseIncome.map((record) => deleteJsonRow(FINANCE_TABLES.income, record.id))).catch(syncError);
         }
-        if (shouldResetFinanceRows(validSupabaseExpenses)) {
-          const seededExpenses = seedExpenseRecords();
-          setExpenseRecords(seededExpenses);
-          void replaceJsonRows(FINANCE_TABLES.expenses, seededExpenses).catch(syncError);
-        } else if (validSupabaseExpenses.length) {
+        if (validSupabaseExpenses.length) {
           const merged = mergeFinanceRecords<EditableExpenseRecord>([], validSupabaseExpenses, expenseIdentity);
           setExpenseRecords(merged.records);
           void persistFinanceMerge(
@@ -548,6 +543,9 @@ export function FinanceView() {
             merged.upserts,
             [...merged.removedIds, ...invalidSupabaseExpenses.map((record) => record.id)]
           ).catch(syncError);
+        } else {
+          setExpenseRecords([]);
+          void Promise.all(invalidSupabaseExpenses.map((record) => deleteJsonRow(FINANCE_TABLES.expenses, record.id))).catch(syncError);
         }
       } catch (error) {
         syncError(error);

@@ -1,4 +1,4 @@
-import { deleteRow, isSupabaseConfigured, selectAllRows, selectRows, upsertRows } from './supabase';
+import { deleteAllRows, deleteRow, isSupabaseConfigured, selectAllRows, selectRows, upsertRows } from './supabase';
 
 export type JsonRow<T> = {
   id: string;
@@ -57,6 +57,11 @@ export async function replaceJsonRows<T extends { id: string }>(table: string, r
 export async function deleteJsonRow(table: string, id: string) {
   if (!isSupabaseConfigured) return;
   await deleteRow(table, id);
+}
+
+export async function deleteAllJsonRows(table: string) {
+  if (!isSupabaseConfigured) return;
+  await deleteAllRows(table);
 }
 
 export async function saveSingleton<T extends object>(table: string, id: string, data: T) {

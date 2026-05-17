@@ -147,31 +147,18 @@ export const useScheduleStore = create<ScheduleState>()(
           ]);
 
           const appSettings = settings.find((item) => item.id === 'app');
-          const nextEmployees = employees.length ? employees : get().employees;
-          const nextShifts = shifts.length ? shifts : get().shifts;
-          const nextLeaves = leaves.length ? leaves.map(serializeLeave) : get().leaves;
-          const nextSchedules = schedules.length ? schedules.map(serializeSchedule) : get().schedules;
 
           set((state) => ({
-            employees: nextEmployees,
-            shifts: nextShifts,
-            leaves: nextLeaves,
-            schedules: nextSchedules,
+            employees,
+            shifts,
+            leaves: leaves.map(serializeLeave),
+            schedules: schedules.map(serializeSchedule),
             constraints: appSettings?.constraints || state.constraints,
             theme: appSettings?.theme || state.theme,
             authCredentials: appSettings?.authCredentials || state.authCredentials,
             isSupabaseReady: true,
           }));
 
-          if (!employees.length) void upsertJsonRows(TABLES.employees, nextEmployees).catch(syncError);
-          if (!shifts.length) void upsertJsonRows(TABLES.shifts, nextShifts).catch(syncError);
-          if (!leaves.length && nextLeaves.length) void upsertJsonRows(TABLES.leaves, nextLeaves).catch(syncError);
-          if (!schedules.length && nextSchedules.length) void upsertJsonRows(TABLES.schedules, nextSchedules).catch(syncError);
-          if (!appSettings) void saveSingleton(TABLES.settings, 'app', {
-            constraints: get().constraints,
-            theme: get().theme,
-            authCredentials: get().authCredentials,
-          }).catch(syncError);
           if (appSettings && !appSettings.authCredentials) void saveSingleton(TABLES.settings, 'app', {
             constraints: get().constraints,
             theme: get().theme,

@@ -93,3 +93,12 @@ export async function deleteRow(table: string, id: string): Promise<void> {
     },
   });
 }
+
+export async function deleteAllRows(table: string): Promise<void> {
+  await request(`${table}?id=not.is.null`, {
+    method: 'DELETE',
+    headers: {
+      Prefer: 'return=minimal',
+    },
+  });
+}

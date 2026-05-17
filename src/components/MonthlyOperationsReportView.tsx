@@ -7,9 +7,9 @@ import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { ExpenseRecord, IncomeRecord } from '../data/nookFinance';
-import { hasPreSeedFinanceDates, seedExpenseRecords, seedIncomeRecords, shouldResetFinanceRows } from '../lib/financeSeed';
+import { seedExpenseRecords, seedIncomeRecords } from '../lib/financeSeed';
 import { expensePaymentBreakdown, expensePaymentFields, inferExpensePaymentMethod, normalizeExpensePayment } from '../lib/financePayments';
-import { loadJsonRows, replaceJsonRows, upsertJsonRows } from '../lib/supabaseSync';
+import { loadJsonRows, upsertJsonRows } from '../lib/supabaseSync';
 
 type EditableIncomeRecord = IncomeRecord & { id: string };
 type EditableExpenseRecord = ExpenseRecord & { id: string };
@@ -149,7 +149,7 @@ function loadLocalIncome() {
     const saved = window.localStorage.getItem('nook-finance-income-records');
     if (saved) {
       const records = (JSON.parse(saved) as EditableIncomeRecord[]).filter((record) => isValidDateString(record.date));
-      return hasPreSeedFinanceDates(records) ? seedIncomeRecords() : records;
+      return records;
     }
     const legacyManual = JSON.parse(window.localStorage.getItem('nook-manual-income') || '[]') as IncomeRecord[];
     return [...seedIncomeRecords(), ...withIncomeIds(legacyManual, 'legacy-income')];
@@ -163,7 +163,7 @@ function loadLocalExpenses() {
     const saved = window.localStorage.getItem('nook-finance-expense-records');
     if (saved) {
       const records = (JSON.parse(saved) as EditableExpenseRecord[]).filter((record) => isValidDateString(record.date)).map(normalizeExpensePayment);
-      return hasPreSeedFinanceDates(records) ? seedExpenseRecords() : records;
+      return records;
     }
     const legacyManual = JSON.parse(window.localStorage.getItem('nook-manual-expenses') || '[]') as ExpenseRecord[];
     return [...seedExpenseRecords(), ...withExpenseIds(legacyManual, 'legacy-expense')];
@@ -495,20 +495,8 @@ export function MonthlyOperationsReportView() {
         ]);
         const validIncome = income.filter((record) => isValidDateString(record.date));
         const validExpenses = expenses.filter((record) => isValidDateString(record.date)).map(normalizeExpensePayment);
-        if (shouldResetFinanceRows(validIncome)) {
-          const seededIncome = seedIncomeRecords();
-          setIncomeRecords(seededIncome);
-          void replaceJsonRows(FINANCE_TABLES.income, seededIncome).catch((error) => console.warn('Monthly report seed sync skipped:', error));
-        } else {
-          setIncomeRecords(validIncome);
-        }
-        if (shouldResetFinanceRows(validExpenses)) {
-          const seededExpenses = seedExpenseRecords();
-          setExpenseRecords(seededExpenses);
-          void replaceJsonRows(FINANCE_TABLES.expenses, seededExpenses).catch((error) => console.warn('Monthly report seed sync skipped:', error));
-        } else {
-          setExpenseRecords(validExpenses);
-        }
+        setIncomeRecords(validIncome);
+        setExpenseRecords(validExpenses);
         const financeSettings = settings.find((item) => item.id === 'finance');
         if (financeSettings?.fixedCostDaily) {
           setFixedCostDaily(financeSettings.fixedCostDaily);

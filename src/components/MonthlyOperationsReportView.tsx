@@ -68,6 +68,10 @@ function formatPlainNumber(value: number) {
   return new Intl.NumberFormat('id-ID', { maximumFractionDigits: 2 }).format(value || 0);
 }
 
+function formatInputNumber(value: number) {
+  return new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 }).format(Math.round(value || 0));
+}
+
 function toNumber(value: unknown) {
   if (typeof value === 'number') return value;
   if (typeof value === 'string') {
@@ -521,9 +525,15 @@ export function MonthlyOperationsReportView() {
     fixedCost: sum(activeRows.map((row) => row.fixedCost)),
     expenses: sum(activeRows.map((row) => row.expense)),
   };
-  const totalNetProfit = summary.productProfit - summary.fixedCost - summary.expenses;
+  const totalNetProfit = summary.productProfit - summary.fixedCost;
   const selectedLabel = selectedMonth ? format(parseISO(`${selectedMonth}-01`), 'MMMM yyyy') : 'No Data';
-  const latestInputRow = [...activeRows].reverse().find((row) => row.actualCashEntered || row.actualQrisEntered) || activeRows[activeRows.length - 1];
+  const latestInputIndex = (() => {
+    for (let index = activeRows.length - 1; index >= 0; index -= 1) {
+      if (activeRows[index].actualCashEntered || activeRows[index].actualQrisEntered) return index;
+    }
+    return activeRows.length - 1;
+  })();
+  const latestInputRow = latestInputIndex >= 0 ? activeRows[latestInputIndex] : undefined;
   const monthlyExpectedCash = sum(activeRows.map((row) => row.cash));
   const monthlyExpectedQris = sum(activeRows.map((row) => row.qris));
   const latestActualCash = latestInputRow?.actualCash ?? 0;
@@ -549,27 +559,34 @@ export function MonthlyOperationsReportView() {
     if (!isEditing) setIsEditing(true);
   };
 
-  const updateActualAmounts = (date: string, actualCash: number, actualQris: number) => {
-    if (!isValidDateString(date)) {
-      toast.error('Choose a valid date');
-      return;
-    }
-    if (actualCash < 0 || actualQris < 0) {
-      toast.error('Cash and QRIS cannot be negative');
-      return;
-    }
-
-    setSelectedMonth(monthKey(date));
+  const updateLatestActual = (updates: Pick<DailyReportRow, 'actualCash'> | Pick<DailyReportRow, 'actualQris'>) => {
     setDraftRows((current) => {
       const source = isEditing ? current : dailyRows;
-      const existingIndex = source.findIndex((row) => row.date === date);
-      const next = existingIndex >= 0
-        ? source.map((row, rowIndex) => rowIndex === existingIndex ? withFormula({ ...row, actualCash, actualQris, actualCashEntered: true, actualQrisEntered: true }) : row)
-        : [...source, withFormula({ ...blankDailyRow(date), actualCash, actualQris, actualCashEntered: true, actualQrisEntered: true })];
+      const targetIndex = (() => {
+        for (let index = source.length - 1; index >= 0; index -= 1) {
+          if (source[index].actualCashEntered || source[index].actualQrisEntered) return index;
+        }
+        return source.length - 1;
+      })();
+      const next = targetIndex >= 0
+        ? source.map((row, rowIndex) => {
+          if (rowIndex !== targetIndex) return row;
+          return withFormula({
+            ...row,
+            ...updates,
+            actualCashEntered: 'actualCash' in updates ? true : row.actualCashEntered,
+            actualQrisEntered: 'actualQris' in updates ? true : row.actualQrisEntered,
+          });
+        })
+        : [withFormula({
+          ...blankDailyRow(selectedMonth ? `${selectedMonth}-01` : new Date().toISOString().slice(0, 10)),
+          ...updates,
+          actualCashEntered: 'actualCash' in updates,
+          actualQrisEntered: 'actualQris' in updates,
+        })];
       return next.sort((a, b) => a.date.localeCompare(b.date));
     });
     if (!isEditing) setIsEditing(true);
-    toast.success('Daily cash and QRIS updated');
   };
 
   const importRows = async (rows: DailyReportRow[]) => {
@@ -672,35 +689,28 @@ export function MonthlyOperationsReportView() {
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-6">
         <MetricCard icon={WalletCards} label="Expected Cash" value={formatMoney(monthlyExpectedCash)} />
-        <MetricCard icon={WalletCards} label="Latest Actual Cash" value={formatMoney(latestInputRow?.actualCash ?? 0)} />
+        <EditableMetricCard icon={WalletCards} label="Latest Actual Cash" value={latestActualCash} onChange={(value) => updateLatestActual({ actualCash: value })} />
         <MetricCard icon={BarChart3} label="Cash Difference" value={formatMoney(latestActualCash - monthlyExpectedCash)} />
         <MetricCard icon={WalletCards} label="Expected QRIS" value={formatMoney(monthlyExpectedQris)} />
-        <MetricCard icon={WalletCards} label="Latest Actual QRIS" value={formatMoney(latestInputRow?.actualQris ?? 0)} />
+        <EditableMetricCard icon={WalletCards} label="Latest Actual QRIS" value={latestActualQris} onChange={(value) => updateLatestActual({ actualQris: value })} />
         <MetricCard icon={BarChart3} label="QRIS Difference" value={formatMoney(latestActualQris - monthlyExpectedQris)} />
       </div>
 
-      <DailyCashInputCard
-        selectedMonth={selectedMonth}
-        onUpdateActual={updateActualAmounts}
-      />
-
       <DailyReportTable rows={activeRows} onChangeRow={updateDailyRow} />
 
-      <div className="max-w-4xl">
+      <div className="max-w-5xl">
         <ReportSummaryCard
           monthLabel={selectedLabel}
           rows={[
-            ['Average Daily Transactions', formatPlainNumber(summary.transactions / activeDays)],
-            ['Average Daily Revenue', formatMoney(summary.gross / activeDays)],
-            ['Average Product Profit', formatMoney(summary.productProfit / activeDays)],
-            ['Transactions', formatPlainNumber(summary.transactions)],
-            ['Total Cash + QRIS', formatMoney(summary.total)],
-            ['Product Profit', formatMoney(summary.productProfit)],
             ['Total Gross Revenue', formatMoney(summary.gross)],
-            ['COGS', formatMoney(summary.cogs), 'danger'],
             ['Discount', formatMoney(summary.discount), 'danger'],
+            ['Money Received', formatMoney(summary.received)],
+            ['COGS', formatMoney(summary.cogs), 'danger'],
+            ['Product Profit', formatMoney(summary.productProfit)],
             ['Fixed Cost', formatMoney(summary.fixedCost), 'danger'],
-            ['Other Expenses', formatMoney(summary.expenses), 'danger'],
+            ['Total Cash + QRIS', formatMoney(summary.total)],
+            ['Latest Actual Cash', formatMoney(latestActualCash)],
+            ['Latest Actual QRIS', formatMoney(latestActualQris)],
             ['Total Net Profit', formatMoney(totalNetProfit), 'total'],
           ]}
         />
@@ -721,6 +731,23 @@ function MetricCard({ icon: Icon, label, value }: { icon: typeof FileSpreadsheet
   );
 }
 
+function EditableMetricCard({ icon: Icon, label, value, onChange }: { icon: typeof FileSpreadsheet; label: string; value: number; onChange: (value: number) => void }) {
+  return (
+    <Card className="rounded-sm border-border bg-card p-5 shadow-none">
+      <div className="flex items-center justify-between">
+        <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">{label}</span>
+        <Icon className="h-4 w-4 text-foreground" />
+      </div>
+      <Input
+        inputMode="numeric"
+        value={formatInputNumber(value)}
+        onChange={(event) => onChange(toNumber(event.target.value))}
+        className="mt-4 h-14 rounded-sm border-border bg-background px-3 font-mono text-2xl text-foreground"
+      />
+    </Card>
+  );
+}
+
 function ReportSummaryCard({ monthLabel, rows }: { monthLabel: string; rows: Array<[string, string, ('danger' | 'total')?]> }) {
   return (
     <Card className="overflow-hidden rounded-sm border-border bg-card shadow-none">
@@ -734,75 +761,6 @@ function ReportSummaryCard({ monthLabel, rows }: { monthLabel: string; rows: Arr
             <span className={tone === 'danger' ? 'font-mono font-semibold text-red-500' : 'font-mono text-foreground'}>{value}</span>
           </div>
         ))}
-      </div>
-    </Card>
-  );
-}
-
-function DailyCashInputCard({
-  selectedMonth,
-  onUpdateActual,
-}: {
-  selectedMonth: string;
-  onUpdateActual: (date: string, actualCash: number, actualQris: number) => void;
-}) {
-  const defaultDate = selectedMonth ? `${selectedMonth}-01` : new Date().toISOString().slice(0, 10);
-  const [date, setDate] = useState(defaultDate);
-  const [actualCash, setActualCash] = useState(0);
-  const [actualQris, setActualQris] = useState(0);
-
-  useEffect(() => {
-    setDate(defaultDate);
-  }, [defaultDate]);
-
-  const submitActual = () => {
-    if (actualCash <= 0 && actualQris <= 0) {
-      toast.error('Cash or QRIS must be greater than 0');
-      return;
-    }
-    onUpdateActual(date, actualCash, actualQris);
-    setActualCash(0);
-    setActualQris(0);
-  };
-
-  return (
-    <Card className="rounded-sm border-border bg-card shadow-none">
-      <div className="flex flex-col gap-4 border-b border-border px-4 py-4 lg:flex-row lg:items-end lg:justify-between">
-        <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">Daily Cash & QRIS Input</span>
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-[160px_180px_180px_auto] sm:items-end">
-          <div className="space-y-2">
-            <span className="block text-[9px] font-bold uppercase tracking-widest text-muted-foreground">Date</span>
-            <Input
-              type="date"
-              value={date}
-              onChange={(event) => setDate(event.target.value)}
-              className="h-10 rounded-sm border-border bg-background text-xs"
-            />
-          </div>
-          <div className="space-y-2">
-            <span className="block text-[9px] font-bold uppercase tracking-widest text-muted-foreground">Cash Amount</span>
-            <Input
-              type="number"
-              min="0"
-              value={actualCash}
-              onChange={(event) => setActualCash(toNumber(event.target.value))}
-              className="h-10 rounded-sm border-border bg-background text-xs"
-            />
-          </div>
-          <div className="space-y-2">
-            <span className="block text-[9px] font-bold uppercase tracking-widest text-muted-foreground">QRIS Amount</span>
-            <Input
-              type="number"
-              min="0"
-              value={actualQris}
-              onChange={(event) => setActualQris(toNumber(event.target.value))}
-              className="h-10 rounded-sm border-border bg-background text-xs"
-            />
-          </div>
-          <Button type="button" onClick={submitActual} className="h-10 rounded-sm bg-foreground px-5 text-[10px] uppercase tracking-[0.2em] text-background">
-            Add
-          </Button>
-        </div>
       </div>
     </Card>
   );
@@ -868,9 +826,8 @@ function EditableMoneyCell({ value, onChange }: { value: number; onChange: (valu
   return (
     <span className="min-h-10 border-r border-border/70 p-1.5 last:border-r-0">
       <Input
-        type="number"
-        min="0"
-        value={value}
+        inputMode="numeric"
+        value={formatInputNumber(value)}
         onChange={(event) => onChange(toNumber(event.target.value))}
         className="h-8 rounded-sm border-border bg-background px-2 font-mono text-xs"
       />

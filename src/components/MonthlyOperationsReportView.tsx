@@ -32,6 +32,8 @@ type DailyReportRow = {
   expectedQris: number;
   actualCash: number;
   actualQris: number;
+  actualCashEntered: boolean;
+  actualQrisEntered: boolean;
   cashDifference: number;
   qrisDifference: number;
   total: number;
@@ -221,6 +223,8 @@ function buildDailyRows(incomeRecords: EditableIncomeRecord[], expenseRecords: E
       expectedQris,
       actualCash,
       actualQris,
+      actualCashEntered: hasActualCash,
+      actualQrisEntered: hasActualQris,
       cashDifference: actualCash - expectedCash,
       qrisDifference: actualQris - expectedQris,
       total: actualCash + actualQris || received,
@@ -266,6 +270,8 @@ function blankDailyRow(date: string): DailyReportRow {
     expectedQris: 0,
     actualCash: 0,
     actualQris: 0,
+    actualCashEntered: false,
+    actualQrisEntered: false,
     cashDifference: 0,
     qrisDifference: 0,
     total: 0,
@@ -417,6 +423,8 @@ function parseDailyFinanceRows(rows: unknown[][]) {
       expectedQris: 0,
       actualCash: 0,
       actualQris: 0,
+      actualCashEntered: false,
+      actualQrisEntered: false,
       cashDifference: 0,
       qrisDifference: 0,
       total: 0,
@@ -491,6 +499,7 @@ export function MonthlyOperationsReportView() {
   };
   const totalNetProfit = summary.productProfit - summary.fixedCost - summary.expenses;
   const selectedLabel = selectedMonth ? format(parseISO(`${selectedMonth}-01`), 'MMMM yyyy') : 'No Data';
+  const latestInputRow = [...activeRows].reverse().find((row) => row.actualCashEntered || row.actualQrisEntered) || activeRows[activeRows.length - 1];
 
   useEffect(() => {
     if (!isEditing) setDraftRows(dailyRows);
@@ -499,7 +508,15 @@ export function MonthlyOperationsReportView() {
   const updateActualRow = (index: number, updates: Pick<DailyReportRow, 'actualCash'> | Pick<DailyReportRow, 'actualQris'>) => {
     setDraftRows((current) => {
       const source = isEditing ? current : dailyRows;
-      return source.map((row, rowIndex) => rowIndex === index ? withFormula({ ...row, ...updates }) : row);
+      return source.map((row, rowIndex) => {
+        if (rowIndex !== index) return row;
+        return withFormula({
+          ...row,
+          ...updates,
+          actualCashEntered: 'actualCash' in updates ? true : row.actualCashEntered,
+          actualQrisEntered: 'actualQris' in updates ? true : row.actualQrisEntered,
+        });
+      });
     });
     if (!isEditing) setIsEditing(true);
   };
@@ -519,8 +536,8 @@ export function MonthlyOperationsReportView() {
       const source = isEditing ? current : dailyRows;
       const existingIndex = source.findIndex((row) => row.date === date);
       const next = existingIndex >= 0
-        ? source.map((row, rowIndex) => rowIndex === existingIndex ? withFormula({ ...row, actualCash, actualQris }) : row)
-        : [...source, withFormula({ ...blankDailyRow(date), actualCash, actualQris })];
+        ? source.map((row, rowIndex) => rowIndex === existingIndex ? withFormula({ ...row, actualCash, actualQris, actualCashEntered: true, actualQrisEntered: true }) : row)
+        : [...source, withFormula({ ...blankDailyRow(date), actualCash, actualQris, actualCashEntered: true, actualQrisEntered: true })];
       return next.sort((a, b) => a.date.localeCompare(b.date));
     });
     if (!isEditing) setIsEditing(true);
@@ -544,7 +561,8 @@ export function MonthlyOperationsReportView() {
 
   const saveDraft = async () => {
     try {
-      const actualIncome = rowsToActualIncomeRecords(draftRows.map(withFormula), incomeRecords);
+      const actualRows = draftRows.map(withFormula).filter((row) => row.actualCashEntered || row.actualQrisEntered);
+      const actualIncome = rowsToActualIncomeRecords(actualRows, incomeRecords);
       const nextIncome = mergeById(incomeRecords, actualIncome);
       setIncomeRecords(nextIncome);
       window.localStorage.setItem('nook-finance-income-records', JSON.stringify(nextIncome));
@@ -626,12 +644,12 @@ export function MonthlyOperationsReportView() {
       </div>
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-6">
-        <MetricCard icon={WalletCards} label="Expected Cash" value={formatMoney(summary.expectedCash)} />
-        <MetricCard icon={WalletCards} label="Actual Cash" value={formatMoney(summary.cash)} />
-        <MetricCard icon={BarChart3} label="Cash Difference" value={formatMoney(summary.cashDifference)} />
-        <MetricCard icon={WalletCards} label="Expected QRIS" value={formatMoney(summary.expectedQris)} />
-        <MetricCard icon={WalletCards} label="Actual QRIS" value={formatMoney(summary.qris)} />
-        <MetricCard icon={BarChart3} label="QRIS Difference" value={formatMoney(summary.qrisDifference)} />
+        <MetricCard icon={WalletCards} label="Latest Expected Cash" value={formatMoney(latestInputRow?.expectedCash ?? 0)} />
+        <MetricCard icon={WalletCards} label="Latest Actual Cash" value={formatMoney(latestInputRow?.actualCash ?? 0)} />
+        <MetricCard icon={BarChart3} label="Latest Cash Difference" value={formatMoney(latestInputRow?.cashDifference ?? 0)} />
+        <MetricCard icon={WalletCards} label="Latest Expected QRIS" value={formatMoney(latestInputRow?.expectedQris ?? 0)} />
+        <MetricCard icon={WalletCards} label="Latest Actual QRIS" value={formatMoney(latestInputRow?.actualQris ?? 0)} />
+        <MetricCard icon={BarChart3} label="Latest QRIS Difference" value={formatMoney(latestInputRow?.qrisDifference ?? 0)} />
       </div>
 
       <DailyCashInputCard

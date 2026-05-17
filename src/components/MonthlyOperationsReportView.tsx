@@ -727,14 +727,9 @@ export function MonthlyOperationsReportView() {
           monthLabel={selectedLabel}
           rows={[
             ['Total Gross Revenue', formatMoney(summary.gross)],
-            ['Discount', formatMoney(summary.discount), 'danger'],
-            ['Money Received', formatMoney(summary.received)],
             ['COGS', formatMoney(summary.cogs), 'danger'],
-            ['Product Profit', formatMoney(summary.productProfit)],
+            ['Discount', formatMoney(summary.discount), 'danger'],
             ['Fixed Cost', formatMoney(summary.fixedCost), 'danger'],
-            ['Total Cash + QRIS', formatMoney(summary.total)],
-            ['Latest Actual Cash', formatMoney(latestActualCash)],
-            ['Latest Actual QRIS', formatMoney(latestActualQris)],
             ['Total Net Profit', formatMoney(totalNetProfit), 'total'],
           ]}
         />
@@ -780,7 +775,7 @@ function ReportSummaryCard({ monthLabel, rows }: { monthLabel: string; rows: Arr
       </div>
       <div className="divide-y divide-border/70">
         {rows.map(([label, value, tone]) => (
-          <div key={label} className={tone === 'total' ? 'grid grid-cols-[1fr_auto] gap-4 bg-blue-950/30 px-4 py-2 text-sm' : 'grid grid-cols-[1fr_auto] gap-4 px-4 py-2 text-sm'}>
+          <div key={label} className={tone === 'total' ? 'mt-4 grid grid-cols-[1fr_auto] gap-4 bg-blue-950/30 px-4 py-2 text-sm' : 'grid grid-cols-[1fr_auto] gap-4 px-4 py-2 text-sm'}>
             <span className={tone === 'danger' ? 'font-semibold text-red-500' : 'text-foreground'}>{label}</span>
             <span className={tone === 'danger' ? 'font-mono font-semibold text-red-500' : 'font-mono text-foreground'}>{value}</span>
           </div>

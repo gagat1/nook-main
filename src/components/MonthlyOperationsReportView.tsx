@@ -561,8 +561,8 @@ export function MonthlyOperationsReportView() {
     return activeRows.length - 1;
   })();
   const latestInputRow = latestInputIndex >= 0 ? activeRows[latestInputIndex] : undefined;
-  const monthlyExpectedCash = sum(activeRows.map((row) => row.cash));
-  const monthlyExpectedQris = sum(activeRows.map((row) => row.qris));
+  const monthlyExpectedCash = summary.expectedCash;
+  const monthlyExpectedQris = summary.expectedQris;
   const latestActualCash = latestInputRow?.actualCash ?? 0;
   const latestActualQris = latestInputRow?.actualQris ?? 0;
 

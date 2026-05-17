@@ -1,6 +1,6 @@
 import { FormEvent, useEffect, useMemo, useRef, useState } from 'react';
 import { format, parseISO } from 'date-fns';
-import { BarChart3, CalendarDays, Plus, ReceiptText, TrendingUp, Upload, Wallet } from 'lucide-react';
+import { ArrowLeftRight, BarChart3, CalendarDays, Plus, ReceiptText, Trash2, TrendingUp, Upload, Wallet } from 'lucide-react';
 import {
   Bar,
   BarChart,
@@ -24,7 +24,8 @@ import { ExpenseRecord, IncomeRecord } from '../data/nookFinance';
 import { expensePaymentFields, inferExpensePaymentMethod, normalizeExpensePayment, type FinancePaymentMethod } from '../lib/financePayments';
 import { isSupabaseConfigured } from '../lib/supabase';
 import { seedExpenseRecords, seedIncomeRecords } from '../lib/financeSeed';
-import { deleteJsonRow, loadJsonRows, upsertJsonRow, upsertJsonRows } from '../lib/supabaseSync';
+import { CASH_MOVEMENT_SETTINGS_ID, LOCAL_CASH_MOVEMENTS_KEY, loadLocalCashMovements, movementDelta, normalizeCashMovements, type CashMovement, type CashMovementDirection } from '../lib/cashMovements';
+import { deleteJsonRow, loadJsonRows, saveSingleton, upsertJsonRow, upsertJsonRows } from '../lib/supabaseSync';
 
 type PeriodSummary = {
   key: string;
@@ -42,6 +43,7 @@ const FINANCE_TABLES = {
   income: 'finance_income',
   expenses: 'finance_expenses',
 };
+const SETTINGS_TABLE = 'app_settings';
 
 declare global {
   interface Window {
@@ -57,6 +59,10 @@ const money = new Intl.NumberFormat('id-ID', {
 
 function formatMoney(value: number) {
   return money.format(Math.round(value || 0));
+}
+
+function formatInputNumber(value: number) {
+  return new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 }).format(Math.round(value || 0));
 }
 
 function extraMetric(label: string, value: number | undefined) {
@@ -504,6 +510,7 @@ export function FinanceView() {
       return seedExpenseRecords();
     }
   });
+  const [cashMovements, setCashMovements] = useState<CashMovement[]>(() => loadLocalCashMovements(isValidDateString));
   const incomeRecordsRef = useRef(incomeRecords);
   const expenseRecordsRef = useRef(expenseRecords);
 
@@ -523,9 +530,10 @@ export function FinanceView() {
 
     void (async () => {
       try {
-        const [supabaseIncome, supabaseExpenses] = await Promise.all([
+        const [supabaseIncome, supabaseExpenses, settings] = await Promise.all([
           loadJsonRows<EditableIncomeRecord>(FINANCE_TABLES.income),
           loadJsonRows<EditableExpenseRecord>(FINANCE_TABLES.expenses),
+          loadJsonRows<{ id: string; movements?: CashMovement[] }>(SETTINGS_TABLE),
         ]);
         const validSupabaseIncome = supabaseIncome.filter(hasValidRecordDate);
         const invalidSupabaseIncome = supabaseIncome.filter((record) => !hasValidRecordDate(record));
@@ -555,6 +563,12 @@ export function FinanceView() {
         } else {
           setExpenseRecords([]);
           void Promise.all(invalidSupabaseExpenses.map((record) => deleteJsonRow(FINANCE_TABLES.expenses, record.id))).catch(syncError);
+        }
+        const movementSettings = settings.find((item) => item.id === CASH_MOVEMENT_SETTINGS_ID);
+        if (movementSettings?.movements) {
+          const syncedMovements = normalizeCashMovements(movementSettings.movements, isValidDateString);
+          setCashMovements(syncedMovements);
+          window.localStorage.setItem(LOCAL_CASH_MOVEMENTS_KEY, JSON.stringify(syncedMovements));
         }
       } catch (error) {
         syncError(error);
@@ -607,6 +621,38 @@ export function FinanceView() {
     }),
     { income: 0, expense: 0, profit: 0 }
   );
+  const fiveYearKeys = new Set(fiveYearSummary.map((item) => item.key));
+  const fiveYearMovements = cashMovements.filter((movement) => fiveYearKeys.has(yearKey(movement.date)));
+  const fiveYearMovementDelta = movementDelta(fiveYearMovements);
+
+  const persistCashMovements = (nextMovements: CashMovement[]) => {
+    const normalized = normalizeCashMovements(nextMovements, isValidDateString);
+    setCashMovements(normalized);
+    window.localStorage.setItem(LOCAL_CASH_MOVEMENTS_KEY, JSON.stringify(normalized));
+    void saveSingleton(SETTINGS_TABLE, CASH_MOVEMENT_SETTINGS_ID, { movements: normalized }).catch((error) => {
+      syncError(error);
+      toast.error('Cash movement was saved locally, but Supabase sync failed');
+    });
+  };
+
+  const addCashMovement = (movement: Omit<CashMovement, 'id'>) => {
+    persistCashMovements([
+      ...cashMovements,
+      { ...movement, id: `cash-movement-${Date.now()}` },
+    ]);
+    toast.success('Cash movement added');
+  };
+
+  const updateCashMovement = (id: string, updates: Partial<CashMovement>) => {
+    persistCashMovements(cashMovements.map((movement) => (
+      movement.id === id ? { ...movement, ...updates } : movement
+    )));
+  };
+
+  const deleteCashMovement = (id: string) => {
+    persistCashMovements(cashMovements.filter((movement) => movement.id !== id));
+    toast.info('Cash movement deleted');
+  };
 
   const selectedMonthIncome = incomeRecords
     .filter((item) => monthKey(item.date) === selectedMonth)
@@ -840,6 +886,13 @@ export function FinanceView() {
               </ResponsiveContainer>
             </div>
           </Card>
+          <CashMovementPanel
+            movements={fiveYearMovements}
+            delta={fiveYearMovementDelta}
+            onAdd={addCashMovement}
+            onUpdate={updateCashMovement}
+            onDelete={deleteCashMovement}
+          />
         </TabsContent>
 
         <TabsContent value="transactions" className="space-y-6">
@@ -1051,6 +1104,135 @@ function ExcelImportPanel({ onImport }: { onImport: (file: File) => void }) {
             }}
           />
         </label>
+      </div>
+    </Card>
+  );
+}
+
+function CashMovementPanel({
+  movements,
+  delta,
+  onAdd,
+  onUpdate,
+  onDelete,
+}: {
+  movements: CashMovement[];
+  delta: { cash: number; qris: number };
+  onAdd: (movement: Omit<CashMovement, 'id'>) => void;
+  onUpdate: (id: string, updates: Partial<CashMovement>) => void;
+  onDelete: (id: string) => void;
+}) {
+  const [date, setDate] = useState(dateToLocalKey(new Date()));
+  const [direction, setDirection] = useState<CashMovementDirection>('cash-to-qris');
+  const [amount, setAmount] = useState(0);
+  const [note, setNote] = useState('');
+
+  const submitMovement = () => {
+    if (!isValidDateString(date) || amount <= 0) {
+      toast.error('Date and amount are required');
+      return;
+    }
+    onAdd({
+      date,
+      direction,
+      amount: Math.round(amount),
+      note: note.trim(),
+    });
+    setAmount(0);
+    setNote('');
+  };
+
+  return (
+    <Card className="overflow-hidden rounded-sm border-border bg-card shadow-none">
+      <div className="flex items-center justify-between border-b border-border p-6">
+        <div>
+          <h3 className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground font-bold">Cash Movement</h3>
+          <p className="mt-2 text-xs text-muted-foreground">Move balance between Cash and QRIS without changing income or expense profit.</p>
+        </div>
+        <ArrowLeftRight className="h-4 w-4 text-foreground" />
+      </div>
+
+      <div className="grid grid-cols-1 gap-6 p-6 xl:grid-cols-[420px_1fr]">
+        <div className="space-y-5">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div className="space-y-2">
+              <Label className="text-[9px] uppercase tracking-widest text-muted-foreground font-bold">Date</Label>
+              <Input type="date" value={date} onChange={(event) => setDate(event.target.value)} className="h-11 rounded-sm border-border bg-background" />
+            </div>
+            <div className="space-y-2">
+              <Label className="text-[9px] uppercase tracking-widest text-muted-foreground font-bold">Direction</Label>
+              <Select value={direction} onValueChange={(value) => setDirection(value as CashMovementDirection)}>
+                <SelectTrigger className="h-11 rounded-sm border-border bg-background">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent className="border-border bg-card text-foreground">
+                  <SelectItem value="cash-to-qris">Cash to QRIS</SelectItem>
+                  <SelectItem value="qris-to-cash">QRIS to Cash</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="space-y-2">
+              <Label className="text-[9px] uppercase tracking-widest text-muted-foreground font-bold">Amount</Label>
+              <Input inputMode="numeric" value={formatInputNumber(amount)} onChange={(event) => setAmount(toNumber(event.target.value))} className="h-11 rounded-sm border-border bg-background font-mono" />
+            </div>
+            <div className="space-y-2">
+              <Label className="text-[9px] uppercase tracking-widest text-muted-foreground font-bold">Note</Label>
+              <Input value={note} onChange={(event) => setNote(event.target.value)} placeholder="Optional" className="h-11 rounded-sm border-border bg-background" />
+            </div>
+          </div>
+          <Button type="button" onClick={submitMovement} className="h-11 w-full rounded-sm bg-foreground text-[10px] uppercase tracking-[0.2em] text-background">
+            Add Movement
+          </Button>
+          <div className="grid grid-cols-2 gap-3">
+            <div className="rounded-sm border border-border bg-background p-4">
+              <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-muted-foreground">Cash Impact</p>
+              <p className="mt-2 font-mono text-sm text-foreground">{formatMoney(delta.cash)}</p>
+            </div>
+            <div className="rounded-sm border border-border bg-background p-4">
+              <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-muted-foreground">QRIS Impact</p>
+              <p className="mt-2 font-mono text-sm text-foreground">{formatMoney(delta.qris)}</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="overflow-x-auto rounded-sm border border-border">
+          <div className="grid min-w-[680px] grid-cols-[120px_150px_130px_1fr_48px] border-b border-border bg-background text-[9px] font-bold uppercase tracking-[0.16em] text-muted-foreground">
+            {['Date', 'Direction', 'Amount', 'Note', ''].map((label) => (
+              <span key={label} className="border-r border-border px-3 py-3 last:border-r-0">{label}</span>
+            ))}
+          </div>
+          {movements.length ? movements.map((movement) => (
+            <div key={movement.id} className="grid min-w-[680px] grid-cols-[120px_150px_130px_1fr_48px] border-b border-border/70 text-xs last:border-b-0">
+              <span className="border-r border-border/70 p-1.5">
+                <Input type="date" value={movement.date} onChange={(event) => onUpdate(movement.id, { date: event.target.value })} className="h-8 rounded-sm border-border bg-background px-2 text-xs" />
+              </span>
+              <span className="border-r border-border/70 p-1.5">
+                <Select value={movement.direction} onValueChange={(value) => onUpdate(movement.id, { direction: value as CashMovementDirection })}>
+                  <SelectTrigger className="h-8 rounded-sm border-border bg-background text-xs">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent className="border-border bg-card text-foreground">
+                    <SelectItem value="cash-to-qris">Cash to QRIS</SelectItem>
+                    <SelectItem value="qris-to-cash">QRIS to Cash</SelectItem>
+                  </SelectContent>
+                </Select>
+              </span>
+              <span className="border-r border-border/70 p-1.5">
+                <Input inputMode="numeric" value={formatInputNumber(movement.amount)} onChange={(event) => onUpdate(movement.id, { amount: toNumber(event.target.value) })} className="h-8 rounded-sm border-border bg-background px-2 font-mono text-xs" />
+              </span>
+              <span className="border-r border-border/70 p-1.5">
+                <Input value={movement.note} onChange={(event) => onUpdate(movement.id, { note: event.target.value })} className="h-8 rounded-sm border-border bg-background px-2 text-xs" />
+              </span>
+              <button type="button" onClick={() => onDelete(movement.id)} className="flex items-center justify-center text-muted-foreground hover:text-red-500" aria-label="Delete cash movement">
+                <Trash2 className="h-4 w-4" />
+              </button>
+            </div>
+          )) : (
+            <div className="px-4 py-10 text-center text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
+              No cash movement yet
+            </div>
+          )}
+        </div>
       </div>
     </Card>
   );

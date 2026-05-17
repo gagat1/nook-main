@@ -500,6 +500,10 @@ export function MonthlyOperationsReportView() {
   const totalNetProfit = summary.productProfit - summary.fixedCost - summary.expenses;
   const selectedLabel = selectedMonth ? format(parseISO(`${selectedMonth}-01`), 'MMMM yyyy') : 'No Data';
   const latestInputRow = [...activeRows].reverse().find((row) => row.actualCashEntered || row.actualQrisEntered) || activeRows[activeRows.length - 1];
+  const monthlyExpectedCash = sum(activeRows.map((row) => row.cash));
+  const monthlyExpectedQris = sum(activeRows.map((row) => row.qris));
+  const latestActualCash = latestInputRow?.actualCash ?? 0;
+  const latestActualQris = latestInputRow?.actualQris ?? 0;
 
   useEffect(() => {
     if (!isEditing) setDraftRows(dailyRows);
@@ -644,12 +648,12 @@ export function MonthlyOperationsReportView() {
       </div>
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-6">
-        <MetricCard icon={WalletCards} label="Latest Expected Cash" value={formatMoney(latestInputRow?.expectedCash ?? 0)} />
+        <MetricCard icon={WalletCards} label="Expected Cash" value={formatMoney(monthlyExpectedCash)} />
         <MetricCard icon={WalletCards} label="Latest Actual Cash" value={formatMoney(latestInputRow?.actualCash ?? 0)} />
-        <MetricCard icon={BarChart3} label="Latest Cash Difference" value={formatMoney(latestInputRow?.cashDifference ?? 0)} />
-        <MetricCard icon={WalletCards} label="Latest Expected QRIS" value={formatMoney(latestInputRow?.expectedQris ?? 0)} />
+        <MetricCard icon={BarChart3} label="Cash Difference" value={formatMoney(latestActualCash - monthlyExpectedCash)} />
+        <MetricCard icon={WalletCards} label="Expected QRIS" value={formatMoney(monthlyExpectedQris)} />
         <MetricCard icon={WalletCards} label="Latest Actual QRIS" value={formatMoney(latestInputRow?.actualQris ?? 0)} />
-        <MetricCard icon={BarChart3} label="Latest QRIS Difference" value={formatMoney(latestInputRow?.qrisDifference ?? 0)} />
+        <MetricCard icon={BarChart3} label="QRIS Difference" value={formatMoney(latestActualQris - monthlyExpectedQris)} />
       </div>
 
       <DailyCashInputCard

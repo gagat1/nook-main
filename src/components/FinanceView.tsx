@@ -73,7 +73,7 @@ function yearKey(date: string) {
 
 function excelSerialToDate(serial: number) {
   const epoch = new Date(Date.UTC(1899, 11, 30));
-  epoch.setUTCDate(epoch.getUTCDate() + serial);
+  epoch.setUTCDate(epoch.getUTCDate() + Math.floor(serial));
   return epoch.toISOString().slice(0, 10);
 }
 
@@ -122,6 +122,8 @@ function normalizeDate(value: unknown) {
     return isValidDateString(date) ? date : '';
   }
   if (typeof value === 'string') {
+    const isoDate = value.trim().match(/^(\d{4}-\d{2}-\d{2})/);
+    if (isoDate) return isValidDateString(isoDate[1]) ? isoDate[1] : '';
     const shortDate = parseShortDate(value);
     if (shortDate) return shortDate;
     const parsed = new Date(value);
@@ -708,7 +710,7 @@ export function FinanceView() {
     try {
       const XLSX = await loadXlsxLibrary();
       const data = await file.arrayBuffer();
-      const workbook = XLSX.read(data, { type: 'array', cellDates: true });
+      const workbook = XLSX.read(data, { type: 'array', cellDates: false });
       const dailySheets = readSheetRowsContaining(workbook, ['pendapatan', 'pengeluaran'])
         .map((sheet) => parseDailyFinanceRows(sheet.rows, sheet.name));
       const importedIncome = [

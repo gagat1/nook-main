@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useScheduleStore } from '../store';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -7,9 +7,34 @@ import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
 import { Shield, Clock, Calendar, Users } from 'lucide-react';
 import { ScheduleConstraint } from '../types';
+import { loadJsonRow, saveSingleton } from '../lib/supabaseSync';
+
+const DEFAULT_FIXED_COST_DAILY = 280000;
+const SETTINGS_TABLE = 'app_settings';
+
+function loadLocalFixedCostDaily() {
+  if (typeof window === 'undefined') return DEFAULT_FIXED_COST_DAILY;
+  const saved = Number(window.localStorage.getItem('nook-fixed-cost-daily'));
+  return Number.isFinite(saved) && saved > 0 ? saved : DEFAULT_FIXED_COST_DAILY;
+}
 
 export function SettingsView() {
   const { constraints, updateConstraints } = useScheduleStore();
+  const [fixedCostDaily, setFixedCostDaily] = useState(loadLocalFixedCostDaily);
+
+  useEffect(() => {
+    void (async () => {
+      try {
+        const settings = await loadJsonRow<{ id: string; fixedCostDaily?: number }>(SETTINGS_TABLE, 'finance');
+        if (settings?.fixedCostDaily) {
+          setFixedCostDaily(settings.fixedCostDaily);
+          window.localStorage.setItem('nook-fixed-cost-daily', String(settings.fixedCostDaily));
+        }
+      } catch (error) {
+        console.warn('Finance settings sync skipped:', error);
+      }
+    })();
+  }, []);
   
   const handleSave = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -28,6 +53,24 @@ export function SettingsView() {
     
     updateConstraints(updatedConstraints);
     toast.success('System constraints updated');
+  };
+
+  const handleFinanceSave = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const nextFixedCost = Number(formData.get('fixedCostDaily') || DEFAULT_FIXED_COST_DAILY);
+
+    if (!Number.isFinite(nextFixedCost) || nextFixedCost < 0) {
+      toast.error('Fixed cost must be a valid amount');
+      return;
+    }
+
+    setFixedCostDaily(nextFixedCost);
+    window.localStorage.setItem('nook-fixed-cost-daily', String(nextFixedCost));
+    void saveSingleton(SETTINGS_TABLE, 'finance', { fixedCostDaily: nextFixedCost }).catch((error) => {
+      console.warn('Finance settings save skipped:', error);
+    });
+    toast.success('Finance defaults updated');
   };
 
   return (
@@ -147,6 +190,29 @@ export function SettingsView() {
               Commit System Protocols
             </Button>
           </div>
+        </Card>
+      </form>
+
+      <form onSubmit={handleFinanceSave} className="space-y-6">
+        <Card className="bg-card border-border p-8 space-y-6 rounded-sm shadow-none">
+          <div className="flex items-center gap-3 border-b border-border pb-4">
+            <Clock className="h-4 w-4 text-foreground" />
+            <span className="text-[11px] font-bold uppercase tracking-widest text-muted-foreground">Finance Defaults</span>
+          </div>
+          <div className="space-y-2">
+            <Label className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold">Fixed Cost Daily</Label>
+            <Input
+              key={fixedCostDaily}
+              name="fixedCostDaily"
+              type="number"
+              min="0"
+              defaultValue={fixedCostDaily}
+              className="bg-background border-border text-foreground rounded-sm h-12 focus:border-accent transition-all"
+            />
+          </div>
+          <Button type="submit" className="w-full bg-foreground text-background hover:opacity-90 uppercase text-[11px] tracking-[0.2em] font-bold h-12 rounded-sm">
+            Save Finance Defaults
+          </Button>
         </Card>
       </form>
     </div>

@@ -13,6 +13,7 @@ type EditableIncomeRecord = IncomeRecord & { id: string };
 type EditableExpenseRecord = ExpenseRecord & { id: string };
 
 type DailyReportRow = {
+  incomeId?: string;
   date: string;
   gross: number;
   discount: number;
@@ -44,6 +45,8 @@ const FINANCE_TABLES = {
   income: 'finance_income',
   expenses: 'finance_expenses',
 };
+const SETTINGS_TABLE = 'app_settings';
+const DEFAULT_FIXED_COST_DAILY = 280000;
 
 declare global {
   interface Window {
@@ -157,6 +160,12 @@ function loadLocalExpenses() {
   }
 }
 
+function loadLocalFixedCostDaily() {
+  if (typeof window === 'undefined') return DEFAULT_FIXED_COST_DAILY;
+  const saved = Number(window.localStorage.getItem('nook-fixed-cost-daily'));
+  return Number.isFinite(saved) && saved > 0 ? saved : DEFAULT_FIXED_COST_DAILY;
+}
+
 function sum(records: number[]) {
   return records.reduce((total, value) => total + (value || 0), 0);
 }
@@ -171,7 +180,7 @@ function expenseQrisAmount(record: EditableExpenseRecord) {
   return record.paymentMethod === 'qris' ? record.net : 0;
 }
 
-function buildDailyRows(incomeRecords: EditableIncomeRecord[], expenseRecords: EditableExpenseRecord[], selectedMonth: string) {
+function buildDailyRows(incomeRecords: EditableIncomeRecord[], expenseRecords: EditableExpenseRecord[], selectedMonth: string, fixedCostDaily: number) {
   const dates = [...new Set([
     ...incomeRecords.filter((record) => monthKey(record.date) === selectedMonth).map((record) => record.date),
     ...expenseRecords.filter((record) => monthKey(record.date) === selectedMonth).map((record) => record.date),
@@ -180,12 +189,14 @@ function buildDailyRows(incomeRecords: EditableIncomeRecord[], expenseRecords: E
   return dates.map((date): DailyReportRow => {
     const dayIncome = incomeRecords.filter((record) => record.date === date);
     const dayExpenses = expenseRecords.filter((record) => record.date === date);
+    const primaryIncome = dayIncome.find((record) => record.id.startsWith('daily-income-')) || dayIncome[0];
     const gross = sum(dayIncome.map((record) => record.gross));
     const discount = sum(dayIncome.map((record) => record.discount));
-    const received = sum(dayIncome.map((record) => record.received ?? record.net));
+    const received = gross - discount;
     const cogs = sum(dayIncome.map((record) => record.cogs ?? 0));
-    const productProfit = sum(dayIncome.map((record) => record.productProfit ?? ((record.received ?? record.net) - (record.cogs ?? 0))));
-    const fixedCost = sum(dayIncome.map((record) => record.fixedCostDaily ?? 0));
+    const productProfit = received - cogs;
+    const storedFixedCost = sum(dayIncome.map((record) => record.fixedCostDaily ?? 0));
+    const fixedCost = storedFixedCost || fixedCostDaily;
     const expense = sum(dayExpenses.map((record) => record.net));
     const cash = sum(dayIncome.map((record) => record.cash ?? 0));
     const qris = sum(dayIncome.map((record) => record.qris ?? 0));
@@ -205,6 +216,7 @@ function buildDailyRows(incomeRecords: EditableIncomeRecord[], expenseRecords: E
 
     return {
       date,
+      incomeId: primaryIncome?.id,
       gross,
       discount,
       received,
@@ -213,7 +225,7 @@ function buildDailyRows(incomeRecords: EditableIncomeRecord[], expenseRecords: E
       fixedCost,
       expense,
       notes,
-      profitLoss: importedProfitLoss,
+      profitLoss: importedProfitLoss || productProfit - fixedCost,
       cash,
       qris,
       deliveryTax,
@@ -234,24 +246,27 @@ function buildDailyRows(incomeRecords: EditableIncomeRecord[], expenseRecords: E
 }
 
 function withFormula(row: DailyReportRow): DailyReportRow {
-  const productProfit = row.received - row.cogs;
+  const received = row.gross - row.discount;
+  const productProfit = received - row.cogs;
   const expectedCash = row.cash - row.cashExpense;
   const expectedQris = row.qris + row.deliveryTax - row.qrisExpense;
   return {
     ...row,
+    received,
     productProfit,
-    profitLoss: productProfit - row.fixedCost - row.expense,
+    profitLoss: productProfit - row.fixedCost,
     expectedCash,
     expectedQris,
     cashDifference: row.actualCash - expectedCash,
     qrisDifference: row.actualQris - expectedQris,
-    total: row.actualCash + row.actualQris || row.received,
+    total: row.cash + row.qris,
   };
 }
 
 function blankDailyRow(date: string): DailyReportRow {
   return withFormula({
     date,
+    incomeId: undefined,
     gross: 0,
     discount: 0,
     received: 0,
@@ -282,10 +297,11 @@ function blankDailyRow(date: string): DailyReportRow {
 function rowsToFinanceRecords(rows: DailyReportRow[], currentIncome: EditableIncomeRecord[] = []) {
   const income = rows.map((row) => {
     const formulaRow = withFormula(row);
-    const existing = currentIncome.find((record) => record.id === `daily-income-${formulaRow.date}`) || currentIncome.find((record) => record.date === formulaRow.date);
+    const id = formulaRow.incomeId || `daily-income-${formulaRow.date}`;
+    const existing = currentIncome.find((record) => record.id === id) || currentIncome.find((record) => record.date === formulaRow.date);
     return {
       ...existing,
-      id: `daily-income-${formulaRow.date}`,
+      id,
       date: formulaRow.date,
       product: 'Daily Sales',
       category: 'Nook Veteran',
@@ -302,8 +318,8 @@ function rowsToFinanceRecords(rows: DailyReportRow[], currentIncome: EditableInc
       cash: Math.round(formulaRow.cash),
       qris: Math.round(formulaRow.qris),
       deliveryTax: Math.round(formulaRow.deliveryTax),
-      actualCash: existing?.actualCash,
-      actualQris: existing?.actualQris,
+      actualCash: formulaRow.actualCashEntered ? Math.round(formulaRow.actualCash) : existing?.actualCash,
+      actualQris: formulaRow.actualQrisEntered ? Math.round(formulaRow.actualQris) : existing?.actualQris,
       transactionCount: Math.round(formulaRow.transactions),
       source: 'Monthly Operations',
     } satisfies EditableIncomeRecord;
@@ -405,6 +421,7 @@ function parseDailyFinanceRows(rows: unknown[][]) {
 
     return [withFormula({
       date,
+      incomeId: undefined,
       gross: Math.round(toNumber(rowValue(row, grossIndex))),
       discount: Math.round(toNumber(rowValue(row, discountIndex))),
       received: Math.round(toNumber(rowValue(row, receivedIndex))),
@@ -449,18 +466,25 @@ function loadXlsxLibrary() {
 export function MonthlyOperationsReportView() {
   const [incomeRecords, setIncomeRecords] = useState<EditableIncomeRecord[]>(loadLocalIncome);
   const [expenseRecords, setExpenseRecords] = useState<EditableExpenseRecord[]>(loadLocalExpenses);
+  const [fixedCostDaily, setFixedCostDaily] = useState(loadLocalFixedCostDaily);
   const [isEditing, setIsEditing] = useState(false);
   const [draftRows, setDraftRows] = useState<DailyReportRow[]>([]);
 
   useEffect(() => {
     void (async () => {
       try {
-        const [income, expenses] = await Promise.all([
+        const [income, expenses, settings] = await Promise.all([
           loadJsonRows<EditableIncomeRecord>(FINANCE_TABLES.income),
           loadJsonRows<EditableExpenseRecord>(FINANCE_TABLES.expenses),
+          loadJsonRows<{ id: string; fixedCostDaily?: number }>(SETTINGS_TABLE),
         ]);
         if (income.length) setIncomeRecords(income.filter((record) => isValidDateString(record.date)));
         if (expenses.length) setExpenseRecords(expenses.filter((record) => isValidDateString(record.date)));
+        const financeSettings = settings.find((item) => item.id === 'finance');
+        if (financeSettings?.fixedCostDaily) {
+          setFixedCostDaily(financeSettings.fixedCostDaily);
+          window.localStorage.setItem('nook-fixed-cost-daily', String(financeSettings.fixedCostDaily));
+        }
       } catch (error) {
         console.warn('Monthly report sync skipped:', error);
       }
@@ -476,7 +500,7 @@ export function MonthlyOperationsReportView() {
     if (!selectedMonth || !months.includes(selectedMonth)) setSelectedMonth(months[months.length - 1] || '');
   }, [months, selectedMonth]);
 
-  const dailyRows = useMemo(() => buildDailyRows(incomeRecords, expenseRecords, selectedMonth), [expenseRecords, incomeRecords, selectedMonth]);
+  const dailyRows = useMemo(() => buildDailyRows(incomeRecords, expenseRecords, selectedMonth, fixedCostDaily), [expenseRecords, fixedCostDaily, incomeRecords, selectedMonth]);
   const activeRows = isEditing ? draftRows.map(withFormula) : dailyRows;
   const activeDays = activeRows.filter((row) => row.gross || row.received || row.expense).length || 1;
   const summary = {
@@ -509,7 +533,7 @@ export function MonthlyOperationsReportView() {
     if (!isEditing) setDraftRows(dailyRows);
   }, [dailyRows, isEditing]);
 
-  const updateActualRow = (index: number, updates: Pick<DailyReportRow, 'actualCash'> | Pick<DailyReportRow, 'actualQris'>) => {
+  const updateDailyRow = (index: number, updates: Partial<DailyReportRow>) => {
     setDraftRows((current) => {
       const source = isEditing ? current : dailyRows;
       return source.map((row, rowIndex) => {
@@ -565,12 +589,11 @@ export function MonthlyOperationsReportView() {
 
   const saveDraft = async () => {
     try {
-      const actualRows = draftRows.map(withFormula).filter((row) => row.actualCashEntered || row.actualQrisEntered);
-      const actualIncome = rowsToActualIncomeRecords(actualRows, incomeRecords);
-      const nextIncome = mergeById(incomeRecords, actualIncome);
+      const { income } = rowsToFinanceRecords(draftRows.map(withFormula), incomeRecords);
+      const nextIncome = mergeById(incomeRecords, income);
       setIncomeRecords(nextIncome);
       window.localStorage.setItem('nook-finance-income-records', JSON.stringify(nextIncome));
-      await upsertJsonRows(FINANCE_TABLES.income, actualIncome);
+      await upsertJsonRows(FINANCE_TABLES.income, income);
       setIsEditing(false);
       toast.success('Monthly report saved');
     } catch (error) {
@@ -661,7 +684,7 @@ export function MonthlyOperationsReportView() {
         onUpdateActual={updateActualAmounts}
       />
 
-      <DailyReportTable rows={activeRows} onChangeActual={updateActualRow} />
+      <DailyReportTable rows={activeRows} onChangeRow={updateDailyRow} />
 
       <div className="max-w-4xl">
         <ReportSummaryCard
@@ -671,7 +694,7 @@ export function MonthlyOperationsReportView() {
             ['Average Daily Revenue', formatMoney(summary.gross / activeDays)],
             ['Average Product Profit', formatMoney(summary.productProfit / activeDays)],
             ['Transactions', formatPlainNumber(summary.transactions)],
-            ['Total Actual', formatMoney(summary.total)],
+            ['Total Cash + QRIS', formatMoney(summary.total)],
             ['Product Profit', formatMoney(summary.productProfit)],
             ['Total Gross Revenue', formatMoney(summary.gross)],
             ['COGS', formatMoney(summary.cogs), 'danger'],
@@ -787,38 +810,36 @@ function DailyCashInputCard({
 
 function DailyReportTable({
   rows,
-  onChangeActual,
+  onChangeRow,
 }: {
   rows: DailyReportRow[];
-  onChangeActual: (index: number, updates: Pick<DailyReportRow, 'actualCash'> | Pick<DailyReportRow, 'actualQris'>) => void;
+  onChangeRow: (index: number, updates: Partial<DailyReportRow>) => void;
 }) {
-  const columns = 'grid-cols-[96px_112px_112px_112px_112px_112px_112px_112px_112px_112px_112px_112px_96px]';
+  const columns = 'grid-cols-[126px_138px_112px_132px_112px_170px_132px_132px_132px_132px_132px]';
   return (
     <Card className="overflow-x-auto rounded-sm border-border bg-card shadow-none">
       <div className="flex items-center justify-between border-b border-border px-4 py-3">
         <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">Daily Detail</span>
       </div>
-      <div className="min-w-[1360px]">
+      <div className="min-w-[1420px]">
         <div className={`grid ${columns} border-b border-border bg-muted/60 text-[10px] font-bold text-foreground`}>
-          {['Date', 'Gross Revenue', 'Received', 'COGS', 'Expense', 'Expected Cash', 'Actual Cash', 'Cash Diff', 'Expected QRIS', 'Actual QRIS', 'QRIS Diff', 'Profit/Loss', 'Transactions'].map((label) => (
+          {['Tanggal', 'Pendapatan Kotor', 'Diskon', 'Uang Diterima', 'HPP', 'Keuntungan Bersih', 'Fix Cost Daily', 'Laba/Rugi', 'Cash', 'QRIS', 'Total Cash + QRIS'].map((label) => (
             <span key={label} className="border-r border-border px-3 py-3 last:border-r-0">{label}</span>
           ))}
         </div>
         {rows.map((row, index) => (
           <div key={`${row.date}-${index}`} className={`${columns} grid border-b border-border/70 text-xs text-foreground`}>
-            <Cell>{format(parseISO(row.date), 'dd-MMM-yy')}</Cell>
-            <MoneyCell value={row.gross} />
+            <EditableDateCell value={row.date} onChange={(value) => onChangeRow(index, { date: value })} />
+            <EditableMoneyCell value={row.gross} onChange={(value) => onChangeRow(index, { gross: value })} />
+            <EditableMoneyCell value={row.discount} onChange={(value) => onChangeRow(index, { discount: value })} />
             <MoneyCell value={row.received} />
-            <MoneyCell value={row.cogs} />
-            <MoneyCell value={row.expense} />
-            <MoneyCell value={row.expectedCash} />
-            <EditableMoneyCell value={row.actualCash} onChange={(value) => onChangeActual(index, { actualCash: value })} />
-            <MoneyCell value={row.cashDifference} negativeParens />
-            <MoneyCell value={row.expectedQris} />
-            <EditableMoneyCell value={row.actualQris} onChange={(value) => onChangeActual(index, { actualQris: value })} />
-            <MoneyCell value={row.qrisDifference} negativeParens />
+            <EditableMoneyCell value={row.cogs} onChange={(value) => onChangeRow(index, { cogs: value })} />
+            <MoneyCell value={row.productProfit} negativeParens />
+            <MoneyCell value={row.fixedCost} />
             <MoneyCell value={row.profitLoss} negativeParens />
-            <Cell>{row.transactions || '-'}</Cell>
+            <EditableMoneyCell value={row.cash} onChange={(value) => onChangeRow(index, { cash: value })} />
+            <EditableMoneyCell value={row.qris} onChange={(value) => onChangeRow(index, { qris: value })} />
+            <MoneyCell value={row.total} />
           </div>
         ))}
       </div>
@@ -828,6 +849,19 @@ function DailyReportTable({
 
 function Cell({ children }: { children: ReactNode }) {
   return <span className="min-h-10 border-r border-border/70 px-3 py-2 last:border-r-0">{children}</span>;
+}
+
+function EditableDateCell({ value, onChange }: { value: string; onChange: (value: string) => void }) {
+  return (
+    <span className="min-h-10 border-r border-border/70 p-1.5 last:border-r-0">
+      <Input
+        type="date"
+        value={value}
+        onChange={(event) => onChange(event.target.value)}
+        className="h-8 rounded-sm border-border bg-background px-2 text-xs"
+      />
+    </span>
+  );
 }
 
 function EditableMoneyCell({ value, onChange }: { value: number; onChange: (value: number) => void }) {

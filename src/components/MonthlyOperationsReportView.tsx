@@ -1,16 +1,17 @@
 import { useEffect, useMemo, useState, type ReactNode } from 'react';
 import { format, parseISO } from 'date-fns';
-import { BarChart3, FileSpreadsheet, Save, Upload, WalletCards, X } from 'lucide-react';
+import { ArrowLeftRight, BarChart3, FileSpreadsheet, Save, Trash2, Upload, WalletCards, X } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { ExpenseRecord, IncomeRecord } from '../data/nookFinance';
 import { seedExpenseRecords, seedIncomeRecords } from '../lib/financeSeed';
 import { expensePaymentBreakdown, expensePaymentFields, inferExpensePaymentMethod, normalizeExpensePayment } from '../lib/financePayments';
-import { CASH_MOVEMENT_SETTINGS_ID, LOCAL_CASH_MOVEMENTS_KEY, loadLocalCashMovements, movementDelta, normalizeCashMovements, type CashMovement } from '../lib/cashMovements';
-import { loadJsonRows, upsertJsonRows } from '../lib/supabaseSync';
+import { CASH_MOVEMENT_SETTINGS_ID, LOCAL_CASH_MOVEMENTS_KEY, loadLocalCashMovements, movementDelta, normalizeCashMovements, type CashMovement, type CashMovementDirection } from '../lib/cashMovements';
+import { loadJsonRows, saveSingleton, upsertJsonRows } from '../lib/supabaseSync';
 
 type EditableIncomeRecord = IncomeRecord & { id: string };
 type EditableExpenseRecord = ExpenseRecord & { id: string };
@@ -680,6 +681,35 @@ export function MonthlyOperationsReportView() {
     }
   };
 
+  const persistCashMovements = (nextMovements: CashMovement[]) => {
+    const normalized = normalizeCashMovements(nextMovements, isValidDateString);
+    setCashMovements(normalized);
+    window.localStorage.setItem(LOCAL_CASH_MOVEMENTS_KEY, JSON.stringify(normalized));
+    void saveSingleton(SETTINGS_TABLE, CASH_MOVEMENT_SETTINGS_ID, { movements: normalized }).catch((error) => {
+      console.warn('Cash movement sync failed:', error);
+      toast.error('Cash movement was saved locally, but Supabase sync failed');
+    });
+  };
+
+  const addCashMovement = (movement: Omit<CashMovement, 'id'>) => {
+    persistCashMovements([
+      ...cashMovements,
+      { ...movement, id: `cash-movement-${Date.now()}` },
+    ]);
+    toast.success('Cash movement added');
+  };
+
+  const updateCashMovement = (id: string, updates: Partial<CashMovement>) => {
+    persistCashMovements(cashMovements.map((movement) => (
+      movement.id === id ? { ...movement, ...updates } : movement
+    )));
+  };
+
+  const deleteCashMovement = (id: string) => {
+    persistCashMovements(cashMovements.filter((movement) => movement.id !== id));
+    toast.info('Cash movement deleted');
+  };
+
   return (
     <div className="space-y-8 pb-16">
       <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
@@ -738,7 +768,7 @@ export function MonthlyOperationsReportView() {
 
       <DailyReportTable rows={activeRows} onChangeRow={updateDailyRow} />
 
-      <div className="max-w-5xl">
+      <div className="grid items-start gap-6 xl:grid-cols-[minmax(0,1fr)_minmax(360px,520px)]">
         <ReportSummaryCard
           monthLabel={selectedLabel}
           rows={[
@@ -748,6 +778,13 @@ export function MonthlyOperationsReportView() {
             ['Fixed Cost', formatMoney(summary.fixedCost), 'danger'],
             ['Total Net Profit', formatMoney(totalNetProfit), 'total'],
           ]}
+        />
+        <CashMovementPanel
+          movements={selectedMonthMovements}
+          delta={selectedMovementDelta}
+          onAdd={addCashMovement}
+          onUpdate={updateCashMovement}
+          onDelete={deleteCashMovement}
         />
       </div>
     </div>
@@ -762,6 +799,135 @@ function MetricCard({ icon: Icon, label, value }: { icon: typeof FileSpreadsheet
         <Icon className="h-4 w-4 text-foreground" />
       </div>
       <p className="mt-4 font-mono text-2xl text-foreground">{value}</p>
+    </Card>
+  );
+}
+
+function CashMovementPanel({
+  movements,
+  delta,
+  onAdd,
+  onUpdate,
+  onDelete,
+}: {
+  movements: CashMovement[];
+  delta: { cash: number; qris: number };
+  onAdd: (movement: Omit<CashMovement, 'id'>) => void;
+  onUpdate: (id: string, updates: Partial<CashMovement>) => void;
+  onDelete: (id: string) => void;
+}) {
+  const [date, setDate] = useState(dateToLocalKey(new Date()));
+  const [direction, setDirection] = useState<CashMovementDirection>('cash-to-qris');
+  const [amount, setAmount] = useState(0);
+  const [note, setNote] = useState('');
+
+  const submitMovement = () => {
+    if (!isValidDateString(date) || amount <= 0) {
+      toast.error('Date and amount are required');
+      return;
+    }
+    onAdd({
+      date,
+      direction,
+      amount: Math.round(amount),
+      note: note.trim(),
+    });
+    setAmount(0);
+    setNote('');
+  };
+
+  return (
+    <Card className="overflow-hidden rounded-sm border-border bg-card shadow-none">
+      <div className="flex items-center justify-between border-b border-border px-5 py-4">
+        <div>
+          <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">Cash Movement</h3>
+          <p className="mt-2 text-xs text-muted-foreground">Move balance between Cash and QRIS.</p>
+        </div>
+        <ArrowLeftRight className="h-4 w-4 text-foreground" />
+      </div>
+
+      <div className="space-y-5 p-5">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+          <div className="space-y-2">
+            <Label className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground">Date</Label>
+            <Input type="date" value={date} onChange={(event) => setDate(event.target.value)} className="h-10 rounded-sm border-border bg-background" />
+          </div>
+          <div className="space-y-2">
+            <Label className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground">Direction</Label>
+            <Select value={direction} onValueChange={(value) => setDirection(value as CashMovementDirection)}>
+              <SelectTrigger className="h-10 rounded-sm border-border bg-background">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent className="border-border bg-card text-foreground">
+                <SelectItem value="cash-to-qris">Cash to QRIS</SelectItem>
+                <SelectItem value="qris-to-cash">QRIS to Cash</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="space-y-2">
+            <Label className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground">Amount</Label>
+            <Input inputMode="numeric" value={formatInputNumber(amount)} onChange={(event) => setAmount(toNumber(event.target.value))} className="h-10 rounded-sm border-border bg-background font-mono" />
+          </div>
+          <div className="space-y-2">
+            <Label className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground">Note</Label>
+            <Input value={note} onChange={(event) => setNote(event.target.value)} placeholder="Optional" className="h-10 rounded-sm border-border bg-background" />
+          </div>
+        </div>
+
+        <Button type="button" onClick={submitMovement} className="h-10 w-full rounded-sm bg-foreground text-[10px] uppercase tracking-[0.2em] text-background">
+          Add Movement
+        </Button>
+
+        <div className="grid grid-cols-2 gap-3">
+          <div className="rounded-sm border border-border bg-background p-4">
+            <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-muted-foreground">Cash Impact</p>
+            <p className="mt-2 font-mono text-sm text-foreground">{formatMoney(delta.cash)}</p>
+          </div>
+          <div className="rounded-sm border border-border bg-background p-4">
+            <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-muted-foreground">QRIS Impact</p>
+            <p className="mt-2 font-mono text-sm text-foreground">{formatMoney(delta.qris)}</p>
+          </div>
+        </div>
+
+        <div className="max-h-[320px] overflow-auto rounded-sm border border-border">
+          <div className="grid min-w-[520px] grid-cols-[115px_135px_120px_1fr_42px] border-b border-border bg-background text-[9px] font-bold uppercase tracking-[0.16em] text-muted-foreground">
+            {['Date', 'Direction', 'Amount', 'Note', ''].map((label) => (
+              <span key={label} className="border-r border-border px-3 py-3 last:border-r-0">{label}</span>
+            ))}
+          </div>
+          {movements.length ? movements.map((movement) => (
+            <div key={movement.id} className="grid min-w-[520px] grid-cols-[115px_135px_120px_1fr_42px] border-b border-border/70 text-xs last:border-b-0">
+              <span className="border-r border-border/70 p-1.5">
+                <Input type="date" value={movement.date} onChange={(event) => onUpdate(movement.id, { date: event.target.value })} className="h-8 rounded-sm border-border bg-background px-2 text-xs" />
+              </span>
+              <span className="border-r border-border/70 p-1.5">
+                <Select value={movement.direction} onValueChange={(value) => onUpdate(movement.id, { direction: value as CashMovementDirection })}>
+                  <SelectTrigger className="h-8 rounded-sm border-border bg-background text-xs">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent className="border-border bg-card text-foreground">
+                    <SelectItem value="cash-to-qris">Cash to QRIS</SelectItem>
+                    <SelectItem value="qris-to-cash">QRIS to Cash</SelectItem>
+                  </SelectContent>
+                </Select>
+              </span>
+              <span className="border-r border-border/70 p-1.5">
+                <Input inputMode="numeric" value={formatInputNumber(movement.amount)} onChange={(event) => onUpdate(movement.id, { amount: toNumber(event.target.value) })} className="h-8 rounded-sm border-border bg-background px-2 font-mono text-xs" />
+              </span>
+              <span className="border-r border-border/70 p-1.5">
+                <Input value={movement.note} onChange={(event) => onUpdate(movement.id, { note: event.target.value })} className="h-8 rounded-sm border-border bg-background px-2 text-xs" />
+              </span>
+              <button type="button" onClick={() => onDelete(movement.id)} className="flex items-center justify-center text-muted-foreground hover:text-red-500" aria-label="Delete cash movement">
+                <Trash2 className="h-4 w-4" />
+              </button>
+            </div>
+          )) : (
+            <div className="px-4 py-8 text-center text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
+              No cash movement yet
+            </div>
+          )}
+        </div>
+      </div>
     </Card>
   );
 }

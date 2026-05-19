@@ -78,19 +78,47 @@ export default function App() {
     setIsAuthenticated(false);
   };
 
-  const navItems = [
-    { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
-    { id: 'scheduler', label: 'Schedule', icon: Calendar },
-    { id: 'employees', label: 'Employees', icon: Users },
-    { id: 'shifts', label: 'Shift Templates', icon: Clock },
-    { id: 'leave', label: 'Time Off', icon: ClipboardList },
-    { id: 'finance', label: 'Finance', icon: ReceiptText },
-    { id: 'monthly-report', label: 'Monthly Report', icon: FileSpreadsheet },
-    { id: 'business', label: 'Business Data', icon: BookOpen },
-    { id: 'cashier', label: 'Cash Counter', icon: Banknote },
-    { id: 'cogs', label: 'COGS Calc', icon: TrendingUp },
-    { id: 'settings', label: 'Protocol', icon: Settings },
-    { id: 'maintenance', label: 'Maintenance', icon: Wrench },
+  const navGroups: Array<{
+    label: string;
+    items: Array<{ id: View; label: string; icon: typeof LayoutDashboard }>;
+  }> = [
+    {
+      label: 'Overview',
+      items: [
+        { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
+      ],
+    },
+    {
+      label: 'Scheduling',
+      items: [
+        { id: 'scheduler', label: 'Schedule', icon: Calendar },
+        { id: 'employees', label: 'Employees', icon: Users },
+        { id: 'shifts', label: 'Shift Templates', icon: Clock },
+        { id: 'leave', label: 'Time Off', icon: ClipboardList },
+      ],
+    },
+    {
+      label: 'Finance',
+      items: [
+        { id: 'finance', label: 'Finance', icon: ReceiptText },
+        { id: 'monthly-report', label: 'Monthly Report', icon: FileSpreadsheet },
+        { id: 'business', label: 'Business Data', icon: BookOpen },
+      ],
+    },
+    {
+      label: 'Tools',
+      items: [
+        { id: 'cashier', label: 'Cash Counter', icon: Banknote },
+        { id: 'cogs', label: 'COGS Calc', icon: TrendingUp },
+      ],
+    },
+    {
+      label: 'System',
+      items: [
+        { id: 'settings', label: 'Protocol', icon: Settings },
+        { id: 'maintenance', label: 'Maintenance', icon: Wrench },
+      ],
+    },
   ];
 
   const navContent = (expanded: boolean) => (
@@ -110,32 +138,50 @@ export default function App() {
         </AnimatePresence>
       </div>
 
-      <nav className="flex-1 space-y-4">
-        {navItems.map((item) => (
-          <button
-            key={item.id}
-            onClick={() => selectView(item.id as View)}
-            className={cn(
-              "group flex w-full items-center gap-3 rounded-sm transition-all duration-300",
-              currentView === item.id 
-                ? "text-foreground" 
-                : "text-muted-foreground hover:text-foreground"
-            )}
-          >
-            <item.icon className={cn(
-              "h-4 w-4 shrink-0 transition-colors",
-              currentView === item.id ? "text-foreground" : "text-muted-foreground group-hover:text-foreground"
-            )} />
-            {expanded && (
-              <motion.span
+      <nav className="flex-1 space-y-6 overflow-y-auto pr-1">
+        {navGroups.map((group) => (
+          <div key={group.label} className="space-y-3">
+            {expanded ? (
+              <motion.p
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="text-[11px] uppercase tracking-[0.1em] font-medium"
+                className="px-0.5 text-[9px] font-bold uppercase tracking-[0.28em] text-muted-foreground/50"
               >
-                {item.label}
-              </motion.span>
+                {group.label}
+              </motion.p>
+            ) : (
+              <div className="mx-auto h-px w-7 bg-border" />
             )}
-          </button>
+            <div className="space-y-3">
+              {group.items.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => selectView(item.id)}
+                  className={cn(
+                    "group flex w-full items-center rounded-sm transition-all duration-300",
+                    expanded ? "gap-3" : "justify-center",
+                    currentView === item.id
+                      ? "text-foreground"
+                      : "text-muted-foreground hover:text-foreground"
+                  )}
+                >
+                  <item.icon className={cn(
+                    "h-4 w-4 shrink-0 transition-colors",
+                    currentView === item.id ? "text-foreground" : "text-muted-foreground group-hover:text-foreground"
+                  )} />
+                  {expanded && (
+                    <motion.span
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      className="text-[11px] uppercase tracking-[0.1em] font-medium"
+                    >
+                      {item.label}
+                    </motion.span>
+                  )}
+                </button>
+              ))}
+            </div>
+          </div>
         ))}
       </nav>
     </>

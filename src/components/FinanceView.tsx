@@ -621,9 +621,6 @@ export function FinanceView() {
     }),
     { income: 0, expense: 0, profit: 0 }
   );
-  const fiveYearKeys = new Set(fiveYearSummary.map((item) => item.key));
-  const fiveYearMovements = cashMovements.filter((movement) => fiveYearKeys.has(yearKey(movement.date)));
-  const fiveYearMovementDelta = movementDelta(fiveYearMovements);
 
   const persistCashMovements = (nextMovements: CashMovement[]) => {
     const normalized = normalizeCashMovements(nextMovements, isValidDateString);
@@ -660,6 +657,10 @@ export function FinanceView() {
   const selectedMonthExpenses = expenseRecords
     .filter((item) => monthKey(item.date) === selectedMonth)
     .sort((a, b) => b.date.localeCompare(a.date));
+  const selectedMonthMovements = cashMovements
+    .filter((movement) => monthKey(movement.date) === selectedMonth)
+    .sort((a, b) => b.date.localeCompare(a.date));
+  const selectedMonthMovementDelta = movementDelta(selectedMonthMovements);
 
   const yearlyMonthlyRows = useMemo(() => {
     if (!selectedYear) return [];
@@ -857,7 +858,6 @@ export function FinanceView() {
 
           <SummaryGrid summary={selectedYearSummary} />
           <YearMonthlyTable rows={yearlyMonthlyRows} />
-          <SummaryTable rows={yearlySummary} />
         </TabsContent>
 
         <TabsContent value="five-year" className="space-y-6">
@@ -886,13 +886,7 @@ export function FinanceView() {
               </ResponsiveContainer>
             </div>
           </Card>
-          <CashMovementPanel
-            movements={fiveYearMovements}
-            delta={fiveYearMovementDelta}
-            onAdd={addCashMovement}
-            onUpdate={updateCashMovement}
-            onDelete={deleteCashMovement}
-          />
+          <SummaryTable rows={fiveYearSummary} />
         </TabsContent>
 
         <TabsContent value="transactions" className="space-y-6">
@@ -911,6 +905,14 @@ export function FinanceView() {
           </div>
 
           <ExcelImportPanel onImport={importExcel} />
+
+          <CashMovementPanel
+            movements={selectedMonthMovements}
+            delta={selectedMonthMovementDelta}
+            onAdd={addCashMovement}
+            onUpdate={updateCashMovement}
+            onDelete={deleteCashMovement}
+          />
 
           <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
             <FinanceEntryForm type="income" onSubmit={addIncome} />

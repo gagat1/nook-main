@@ -1,6 +1,6 @@
 import { FormEvent, useEffect, useMemo, useState, type ReactNode } from 'react';
 import { format, parseISO } from 'date-fns';
-import { ArrowLeftRight, BarChart3, FileSpreadsheet, Plus, Save, Trash2, Upload, WalletCards, X } from 'lucide-react';
+import { ArrowLeftRight, ArrowUpDown, BarChart3, FileSpreadsheet, Plus, Save, Trash2, Upload, WalletCards, X } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -1003,7 +1003,7 @@ function ExpenseTransactionsSection({
   onDelete: (id: string) => void;
 }) {
   return (
-    <div className="grid items-start gap-6 xl:grid-cols-[420px_minmax(0,1fr)]">
+    <div className="space-y-6">
       <ExpenseEntryForm onSubmit={onAdd} />
       <ExpenseHistory expenses={expenses} onUpdate={onUpdate} onDelete={onDelete} />
     </div>
@@ -1055,7 +1055,7 @@ function ExpenseEntryForm({ onSubmit }: { onSubmit: (record: ExpenseRecord) => v
         <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">Add Expense</h3>
       </div>
       <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-1">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
           <div className="space-y-2">
             <Label className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground">Date</Label>
             <Input name="date" type="date" required className="h-10 rounded-sm border-border bg-background" />
@@ -1098,7 +1098,7 @@ function ExpenseEntryForm({ onSubmit }: { onSubmit: (record: ExpenseRecord) => v
             <Input name="note" placeholder="Optional" className="h-10 rounded-sm border-border bg-background" />
           </div>
         </div>
-        <Button type="submit" className="h-10 w-full rounded-sm bg-foreground text-[10px] uppercase tracking-[0.2em] text-background">
+        <Button type="submit" className="h-10 w-full rounded-sm bg-foreground text-[10px] uppercase tracking-[0.2em] text-background md:w-auto">
           Add Expense
         </Button>
       </form>
@@ -1116,6 +1116,7 @@ function ExpenseHistory({
   onDelete: (id: string) => void;
 }) {
   const [editingId, setEditingId] = useState<string | null>(null);
+  const [dateSort, setDateSort] = useState<'desc' | 'asc'>('desc');
   const [draft, setDraft] = useState({
     date: '',
     item: '',
@@ -1167,6 +1168,22 @@ function ExpenseHistory({
   };
 
   const totalExpense = expenses.reduce((total, expense) => total + expense.net, 0);
+  const groupedExpenses = useMemo(() => {
+    const groups = expenses.reduce((map, expense) => {
+      const list = map.get(expense.date) || [];
+      list.push(expense);
+      map.set(expense.date, list);
+      return map;
+    }, new Map<string, EditableExpenseRecord[]>());
+
+    return [...groups.entries()]
+      .sort(([dateA], [dateB]) => dateSort === 'asc' ? dateA.localeCompare(dateB) : dateB.localeCompare(dateA))
+      .map(([date, records]) => ({
+        date,
+        total: records.reduce((sum, expense) => sum + expense.net, 0),
+        records: records.sort((a, b) => a.item.localeCompare(b.item)),
+      }));
+  }, [dateSort, expenses]);
 
   return (
     <Card className="overflow-hidden rounded-sm border-border bg-card shadow-none">
@@ -1175,65 +1192,99 @@ function ExpenseHistory({
           <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">Expense History</h3>
           <p className="mt-2 text-xs text-muted-foreground">Edit or delete expenses for the selected month.</p>
         </div>
-        <div className="text-left sm:text-right">
-          <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-muted-foreground">{expenses.length} entries</p>
-          <p className="mt-1 font-mono text-sm text-red-500">{formatMoney(totalExpense)}</p>
+        <div className="flex flex-col gap-3 text-left sm:items-end sm:text-right">
+          <button type="button" onClick={() => setDateSort((current) => current === 'asc' ? 'desc' : 'asc')} className="inline-flex h-9 items-center justify-center gap-2 rounded-sm border border-border bg-background px-3 text-[9px] font-bold uppercase tracking-[0.18em] text-foreground hover:border-foreground">
+            Date {dateSort === 'asc' ? 'Oldest' : 'Newest'}
+            <ArrowUpDown className="h-3.5 w-3.5" />
+          </button>
+          <div>
+            <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-muted-foreground">{expenses.length} entries</p>
+            <p className="mt-1 font-mono text-sm text-red-500">{formatMoney(totalExpense)}</p>
+          </div>
         </div>
       </div>
 
       <ScrollArea className="h-[520px]">
-        <div className="divide-y divide-border/70">
-          {expenses.length ? expenses.map((expense) => {
-            const isEditing = editingId === expense.id;
-            const paymentMethod = inferExpensePaymentMethod(expense);
+        <div className="min-w-[860px]">
+          <div className="grid grid-cols-[1.2fr_1fr_1fr_1.2fr_150px] border-b border-border bg-background text-[9px] font-bold uppercase tracking-[0.16em] text-muted-foreground">
+            <span className="border-r border-border px-4 py-4 text-center">Item</span>
+            <span className="border-r border-border px-4 py-4 text-center">Category / Note</span>
+            <span className="border-r border-border px-4 py-4 text-center">Payment</span>
+            <span className="border-r border-border px-4 py-4 text-center">Amount</span>
+            <span className="px-4 py-4 text-center">Action</span>
+          </div>
 
-            return (
-              <div key={expense.id} className="p-4">
-                {isEditing ? (
-                  <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
-                    <Input type="date" value={draft.date} onChange={(event) => setDraft((current) => ({ ...current, date: event.target.value }))} className="h-10 rounded-sm border-border bg-background text-xs" />
-                    <select value={draft.paymentMethod} onChange={(event) => setDraft((current) => ({ ...current, paymentMethod: event.target.value as FinancePaymentMethod }))} className="h-10 w-full rounded-sm border border-border bg-background px-3 text-xs text-foreground outline-none">
-                      <option value="cash">Cash</option>
-                      <option value="qris">QRIS</option>
-                    </select>
-                    <Input value={draft.category} onChange={(event) => setDraft((current) => ({ ...current, category: event.target.value }))} placeholder="Category" className="h-10 rounded-sm border-border bg-background text-xs" />
-                    <Input value={draft.item} onChange={(event) => setDraft((current) => ({ ...current, item: event.target.value }))} placeholder="Item" className="h-10 rounded-sm border-border bg-background text-xs" />
-                    <Input inputMode="numeric" value={formatInputNumber(draft.gross)} onChange={(event) => setDraft((current) => ({ ...current, gross: toNumber(event.target.value) }))} placeholder="Amount" className="h-10 rounded-sm border-border bg-background font-mono text-xs" />
-                    <Input inputMode="numeric" value={formatInputNumber(draft.cogs)} onChange={(event) => setDraft((current) => ({ ...current, cogs: toNumber(event.target.value) }))} placeholder="COGS / HPP" className="h-10 rounded-sm border-border bg-background font-mono text-xs" />
-                    <Input inputMode="numeric" value={formatInputNumber(draft.tax)} onChange={(event) => setDraft((current) => ({ ...current, tax: toNumber(event.target.value) }))} placeholder="Tax" className="h-10 rounded-sm border-border bg-background font-mono text-xs" />
-                    <Input inputMode="numeric" value={formatInputNumber(draft.fee)} onChange={(event) => setDraft((current) => ({ ...current, fee: toNumber(event.target.value) }))} placeholder="Fee" className="h-10 rounded-sm border-border bg-background font-mono text-xs" />
-                    <Input value={draft.note} onChange={(event) => setDraft((current) => ({ ...current, note: event.target.value }))} placeholder="Note" className="h-10 rounded-sm border-border bg-background text-xs md:col-span-2" />
-                    <div className="flex justify-end gap-2 md:col-span-2">
-                      <Button type="button" variant="outline" onClick={() => setEditingId(null)} className="h-9 rounded-sm border-border bg-transparent text-[10px] uppercase tracking-widest">Cancel</Button>
-                      <Button type="button" onClick={saveEdit} className="h-9 rounded-sm bg-foreground text-[10px] uppercase tracking-widest text-background">Save</Button>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="grid grid-cols-1 gap-3 md:grid-cols-[92px_1fr_120px_120px] md:items-start">
-                    <div>
-                      <p className="font-mono text-xs text-foreground">{format(parseISO(expense.date), 'dd MMM')}</p>
-                      <p className="mt-1 text-[9px] uppercase tracking-widest text-muted-foreground">{paymentMethod}</p>
-                    </div>
-                    <div className="min-w-0">
-                      <p className="truncate text-sm text-foreground">{expense.item}</p>
-                      <p className="mt-1 truncate text-[10px] uppercase tracking-widest text-muted-foreground">{expense.category}{expense.note ? ` / ${expense.note}` : ''}</p>
-                      <div className="mt-3 flex flex-wrap gap-2">
-                        <span className="rounded-sm border border-border px-2 py-1 text-[9px] uppercase tracking-widest text-muted-foreground">Base <span className="text-foreground">{formatMoney(expense.gross)}</span></span>
-                        {expense.cogs ? <span className="rounded-sm border border-border px-2 py-1 text-[9px] uppercase tracking-widest text-muted-foreground">COGS <span className="text-foreground">{formatMoney(expense.cogs)}</span></span> : null}
-                        {expense.tax ? <span className="rounded-sm border border-border px-2 py-1 text-[9px] uppercase tracking-widest text-muted-foreground">Tax <span className="text-foreground">{formatMoney(expense.tax)}</span></span> : null}
-                        {expense.fee ? <span className="rounded-sm border border-border px-2 py-1 text-[9px] uppercase tracking-widest text-muted-foreground">Fee <span className="text-foreground">{formatMoney(expense.fee)}</span></span> : null}
-                      </div>
-                    </div>
-                    <p className="font-mono text-sm text-red-500 md:text-right">{formatMoney(expense.net)}</p>
-                    <div className="flex gap-2 md:justify-end">
-                      <Button type="button" variant="outline" onClick={() => beginEdit(expense)} className="h-8 rounded-sm border-border bg-transparent px-3 text-[9px] uppercase tracking-widest">Edit</Button>
-                      <Button type="button" variant="outline" onClick={() => onDelete(expense.id)} className="h-8 rounded-sm border-red-900/40 bg-transparent px-3 text-[9px] uppercase tracking-widest text-red-500 hover:bg-red-950/20">Delete</Button>
-                    </div>
-                  </div>
-                )}
+          {groupedExpenses.length ? groupedExpenses.map((group) => (
+            <div key={group.date} className="border-b border-border/70 last:border-b-0">
+              <div className="flex items-center justify-between bg-muted/20 px-4 py-4">
+                <div className="flex items-center gap-3">
+                  <span className="font-mono text-sm text-foreground">{format(parseISO(group.date), 'dd MMM yyyy')}</span>
+                  <span className="rounded-sm border border-border px-2 py-1 text-[9px] font-bold uppercase tracking-widest text-muted-foreground">
+                    {group.records.length} entries
+                  </span>
+                </div>
+                <span className="font-mono text-sm text-red-500">{formatMoney(group.total)}</span>
               </div>
-            );
-          }) : (
+
+              {group.records.map((expense) => {
+                const isEditing = editingId === expense.id;
+                const paymentMethod = inferExpensePaymentMethod(expense);
+
+                return (
+                  <div key={expense.id} className="border-t border-border/60">
+                    {isEditing ? (
+                      <div className="grid grid-cols-1 gap-3 p-4 md:grid-cols-4">
+                        <Input type="date" value={draft.date} onChange={(event) => setDraft((current) => ({ ...current, date: event.target.value }))} className="h-10 rounded-sm border-border bg-background text-xs" />
+                        <select value={draft.paymentMethod} onChange={(event) => setDraft((current) => ({ ...current, paymentMethod: event.target.value as FinancePaymentMethod }))} className="h-10 w-full rounded-sm border border-border bg-background px-3 text-xs text-foreground outline-none">
+                          <option value="cash">Cash</option>
+                          <option value="qris">QRIS</option>
+                        </select>
+                        <Input value={draft.category} onChange={(event) => setDraft((current) => ({ ...current, category: event.target.value }))} placeholder="Category" className="h-10 rounded-sm border-border bg-background text-xs" />
+                        <Input value={draft.item} onChange={(event) => setDraft((current) => ({ ...current, item: event.target.value }))} placeholder="Item" className="h-10 rounded-sm border-border bg-background text-xs" />
+                        <Input inputMode="numeric" value={formatInputNumber(draft.gross)} onChange={(event) => setDraft((current) => ({ ...current, gross: toNumber(event.target.value) }))} placeholder="Amount" className="h-10 rounded-sm border-border bg-background font-mono text-xs" />
+                        <Input inputMode="numeric" value={formatInputNumber(draft.cogs)} onChange={(event) => setDraft((current) => ({ ...current, cogs: toNumber(event.target.value) }))} placeholder="COGS / HPP" className="h-10 rounded-sm border-border bg-background font-mono text-xs" />
+                        <Input inputMode="numeric" value={formatInputNumber(draft.tax)} onChange={(event) => setDraft((current) => ({ ...current, tax: toNumber(event.target.value) }))} placeholder="Tax" className="h-10 rounded-sm border-border bg-background font-mono text-xs" />
+                        <Input inputMode="numeric" value={formatInputNumber(draft.fee)} onChange={(event) => setDraft((current) => ({ ...current, fee: toNumber(event.target.value) }))} placeholder="Fee" className="h-10 rounded-sm border-border bg-background font-mono text-xs" />
+                        <Input value={draft.note} onChange={(event) => setDraft((current) => ({ ...current, note: event.target.value }))} placeholder="Note" className="h-10 rounded-sm border-border bg-background text-xs md:col-span-2" />
+                        <div className="flex justify-end gap-2 md:col-span-2">
+                          <Button type="button" variant="outline" onClick={() => setEditingId(null)} className="h-9 rounded-sm border-border bg-transparent text-[10px] uppercase tracking-widest">Cancel</Button>
+                          <Button type="button" onClick={saveEdit} className="h-9 rounded-sm bg-foreground text-[10px] uppercase tracking-widest text-background">Save</Button>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="grid grid-cols-[1.2fr_1fr_1fr_1.2fr_150px] items-center text-xs text-foreground">
+                        <div className="min-w-0 border-r border-border/60 px-4 py-4">
+                          <p className="truncate text-sm text-foreground">{expense.item}</p>
+                        </div>
+                        <div className="min-w-0 border-r border-border/60 px-4 py-4">
+                          <p className="truncate text-xs uppercase tracking-widest text-muted-foreground">{expense.category}</p>
+                          {expense.note ? <p className="mt-1 truncate text-xs text-foreground">{expense.note}</p> : null}
+                        </div>
+                        <div className="border-r border-border/60 px-4 py-4 text-center">
+                          <span className={paymentMethod === 'cash' ? 'rounded-full bg-emerald-500/15 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-emerald-400' : 'rounded-full bg-sky-500/15 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-sky-400'}>
+                            {paymentMethod}
+                          </span>
+                        </div>
+                        <div className="border-r border-border/60 px-4 py-4">
+                          <p className="font-mono text-sm text-red-500">{formatMoney(expense.net)}</p>
+                          <div className="mt-2 flex flex-wrap gap-2">
+                            <span className="rounded-sm border border-border px-2 py-1 text-[9px] uppercase tracking-widest text-muted-foreground">Base <span className="text-foreground">{formatMoney(expense.gross)}</span></span>
+                            {expense.cogs ? <span className="rounded-sm border border-border px-2 py-1 text-[9px] uppercase tracking-widest text-muted-foreground">COGS <span className="text-foreground">{formatMoney(expense.cogs)}</span></span> : null}
+                            {expense.tax ? <span className="rounded-sm border border-border px-2 py-1 text-[9px] uppercase tracking-widest text-muted-foreground">Tax <span className="text-foreground">{formatMoney(expense.tax)}</span></span> : null}
+                            {expense.fee ? <span className="rounded-sm border border-border px-2 py-1 text-[9px] uppercase tracking-widest text-muted-foreground">Fee <span className="text-foreground">{formatMoney(expense.fee)}</span></span> : null}
+                          </div>
+                        </div>
+                        <div className="flex justify-center gap-2 px-4 py-4">
+                          <Button type="button" variant="outline" onClick={() => beginEdit(expense)} className="h-8 rounded-sm border-border bg-transparent px-3 text-[9px] uppercase tracking-widest">Edit</Button>
+                          <Button type="button" variant="outline" onClick={() => onDelete(expense.id)} className="h-8 rounded-sm border-red-900/40 bg-transparent px-3 text-[9px] uppercase tracking-widest text-red-500 hover:bg-red-950/20">Delete</Button>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          )) : (
             <div className="px-4 py-12 text-center text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
               No expenses for this month
             </div>

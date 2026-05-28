@@ -1,6 +1,6 @@
-import { FormEvent, useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { format, parseISO } from 'date-fns';
-import { BarChart3, CalendarDays, Plus, ReceiptText, Trash2, TrendingUp, Upload, Wallet } from 'lucide-react';
+import { BarChart3, CalendarDays, ReceiptText, TrendingUp, Upload, Wallet } from 'lucide-react';
 import {
   Bar,
   BarChart,
@@ -13,18 +13,14 @@ import {
   YAxis,
 } from 'recharts';
 import { Card } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { ScrollArea } from '@/components/ui/scroll-area';
 import { toast } from 'sonner';
 import { ExpenseRecord, IncomeRecord } from '../data/nookFinance';
-import { expensePaymentFields, inferExpensePaymentMethod, normalizeExpensePayment, type FinancePaymentMethod } from '../lib/financePayments';
+import { expensePaymentFields, inferExpensePaymentMethod, normalizeExpensePayment } from '../lib/financePayments';
 import { isSupabaseConfigured } from '../lib/supabase';
 import { seedExpenseRecords, seedIncomeRecords } from '../lib/financeSeed';
-import { deleteJsonRow, loadJsonRows, upsertJsonRow, upsertJsonRows } from '../lib/supabaseSync';
+import { deleteJsonRow, loadJsonRows, upsertJsonRows } from '../lib/supabaseSync';
 
 type PeriodSummary = {
   key: string;
@@ -61,10 +57,6 @@ function formatMoney(value: number) {
 
 function formatInputNumber(value: number) {
   return new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 }).format(Math.round(value || 0));
-}
-
-function extraMetric(label: string, value: number | undefined) {
-  return value == null || value === 0 ? [] : [{ label, value: formatMoney(value) }];
 }
 
 function monthKey(date: string) {
@@ -612,13 +604,6 @@ export function FinanceView() {
     { income: 0, expense: 0, profit: 0 }
   );
 
-  const selectedMonthIncome = incomeRecords
-    .filter((item) => monthKey(item.date) === selectedMonth)
-    .sort((a, b) => b.date.localeCompare(a.date));
-  const selectedMonthExpenses = expenseRecords
-    .filter((item) => monthKey(item.date) === selectedMonth)
-    .sort((a, b) => b.date.localeCompare(a.date));
-
   const yearlyMonthlyRows = useMemo(() => {
     if (!selectedYear) return [];
 
@@ -649,66 +634,6 @@ export function FinanceView() {
     expense: item.expense,
     profit: item.profit,
   }));
-
-  const addIncome = async (record: IncomeRecord) => {
-    const nextRecord = { ...record, id: `manual-income-${Date.now()}` };
-    const merged = mergeFinanceRecords<EditableIncomeRecord>(incomeRecordsRef.current, [nextRecord], incomeIdentity);
-    setIncomeRecords(merged.records);
-
-    try {
-      await persistFinanceMerge(FINANCE_TABLES.income, merged.upserts, merged.removedIds);
-      toast.success('Income saved');
-    } catch (error) {
-      syncError(error);
-      toast.error('Income was not saved to Supabase');
-    }
-  };
-
-  const addExpense = async (record: ExpenseRecord) => {
-    const nextRecord = normalizeExpensePayment({ ...record, id: `manual-expense-${Date.now()}` });
-    const merged = mergeFinanceRecords<EditableExpenseRecord>(expenseRecordsRef.current, [nextRecord], expenseIdentity);
-    setExpenseRecords(merged.records);
-
-    try {
-      await persistFinanceMerge(FINANCE_TABLES.expenses, merged.upserts, merged.removedIds);
-      toast.success('Expense saved');
-    } catch (error) {
-      syncError(error);
-      toast.error('Expense was not saved to Supabase');
-    }
-  };
-
-  const updateIncome = (id: string, updates: Partial<IncomeRecord>) => {
-    setIncomeRecords((current) => current.map((record) => {
-      if (record.id !== id) return record;
-      const nextRecord = { ...record, ...updates };
-      void upsertJsonRow(FINANCE_TABLES.income, nextRecord).catch(syncError);
-      return nextRecord;
-    }));
-    toast.success('Income updated');
-  };
-
-  const updateExpense = (id: string, updates: Partial<ExpenseRecord>) => {
-    setExpenseRecords((current) => current.map((record) => {
-      if (record.id !== id) return record;
-      const nextRecord = normalizeExpensePayment({ ...record, ...updates });
-      void upsertJsonRow(FINANCE_TABLES.expenses, nextRecord).catch(syncError);
-      return nextRecord;
-    }));
-    toast.success('Expense updated');
-  };
-
-  const deleteIncome = (id: string) => {
-    setIncomeRecords((current) => current.filter((record) => record.id !== id));
-    void deleteJsonRow(FINANCE_TABLES.income, id).catch(syncError);
-    toast.info('Income deleted');
-  };
-
-  const deleteExpense = (id: string) => {
-    setExpenseRecords((current) => current.filter((record) => record.id !== id));
-    void deleteJsonRow(FINANCE_TABLES.expenses, id).catch(syncError);
-    toast.info('Expense deleted');
-  };
 
   const importExcel = async (file: File) => {
     try {
@@ -776,7 +701,6 @@ export function FinanceView() {
           <TabsTrigger value="monthly" className="uppercase text-[10px] tracking-widest px-5">Monthly</TabsTrigger>
           <TabsTrigger value="yearly" className="uppercase text-[10px] tracking-widest px-5">Yearly</TabsTrigger>
           <TabsTrigger value="five-year" className="uppercase text-[10px] tracking-widest px-5">5 Years</TabsTrigger>
-          <TabsTrigger value="transactions" className="uppercase text-[10px] tracking-widest px-5">Transactions</TabsTrigger>
         </TabsList>
 
         <TabsContent value="monthly" className="space-y-6">
@@ -844,100 +768,6 @@ export function FinanceView() {
             </div>
           </Card>
           <SummaryTable rows={fiveYearSummary} />
-        </TabsContent>
-
-        <TabsContent value="transactions" className="space-y-6">
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <h2 className="text-xl font-light tracking-tight">Income & Expense Entries</h2>
-            <Select value={selectedMonth} onValueChange={setSelectedMonth}>
-              <SelectTrigger className="w-full sm:w-[180px] bg-card border-border rounded-sm">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent className="bg-card border-border text-foreground">
-                {allMonths.map((month) => (
-                  <SelectItem key={month} value={month}>{format(parseISO(`${month}-01`), 'MMM yyyy')}</SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-
-          <ExcelImportPanel onImport={importExcel} />
-
-          <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-            <FinanceEntryForm type="income" onSubmit={addIncome} />
-            <FinanceEntryForm type="expense" onSubmit={addExpense} />
-          </div>
-
-          <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-            <TransactionPanel title="Income" rows={selectedMonthIncome.map((item) => ({
-              id: item.id,
-              date: item.date,
-              name: item.product,
-              category: item.category,
-              gross: item.gross,
-              adjustment: item.discount,
-              fee: item.fee,
-              cogs: item.cogs ?? 0,
-              amount: item.net,
-              note: item.note,
-              extra: [
-                ...extraMetric('Received', item.received),
-                ...extraMetric('COGS', item.cogs),
-                ...extraMetric('Product Profit', item.productProfit),
-                ...extraMetric('Fixed Cost', item.fixedCostDaily),
-                ...extraMetric('Cash', item.cash),
-                ...extraMetric('QRIS', item.qris),
-                ...extraMetric('Delivery Tax', item.deliveryTax),
-                ...extraMetric('Profit / Loss', item.profitLoss),
-                ...(item.transactionCount ? [{ label: 'Transactions', value: String(item.transactionCount) }] : []),
-              ],
-            }))} tone="income" onUpdate={(id, updates) => updateIncome(id, {
-              date: updates.date,
-              product: updates.name,
-              category: updates.category,
-              gross: updates.gross,
-              discount: updates.adjustment,
-              fee: updates.fee,
-              net: updates.gross - updates.adjustment - updates.fee,
-              cogs: updates.cogs,
-              productProfit: updates.gross - updates.adjustment - updates.fee - (updates.cogs || 0),
-              note: updates.note,
-            })} onDelete={deleteIncome} />
-            <TransactionPanel title="Expense" rows={selectedMonthExpenses.map((item) => ({
-              id: item.id,
-              date: item.date,
-              name: item.item,
-              category: item.category,
-              gross: item.gross,
-              adjustment: item.tax,
-              fee: item.fee,
-              cogs: item.cogs ?? 0,
-              amount: item.net,
-              note: item.note,
-              paymentMethod: inferExpensePaymentMethod(item),
-              extra: [
-                { label: 'Payment', value: inferExpensePaymentMethod(item).toUpperCase() },
-                ...extraMetric('COGS', item.cogs),
-                ...extraMetric('Fixed Cost', item.fixedCostDaily),
-                ...extraMetric('Cash', item.cash),
-                ...extraMetric('QRIS', item.qris),
-                ...extraMetric('Delivery Tax', item.deliveryTax),
-                ...extraMetric('Profit / Loss', item.profitLoss),
-                ...(item.transactionCount ? [{ label: 'Transactions', value: String(item.transactionCount) }] : []),
-              ],
-            }))} tone="expense" onUpdate={(id, updates) => updateExpense(id, {
-              date: updates.date,
-              item: updates.name,
-              category: updates.category,
-              gross: updates.gross,
-              tax: updates.adjustment,
-              fee: updates.fee,
-              net: updates.gross + updates.adjustment + updates.fee,
-              cogs: updates.cogs,
-              note: updates.note,
-              ...expensePaymentFields(updates.gross + updates.adjustment + updates.fee, updates.paymentMethod || 'cash'),
-            })} onDelete={deleteExpense} />
-          </div>
         </TabsContent>
       </Tabs>
     </div>
@@ -1084,238 +914,6 @@ function YearMonthlyTable({ rows }: { rows: PeriodSummary[] }) {
           </div>
         ))}
       </div>
-    </Card>
-  );
-}
-
-function FinanceEntryForm({
-  type,
-  onSubmit,
-}: {
-  type: 'income' | 'expense';
-  onSubmit: (record: IncomeRecord & ExpenseRecord) => void;
-}) {
-  const isIncome = type === 'income';
-  const title = isIncome ? 'Add Income' : 'Add Expense';
-  const amountLabel = 'Amount';
-  const nameLabel = isIncome ? 'Product / Service' : 'Item / Product';
-
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const form = event.currentTarget;
-    const formData = new FormData(form);
-    const date = String(formData.get('date') || '');
-    const name = String(formData.get('name') || '').trim();
-    const category = String(formData.get('category') || '').trim();
-    const amount = Number(formData.get('amount') || 0);
-    const adjustment = Number(formData.get('adjustment') || 0);
-    const fee = Number(formData.get('fee') || 0);
-    const cogs = Number(formData.get('cogs') || 0);
-    const note = String(formData.get('note') || '').trim();
-    const paymentMethod = String(formData.get('paymentMethod') || 'cash') as FinancePaymentMethod;
-
-    if (!date || !name || !category || amount <= 0) {
-      toast.error('Date, name, category, and amount are required');
-      return;
-    }
-
-    if (isIncome) {
-      onSubmit({
-        date,
-        product: name,
-        item: name,
-        category,
-        gross: amount,
-        discount: adjustment,
-        tax: 0,
-        fee,
-        net: amount - adjustment - fee,
-        cogs,
-        productProfit: amount - adjustment - fee - cogs,
-        note,
-      });
-    } else {
-      const net = amount + adjustment + fee;
-      onSubmit({
-        date,
-        product: name,
-        item: name,
-        category,
-        gross: amount,
-        discount: 0,
-        tax: adjustment,
-        fee,
-        net,
-        cogs,
-        note,
-        ...expensePaymentFields(net, paymentMethod),
-      });
-    }
-
-    form.reset();
-  };
-
-  return (
-    <Card className="bg-card border-border rounded-sm shadow-none p-6">
-      <div className="flex items-center gap-3 mb-6">
-        <Plus className={isIncome ? 'h-4 w-4 text-emerald-500' : 'h-4 w-4 text-red-500'} />
-        <h3 className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground font-bold">{title}</h3>
-      </div>
-      <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="space-y-2">
-          <Label className="text-[9px] uppercase tracking-widest text-muted-foreground font-bold">Date</Label>
-          <Input name="date" type="date" required className="bg-background border-border rounded-sm h-11" />
-        </div>
-        <div className="space-y-2">
-          <Label className="text-[9px] uppercase tracking-widest text-muted-foreground font-bold">Category</Label>
-          <Input name="category" required placeholder={isIncome ? 'Nook Main' : 'Raw Material'} className="bg-background border-border rounded-sm h-11" />
-        </div>
-        <div className="space-y-2 md:col-span-2">
-          <Label className="text-[9px] uppercase tracking-widest text-muted-foreground font-bold">{nameLabel}</Label>
-          <Input name="name" required placeholder={isIncome ? 'Daily sales' : 'Coffee beans'} className="bg-background border-border rounded-sm h-11" />
-        </div>
-        <div className="space-y-2">
-          <Label className="text-[9px] uppercase tracking-widest text-muted-foreground font-bold">{amountLabel}</Label>
-          <Input name="amount" type="number" min="0" required className="bg-background border-border rounded-sm h-11" />
-        </div>
-        <div className="space-y-2">
-          <Label className="text-[9px] uppercase tracking-widest text-muted-foreground font-bold">{isIncome ? 'Discount' : 'Tax'}</Label>
-          <Input name="adjustment" type="number" min="0" defaultValue="0" className="bg-background border-border rounded-sm h-11" />
-        </div>
-        <div className="space-y-2">
-          <Label className="text-[9px] uppercase tracking-widest text-muted-foreground font-bold">Fee</Label>
-          <Input name="fee" type="number" min="0" defaultValue="0" className="bg-background border-border rounded-sm h-11" />
-        </div>
-        <div className="space-y-2">
-          <Label className="text-[9px] uppercase tracking-widest text-muted-foreground font-bold">COGS / HPP</Label>
-          <Input name="cogs" type="number" min="0" defaultValue="0" className="bg-background border-border rounded-sm h-11" />
-        </div>
-        {!isIncome && (
-          <div className="space-y-2">
-            <Label className="text-[9px] uppercase tracking-widest text-muted-foreground font-bold">Payment</Label>
-            <select name="paymentMethod" defaultValue="cash" className="h-11 w-full rounded-sm border border-border bg-background px-3 text-sm text-foreground outline-none">
-              <option value="cash">Cash</option>
-              <option value="qris">QRIS</option>
-            </select>
-          </div>
-        )}
-        <div className="space-y-2">
-          <Label className="text-[9px] uppercase tracking-widest text-muted-foreground font-bold">Note</Label>
-          <Input name="note" placeholder="Optional" className="bg-background border-border rounded-sm h-11" />
-        </div>
-        <Button type="submit" className="md:col-span-2 bg-foreground text-background hover:opacity-90 rounded-sm uppercase text-[10px] tracking-[0.2em] h-11">
-          Add {isIncome ? 'Income' : 'Expense'}
-        </Button>
-      </form>
-    </Card>
-  );
-}
-
-function TransactionPanel({
-  title,
-  rows,
-  tone,
-  onUpdate,
-  onDelete,
-}: {
-  title: string;
-  rows: Array<{ id: string; date: string; name: string; category: string; gross: number; adjustment: number; fee: number; cogs: number; amount: number; note: string; paymentMethod?: FinancePaymentMethod; extra?: Array<{ label: string; value: string }> }>;
-  tone: 'income' | 'expense';
-  onUpdate: (id: string, updates: { date: string; name: string; category: string; gross: number; adjustment: number; fee: number; cogs: number; note: string; paymentMethod?: FinancePaymentMethod }) => void;
-  onDelete: (id: string) => void;
-}) {
-  const [editingId, setEditingId] = useState<string | null>(null);
-  const [draft, setDraft] = useState({ date: '', name: '', category: '', gross: 0, adjustment: 0, fee: 0, cogs: 0, note: '', paymentMethod: 'cash' as FinancePaymentMethod });
-
-  const beginEdit = (row: { id: string; date: string; name: string; category: string; gross: number; adjustment: number; fee: number; cogs: number; note: string; paymentMethod?: FinancePaymentMethod }) => {
-    setEditingId(row.id);
-    setDraft({
-      date: row.date,
-      name: row.name,
-      category: row.category,
-      gross: row.gross,
-      adjustment: row.adjustment,
-      fee: row.fee,
-      cogs: row.cogs,
-      note: row.note,
-      paymentMethod: row.paymentMethod || 'cash',
-    });
-  };
-
-  const saveEdit = () => {
-    if (!editingId) return;
-    if (!draft.date || !draft.name.trim() || !draft.category.trim() || draft.gross <= 0) {
-      toast.error('Date, name, category, and amount are required');
-      return;
-    }
-    onUpdate(editingId, draft);
-    setEditingId(null);
-  };
-
-  return (
-    <Card className="bg-card border-border rounded-sm shadow-none overflow-hidden">
-      <div className="flex items-center justify-between border-b border-border p-6">
-        <h3 className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground font-bold">{title}</h3>
-        <span className={tone === 'income' ? 'text-emerald-500 text-xs' : 'text-red-500 text-xs'}>{rows.length} entries</span>
-      </div>
-      <ScrollArea className="h-[440px]">
-        <div className="divide-y divide-border/60">
-          {rows.map((row) => {
-            const isEditing = editingId === row.id;
-
-            return (
-              <div key={row.id} className="p-4">
-                {isEditing ? (
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    <Input type="date" value={draft.date} onChange={(event) => setDraft((current) => ({ ...current, date: event.target.value }))} className="bg-background border-border rounded-sm h-10 text-xs" />
-                    <Input value={draft.category} onChange={(event) => setDraft((current) => ({ ...current, category: event.target.value }))} className="bg-background border-border rounded-sm h-10 text-xs" placeholder="Category" />
-                    <Input value={draft.name} onChange={(event) => setDraft((current) => ({ ...current, name: event.target.value }))} className="bg-background border-border rounded-sm h-10 text-xs md:col-span-2" placeholder="Transaction name" />
-                    <Input type="number" value={draft.gross} onChange={(event) => setDraft((current) => ({ ...current, gross: Number(event.target.value) }))} className="bg-background border-border rounded-sm h-10 text-xs" placeholder="Amount" />
-                    <Input type="number" value={draft.adjustment} onChange={(event) => setDraft((current) => ({ ...current, adjustment: Number(event.target.value) }))} className="bg-background border-border rounded-sm h-10 text-xs" placeholder={tone === 'income' ? 'Discount' : 'Tax'} />
-                    <Input type="number" value={draft.fee} onChange={(event) => setDraft((current) => ({ ...current, fee: Number(event.target.value) }))} className="bg-background border-border rounded-sm h-10 text-xs" placeholder="Fee" />
-                    <Input type="number" value={draft.cogs} onChange={(event) => setDraft((current) => ({ ...current, cogs: Number(event.target.value) }))} className="bg-background border-border rounded-sm h-10 text-xs" placeholder="COGS / HPP" />
-                    {tone === 'expense' && (
-                      <select value={draft.paymentMethod} onChange={(event) => setDraft((current) => ({ ...current, paymentMethod: event.target.value as FinancePaymentMethod }))} className="h-10 w-full rounded-sm border border-border bg-background px-3 text-xs text-foreground outline-none">
-                        <option value="cash">Cash</option>
-                        <option value="qris">QRIS</option>
-                      </select>
-                    )}
-                    <Input value={draft.note} onChange={(event) => setDraft((current) => ({ ...current, note: event.target.value }))} className="bg-background border-border rounded-sm h-10 text-xs" placeholder="Note" />
-                    <div className="md:col-span-2 flex justify-end gap-2">
-                      <Button type="button" variant="outline" onClick={() => setEditingId(null)} className="h-9 rounded-sm bg-transparent border-border text-[10px] uppercase tracking-widest">Cancel</Button>
-                      <Button type="button" onClick={saveEdit} className="h-9 rounded-sm bg-foreground text-background text-[10px] uppercase tracking-widest">Save</Button>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="grid grid-cols-1 gap-3 sm:grid-cols-[88px_1fr_auto] sm:gap-4">
-                    <span className="text-[10px] text-muted-foreground font-mono">{format(parseISO(row.date), 'dd MMM')}</span>
-                    <div className="min-w-0">
-                      <p className="text-xs text-foreground truncate">{row.name}</p>
-                      <p className="text-[10px] uppercase tracking-widest text-muted-foreground truncate">{row.category}{row.note ? ` / ${row.note}` : ''}</p>
-                      {row.extra?.length ? (
-                        <div className="mt-2 flex flex-wrap gap-2">
-                          {row.extra.map((metric) => (
-                            <span key={`${row.id}-${metric.label}`} className="rounded-sm border border-border px-2 py-1 text-[9px] uppercase tracking-widest text-muted-foreground">
-                              {metric.label}: <span className="text-foreground">{metric.value}</span>
-                            </span>
-                          ))}
-                        </div>
-                      ) : null}
-                      <div className="mt-3 flex gap-2">
-                        <Button type="button" variant="outline" onClick={() => beginEdit(row)} className="h-7 rounded-sm bg-transparent border-border px-3 text-[9px] uppercase tracking-widest">Edit</Button>
-                        <Button type="button" variant="outline" onClick={() => onDelete(row.id)} className="h-7 rounded-sm bg-transparent border-red-900/40 px-3 text-[9px] uppercase tracking-widest text-red-500 hover:bg-red-950/20">Delete</Button>
-                      </div>
-                    </div>
-                    <span className={tone === 'income' ? 'text-xs text-emerald-500 font-mono' : 'text-xs text-red-500 font-mono'}>
-                      {formatMoney(row.amount)}
-                    </span>
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </div>
-      </ScrollArea>
     </Card>
   );
 }

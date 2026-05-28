@@ -1,17 +1,18 @@
-import { useEffect, useMemo, useState, type ReactNode } from 'react';
+import { FormEvent, useEffect, useMemo, useState, type ReactNode } from 'react';
 import { format, parseISO } from 'date-fns';
-import { ArrowLeftRight, BarChart3, FileSpreadsheet, Save, Trash2, Upload, WalletCards, X } from 'lucide-react';
+import { ArrowLeftRight, BarChart3, FileSpreadsheet, Plus, Save, Trash2, Upload, WalletCards, X } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { ScrollArea } from '@/components/ui/scroll-area';
 import { ExpenseRecord, IncomeRecord } from '../data/nookFinance';
 import { seedExpenseRecords, seedIncomeRecords } from '../lib/financeSeed';
-import { expensePaymentBreakdown, expensePaymentFields, inferExpensePaymentMethod, normalizeExpensePayment } from '../lib/financePayments';
+import { expensePaymentBreakdown, expensePaymentFields, inferExpensePaymentMethod, normalizeExpensePayment, type FinancePaymentMethod } from '../lib/financePayments';
 import { CASH_MOVEMENT_SETTINGS_ID, LOCAL_CASH_MOVEMENTS_KEY, loadLocalCashMovements, movementDelta, normalizeCashMovements, type CashMovement, type CashMovementDirection } from '../lib/cashMovements';
-import { loadJsonRows, saveSingleton, upsertJsonRows } from '../lib/supabaseSync';
+import { deleteJsonRow, loadJsonRows, saveSingleton, upsertJsonRow, upsertJsonRows } from '../lib/supabaseSync';
 
 type EditableIncomeRecord = IncomeRecord & { id: string };
 type EditableExpenseRecord = ExpenseRecord & { id: string };
@@ -566,6 +567,11 @@ export function MonthlyOperationsReportView() {
       .sort((a, b) => b.date.localeCompare(a.date));
   }, [cashMovements, selectedMonth]);
   const selectedMovementDelta = movementDelta(selectedMonthMovements);
+  const selectedMonthExpenses = useMemo(() => {
+    return expenseRecords
+      .filter((expense) => monthKey(expense.date) === selectedMonth)
+      .sort((a, b) => b.date.localeCompare(a.date));
+  }, [expenseRecords, selectedMonth]);
   const selectedLabel = selectedMonth ? format(parseISO(`${selectedMonth}-01`), 'MMMM yyyy') : 'No Data';
   const latestInputIndex = (() => {
     for (let index = activeRows.length - 1; index >= 0; index -= 1) {
@@ -710,6 +716,52 @@ export function MonthlyOperationsReportView() {
     toast.info('Cash movement deleted');
   };
 
+  const persistExpenses = (nextExpenses: EditableExpenseRecord[]) => {
+    setExpenseRecords(nextExpenses);
+    window.localStorage.setItem('nook-finance-expense-records', JSON.stringify(nextExpenses));
+  };
+
+  const addExpense = async (record: ExpenseRecord) => {
+    const nextRecord = normalizeExpensePayment({ ...record, id: `manual-expense-${Date.now()}` });
+    const nextExpenses = [...expenseRecords, nextRecord].filter((expense) => isValidDateString(expense.date));
+    persistExpenses(nextExpenses);
+
+    try {
+      await upsertJsonRow(FINANCE_TABLES.expenses, nextRecord);
+      toast.success('Expense saved');
+    } catch (error) {
+      console.warn('Expense save failed:', error);
+      toast.error('Expense was saved locally, but Supabase sync failed');
+    }
+  };
+
+  const updateExpense = (id: string, updates: Partial<ExpenseRecord>) => {
+    setExpenseRecords((current) => {
+      const nextExpenses = current.map((record) => {
+        if (record.id !== id) return record;
+        const nextRecord = normalizeExpensePayment({ ...record, ...updates });
+        void upsertJsonRow(FINANCE_TABLES.expenses, nextRecord).catch((error) => {
+          console.warn('Expense update failed:', error);
+          toast.error('Expense was updated locally, but Supabase sync failed');
+        });
+        return nextRecord;
+      });
+      window.localStorage.setItem('nook-finance-expense-records', JSON.stringify(nextExpenses));
+      return nextExpenses;
+    });
+    toast.success('Expense updated');
+  };
+
+  const deleteExpense = (id: string) => {
+    const nextExpenses = expenseRecords.filter((record) => record.id !== id);
+    persistExpenses(nextExpenses);
+    void deleteJsonRow(FINANCE_TABLES.expenses, id).catch((error) => {
+      console.warn('Expense delete failed:', error);
+      toast.error('Expense was deleted locally, but Supabase sync failed');
+    });
+    toast.info('Expense deleted');
+  };
+
   return (
     <div className="space-y-8 pb-16">
       <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
@@ -787,6 +839,13 @@ export function MonthlyOperationsReportView() {
           onDelete={deleteCashMovement}
         />
       </div>
+
+      <ExpenseTransactionsSection
+        expenses={selectedMonthExpenses}
+        onAdd={addExpense}
+        onUpdate={updateExpense}
+        onDelete={deleteExpense}
+      />
     </div>
   );
 }
@@ -928,6 +987,259 @@ function CashMovementPanel({
           )}
         </div>
       </div>
+    </Card>
+  );
+}
+
+function ExpenseTransactionsSection({
+  expenses,
+  onAdd,
+  onUpdate,
+  onDelete,
+}: {
+  expenses: EditableExpenseRecord[];
+  onAdd: (record: ExpenseRecord) => void;
+  onUpdate: (id: string, updates: Partial<ExpenseRecord>) => void;
+  onDelete: (id: string) => void;
+}) {
+  return (
+    <div className="grid items-start gap-6 xl:grid-cols-[420px_minmax(0,1fr)]">
+      <ExpenseEntryForm onSubmit={onAdd} />
+      <ExpenseHistory expenses={expenses} onUpdate={onUpdate} onDelete={onDelete} />
+    </div>
+  );
+}
+
+function ExpenseEntryForm({ onSubmit }: { onSubmit: (record: ExpenseRecord) => void }) {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+    const date = String(formData.get('date') || '');
+    const item = String(formData.get('item') || '').trim();
+    const category = String(formData.get('category') || '').trim();
+    const amount = toNumber(formData.get('amount'));
+    const tax = toNumber(formData.get('tax'));
+    const fee = toNumber(formData.get('fee'));
+    const cogs = toNumber(formData.get('cogs'));
+    const note = String(formData.get('note') || '').trim();
+    const paymentMethod = String(formData.get('paymentMethod') || 'cash') as FinancePaymentMethod;
+
+    if (!date || !item || !category || amount <= 0) {
+      toast.error('Date, item, category, and amount are required');
+      return;
+    }
+
+    const net = amount + tax + fee;
+    onSubmit({
+      date,
+      item,
+      product: item,
+      category,
+      gross: amount,
+      discount: 0,
+      tax,
+      fee,
+      net,
+      cogs,
+      note,
+      ...expensePaymentFields(net, paymentMethod),
+    });
+    form.reset();
+  };
+
+  return (
+    <Card className="rounded-sm border-border bg-card p-5 shadow-none">
+      <div className="mb-5 flex items-center gap-3">
+        <Plus className="h-4 w-4 text-red-500" />
+        <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">Add Expense</h3>
+      </div>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-1">
+          <div className="space-y-2">
+            <Label className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground">Date</Label>
+            <Input name="date" type="date" required className="h-10 rounded-sm border-border bg-background" />
+          </div>
+          <div className="space-y-2">
+            <Label className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground">Payment</Label>
+            <select name="paymentMethod" defaultValue="cash" className="h-10 w-full rounded-sm border border-border bg-background px-3 text-sm text-foreground outline-none">
+              <option value="cash">Cash</option>
+              <option value="qris">QRIS</option>
+            </select>
+          </div>
+          <div className="space-y-2">
+            <Label className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground">Category</Label>
+            <Input name="category" required placeholder="Operations" className="h-10 rounded-sm border-border bg-background" />
+          </div>
+          <div className="space-y-2">
+            <Label className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground">Item</Label>
+            <Input name="item" required placeholder="Milk, rent, utilities" className="h-10 rounded-sm border-border bg-background" />
+          </div>
+          <div className="space-y-2">
+            <Label className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground">Amount</Label>
+            <Input name="amount" inputMode="numeric" required className="h-10 rounded-sm border-border bg-background font-mono" />
+          </div>
+          <div className="grid grid-cols-2 gap-3">
+            <div className="space-y-2">
+              <Label className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground">Tax</Label>
+              <Input name="tax" inputMode="numeric" defaultValue="0" className="h-10 rounded-sm border-border bg-background font-mono" />
+            </div>
+            <div className="space-y-2">
+              <Label className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground">Fee</Label>
+              <Input name="fee" inputMode="numeric" defaultValue="0" className="h-10 rounded-sm border-border bg-background font-mono" />
+            </div>
+          </div>
+          <div className="space-y-2">
+            <Label className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground">COGS / HPP</Label>
+            <Input name="cogs" inputMode="numeric" defaultValue="0" className="h-10 rounded-sm border-border bg-background font-mono" />
+          </div>
+          <div className="space-y-2">
+            <Label className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground">Note</Label>
+            <Input name="note" placeholder="Optional" className="h-10 rounded-sm border-border bg-background" />
+          </div>
+        </div>
+        <Button type="submit" className="h-10 w-full rounded-sm bg-foreground text-[10px] uppercase tracking-[0.2em] text-background">
+          Add Expense
+        </Button>
+      </form>
+    </Card>
+  );
+}
+
+function ExpenseHistory({
+  expenses,
+  onUpdate,
+  onDelete,
+}: {
+  expenses: EditableExpenseRecord[];
+  onUpdate: (id: string, updates: Partial<ExpenseRecord>) => void;
+  onDelete: (id: string) => void;
+}) {
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [draft, setDraft] = useState({
+    date: '',
+    item: '',
+    category: '',
+    gross: 0,
+    tax: 0,
+    fee: 0,
+    cogs: 0,
+    note: '',
+    paymentMethod: 'cash' as FinancePaymentMethod,
+  });
+
+  const beginEdit = (expense: EditableExpenseRecord) => {
+    setEditingId(expense.id);
+    setDraft({
+      date: expense.date,
+      item: expense.item,
+      category: expense.category,
+      gross: expense.gross,
+      tax: expense.tax,
+      fee: expense.fee,
+      cogs: expense.cogs ?? 0,
+      note: expense.note,
+      paymentMethod: inferExpensePaymentMethod(expense),
+    });
+  };
+
+  const saveEdit = () => {
+    if (!editingId) return;
+    if (!draft.date || !draft.item.trim() || !draft.category.trim() || draft.gross <= 0) {
+      toast.error('Date, item, category, and amount are required');
+      return;
+    }
+    const net = draft.gross + draft.tax + draft.fee;
+    onUpdate(editingId, {
+      date: draft.date,
+      item: draft.item,
+      product: draft.item,
+      category: draft.category,
+      gross: draft.gross,
+      tax: draft.tax,
+      fee: draft.fee,
+      net,
+      cogs: draft.cogs,
+      note: draft.note,
+      ...expensePaymentFields(net, draft.paymentMethod),
+    });
+    setEditingId(null);
+  };
+
+  const totalExpense = expenses.reduce((total, expense) => total + expense.net, 0);
+
+  return (
+    <Card className="overflow-hidden rounded-sm border-border bg-card shadow-none">
+      <div className="flex flex-col gap-2 border-b border-border p-5 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">Expense History</h3>
+          <p className="mt-2 text-xs text-muted-foreground">Edit or delete expenses for the selected month.</p>
+        </div>
+        <div className="text-left sm:text-right">
+          <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-muted-foreground">{expenses.length} entries</p>
+          <p className="mt-1 font-mono text-sm text-red-500">{formatMoney(totalExpense)}</p>
+        </div>
+      </div>
+
+      <ScrollArea className="h-[520px]">
+        <div className="divide-y divide-border/70">
+          {expenses.length ? expenses.map((expense) => {
+            const isEditing = editingId === expense.id;
+            const paymentMethod = inferExpensePaymentMethod(expense);
+
+            return (
+              <div key={expense.id} className="p-4">
+                {isEditing ? (
+                  <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+                    <Input type="date" value={draft.date} onChange={(event) => setDraft((current) => ({ ...current, date: event.target.value }))} className="h-10 rounded-sm border-border bg-background text-xs" />
+                    <select value={draft.paymentMethod} onChange={(event) => setDraft((current) => ({ ...current, paymentMethod: event.target.value as FinancePaymentMethod }))} className="h-10 w-full rounded-sm border border-border bg-background px-3 text-xs text-foreground outline-none">
+                      <option value="cash">Cash</option>
+                      <option value="qris">QRIS</option>
+                    </select>
+                    <Input value={draft.category} onChange={(event) => setDraft((current) => ({ ...current, category: event.target.value }))} placeholder="Category" className="h-10 rounded-sm border-border bg-background text-xs" />
+                    <Input value={draft.item} onChange={(event) => setDraft((current) => ({ ...current, item: event.target.value }))} placeholder="Item" className="h-10 rounded-sm border-border bg-background text-xs" />
+                    <Input inputMode="numeric" value={formatInputNumber(draft.gross)} onChange={(event) => setDraft((current) => ({ ...current, gross: toNumber(event.target.value) }))} placeholder="Amount" className="h-10 rounded-sm border-border bg-background font-mono text-xs" />
+                    <Input inputMode="numeric" value={formatInputNumber(draft.cogs)} onChange={(event) => setDraft((current) => ({ ...current, cogs: toNumber(event.target.value) }))} placeholder="COGS / HPP" className="h-10 rounded-sm border-border bg-background font-mono text-xs" />
+                    <Input inputMode="numeric" value={formatInputNumber(draft.tax)} onChange={(event) => setDraft((current) => ({ ...current, tax: toNumber(event.target.value) }))} placeholder="Tax" className="h-10 rounded-sm border-border bg-background font-mono text-xs" />
+                    <Input inputMode="numeric" value={formatInputNumber(draft.fee)} onChange={(event) => setDraft((current) => ({ ...current, fee: toNumber(event.target.value) }))} placeholder="Fee" className="h-10 rounded-sm border-border bg-background font-mono text-xs" />
+                    <Input value={draft.note} onChange={(event) => setDraft((current) => ({ ...current, note: event.target.value }))} placeholder="Note" className="h-10 rounded-sm border-border bg-background text-xs md:col-span-2" />
+                    <div className="flex justify-end gap-2 md:col-span-2">
+                      <Button type="button" variant="outline" onClick={() => setEditingId(null)} className="h-9 rounded-sm border-border bg-transparent text-[10px] uppercase tracking-widest">Cancel</Button>
+                      <Button type="button" onClick={saveEdit} className="h-9 rounded-sm bg-foreground text-[10px] uppercase tracking-widest text-background">Save</Button>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-1 gap-3 md:grid-cols-[92px_1fr_120px_120px] md:items-start">
+                    <div>
+                      <p className="font-mono text-xs text-foreground">{format(parseISO(expense.date), 'dd MMM')}</p>
+                      <p className="mt-1 text-[9px] uppercase tracking-widest text-muted-foreground">{paymentMethod}</p>
+                    </div>
+                    <div className="min-w-0">
+                      <p className="truncate text-sm text-foreground">{expense.item}</p>
+                      <p className="mt-1 truncate text-[10px] uppercase tracking-widest text-muted-foreground">{expense.category}{expense.note ? ` / ${expense.note}` : ''}</p>
+                      <div className="mt-3 flex flex-wrap gap-2">
+                        <span className="rounded-sm border border-border px-2 py-1 text-[9px] uppercase tracking-widest text-muted-foreground">Base <span className="text-foreground">{formatMoney(expense.gross)}</span></span>
+                        {expense.cogs ? <span className="rounded-sm border border-border px-2 py-1 text-[9px] uppercase tracking-widest text-muted-foreground">COGS <span className="text-foreground">{formatMoney(expense.cogs)}</span></span> : null}
+                        {expense.tax ? <span className="rounded-sm border border-border px-2 py-1 text-[9px] uppercase tracking-widest text-muted-foreground">Tax <span className="text-foreground">{formatMoney(expense.tax)}</span></span> : null}
+                        {expense.fee ? <span className="rounded-sm border border-border px-2 py-1 text-[9px] uppercase tracking-widest text-muted-foreground">Fee <span className="text-foreground">{formatMoney(expense.fee)}</span></span> : null}
+                      </div>
+                    </div>
+                    <p className="font-mono text-sm text-red-500 md:text-right">{formatMoney(expense.net)}</p>
+                    <div className="flex gap-2 md:justify-end">
+                      <Button type="button" variant="outline" onClick={() => beginEdit(expense)} className="h-8 rounded-sm border-border bg-transparent px-3 text-[9px] uppercase tracking-widest">Edit</Button>
+                      <Button type="button" variant="outline" onClick={() => onDelete(expense.id)} className="h-8 rounded-sm border-red-900/40 bg-transparent px-3 text-[9px] uppercase tracking-widest text-red-500 hover:bg-red-950/20">Delete</Button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            );
+          }) : (
+            <div className="px-4 py-12 text-center text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
+              No expenses for this month
+            </div>
+          )}
+        </div>
+      </ScrollArea>
     </Card>
   );
 }

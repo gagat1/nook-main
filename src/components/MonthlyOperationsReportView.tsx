@@ -95,6 +95,20 @@ function monthKey(date: string) {
   return date.slice(0, 7);
 }
 
+function nextMonthKey(month: string) {
+  const baseDate = month ? new Date(`${month}-01T00:00:00`) : new Date();
+  baseDate.setMonth(baseDate.getMonth() + 1);
+  return `${baseDate.getFullYear()}-${String(baseDate.getMonth() + 1).padStart(2, '0')}`;
+}
+
+function monthDates(month: string) {
+  const [year, monthNumber] = month.split('-').map(Number);
+  if (!year || !monthNumber) return [];
+
+  const totalDays = new Date(year, monthNumber, 0).getDate();
+  return Array.from({ length: totalDays }, (_, index) => `${month}-${String(index + 1).padStart(2, '0')}`);
+}
+
 function excelSerialToDate(serial: number) {
   const epoch = new Date(Date.UTC(1899, 11, 30));
   epoch.setUTCDate(epoch.getUTCDate() + Math.floor(serial));
@@ -286,7 +300,7 @@ function withFormula(row: DailyReportRow): DailyReportRow {
   };
 }
 
-function blankDailyRow(date: string): DailyReportRow {
+function blankDailyRow(date: string, fixedCost = 0): DailyReportRow {
   return withFormula({
     date,
     incomeId: undefined,
@@ -295,7 +309,7 @@ function blankDailyRow(date: string): DailyReportRow {
     received: 0,
     cogs: 0,
     productProfit: 0,
-    fixedCost: 0,
+    fixedCost,
     expense: 0,
     notes: '',
     profitLoss: 0,
@@ -498,6 +512,8 @@ export function MonthlyOperationsReportView() {
   const [fixedCostDaily, setFixedCostDaily] = useState(loadLocalFixedCostDaily);
   const [isEditing, setIsEditing] = useState(false);
   const [draftRows, setDraftRows] = useState<DailyReportRow[]>([]);
+  const [isAddingMonth, setIsAddingMonth] = useState(false);
+  const [manualMonths, setManualMonths] = useState<string[]>([]);
 
   useEffect(() => {
     void (async () => {
@@ -532,10 +548,14 @@ export function MonthlyOperationsReportView() {
     return [...new Set([...incomeRecords, ...expenseRecords].map((record) => monthKey(record.date)).filter(Boolean))].sort();
   }, [expenseRecords, incomeRecords]);
   const [selectedMonth, setSelectedMonth] = useState(months[months.length - 1] || '');
+  const [newMonth, setNewMonth] = useState(nextMonthKey(months[months.length - 1] || ''));
+  const availableMonths = useMemo(() => {
+    return [...new Set([...months, ...manualMonths, selectedMonth].filter(Boolean))].sort();
+  }, [manualMonths, months, selectedMonth]);
 
   useEffect(() => {
-    if (!selectedMonth || !months.includes(selectedMonth)) setSelectedMonth(months[months.length - 1] || '');
-  }, [months, selectedMonth]);
+    if (!selectedMonth || !availableMonths.includes(selectedMonth)) setSelectedMonth(availableMonths[availableMonths.length - 1] || '');
+  }, [availableMonths, selectedMonth]);
 
   const dailyRows = useMemo(() => buildDailyRows(incomeRecords, expenseRecords, selectedMonth, fixedCostDaily), [expenseRecords, fixedCostDaily, incomeRecords, selectedMonth]);
   const activeRows = isEditing ? draftRows.map(withFormula) : dailyRows;
@@ -687,6 +707,41 @@ export function MonthlyOperationsReportView() {
     }
   };
 
+  const createMonth = async () => {
+    if (!/^\d{4}-\d{2}$/.test(newMonth)) {
+      toast.error('Choose a valid month');
+      return;
+    }
+
+    const existingRows = buildDailyRows(incomeRecords, expenseRecords, newMonth, fixedCostDaily);
+    const existingByDate = new Map(existingRows.map((row) => [row.date, row]));
+    const monthRows = monthDates(newMonth).map((date) => existingByDate.get(date) || blankDailyRow(date, fixedCostDaily));
+
+    if (!monthRows.length) {
+      toast.error('Could not create this month');
+      return;
+    }
+
+    const { income } = rowsToFinanceRecords(monthRows, incomeRecords);
+    const nextIncome = mergeById(incomeRecords, income);
+    setIncomeRecords(nextIncome);
+    setManualMonths((current) => [...new Set([...current, newMonth])]);
+    setSelectedMonth(newMonth);
+    setDraftRows(monthRows);
+    setIsEditing(false);
+    window.localStorage.setItem('nook-finance-income-records', JSON.stringify(nextIncome));
+
+    try {
+      await upsertJsonRows(FINANCE_TABLES.income, income);
+      toast.success(`${format(parseISO(`${newMonth}-01`), 'MMMM yyyy')} created`);
+      setNewMonth(nextMonthKey(newMonth));
+      setIsAddingMonth(false);
+    } catch (error) {
+      console.warn('Create month failed:', error);
+      toast.error('Month was created locally, but Supabase sync failed');
+    }
+  };
+
   const persistCashMovements = (nextMovements: CashMovement[]) => {
     const normalized = normalizeCashMovements(nextMovements, isValidDateString);
     setCashMovements(normalized);
@@ -775,11 +830,32 @@ export function MonthlyOperationsReportView() {
               <SelectValue />
             </SelectTrigger>
             <SelectContent className="border-border bg-card text-foreground">
-              {months.map((month) => (
+              {availableMonths.map((month) => (
                 <SelectItem key={month} value={month}>{format(parseISO(`${month}-01`), 'MMM yyyy')}</SelectItem>
               ))}
             </SelectContent>
           </Select>
+          {isAddingMonth ? (
+            <div className="flex flex-col gap-2 sm:flex-row">
+              <Input
+                type="month"
+                value={newMonth}
+                onChange={(event) => setNewMonth(event.target.value)}
+                className="h-10 rounded-sm border-border bg-card sm:w-[160px]"
+              />
+              <Button type="button" onClick={createMonth} className="h-10 rounded-sm bg-foreground px-4 text-[10px] uppercase tracking-[0.2em] text-background">
+                Create
+              </Button>
+              <Button type="button" variant="outline" onClick={() => setIsAddingMonth(false)} className="h-10 rounded-sm border-border bg-transparent px-4 text-[10px] uppercase tracking-[0.2em]">
+                Cancel
+              </Button>
+            </div>
+          ) : (
+            <Button type="button" variant="outline" onClick={() => { setNewMonth(nextMonthKey(selectedMonth || months[months.length - 1] || '')); setIsAddingMonth(true); }} className="h-10 rounded-sm border-border bg-card px-4 text-[10px] uppercase tracking-[0.2em] text-foreground hover:border-foreground">
+              <Plus className="mr-2 h-4 w-4" />
+              Add Month
+            </Button>
+          )}
           <label className="inline-flex h-10 cursor-pointer items-center justify-center rounded-sm border border-border bg-card px-4 text-[10px] font-bold uppercase tracking-[0.2em] text-foreground hover:border-foreground">
             <Upload className="mr-2 h-4 w-4" />
             Import Excel

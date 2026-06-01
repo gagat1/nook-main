@@ -713,9 +713,7 @@ export function MonthlyOperationsReportView() {
       return;
     }
 
-    const existingRows = buildDailyRows(incomeRecords, expenseRecords, newMonth, fixedCostDaily);
-    const existingByDate = new Map(existingRows.map((row) => [row.date, row]));
-    const monthRows = monthDates(newMonth).map((date) => existingByDate.get(date) || blankDailyRow(date, fixedCostDaily));
+    const monthRows = monthDates(newMonth).map((date) => blankDailyRow(date, fixedCostDaily));
 
     if (!monthRows.length) {
       toast.error('Could not create this month');

@@ -560,6 +560,7 @@ export function MonthlyOperationsReportView() {
   const dailyRows = useMemo(() => buildDailyRows(incomeRecords, expenseRecords, selectedMonth, fixedCostDaily), [expenseRecords, fixedCostDaily, incomeRecords, selectedMonth]);
   const activeRows = isEditing ? draftRows.map(withFormula) : dailyRows;
   const activeDays = activeRows.filter((row) => row.gross || row.received || row.expense).length || 1;
+  const daysInSelectedMonth = monthDates(selectedMonth).length || 1;
   const summary = {
     cash: sum(activeRows.map((row) => row.actualCash)),
     qris: sum(activeRows.map((row) => row.actualQris)),
@@ -581,6 +582,8 @@ export function MonthlyOperationsReportView() {
     qrisExpense: sum(activeRows.map((row) => row.qrisExpense)),
   };
   const totalNetProfit = summary.gross - summary.cogs - summary.discount - summary.fixedCost;
+  const averageGrossRevenue = summary.gross / daysInSelectedMonth;
+  const averageNetRevenue = (summary.gross - summary.cogs) / daysInSelectedMonth;
   const selectedMonthMovements = useMemo(() => {
     return cashMovements
       .filter((movement) => monthKey(movement.date) === selectedMonth)
@@ -899,6 +902,8 @@ export function MonthlyOperationsReportView() {
           monthLabel={selectedLabel}
           rows={[
             ['Total Gross Revenue', formatMoney(summary.gross)],
+            ['Average Gross Revenue', formatMoney(averageGrossRevenue)],
+            ['Average Net Revenue', formatMoney(averageNetRevenue)],
             ['COGS', formatMoney(summary.cogs), 'danger'],
             ['Discount', formatMoney(summary.discount), 'danger'],
             ['Fixed Cost', formatMoney(summary.fixedCost), 'danger'],

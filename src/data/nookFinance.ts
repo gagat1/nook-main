@@ -1,6 +1,7 @@
 export type FinanceExtraFields = {
   received?: number;
   cogs?: number;
+  cogsAuto?: boolean;
   productProfit?: number;
   fixedCostDaily?: number;
   profitLoss?: number;

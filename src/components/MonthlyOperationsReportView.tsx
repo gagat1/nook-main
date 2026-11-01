@@ -24,6 +24,7 @@ type DailyReportRow = {
   discount: number;
   received: number;
   cogs: number;
+  cogsAuto?: boolean;
   productProfit: number;
   fixedCost: number;
   expense: number;
@@ -251,9 +252,10 @@ function buildDailyRows(incomeRecords: EditableIncomeRecord[], expenseRecords: E
       : productProfit - fixedCost - expense;
     const notes = [...new Set([...dayIncome, ...dayExpenses].map((record) => record.note).filter(Boolean))].join(', ');
 
-    return {
+    return withFormula({
       date,
       incomeId: primaryIncome?.id,
+      cogsAuto: primaryIncome?.cogsAuto ?? false,
       gross,
       discount,
       received,
@@ -278,17 +280,22 @@ function buildDailyRows(incomeRecords: EditableIncomeRecord[], expenseRecords: E
       qrisDifference: actualQris - expectedQris,
       total: actualCash + actualQris || received,
       transactions: sum(dayIncome.map((record) => record.transactionCount ?? 0)),
-    };
+    });
   });
 }
 
 function withFormula(row: DailyReportRow): DailyReportRow {
-  const received = row.gross - row.discount;
-  const productProfit = received - row.cogs;
-  const expectedCash = row.cash - row.cashExpense;
+  const received = row.gross;
+  const cash = row.gross - row.qris;
+  const cogs = row.cogsAuto ? Math.round(row.gross * 0.55) : row.cogs;
+  const productProfit = received - cogs;
+  const expectedCash = cash - row.cashExpense;
   const expectedQris = row.qris + row.deliveryTax - row.qrisExpense;
   return {
     ...row,
+    discount: 0,
+    cogs,
+    cash,
     received,
     productProfit,
     profitLoss: productProfit - row.fixedCost,
@@ -296,7 +303,7 @@ function withFormula(row: DailyReportRow): DailyReportRow {
     expectedQris,
     cashDifference: row.actualCash - expectedCash,
     qrisDifference: row.actualQris - expectedQris,
-    total: row.cash + row.qris,
+    total: cash + row.qris,
   };
 }
 
@@ -349,6 +356,7 @@ function rowsToFinanceRecords(rows: DailyReportRow[], currentIncome: EditableInc
       note: formulaRow.notes,
       received: Math.round(formulaRow.received),
       cogs: Math.round(formulaRow.cogs),
+      cogsAuto: formulaRow.cogsAuto ?? false,
       productProfit: Math.round(formulaRow.productProfit),
       fixedCostDaily: Math.round(formulaRow.fixedCost),
       profitLoss: Math.round(formulaRow.profitLoss),
@@ -895,7 +903,10 @@ export function MonthlyOperationsReportView() {
         <MetricCard icon={BarChart3} label="QRIS Difference" value={formatMoney(latestActualQris - monthlyExpectedQris)} />
       </div>
 
-      <DailyReportTable rows={activeRows} onChangeRow={updateDailyRow} />
+      <DailyReportTable rows={activeRows} onChangeRow={updateDailyRow} onToggleAutoCogs={(enabled) => {
+        setDraftRows(activeRows.map((row) => withFormula({ ...row, cogsAuto: enabled })));
+        setIsEditing(true);
+      }} />
 
       <div className="grid items-start gap-6 xl:grid-cols-[minmax(0,1fr)_minmax(360px,520px)]">
         <ReportSummaryCard
@@ -905,7 +916,6 @@ export function MonthlyOperationsReportView() {
             ['Average Gross Revenue', formatMoney(averageGrossRevenue)],
             ['Average Net Revenue', formatMoney(averageNetRevenue)],
             ['COGS', formatMoney(summary.cogs), 'danger'],
-            ['Discount', formatMoney(summary.discount), 'danger'],
             ['Fixed Cost', formatMoney(summary.fixedCost), 'danger'],
             ['Total Net Profit', formatMoney(totalNetProfit), 'total'],
           ]}
@@ -1412,19 +1422,25 @@ function ReportSummaryCard({ monthLabel, rows }: { monthLabel: string; rows: Arr
 function DailyReportTable({
   rows,
   onChangeRow,
+  onToggleAutoCogs,
 }: {
   rows: DailyReportRow[];
   onChangeRow: (index: number, updates: Partial<DailyReportRow>) => void;
+  onToggleAutoCogs: (enabled: boolean) => void;
 }) {
-  const columns = 'grid-cols-[126px_138px_112px_132px_112px_170px_132px_132px_132px_132px_132px]';
+  const columns = 'grid-cols-[126px_138px_132px_112px_170px_132px_132px_132px_132px_132px]';
   return (
     <Card className="overflow-x-auto rounded-sm border-border bg-card shadow-none">
-      <div className="flex items-center justify-between border-b border-border px-4 py-3">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border px-4 py-3">
         <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">Daily Detail</span>
+        <label className="flex cursor-pointer items-center gap-2 text-xs font-medium">
+          <input type="checkbox" role="switch" checked={rows.length > 0 && rows.every((row) => row.cogsAuto)} disabled={!rows.length} onChange={(event) => onToggleAutoCogs(event.target.checked)} className="h-4 w-4 accent-current" />
+          Auto HPP (55%)
+        </label>
       </div>
       <div className="min-w-[1420px]">
         <div className={`grid ${columns} border-b border-border bg-muted/60 text-[10px] font-bold text-foreground`}>
-          {['Tanggal', 'Pendapatan Kotor', 'Diskon', 'Uang Diterima', 'HPP', 'Keuntungan Bersih', 'Fix Cost Daily', 'Laba/Rugi', 'Cash', 'QRIS', 'Total Cash + QRIS'].map((label) => (
+          {['Tanggal', 'Pendapatan Kotor', 'Uang Diterima', 'HPP', 'Keuntungan Bersih', 'Fix Cost Daily', 'Laba/Rugi', 'Cash', 'QRIS', 'Total Cash + QRIS'].map((label) => (
             <span key={label} className="border-r border-border px-3 py-3 last:border-r-0">{label}</span>
           ))}
         </div>
@@ -1432,13 +1448,12 @@ function DailyReportTable({
           <div key={`${row.date}-${index}`} className={`${columns} grid border-b border-border/70 text-xs text-foreground`}>
             <EditableDateCell value={row.date} onChange={(value) => onChangeRow(index, { date: value })} />
             <EditableMoneyCell value={row.gross} onChange={(value) => onChangeRow(index, { gross: value })} />
-            <EditableMoneyCell value={row.discount} onChange={(value) => onChangeRow(index, { discount: value })} />
             <MoneyCell value={row.received} />
-            <EditableMoneyCell value={row.cogs} onChange={(value) => onChangeRow(index, { cogs: value })} />
+            {row.cogsAuto ? <MoneyCell value={row.cogs} /> : <EditableMoneyCell value={row.cogs} onChange={(value) => onChangeRow(index, { cogs: value })} />}
             <MoneyCell value={row.productProfit} negativeParens />
             <MoneyCell value={row.fixedCost} />
             <MoneyCell value={row.profitLoss} negativeParens />
-            <EditableMoneyCell value={row.cash} onChange={(value) => onChangeRow(index, { cash: value })} />
+            <MoneyCell value={row.cash} negativeParens />
             <EditableMoneyCell value={row.qris} onChange={(value) => onChangeRow(index, { qris: value })} />
             <MoneyCell value={row.total} />
           </div>
